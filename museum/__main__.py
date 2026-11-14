@@ -24,7 +24,7 @@ def status() -> None:
     for name, m in config.modes().items():
         print(f"  {name:6} {m['reason']}")
     print(f"Video: {config.VIDEO_MODEL} at {config.VIDEO_RESOLUTION} {config.VIDEO_ASPECT}, "
-          f"${config.clip_price_usd(config.VIDEO_MAX_SECONDS):.2f} per {config.VIDEO_MAX_SECONDS} s clip, budget ${config.MAX_FAL_USD:.2f}/film")
+          f"${config.clip_price_usd(config.VIDEO_MAX_SECONDS):.2f} per {config.VIDEO_MAX_SECONDS} s clip, budget {f"${config.MAX_FAL_USD:.2f}/film" if config.MAX_FAL_USD > 0 else "unlimited"}")
     for exhibit in exhibits.all_exhibits():
         print(f"Exhibit '{exhibit.id}': {exhibit.name}")
         print(f"  facts with a source: {len(exhibit.facts)}, without: {len(exhibit.unsourced_facts)}")

@@ -47,10 +47,11 @@ While the agent works, the waiting screen shows its stages and the keywords it p
 
 - **Time**: the agent takes about 7 minutes to write a film (research, drafts, review); Seedance about 8 minutes
   per scene. A new exhibit takes about 15 minutes, so a live demo should play films already in the library.
-- **Cost**: about $1.20 of Claude per new script, plus pictures and video. The budget check before generation
-  counts pictures and video (not the Claude part, which is spent by then).
-- **Review**: a script that does not pass the agent's own review (`NEEDS_HUMAN`) is still filmed, but is not saved to
-  the library. Watch it, then keep it with `python -m museum promote <job>` if it is good.
+- **Cost**: about $1.20 of Claude per new script, plus pictures and video. If `MAX_FAL_USD` is set, the check
+  before generation counts pictures and video (not the Claude part, which is spent by then).
+- **Review**: there is no human review in this first version. A script that does not pass the agent's own review
+  (`NEEDS_HUMAN`, about two runs in three so far) is filmed and saved to the library like any other; its status is
+  kept in the film's `manifest.json` under `agent.status`, so such films can be found and re-made later.
 - **Exhibits**: an exhibit with a pack in `harness/knowledge/` but no folder in `exhibits/` is still recognised from
   photos; its films are kept in `exhibits/<id>/demo/`. An object with no pack at all is researched from scratch,
   and its film is not kept in the library.
@@ -64,7 +65,7 @@ into the prompt and the model speaks it, with ambience. A film is two 15-second 
 
 - **Cost**: fal bills by the second, about $0.24 at 720p and $0.11 at 480p. One film (2 x 15 s) is about
   **$7.30 at 720p** or $3.20 at 480p. Set `VIDEO_RESOLUTION=480p` while tuning prompts.
-- **Budget guard**: a film estimated above `MAX_FAL_USD` (default $8, one film at 720p) refuses to start.
+- **Budget guard**: off by default. Set `MAX_FAL_USD` and a film estimated above it refuses to start.
 - **Cache**: every paid clip is cached by a hash of its inputs (`cache/`), so re-running only pays for what changed.
 - **Film library**: a finished film is reused for later visitors of the same exhibit (see below), so repeat
   visitors cost nothing: no agent run, no pictures, no video.
@@ -74,7 +75,7 @@ into the prompt and the model speaks it, with ambience. A film is two 15-second 
 Not yet run with a real key. Things to watch on the first live film:
 
 - **The model speaks the words, we cannot check them.** If it mispronounces or changes a date or number, the film
-  states something the sources do not. Listen to every new film before it goes into the library.
+  states something the sources do not. Nothing checks this automatically yet.
 - **Subtitles are estimated.** The model does not report when each word is spoken, so subtitle lines are spread
   over the scene by their length. They can drift from the voice.
 - **Two scenes, two takes of the voice.** The voice is described in the prompt (`character.voice_description` in

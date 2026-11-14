@@ -90,8 +90,13 @@ else:
     VIDEO_PRICE_PER_SECOND_USD = {}
     # Listed fal price per Vidu Q2 clip. 1080p is $0.20 + $0.10/s; estimated at 8 s.
     VIDEO_PRICE_PER_CLIP_USD = {"360p": 0.10, "520p": 0.20, "720p": 0.30, "1080p": 1.00}
-# A job whose estimated fal cost is above this refuses to start. One 2 x 15 s Seedance film at 720p is about $7.30.
-MAX_FAL_USD = float(_env("MAX_FAL_USD", "8.0"))
+# No spending limit per film by default (0). Set MAX_FAL_USD to make a film estimated above it refuse to start.
+# One 2 x 15 s Seedance film at 720p is about $7.30.
+MAX_FAL_USD = float(_env("MAX_FAL_USD", "0"))
+
+
+def over_budget(cost: float) -> bool:
+    return MAX_FAL_USD > 0 and cost > MAX_FAL_USD
 
 
 def clip_price_usd(seconds: float) -> float:

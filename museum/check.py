@@ -54,7 +54,8 @@ def fal() -> list[str]:
         if allowed and value not in allowed:
             out.append(f"FAIL  {field}={value!r} is not one of {allowed}")
     film = video.worst_case_usd(2) if config.NATIVE_AUDIO else video.worst_case_usd(9)
-    out.append(f"note  one film costs about ${film:.2f} at {config.VIDEO_RESOLUTION}; the per-film limit MAX_FAL_USD is ${config.MAX_FAL_USD:.2f}")
+    limit = f"${config.MAX_FAL_USD:.2f}" if config.MAX_FAL_USD > 0 else "off"
+    out.append(f"note  one film costs about ${film:.2f} at {config.VIDEO_RESOLUTION}; the per-film limit MAX_FAL_USD is {limit}")
     return out
 
 

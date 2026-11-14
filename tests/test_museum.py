@@ -117,7 +117,10 @@ def test_seedance_request_and_price(monkeypatch, tiny_exhibit):
     request = video.request_arguments(p, ["u1", "u2"])
     assert request == {"prompt": p.prompt, "duration": "15", "resolution": "720p", "aspect_ratio": "16:9", "generate_audio": True, "image_urls": ["u1", "u2"]}
     assert video.estimate_usd([p, p]) == pytest.approx(7.26, abs=0.01), "two 15 s scenes at 720p"
-    assert video.check_budget([p, p]) <= config.MAX_FAL_USD
+    assert video.check_budget([p, p]) == pytest.approx(7.26, abs=0.01), "no limit by default"
+    monkeypatch.setattr(config, "MAX_FAL_USD", 5.0)
+    with pytest.raises(RuntimeError, match="MAX_FAL_USD"):
+        video.check_budget([p, p])
 
 
 # ---------- the whole thing, mock ----------

@@ -301,7 +301,7 @@ def _agent_film(job_dir: Path, exhibit: Exhibit, run: script_agent.AgentRun, boa
             if probe.source == "cache":
                 continue
         planned_cost += config.clip_price_usd(int(request["duration"]))
-    if planned_cost > config.MAX_FAL_USD:
+    if config.over_budget(planned_cost):
         raise RuntimeError(f"This film would spend about ${planned_cost:.2f} on fal, above MAX_FAL_USD=${config.MAX_FAL_USD:.2f}. "
                            f"Check with the team, then raise MAX_FAL_USD to go ahead.")
 
@@ -391,8 +391,8 @@ def make_film(job_dir: Path, language: str, style: str, emit: Emit, photo: Path 
         exhibit = exhibit or _agent_exhibit(agent_run)
         board = _board_from_agent(agent_run)
         emit("thought", text=f"Script ready: \"{board.title}\", {len(board.shots)} scene(s), {agent_run.status}.")
-        if not agent_run.passed:
-            emit("thought", text="The script did not fully pass its own review; this film will not be reused for other visitors.", level="warn")
+        if not agent_run.passed:  # first version: no human review, the film is made and kept either way
+            emit("thought", text=f"The script did not fully pass its own review ({agent_run.status}); filming it anyway.", level="warn")
     else:
         board = storyboard.build(exhibit, language, style, emit)
     emit("storyboard", title=board.title, origin=board.origin, shots=[
@@ -453,8 +453,8 @@ def make_film(job_dir: Path, language: str, style: str, emit: Emit, photo: Path 
     (job_dir / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2))
     emit("step", step="edit", status="done")
     (job_dir / "events.json").write_text(json.dumps(recorded, ensure_ascii=False))
-    # Only a script that passed the agent's own review is reused for other visitors.
-    if save and (agent_run is None or agent_run.passed):
+    # Every finished film is reused for other visitors; the agent's review status stays in the manifest.
+    if save:
         try:
             promote(job_dir)
         except (RuntimeError, FileNotFoundError):

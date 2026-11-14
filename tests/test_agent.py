@@ -102,7 +102,8 @@ def test_agent_film_mock(tiny_exhibit, tmp_path, agent_on, monkeypatch):
     assert manifest["shots"][0]["prompt"] == run.final["video_requests"][0]["prompt"], "the agent's prompt is used as written"
     assert manifest["facts"] == [{"id": "unearthed_1938_ningxiang", "text": "Unearthed in 1938 in Ningxiang, Hunan.",
                                   "source": "https://example.org/zun", "used": True}]
-    assert not (tiny_exhibit / "demo" / "en-first_person").exists(), "a script that failed review is not reused"
+    saved = json.loads((tiny_exhibit / "demo" / "en-first_person" / "manifest.json").read_text())
+    assert saved["agent"]["status"] == "NEEDS_HUMAN", "kept for other visitors, with its review status recorded"
 
 
 def test_passing_agent_film_is_reused_without_running_the_agent_again(tiny_exhibit, tmp_path, agent_on, monkeypatch):

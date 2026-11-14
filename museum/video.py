@@ -130,7 +130,7 @@ def worst_case_usd(shots: int) -> float:
 
 def check_budget(plans: list[ShotPlan]) -> float:
     cost = estimate_usd(plans)
-    if cost > config.MAX_FAL_USD:
+    if config.over_budget(cost):
         raise RuntimeError(
             f"This film would spend about ${cost:.2f} on fal, above MAX_FAL_USD=${config.MAX_FAL_USD:.2f}. "
             f"Check with the team, then raise MAX_FAL_USD to go ahead."
