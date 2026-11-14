@@ -1,0 +1,52 @@
+[
+  {
+    "endpoint": "bytedance/seedance-2.0/reference-to-video",
+    "image_urls": [
+      "<hope_skeleton_now>",
+      "<hall_inplace>",
+      "<hope_awake>"
+    ],
+    "duration": "15",
+    "resolution": "480p",
+    "aspect_ratio": "16:9",
+    "generate_audio": true,
+    "prompt": "References: @Image1 = the whale skeleton, identity anchor: shape, decoration and colours exactly as shown; ignore its background; @Image2 = skeleton in Hintze Hall from the first-floor balcony, visitor's photo angle (setting only); @Image3 = Hope the cartoon whale, the character: same design, colours and markings in every shot; ignore its background.\nOnly Hope the cartoon whale comes alive. The whale skeleton ends whole and unchanged.\nStylized 3D animated feature, light anime outlines, soft skylight daylight, grand Romanesque hall.\nShot 1 (0-3.5s) [the whale skeleton from @Image1, the setting from @Image2]: wide elevated balcony view, locked off. Tiny visitors stand frozen on staircase and floor, looking up; at 1.5s the skull's empty eye socket blinks open into a bright cartoon eye that swivels to camera. Shot 2 (3.5-8.5s) [the whale skeleton from @Image1, Hope the cartoon whale from @Image3]: close-up on skull and jaws, slow push-in to her eye. She shakes her head hard, cables twanging, and grins at camera, talking; pale bone -> blue-grey skin ripples fast from the jaw tips back over four seconds -> Hope's living head fills the frame. Shot 3 (8.5-15s) [the setting from @Image2, the whale skeleton from @Image1, Hope the cartoon whale from @Image3]: Whip pan: wide full hall, fast lateral tracking alongside her, then hold. Hope, free of the bare skeleton behind, surges the hall's length, tail beating hard, flipper skimming over frozen visitors on the staircase; cables swing in her wake; she brakes hard and hovers, looking back. End on a near-still image: hope hovering near-still above the grand staircase, looking back at camera, the bare skeleton hanging behind her.\nHope the cartoon whale speaks on screen, lips in sync, a young woman's voice, bright and warm, soft British accent, unhurried pace, playful with a hint of shyness: \"My skeleton is twenty-five point two metres long.\" \"And I wasn't yet fully grown.\"\nSound: Echoing stone hall; bone creak; cables twanging; deep whale call. No music.\nClean picture: no subtitles, captions, lettering, logos or watermark. Never two copies of the whale skeleton or of Hope the cartoon whale in one frame.",
+    "prompt_words": 349,
+    "direction_words": 335,
+    "prompt_parts": {
+      "refs": 52,
+      "lock": 14,
+      "style": 13,
+      "shots": 190,
+      "voice": 28,
+      "sound": 13,
+      "constraint": 25
+    },
+    "est_usd": 2.1
+  },
+  {
+    "endpoint": "bytedance/seedance-2.0/reference-to-video",
+    "image_urls": [
+      "<hope_skeleton_now>",
+      "<hall_inplace>",
+      "<hope_awake>"
+    ],
+    "duration": "15",
+    "resolution": "480p",
+    "aspect_ratio": "16:9",
+    "generate_audio": true,
+    "prompt": "References: @Image1 = the whale skeleton, identity anchor: shape, decoration and colours exactly as shown; ignore its background; @Image2 = skeleton in Hintze Hall from the first-floor balcony, visitor's photo angle (setting only); @Image3 = Hope the cartoon whale, the character: same design, colours and markings in every shot; ignore its background.\nOnly Hope the cartoon whale comes alive. The whale skeleton ends whole and unchanged.\nStylized 3D animated feature, light anime outlines, soft skylight daylight, grand Romanesque hall.\nShot 1 (0-4.5s) [Hope the cartoon whale from @Image3, the setting from @Image2]: medium close-up, slow push-in to her eyes. Hope hovers above the staircase, looks down at frozen tiny visitors, eyes softening, flippers drooping as she speaks, then her tail snaps once, hard. Shot 2 (4.5-9.5s) [Hope the cartoon whale from @Image3, the whale skeleton from @Image1, the setting from @Image2]: wide at balcony height, 4.5-5.5s fast tilt up, 5.5-9.5s hold wide. Hope rockets to the glazed roof, flips, plunges full speed into the hanging bones, jaw thrown open, throat pleats ballooning; cables swing hard; a deep thud as it locks; blue skin -> streams off into the hanging bones snout to tail over four seconds -> skeleton locked in dive pose. Shot 3 (9.5-15s) [the setting from @Image2, the whale skeleton from @Image1]: wide elevated balcony view, visitor's photo angle, locked off. The skeleton hangs whole and still, jaws angled down; one cable still trembles and a last shimmer of blue fades along the lower jaw.\nHope the cartoon whale speaks on screen, lips in sync, a young woman's voice, bright and warm, soft British accent, unhurried pace, playful with a hint of shyness: \"My youth wasn't enough to escape the shallows.\" \"I'm the only blue whale skeleton in a diving lunge.\"\nSound: Echoing stone hall hush; air whoosh; bones locking thud; cable twang. No music.\nClean picture: no subtitles, captions, lettering, logos or watermark. Never two copies of the whale skeleton or of Hope the cartoon whale in one frame.",
+    "prompt_words": 332,
+    "direction_words": 314,
+    "prompt_parts": {
+      "refs": 52,
+      "lock": 14,
+      "style": 13,
+      "shots": 168,
+      "voice": 28,
+      "sound": 14,
+      "constraint": 25
+    },
+    "est_usd": 2.1
+  }
+]

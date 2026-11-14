@@ -1,0 +1,215 @@
+{
+  "exhibit_id": "adhoc-four-ram-square-zun",
+  "status": "NEEDS_HUMAN",
+  "title": "Caught Looking",
+  "duration_s": 15,
+  "photo": "photos/four_ram_zun.webp",
+  "keywords": [
+    {
+      "t_run": 11.98,
+      "stage": "kw_identify",
+      "type": "keywords_batch",
+      "label": "identify",
+      "keywords": [
+        {
+          "kind": "name",
+          "text": "Siyang Fangzun",
+          "basis": "photo"
+        },
+        {
+          "kind": "name",
+          "text": "Four-Ram Square Zun",
+          "basis": "photo"
+        },
+        {
+          "kind": "period",
+          "text": "late Shang dynasty",
+          "basis": "photo"
+        },
+        {
+          "kind": "material",
+          "text": "bronze",
+          "basis": "photo"
+        },
+        {
+          "kind": "theme",
+          "text": "ritual wine vessel",
+          "basis": "photo"
+        },
+        {
+          "kind": "visual",
+          "text": "four curly-horned rams",
+          "basis": "photo"
+        },
+        {
+          "kind": "visual",
+          "text": "flaring square mouth",
+          "basis": "photo"
+        },
+        {
+          "kind": "place",
+          "text": "National Museum of China",
+          "basis": "photo"
+        },
+        {
+          "kind": "name",
+          "text": "四羊青铜方尊",
+          "basis": "photo"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "t_run": 88.92,
+      "stage": "kw_research",
+      "type": "keywords_batch",
+      "label": "research",
+      "keywords": [
+        {
+          "kind": "name",
+          "text": "Four-goat Square Zun",
+          "basis": "https://en.wikipedia.org/wiki/Four-goat_Square_Zun"
+        },
+        {
+          "kind": "period",
+          "text": "Late Shang (1300–1046 BC)",
+          "basis": "http://www.china.org.cn/top10/2012-08/24/content_26326351_8.htm"
+        },
+        {
+          "kind": "place",
+          "text": "Ningxiang County",
+          "basis": "http://www.china.org.cn/top10/2012-08/24/content_26326351_8.htm"
+        },
+        {
+          "kind": "date",
+          "text": "April 1938",
+          "basis": "http://wenwuchina.com/a/203/201295.html"
+        },
+        {
+          "kind": "place",
+          "text": "National Museum of China",
+          "basis": "https://govt.chinadaily.com.cn/s/202206/06/WS629d9cd4498e6a12c122e1df/bronze-vessel-with-ram-head-sculptures-masterpiece-from-the-shang-dynasty.html"
+        },
+        {
+          "kind": "measure",
+          "text": "58.3cm",
+          "basis": "http://www.china.org.cn/top10/2012-08/24/content_26326351_8.htm"
+        },
+        {
+          "kind": "measure",
+          "text": "34.5 kg",
+          "basis": "http://www.china.org.cn/top10/2012-08/24/content_26326351_8.htm"
+        },
+        {
+          "kind": "visual",
+          "text": "rams' heads with curly horns",
+          "basis": "http://www.china.org.cn/top10/2012-08/24/content_26326351_8.htm"
+        },
+        {
+          "kind": "material",
+          "text": "Piece mold casting technique",
+          "basis": "https://baike.baidu.com/en/item/Shang%20Siyang%20Bronze%20Square%20Zun/941638"
+        },
+        {
+          "kind": "person",
+          "text": "Jiang Jingshu",
+          "basis": "https://wap.ningxiangnews.cn/content/2012/09/04/5674647.html"
+        }
+      ],
+      "flags": []
+    }
+  ],
+  "image_jobs": [
+    {
+      "id": "zun_now",
+      "kind": "subject_view",
+      "endpoint": "fal-ai/nano-banana-pro/edit",
+      "input": {
+        "image_urls": [
+          "<visitor_photo>"
+        ],
+        "prompt": "From this photo, show the Four-Ram Square Zun alone at the same slightly-low three-quarter angle, the front ram head facing the viewer, on a plain seamless light grey background in even, soft, neutral studio light with all glare and reflections removed. A dark grey-black Shang bronze square wine vessel with silvery-grey patina, flaring square mouth with hooked ridged flanges, four curly-horned ram heads at shoulder corners, densely patterned. The tall flaring neck carries long banana-leaf blade panels edged by notched ridged flanges; the bulging shoulder holds four ram heads projecting from the corners, each with thick spiralling ridged horns curling forward around the ears, long snouts, and chests covered in overlapping scale pattern; the belly panels are filled with fine cloud-and-thunder spirals and beast-face patterns in silvery-grey relief on near-black ground; the square foot below has notched flanges, ram hooves in relief and banana-leaf panels. The whole vessel is fully visible, centred, sharp, with a soft contact shadow only. No people anywhere in the image: the space is empty, every visitor and figure removed, including any reflection, shadow or silhouette of a person on glass, metal or polished surfaces. Avoid: text, labels, captions, watermarks, people, reflections of visitors or phones, glass case, glass reflections, spotlights, plinth, museum label card, second copies of the vessel, colour shifts to gold or green"
+      },
+      "purpose": "Identity anchor for the exhibit's exact shape, colours and markings in every shot.",
+      "est_usd": 0.15
+    },
+    {
+      "id": "hall_inplace",
+      "kind": "in_place",
+      "endpoint": "fal-ai/nano-banana-pro/edit",
+      "input": {
+        "image_urls": [
+          "<visitor_photo>"
+        ],
+        "prompt": "From this photo, keep the same angle and framing: the Four-Ram Square Zun standing on its white plinth in the dim National Museum gallery, a dark grey-black Shang bronze square wine vessel with silvery-grey patina, flaring square mouth with hooked ridged flanges, four curly-horned ram heads at shoulder corners, densely patterned. Clean the image: remove every visitor and every reflection of people and phones, remove all glare and spotlight reflections on the glass so no glass is visible, remove the label card and any readable text. The background is an empty, softly lit warm-beige gallery wall and dark ceiling with a few distant display cases, no one present. The vessel keeps exactly its shape, its silvery-grey relief patterns and the front ram head facing the viewer, lit by a gentle top spotlight. No people anywhere in the image: the space is empty, every visitor and figure removed, including any reflection, shadow or silhouette of a person on glass, metal or polished surfaces. Avoid: people, faces, figures, reflections of people or phones, glass reflections, glare, label card, signs, readable text, watermarks, second copies of the vessel"
+      },
+      "purpose": "Reference for the exhibit in its hall and for the final return shot.",
+      "est_usd": 0.15
+    },
+    {
+      "id": "ram_awake",
+      "kind": "living_form",
+      "endpoint": "fal-ai/nano-banana-pro/edit",
+      "input": {
+        "image_urls": [
+          "<visitor_photo>"
+        ],
+        "prompt": "From this photo, design the front ram of the vessel as a stylized animated character: a stylized cartoon bronze ram, dark grey-black bronze with silvery-grey patina, thick spiralling ridged horns, scale-patterned chest, cloud-and-thunder spirals on flanks, large expressive dark eyes. A full-bodied, sturdy little ram standing on four hooves in three-quarter view, head slightly raised with a curious, proud, friendly expression and a soft closed smile; its horns curl forward around the ears exactly like the vessel's ram heads, with the same ridged spiral; its long snout, chest of overlapping scale pattern and flank panels of fine cloud-and-thunder spirals and banana-leaf motifs are rendered in silvery-grey relief on near-black bronze, matching the vessel's surface, now flexible like a living animal. Plain light grey background, even soft light, the ram alone, fully visible and centred. No people anywhere in the image: the space is empty, every visitor and figure removed, including any reflection, shadow or silhouette of a person on glass, metal or polished surfaces. Avoid: text, labels, captions, watermarks, people, the vessel, other rams, glass case, multiple poses, expression grids, extra horns, gold or green colouring, fluffy wool"
+      },
+      "purpose": "Character reference for the front ram that comes alive, keeping the exhibit's bronze identity.",
+      "est_usd": 0.15
+    }
+  ],
+  "existing_images_used": [],
+  "missing_images": [],
+  "video_requests": [
+    {
+      "endpoint": "bytedance/seedance-2.0/reference-to-video",
+      "image_urls": [
+        "<job:zun_now>",
+        "<job:hall_inplace>",
+        "<job:ram_awake>"
+      ],
+      "duration": "15",
+      "resolution": "480p",
+      "aspect_ratio": "16:9",
+      "generate_audio": true,
+      "prompt": "References: @Image1 = the Four-Ram Square Zun, identity anchor: shape, decoration and colours exactly as shown; ignore its background; @Image2 = setting and final angle (setting only); @Image3 = the front ram, the character: same design, colours and markings in every shot; ignore its background.\nOnly the front ram comes alive. the other three rams and the rest of the vessel stay still. The Four-Ram Square Zun ends whole and unchanged.\nStylized 3D animated feature, soft rim light, gallery at night.\nShot 1 (0-3s) [the Four-Ram Square Zun from @Image1, the setting from @Image2]: medium, slightly low head-on, front ram centred, slow push-in, ending at chest height. A white flash pops across the bronze; at two seconds the front ram's eye blinks once, then one ear flicks sharply. Shot 2 (3-7s) [the Four-Ram Square Zun from @Image1, the front ram from @Image3]: close-up on the front ram at the vessel corner, slow push-in. He strains forward hard and locks his eyes on camera; rigid ram head -> softens and flows outward over four seconds, neck and forelegs pulling free -> front half leans out of the corner. Shot 3 (7-11s) [the front ram from @Image3, the setting from @Image2]: low wide across the plinth top, locked off. The ram leaps down heavily onto the plinth, whips his head hard; both horns fly off glowing and spin overhead; he snaps his head up and they slam back on, sparks skittering across the plinth. Shot 4 (11-15s) [the setting from @Image2, the Four-Ram Square Zun from @Image1]: Match cut on the horn spiral: medium, the visitor's slightly low head-on angle, locked off. The vessel stands whole and still; a faint silvery glint runs once around each horn base and fades.\nVoiceover, a spry middle-aged male voice, warm deep bronze-toned baritone with a dry teasing edge, neutral English accent, quick playful pace: \"You're staring at my horns, aren't you?\" \"My horns were cast first, then joined in.\" \"Find the join; it's hard to see.\"\nSound: gallery hum; shutter click; bronze grinding; hooves thud; ringing clang, molten hiss. No music.\nClean picture: no subtitles, captions, lettering, logos or watermark. No people in frame. Never two copies of the Four-Ram Square Zun or of the front ram in one frame.",
+      "prompt_words": 375,
+      "direction_words": 353,
+      "prompt_parts": {
+        "refs": 45,
+        "lock": 26,
+        "style": 10,
+        "shots": 207,
+        "voice": 21,
+        "sound": 15,
+        "constraint": 29
+      },
+      "est_usd": 2.1
+    }
+  ],
+  "subtitles": [
+    {
+      "t_start": 1.0,
+      "t_end": 3.2,
+      "text": "You're staring at my horns, aren't you?"
+    },
+    {
+      "t_start": 3.9,
+      "t_end": 6.3,
+      "text": "My horns were cast first, then joined in."
+    },
+    {
+      "t_start": 11.35,
+      "t_end": 13.35,
+      "text": "Find the join; it's hard to see."
+    }
+  ],
+  "voice": "A spry middle-aged male voice, warm deep bronze-toned baritone with a dry teasing edge, neutral English accent, quick playful pace.",
+  "music_style": "no music",
+  "est_usd": {
+    "images": 0.45,
+    "video": 2.1
+  }
+}

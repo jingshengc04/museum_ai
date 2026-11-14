@@ -15,7 +15,12 @@ import seedance
 WORDS_PER_SECOND = 2.5     # comfortable English narration pace
 MAX_SEGMENT_S = 15         # one Seedance generation
 MAX_REFS_PER_SEGMENT = 4   # research: 3-4 references work best; more invites duplicates
-MIN_SHOT_S = 3.0
+MIN_SHOT_S = 2.0           # quick cuts render
+MIN_TRANSFORM_S = 3.5      # a transformation needs time
+MAX_SHOTS_PER_SEGMENT = 5
+MAX_LINE_WORDS = 10        # short lines keep lip-sync clean
+MAX_SEG_WORDS = 24         # lines are a counter-track, not a lecture
+MAX_SHOT_WORDS = 45        # framing+camera+action+transformation+visual per shot
 TAIL_S = 1.0               # last line must finish this long before its segment ends
 HEAD_S = 0.8               # film opens on picture and sound
 
@@ -26,7 +31,13 @@ TEXT_ON_SCREEN = re.compile(
 NEGATED = re.compile(r"\b(?:no|not|without|avoid|avoiding|free of|never|exclude|excluding|remove|removed|removing|must not show)\b[^.;:]*", re.I)
 SOCIAL = re.compile(r"//(www\.)?(x\.com|twitter\.com|facebook\.com|instagram\.com|tiktok\.com|threads\.net)/", re.I)
 GLUED = re.compile(r"[a-z]{2}\.[a-z]{2,}")  # 'juvenile.of course': a sentence glued to stray words
-MULTI_MOVE = re.compile(r"\b(then|followed by|before (?:a|it)|and then|while (?:tilting|panning|pushing|pulling|orbiting))\b", re.I)
+MOVES = re.compile(r"\b(locked(?: off)?|static|push[- ]?in|pull[- ]?back|pull[- ]?out|tilt\w*|pan\w*|whip pan|orbit\w*|crane\w*|dolly\w*|track\w*|zoom\w*|crash zoom|fpv|drift\w*|handheld|arc\w*)\b", re.I)
+QUICK = re.compile(r"\b(whip pan|crash zoom|locked(?: off)?|static)\b", re.I)
+TIMED = re.compile(r"\d+(\.\d+)?\s*-\s*\d+(\.\d+)?\s*s")
+FORCE = re.compile(r"\b(fast|quickly|hard|snaps?|snapping|wrench\w*|leaps?|leaping|lunges?|bursts?|surges?|slams?|violently|heaves?|races?|racing|gallops?|crash\w*|shakes|whips?|explod\w*|dives?|diving|rockets?|spins?|spinning|bounds?|charges?|plunges?|soars?|thrash\w*|flips?|breaches?|breaching)\b", re.I)
+TRANSFORM_VERBS = re.compile(r"\b(turns into|becomes|morphs?|dissolves?|melts?|transforms?|solidif\w+|reassembles?)\b", re.I)
+RECORD = re.compile(r"\b(documentary|archival|newsreel|re-?enact\w*|reconstruction of|excavat\w+|foundry|casting workshop|air raid|bombing|bombers?|soldiers?|priests?|archaeologists?|the finders?)\b", re.I)
+ADJECTIVES = re.compile(r"\b(magical|majestic|stunning|epic|breathtaking|8k|mystical|cinematic masterpiece)\b", re.I)
 NUMBERISH = re.compile(r"\d|\b(two|three|four|five|six|seven|eight|nine|ten|eleven|twelve|thirteen|fourteen|fifteen|"
                        r"sixteen|seventeen|eighteen|nineteen|twenty|thirty|forty|fifty|sixty|seventy|eighty|ninety|"
                        r"hundred|thousand|million|billion|tonnes?|metres?|meters?|january|february|march|april|june|"
@@ -71,6 +82,10 @@ def spoken_words(text: str) -> int:
 def word_budget(duration_s: float) -> int:
     """Narration ceiling for a segment: pace x (duration minus head/tail kept for picture and sound)."""
     return int((duration_s - 2) * WORDS_PER_SECOND)
+
+
+def _s(t: str) -> str:
+    return (t or "").strip()
 
 
 def _expect(exhibit_id: str) -> dict:
@@ -175,6 +190,10 @@ def concepts(cs: schemas.ConceptSet, sheet: schemas.MaterialSheet) -> list[str]:
     if len(set(engines)) < len(engines):
         problems.append(f"concepts reuse the same engine: {[c.engine for c in cs.concepts]}")
     for c in cs.concepts:
+        if not _s(c.hero_mover):
+            problems.append(f"concept '{c.name}' has no hero_mover")
+        if not FORCE.search(c.big_move):
+            problems.append(f"concept '{c.name}' big_move has no speed or force word: '{c.big_move[:60]}'")
         unknown = [f for f in c.fact_ids if f not in known]
         if unknown:
             problems.append(f"concept '{c.name}' uses unknown facts {unknown}")
@@ -208,11 +227,24 @@ def script(sc: schemas.Script, sheet: schemas.MaterialSheet, exhibit_id: str,
             problems.append(f"asset '{a.id}' prompt asks for text in the image")
 
     labeled = {a["id"] for a in (existing or []) if a.get("has_text_labels")}
-    sheets = {a["id"] for a in (existing or []) if a.get("kind") == "character_sheet"}
+    if not _s(sc.hero_mover):
+        problems.append("no hero_mover: name the one character or part that comes alive")
     for i, seg in enumerate(sc.segments, 1):
         for a in seg.ref_assets:
-            if a in labeled or a in sheets or ("sheet" in a and not a.endswith("_side")):
-                problems.append(f"segment {i} sends '{a}' to the video model; never send a character sheet or labelled image, use its single-view image")
+            if a in labeled or "expression" in a:
+                problems.append(f"segment {i} sends '{a}' to the video model; never send a labelled image or expression grid, use its single-view image")
+        if len(seg.shots) > MAX_SHOTS_PER_SEGMENT:
+            problems.append(f"segment {i} has {len(seg.shots)} shots; keep to {MAX_SHOTS_PER_SEGMENT}")
+        acts = [sh for sh in seg.shots if sh.beat == "act"]
+        if len(acts) != 1:
+            problems.append(f"segment {i} has {len(acts)} act shots; give it exactly one high-amplitude beat")
+        for sh in acts:
+            if not FORCE.search(sh.action + " " + sh.camera + " " + sh.transformation):
+                problems.append(f"segment {i} act shot has no speed or force word; the model defaults to gentle motion")
+        if seg.shots and seg.shots[0].beat != "still" and i == 1:
+            problems.append("the film should open on the still, real exhibit (beat 'still')")
+        if seg.shots and seg.shots[-1].beat != "return" and i == len(sc.segments):
+            problems.append("the film should end on the return to the real exhibit (beat 'return')")
         if seg.duration_s > MAX_SEGMENT_S:
             problems.append(f"segment {i} is {seg.duration_s}s, over the {MAX_SEGMENT_S}s generation limit")
         if len(seg.ref_assets) > MAX_REFS_PER_SEGMENT:
@@ -229,11 +261,21 @@ def script(sc: schemas.Script, sheet: schemas.MaterialSheet, exhibit_id: str,
                 problems.append(f"{where} is {shot.t_end - shot.t_start:.1f}s; shots under {MIN_SHOT_S}s rarely render cleanly")
             if _text_on_screen(shot.visual + " " + shot.action):
                 problems.append(f"{where} seems to ask for text on screen")
-            if MULTI_MOVE.search(shot.camera):
-                problems.append(f"{where} camera has more than one move: '{shot.camera}'")
-            states = {assets[r].depicts for r in shot.refs if r in assets} & {"exhibit_now", "living_form"}
-            if len(states) > 1:
-                problems.append(f"{where} shows the exhibit as it is now and its living form together; keep them in separate shots")
+            moves = {m.group(0).lower() for m in MOVES.finditer(shot.camera)}
+            if len(moves) >= 3 or (len(moves) == 2 and not QUICK.search(shot.camera) and not TIMED.search(shot.camera)):
+                problems.append(f"{where} camera stacks moves ('{shot.camera}'); cut, or write timed beats")
+            shot_words = len(" ".join([shot.framing, shot.camera, shot.action, shot.transformation, shot.visual]).split())
+            if shot_words > MAX_SHOT_WORDS:
+                problems.append(f"{where} is {shot_words} words; keep each shot to about 40 (one tight sentence, verbs first)")
+            n_tr = len(TRANSFORM_VERBS.findall(shot.action)) + (1 if _s(shot.transformation) else 0)
+            if n_tr > 1:
+                problems.append(f"{where} has more than one transformation; give each its own shot")
+            if _s(shot.transformation) and shot.t_end - shot.t_start < MIN_TRANSFORM_S:
+                problems.append(f"{where} transforms in {shot.t_end - shot.t_start:.1f}s; give a transformation at least {MIN_TRANSFORM_S}s")
+            if ADJECTIVES.search(shot.action + " " + shot.visual):
+                problems.append(f"{where} uses adjectives for action; write verbs and physics")
+            if sc.style != "stylized" and RECORD.search(shot.action + " " + shot.visual) and not re.search(r"ink|shadow puppet|rubbing", shot.visual + shot.transition_in, re.I):
+                problems.append(f"{where} stages history as record; show it as fantasy or in one stated stylised look")
             stray = [r for r in shot.refs if r not in seg.ref_assets]
             if stray:
                 problems.append(f"{where} shows {stray}, which are not in the segment's references")
@@ -273,13 +315,25 @@ def script(sc: schemas.Script, sheet: schemas.MaterialSheet, exhibit_id: str,
             p = req["prompt_parts"]
             problems.append(f"segment {i} request has {req['direction_words']} direction words (cap {seedance.MAX_DIRECTION_WORDS}, quoted narration not counted): "
                             f"references {p.get('refs', 0)}, shots {p.get('shots', 0)}, sound {p.get('sound', 0)}, voice {p.get('voice', 0)}, "
-                            f"fixed {p.get('style', 0) + p.get('states', 0) + p.get('constraint', 0)}; cut the largest part you control")
+                            f"fixed {p.get('style', 0) + p.get('lock', 0) + p.get('constraint', 0)}; cut sound and light words first, never speed, force or consequence words")
         seg_words = sum(spoken_words(l.text) for l in seg.narration)
-        if seg_words > word_budget(seg.duration_s):
-            problems.append(f"segment {i} narration is {seg_words} spoken words; budget for {seg.duration_s}s is {word_budget(seg.duration_s)}")
+        if seg_words > MAX_SEG_WORDS:
+            problems.append(f"segment {i} has {seg_words} spoken words; keep to {MAX_SEG_WORDS} per 15 s so the action can breathe")
+        for l in seg.narration:
+            if spoken_words(l.text) > MAX_LINE_WORDS:
+                problems.append(f"segment {i} line '{l.text[:40]}' is {spoken_words(l.text)} words; keep lines to {MAX_LINE_WORDS} for clean lip-sync")
+        for act in acts:
+            for l in seg.narration:
+                l_end = l.t_start + spoken_words(l.text) / WORDS_PER_SECOND
+                if l.t_start < act.t_end - 0.3 and l_end > act.t_start + 0.3:
+                    problems.append(f"segment {i} line '{l.text[:40]}' talks over the act beat; leave the big move without speech")
+        if len(seg.audio.sfx) < 3:
+            problems.append(f"segment {i} names {len(seg.audio.sfx)} sounds; sound is the second actor, name three or four")
 
-    if sc.duration_s == 30 and sum(spoken_words(l.text) for s in sc.segments for l in s.narration) < 40:
-        problems.append("a 30 s film with under 40 spoken words is a 15 s story stretched")
+    if sc.segments and sc.segments[-1].shots:
+        last = sc.segments[-1].shots[-1]
+        if not any(assets.get(r) and assets[r].depicts in ("exhibit_now", "environment") for r in last.refs):
+            problems.append("the return shot lists neither the exhibit nor the in-place view; the visitor must see the real object at the end")
     spoken = " ".join(l.text for s in sc.segments for l in s.narration)
     subs = " ".join(s.text for s in sc.subtitles)
     if spoken and abs(len(re.findall(r"[A-Za-z]+", spoken)) - len(re.findall(r"[A-Za-z]+", subs))) > 4:
@@ -304,6 +358,8 @@ def notes(sc: schemas.Script, existing: list[dict] | None = None) -> list[str]:
                 out.append(f"segment {i} uses '{a}', which carries text labels: crop it into text-free views before sending to Seedance")
     for i in range(len(sc.segments)):
         r = seedance.render(sc, i)
+        if r["direction_words"] > seedance.SOFT_DIRECTION_WORDS:
+            out.append(f"segment {i + 1} request has {r['direction_words']} direction words (soft limit {seedance.SOFT_DIRECTION_WORDS})")
         if r["prompt_words"] > seedance.NOTE_TOTAL_WORDS:
             out.append(f"segment {i + 1} request is {r['prompt_words']} words including narration")
     styles = {a.get("style") for a in (existing or []) if a["id"] in {r for s in sc.segments for r in s.ref_assets}}
@@ -319,6 +375,10 @@ def stats(sc: schemas.Script) -> dict:
     words = sum(spoken_words(l.text) for s in sc.segments for l in s.narration)
     return {
         "duration_s": sc.duration_s,
+        "mode": sc.mode,
+        "hero_mover": sc.hero_mover,
+        "act_shots": [f"{i + 1}.{j + 1}" for i, s in enumerate(sc.segments) for j, sh in enumerate(s.shots) if sh.beat == "act"],
+        "force_words": sum(len(FORCE.findall(sh.action)) for s in sc.segments for sh in s.shots),
         "style": sc.style,
         "narrator": sc.narrator_presence,
         "segments": len(sc.segments),

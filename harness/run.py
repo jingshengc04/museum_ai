@@ -36,16 +36,22 @@ NO_SEARCH = False
 SHORT = {"s0b": "s0b_research", "s0": "s0_identify", "s1": "s1_digest", "s1b": "s1b_assets", "s2": "s2_concept", "s3": "s3_script", "s4": "s4_review"}
 
 
+GATES = {"aliveness": 4, "spectacle": 4, "return_shot": 4}  # the new centre; every other score needs 3
+
+
 def passed(review: schemas.Review, problems: list[str]) -> bool:
     s = review.scores.model_dump()
     blocking = [i for i in review.issues if i.severity == "blocking"]
-    return not problems and not blocking and s["truth"] == 5 and min(s.values()) >= 4
+    gates = all(s[k] >= v for k, v in GATES.items())
+    return (not problems and not blocking and s["truth"] == 5 and review.fantasy_legibility == "pass"
+            and gates and min(s.values()) >= 3)
 
 
 def rank(attempt: dict) -> tuple:
     r: schemas.Review = attempt["review"]
     s = r.scores.model_dump()
-    return (len(attempt["problems"]), sum(i.severity == "blocking" for i in r.issues), -s["truth"], -min(s.values()), -sum(s.values()))
+    return (len(attempt["problems"]), sum(i.severity == "blocking" for i in r.issues), -s["truth"],
+            -(s["aliveness"] + s["spectacle"]), -min(s.values()), -sum(s.values()))
 
 
 def run_one(exhibit_id: str | None, photo: Path | None, variants: dict[str, str], label: str) -> Path:
@@ -358,20 +364,23 @@ def render(ctx: dict, run_dir: Path) -> str:
         cs = ctx["concepts"]
         out += ["## S2 Concepts", ""]
         for n, c in enumerate(cs.concepts):
-            out += [f"### {n}. {c.name}{' ✅ chosen' if n == cs.chosen else ''} — {c.engine}", f"- **Logline:** {c.logline}",
+            out += [f"### {n}. {c.name}{' ✅ chosen' if n == cs.chosen else ''} — {c.mode} / {c.engine}", f"- **Logline:** {c.logline}",
+                    f"- **Hero:** {c.hero_mover} wants {c.want} · first sign: {c.first_sign} · big move: {c.big_move}",
+                    f"- **Spectacle shot:** {c.spectacle_shot} · return trace: {c.return_trace}",
                     f"- **Hook:** {c.hook_visual} — \"{c.hook_line}\"", f"- **Arc:** {c.emotional_arc}",
                     f"- **Ending:** {c.ending_visual} — \"{c.ending_line}\"", f"- **Answers:** {c.answers_question}", ""]
         out += [f"**Why this one:** {cs.choice_reason}", ""]
 
     if sc:
         out += ["## S3 Script (chosen attempt)", "", "```", json.dumps(checks.stats(sc), indent=2), "```", "",
-                f"- **Style / narrator:** {sc.style} / {sc.narrator_presence}", f"- **Voice:** {sc.voice}",
+                f"- **Mode / hero:** {sc.mode} / {sc.hero_mover} (wants {sc.hero_want}); still: {sc.still_parts or '—'}",
+                f"- **Look:** {sc.look} · style {sc.style} · narrator {sc.narrator_presence}", f"- **Voice:** {sc.voice}",
                 f"- **Attitude:** {sc.narrator_attitude}", f"- **Music:** {sc.music_style}", f"- **Subject lock:** {sc.subject_lock}", ""]
         offset = 0.0
         for n, seg in enumerate(sc.segments, 1):
             out += [f"### Segment {n} ({seg.duration_s}s · {seg.setting} · refs: {', '.join(seg.ref_assets) or 'none'})", "",
                     "| t | refs | framing / camera | action | visual |", "| --- | --- | --- | --- | --- |"]
-            out += [f"| {offset + s.t_start:.1f}–{offset + s.t_end:.1f} | {', '.join(s.refs)} | {s.framing} / {s.camera} | {s.action} | {s.visual} |" for s in seg.shots]
+            out += [f"| {offset + s.t_start:.1f}–{offset + s.t_end:.1f} **{s.beat}** | {', '.join(s.refs)} | {s.transition_in} → {s.framing} / {s.camera} | {s.action}{(' ⟶ ' + s.transformation) if s.transformation else ''} | {s.visual} |" for s in seg.shots]
             out += ["", "Narration:"]
             out += [f"- `{offset + l.t_start:.1f}s` *{l.kind}* \"{l.text}\" {('[' + ', '.join(l.fact_ids) + ']') if l.fact_ids else ''}" for l in seg.narration]
             out += ["", f"Audio: {seg.audio.ambience}; sfx: {', '.join(seg.audio.sfx)}; music: {seg.audio.music}",
@@ -385,7 +394,7 @@ def render(ctx: dict, run_dir: Path) -> str:
                     f"refs {r['image_urls']} · {r['direction_words']} direction words {r['prompt_parts']} · {r['prompt_words']} total · ~${r['est_usd']}", "", "```", r["prompt"], "```", ""]
 
         rv: schemas.Review = best["review"]
-        out += ["## S4 Review of chosen attempt", "", "```", json.dumps(rv.scores.model_dump()), "```", "", rv.summary, "",
+        out += ["## S4 Review of chosen attempt", "", f"Fantasy legibility: **{rv.fantasy_legibility}**", "", "```", json.dumps(rv.scores.model_dump()), "```", "", rv.summary, "",
                 "Claim audit:"]
         out += [f"- {'✅' if c.supported else '❌'} *{c.kind}* \"{c.line}\" — {c.claim} — {c.supporting_fact}" for c in rv.claims]
         out += ["", "Issues:"] + [f"- **{i.severity}** [{i.where}] {i.problem} → {i.fix}" for i in rv.issues] + [""]

@@ -1,0 +1,380 @@
+##### centre
+NEW CENTRE: "Make the exhibit act." (让展品活过来，再让它回到原位。)
+
+The harness's first question changes from "what could go wrong?" to "what does this object do when it comes alive, and what does the visitor feel when they look up at it afterwards?" Every film is a 15 s (or 2 x 15 s) live-action fantasy beat in which the exhibit is the main character. A technically clean film in which the exhibit never acts now counts as a failure. The first Zun film (push-ins over a motionless bronze) is the negative anchor and should score aliveness 1-2.
+
+Truth follows two separate rules.
+- SAID: strict and unchanged. Every spoken claim cites fact ids that say it, in the pack's wording, with no added qualifiers, no worked-out figures, and nothing from appearance notes, UNSOURCED material or conflict notes.
+- SHOWN: free, but it must read as fantasy (waking, breathing, leaping, the world bending, a passage through the glass). It must never be staged as a historical record: no documentary-register casting, excavation, bombing, ritual with priests, named or identifiable people, or a site or hall the object was never in. A glimpse of the past is allowed only in one stated stylised look (ink-wash, shadow puppet, rubbing, the object's own decoration come alive) or as the object's memory entered through a transition device, and no spoken line may present that image as what happened.
+
+Renderability stops being a ban on motion. It becomes the set of Seedance's real failure modes:
+- several movers at once
+- more than one transformation per shot
+- stacked camera moves
+- instruction overflow
+- references with no stated job, or two references that disagree about the same subject
+- orbiting onto sides no reference shows
+- text in frame
+- long lip-synced lines
+
+THREE MODES. The agent picks one per exhibit and may combine two: the main mode gives the big beat and the other gives one shot.
+
+1. AWAKEN (default when the object has a figurative part: an animal, figure, face or creature). One hero mover wakes in place, acts with a want, causes a physical consequence, and is back in place before we look.
+2. WORLD RETURNS (default when nothing on the object can plausibly move: a plain vessel, coin, manuscript or tool). The object stays perfectly still while its world, light, contents, time and scale move fast around it. It reads as the object's memory or a fantasy passage and returns by match cut.
+3. CHARACTER (layered on 1 or 2 when the visitor's photo invites direct address). The awakened part has a personality, notices the visitor, and may speak short in-character lines (voice lines with no claims, or sourced facts as a boast or a confession).
+
+Choosing a mode:
+- Does the object have one part that could plausibly move and be filmed whole again? Use AWAKEN.
+- Is its function (holding, pouring, sailing) the strongest image? Use WORLD RETURNS, with the CONTENTS moving.
+- Did the visitor frame a face or a creature head-on? Add CHARACTER.
+
+FIXED SHAPE of every 15 s generation: STILL, then STIR, then ACT, then RETURN.
+1. The real exhibit, grounded, with a first sign of life by about 3 s.
+2. The inciting physical change.
+3. The high-amplitude beat: a speed or force word, a physical result, and no voice over it.
+4. Back to the real exhibit at the visitor's photo angle, whole and correct, with one trace of life left behind.
+
+The voice is a terse sourced counter-track of 15-22 words per 15 s. Sound is the second actor.
+
+PASS GATE (code):
+- no hard-check failures and no blocking issues
+- truth = 5
+- aliveness >= 4, spectacle >= 4, return >= 4
+- fantasy_legibility is pass or fail (a fail is blocking)
+- every other score >= 3
+
+checks.py, seedance.py, schemas.py and prompts S1b, S2, S3 and S4 must change in the same commit. The old MULTI_MOVE check, the mixed-state check, the "no morphing" line and S4's "no fast motion, transformations" each veto the new films on their own, so a partial change will produce contradictory feedback loops.
+
+Schema additions this centre needs (schemas.py):
+- Concept: mode, hero_mover, want (5 words), first_sign, big_move, return_trace, spectacle_shot.
+- Script: mode, hero_mover, hero_want, still_parts (e.g. 'the other three rams'), look (one concrete look line), return_trace.
+- ShotSpec:
+  - beat: still | stir | act | return
+  - transition_in: cut | match cut on <feature> | whip pan | through the glass | time-lapse
+  - transformation: optional, as start -> mechanism and speed -> end
+  - action: a verb chain of up to about 35 words
+  - visual: up to 8 words of light
+- Scores: aliveness, spectacle, escalation, physicality, character, return, fantasy_legibility, renderability, truth, sound, voice_fit, hook, visitor_view. Drop counterpoint, visual_feasibility, concept_fidelity and length_fit as separate axes; fold them into voice_fit and the focus notes.
+
+METHOD.md section 1 table:
+- In the "能画出来" row, delete the bad examples "骨架和活体同框、变形".
+- Add a new first row, "活起来": the good version is that the exhibit, or one part of it, acts with intent and returns to its place; the bad version is the camera pushing slowly over an object that never moves.
+
+##### s3_shots_section
+This replaces S3 paragraph 9 ("Shots. Two or three shots...") and the "Structure" sentences "Put the big jump between worlds at that cut...", "Each segment has one setting, with at most one jump to a second" and "Write the setting ... in at most 12 words". The new text:
+
+Shots: direct the exhibit as the main character of a live-action fantasy short. The concept names the mode (awaken, world returns, character), the hero mover and its want; copy them into the script unchanged. The hero mover is exactly one thing: one sculpted part or figure of the exhibit (one ram, not four), or, in world-returns mode, the world and the object's contents while the object holds still. Name everything else that belongs to the object in still_parts; the builder states that they stay still.
+
+Build each 15-second segment as three or four shots, each with a beat, in this order:
+1. still: the real exhibit as the visitor knows it, camera locked off or moving slowly, with one tiny first sign of life by about three seconds (a hairline of light along a horn, one flake of patina dropping, a tick of metal, the case glass rippling).
+2. stir: the inciting physical change, close on the part that wakes, written as a chain of verbs with visible consequences ("verdigris cracks off the brow and falls; the eyelid blinks; steam leaves the nostrils; the head snaps round to camera").
+3. act: the big move at full force. The hero leaps, runs, climbs or flies, or the world floods, buries, rebuilds or races past the still object. Every motion verb carries a speed or force word (snaps, wrenches, leaps, lands hard, surges, a slow heave), and the shot says the physical result ("lands hard; dust bursts from the floor; the camera shakes on impact"). The video model defaults to gentle motion, so a segment without one high-amplitude shot fails.
+4. return: back to the real exhibit at the angle of the visitor's photo, whole, still and correct in every detail, in the in-place view, with one trace of life left behind (return_trace: a last wisp of steam, a flake still settling, a faint glow fading). This is what the visitor matches when they look up.
+
+Each shot has one framing, one primary camera move with its speed and endpoint, and one main action. Any move at any speed is allowed: locked off, push-in, pull-back, tilt, tracking (including fast and low), crane, orbit, handheld, whip pan with motion blur, crash zoom, FPV dive. A second move is allowed only as "<move>, then <move>" where the first is a quick transition (a whip pan, then locked off) or as timed beats ("0-2s locked off, 2-4s fast push-in"); never three. Orbit past about 90 degrees, or show a side the photo does not show, only if the shot lists a reference that shows that side. Write how each shot after the first begins in transition_in: cut, match cut on <named feature>, whip pan, through the rippling glass, or time-lapse.
+
+Transformation. At most one transformation per shot, and give it at least four seconds: start state, then the change with its mechanism and speed, then the end state ("the patina peels back fast to bright gold bronze, then creeps back to grey-green"). The living hero and the vessel it belongs to may share a frame; that is the point of an awakening. Never use two references that show different versions of the same whole subject (the whole vessel newly cast and the whole vessel as it is now). The first shot of the awakened form in a segment lists its living-form reference; the living form is still the same material, with the same motifs, patina and proportions, now flexible. Keep inscriptions and fine decoration on the still object; never ask the moving hero to carry readable marks.
+
+Write action as verbs and physics, never as adjectives: no magical, majestic, stunning, epic, cinematic, 8k. Spend words on the action and its consequence. visual is at most eight words of light or colour, and only when it adds something.
+
+The picture is free, but it is fantasy, not testimony. Show the object waking or its world returning, never a reconstruction of a real event (its making, burial, discovery, damage, sale or ritual use with people) filmed as if it were documentary footage. In world-returns mode, enter the past through a transition device (the glass ripples, spotlights turn to firelight, a time-lapse) and leave by match cut. Show only what the facts make true in kind (a wine ritual for a ritual wine vessel, the kind of hillside it was found on), with no faces, no named people, no dated event and no specific place the sources do not give. A stylised look (ink-wash, shadow puppet, rubbing) is the other way to show the past, after a cut and in one named style. Never write the word documentary. Every shot of the real exhibit in the present matches how the pack and photo say it is displayed (case, plinth, hall).
+
+Use only details visible in the photo or the references. Do not write @Image tags or restate the subject lock; the builder binds references from each shot's refs. Copy subject_lock, living_form_lock, subject_name and living_form_name from the asset plan unchanged. Write look as one concrete line (for example "photoreal live-action fantasy, gallery at night, warm spotlights"), or one named style.
+
+Budget: each segment's request should stay at or under about 220 direction words (quoted narration excluded); the builder adds about 45 fixed words. Put the essentials first: the hero's action, then the camera, then sound. If you must cut, cut the sound list and light words before any speed, force or consequence word. Never ask for text, captions, signs, numbers or logos in the picture.
+
+Structure of a 30-second film: two generations sharing the same identity and living-form references in the same upload order, joined by a cut. Put that cut on the landing or the return. Segment 1 ends on a near-still end_frame. Segment 2 opens as a continuation of the same character (not a recap) and runs its own STIR, then ACT, then RETURN. The setting field lists the place of each beat (gallery, then gallery again; or gallery, then ritual hall, then hillside, then gallery), one world per shot.
+
+##### s3_narration_sound_changes
+NARRATION (replaces S3 paragraphs 5 and 11 and the timing sentence in paragraph 17; the Truth paragraph 19-23 and Place words paragraph 15 stay unchanged):
+
+Narrator. The voice belongs to the exhibit, or to its awakened hero. Describe it once, in one concrete sentence (apparent age, timbre, accent, pace, attitude), and repeat it word for word in both segments. narrator_presence:
+- "voiceover" is the default.
+- "on_screen" is for when the hero's face is in frame in CHARACTER mode. On a muzzle or a carved face, prefer voiceover over the next shot, because lip-sync on non-human mouths drifts.
+
+Narration is a counter-track to the spectacle, not a lecture: 15 to 22 spoken words per 15-second segment, at most three lines, one short sentence each (at most about ten words).
+- Leave the ACT beat (the leap, the landing, the transformation) with no voice, so its sound lands.
+- The first line starts after at least 0.8 s of picture.
+- The last line of each segment ends at least one second before the segment does.
+
+Each line is one of two things:
+- a sourced fact in the pack's own wording, or
+- the character's voice with no claims (attitude, a dry aside, address to the visitor).
+
+Plan one collision per segment: a plain fact that lands over an image that makes it astonishing ("bombs destroyed me" over the vessel standing whole with steam still curling from the ram that just ran). A line never captions its shot. A line never describes or explains the fantasy picture, and never says the fantasy happened ("I leapt", "I remember the hall"). The picture is imagination; the words stay true.
+
+Keep from the old text: write for the ear, with numbers in words. Delete "That leaves roughly 25-30 words per 15-second segment".
+
+Truth paragraph: add one sentence: "A claim that appears only in conflict notes, one secondary source or a verify flag is never voiced; write the safe line instead. Visual invention is never a truth failure, but a line that presents it as fact is."
+
+SOUND (replaces S3 paragraph 25). Sound is the second actor. For each segment give:
+- one ambience bed;
+- three or four named foley sounds tied to the physical events, in the order they happen (bronze grinding on bronze, flakes tinkling onto glass, hooves clanging on stone with an echo, a hiss of steam);
+- in world-returns mode, the world's diegetic sounds (torches crackling, frame drums, earth rumbling, rain) instead of a score.
+
+"no music" is the default. If a score is part of the concept, name its instruments and tempo, and say which beat it hits (the awakening, the landing). Never leave the audio open: an unspecified soundtrack comes back scored. Never let music or speech continue across a segment cut.
+
+The SFX field's description changes from "two or three" to "three or four, each tied to a named action".
+
+##### s2_changes
+S2 (s2_concept.md).
+
+Line 1: "The exhibit itself is the narrator and speaks in the first person" becomes "The exhibit is the main character: it, or one part of it, comes alive on screen, and its voice speaks in the first person."
+
+Keep lines 3-7 (visitor first, rank questions, controlling idea). Add this sentence after line 7: "The controlling idea lives in the words; the aliveness lives in the picture. A concept needs both."
+
+Delete line 16 ("An inanimate object can still have a point of view...") and replace engines (a)-(f) with:
+
+"Write three concepts that differ in their engine. First pick the mode that fits this object (awaken when it has a figurative part such as an animal, a figure or a face; world returns when nothing on it can plausibly move; character on top of either when the visitor framed a face or creature head-on). Then choose engines from this list, or invent a better one:
+(A) THE AWAKENING: one part wakes in place, discovers it can move, does one bold thing, and is back in its pose just before it is seen.
+(B) ESCAPE AND RETURN: the hero breaks free and crosses the gallery at speed (off the plinth, a floor-level chase), then gets back to its place in time; the vessel ends whole.
+(C) IT NOTICES YOU: the visitor's photo or flash is the inciting incident; the hero turns to the lens, holds the pose, fogs the glass or shakes off dust at them.
+(D) MATERIAL MAGIC: the material behaves impossibly but physically, with a clear start and end (patina peels back to bright bronze and creeps back; carved fleece lifts like real wool; bronze ripples like liquid and sets).
+(E) ITS WORLD RETURNS: the object holds still, camera locked, while its world rebuilds or races around it (the gallery becomes the place of its use, time-lapse of its life), entered through the glass and left by match cut. Use it only where the world shown reads as memory or fantasy, never as a claimed historical scene.
+(F) WHAT IT HELD: the contents or function move (wine rises in the mouth, smoke curls, offerings land), so the function is acted rather than described.
+(G) THE GUARDIAN ON DUTY: the creature performs the role its form suggests (patrolling the rim, baring teeth at a shadow); the role is shown, and it is never claimed in speech unless a fact says it.
+(H) SCALE DIVE: the camera shrinks into the surface (FPV over the relief like terrain) until a carved animal looms as a living giant, then pulls back out. It suits a 'detail most people walk past' question.
+The old engines (reveal, contrast, decisive moment, detail most people miss) survive as the way the spoken lines are ordered inside one of these."
+
+Line 18, new required fields per concept:
+- mode
+- engine
+- hero_mover: exactly one, or "the world" in mode E or F
+- want: what the hero wants, in at most five words, readable with the sound off
+- first_sign: the first visible sign of life, by about 3 s
+- big_move: the high-amplitude beat, with a speed or force word and its physical consequence
+- return_trace: what is left on the still, whole exhibit in the last shot
+- spectacle_shot: the one image a visitor would screen-record, in one sentence
+- the fields kept from before: logline, hook_visual, hook_line, emotional_arc, ending_visual (the real exhibit, whole, at the visitor's angle), ending_line, fact_ids, answers_question.
+
+Replace line 22 (Production limits) with: "Production limits. The film is one or two separate 15-second generations with sound, guided by two to four reference images. What renders: one hero moving with weight, one transformation per 4-5 s shot, one camera move per shot (any speed), fast physical action with contact, a world changing around a still object, passing through glass, match cuts. What breaks: several parts moving at once (four rams waking), several transformations in one shot, readable text, inscriptions on a moving part, long speeches, identifiable real faces. Nothing can be written on screen, so a number is heard, not read. Visual imagination is free if it reads as fantasy; never build a concept on a realistic reconstruction of a real event (making, burial, discovery, damage, sale), on named people, or on a place the sources do not give."
+
+Line 24, choosing: rank the concepts first by aliveness and the spectacle shot, then by how well the lines answer the visitor's top question, then by renderability. A concept in which the exhibit never acts (camera, light and dust only) may not be chosen. Explain the choice from the visitor's side: what they will feel when they look up.
+
+Keep line 20 (lines written as final, truth rules) unchanged.
+
+checks.concepts: keep the distinct-engine check (A-H have distinct first words). Add three checks: hero_mover is non-empty; big_move contains a FORCE word (the same regex as in checks); ending_visual mentions whole/still/in place, or names the in-place view.
+
+##### s4_rubric
+S4 (s4_review.md).
+
+Line 1: unchanged.
+
+Item 1 (truth audit): keep it word for word for the spoken track. Replace its last sentence with: "Check that every shot of the real exhibit in the present matches how the pack and photo say it is displayed. Then audit the picture separately for fantasy legibility: list any shot that could be mistaken for a documentary record of a real event (casting, excavation, burial, bombing, sale, ritual with people), any identifiable or named person, and any specific place or date the sources do not give. Visual invention is not a truth failure unless a spoken line presents it as fact."
+
+Items 2-3 (previous review; issues) stay. Add to item 3's list of blocking issues: aliveness 2 or lower, a fantasy-legibility violation, or a return shot that shows the exhibit altered or missing a part.
+
+Replace the renderability paragraph (line 9) with:
+
+"Check renderability only against what actually breaks Seedance:
+- more than one part of the object moving (the rest must be stated still);
+- more than one transformation in a shot, or a transformation under about 4 s;
+- three camera moves in a shot, or two without a quick-transition or timed-beat form;
+- an orbit or a reveal of an unseen side with no reference showing it;
+- a reference with no stated job, or two references showing different versions of the same whole subject;
+- over about 220 direction words, or essentials placed after the sound list;
+- text, captions or inscriptions asked of a moving part;
+- a spoken line over about ten words in one shot, or lip-sync on a non-human mouth for a long line;
+- a different voice description between segments.
+Fast motion, transformations, the hero and its vessel in one frame, and several settings across shots are NOT faults in themselves. When ambition would smear, propose the boldest version that renders (soften 'leaps' to 'leaps down heavily', move the transformation into its own shot); never propose a static shot as the fix."
+
+Keep line 11 (self-check replacement lines and word counts), with one change: replacement shots must keep at least the segment's current amplitude.
+
+Item 4 scores, 1-5 (5 = ship unchanged in a paid animated short):
+- aliveness (gate >= 4): 5 = the exhibit itself, or one part, acts with intent and weight, its want is readable with the sound off, and the first sign of life comes by about 3 s; 3 = it moves only as a gentle effect (glow, dust, a lone blink) with no intent; 1-2 = the object never moves on its own (camera, light and dust only; the first Zun film is a 1). 2 or lower is blocking with where='aliveness' and a concrete replacement shot.
+- spectacle (gate >= 4): name the one shot a viewer would screen-record or replay. If you cannot name it, score at most 3.
+- escalation: amplitude rises still, stir, act, return; 5 = a clear high-amplitude beat with a speed or force word and a physical result; 3 = one gentle speed throughout; 1 = no beat.
+- physicality: every living action is a verb chain with a visible consequence and a named sound; deduct for adjectives (magical, majestic, epic) standing in for action.
+- character: the hero shows personality through behaviour (hesitation, curiosity, pride, mischief), and voice and behaviour feel like the same character; dignified, never slapstick toward a sacred or ritual object.
+- return (gate >= 4): the last shot is the real exhibit at the visitor's angle, whole, correct and still, with one trace of life. Altered, missing a part or not at the visitor's angle scores at most 2.
+- fantasy_legibility: pass or fail. Fail (blocking) if any image could be read as a documentary record of an invented or unsourced historical event, or shows identifiable or named people.
+- renderability: under the limits above; each fails_at violation is blocking.
+- truth (must be 5): unchanged; any unsupported spoken claim scores 1 and is blocking, and so does a claim from conflict notes or a verify flag.
+- sound: three or four named foley sounds tied to the events, the ACT beat left without a voice, and 'no music' or one named score; open audio scores at most 2.
+- voice_fit (replaces counterpoint and spoken): lines add what the picture cannot (age, origin, what happened), never caption or explain the fantasy, sound like this character, fit 15-22 words per 15 s, and land one collision.
+- hook: the first 2-3 s hold a promise of life, not a mood shot.
+- visitor_view: it answers this visitor's most likely question; answering none scores at most 2.
+Drop counterpoint, spoken, visual_feasibility, concept_fidelity and length_fit as separate scores. Mention concept drift and padding as issues instead.
+
+Pass gate in code: no hard-check failures, no blocking issues, truth = 5, fantasy_legibility = pass, aliveness, spectacle and return each >= 4, every other score >= 3.
+
+Keep the summary to two or three sentences, and name the spectacle shot in it.
+
+##### seedance_template_changes
+seedance.py render(), specific edits.
+
+1. Docstring. Delete "precise per-shot timings are unreliable, so no timecodes". Write instead: "numbered shots with time ranges, 'Shot n (a-bs)', for clips over about 8 s (official multi-shot storyboard guidance); essentials first: reference jobs, then the lock, then the shots, then the voice, then the sound."
+
+2. ROLE dict (each reference gets one job):
+- exhibit_now: "identity anchor: its shape, decoration and patina exactly as photographed; ignore its background"
+- living_form: "{living_form_name}: same material, motifs and proportions as {subject}, now a flexible living form; ignore its background" (it is no longer "copy its body shape" of a different subject)
+- environment: "setting and final framing" for the in-place view (asset.view contains the subject), and "setting only, without the exhibit" for world plates
+- add a new depicts value, "keyframe": "the {hero}'s pose at the big move"
+Keep the 'another view of' and 'close-up of ... part of' logic.
+
+3. Delete the whole parts["states"] block, including the line "{living} and {now} never appear in the same shot: hard cut between them, no morphing." Replace it with parts["lock"], placed right after refs:
+`f"{subject} keeps its shape, decoration and patina and ends whole. Only {script.hero_mover} moves; {script.still_parts} stay {material}."`
+Example output: "Only the front ram moves; the other three rams stay bronze." In world-returns mode: `f"{subject} stays perfectly still; only its world moves."`
+Never print "no morphing". A transformation is requested per shot instead.
+
+4. Style line. Delete `"photorealistic documentary footage, natural light"`; the word "documentary" tells the model to film a still object, and it invites the record register that the truth rule forbids. Use `look = _s(script.look) or ("photoreal live-action fantasy, real museum gallery" if script.style == "realistic" else "lightly stylized animation, clean shapes")`. Print it as one line: `f"{look}."`. Fold Setting into each shot (its world) rather than one global setting; keep `f"Setting: {_s(seg.setting)}."` only if every shot is in one place.
+
+5. Shots. Replace `lead = "Shot 1" if n == 1 else f"Cut to shot {n}"` with `lead = f"Shot {n} ({s.t_start:g}-{s.t_end:g}s)"`. When n > 1 and `s.transition_in` is not a plain cut, start the body with it ("match cut on the horn spiral to ...", "whip pan to ...", "through the rippling glass into ..."). Body:
+`f"{lead}{refs}: {framing}, {camera}. {action}{'; ' + transformation if s.transformation else ''}{'; ' + visual if visual else ''}."`
+Write the action as a verb chain; printing it as a full sentence after the camera (not after a semicolon) keeps the verbs at the front.
+Inside each shot, refer to a reference as "the ram from @Image3" or "the @Image2 view", i.e. `f"{name} from {tag}"` in the refs clause, instead of the bare "(@Image3)".
+Keep the end-frame sentence for segment 1 of 2, but print "the music has faded" only when music_style is not "no music".
+
+6. Transformation phrasing (builder template when s.transformation is set): `f"{start}; then {mechanism}, {speed}; it ends {end}"`, for example "the grey-green patina peels back fast, revealing bright gold bronze; then it creeps back; it ends grey-green as photographed". Character motion phrasing is the writer's verb chain, passed through unchanged; the builder never adds adverbs.
+
+7. Voice. For on_screen use `f"{script.hero_mover or 'The subject'} says, {voice}:"`; voiceover stays as `f"Voiceover, {voice}:"`. Drop "an unseen narrator" to save words.
+
+8. Sound: unchanged logic, with music_style defaulting to "No music." Print it after the voice.
+
+9. Constraint, shorter: `f"Clean picture: no subtitles, captions, lettering, logos or watermark. One {subject} in every frame."` In awakening films, add nothing else: the lock line already carries the stillness.
+
+10. Order: `("refs", "lock", "style", "shots", "voice", "sound", "constraint")`.
+
+11. Caps. Set `MAX_DIRECTION_WORDS = 240` as the hard limit (instruction overflow is a real failure). Add `SOFT_DIRECTION_WORDS = 200`; going over it adds a note, not a problem. Set `NOTE_TOTAL_WORDS = 300`, unchanged. Fixed text drops from about 60 to about 45 words.
+
+12. RESOLUTION default: keep the 720p env var. For aliveness drafts, the run sets SEEDANCE_RESOLUTION=480p ($1.95 per 15 s), and only the chosen take goes to 720p.
+
+##### checks_changes
+checks.py, specific changes.
+
+DELETE
+1. The mixed-state check in script():
+```
+states = {assets[r].depicts ...} & {"exhibit_now", "living_form"}
+if len(states) > 1: problems.append("... shows the exhibit as it is now and its living form together ...")
+```
+Replace it with a check that targets only real flicker: two refs in the same SEGMENT that both depict a whole version of the exhibit (two exhibit_now assets that differ, or exhibit_now plus a new depicts="exhibit_restored") are a problem: "two references show different versions of the whole exhibit; identity will flicker". exhibit_now plus living_form (a part awakened) is allowed.
+
+2. The sheet ban:
+```
+if a in labeled or a in sheets or ("sheet" in a and not a.endswith("_side"))
+```
+becomes: a problem only if `a in labeled`, or the asset's kind is "expression_sheet" (variants of the same subject in different states inside one image). A label-free "turnaround" (same pose, several angles, no text) is allowed as a living_form reference.
+
+RELAX
+3. MULTI_MOVE. Delete the regex on 'then' / 'followed by' / 'before'. Replace it with a count of camera moves: MOVES = r"\b(locked(?: off)?|static|push[- ]in|pull[- ]back|pull[- ]out|tilt|pan|whip pan|orbit|crane|dolly|track(?:ing)?|zoom|crash zoom|fpv|drift|handheld|arc)\b".
+- Three or more distinct moves in one shot is a problem.
+- Two moves is allowed only if one of them is a whip pan, crash zoom or "locked off" (a transition followed by a hold), or the camera field has timed beats (r"\d+(\.\d+)?\s*-\s*\d+(\.\d+)?\s*s").
+- Otherwise: "camera stacks moves; cut, or write timed beats".
+
+4. MIN_SHOT_S. Go from 3.0 to 2.0 for ordinary shots (quick cuts render). Add MIN_TRANSFORM_S = 3.5: a shot with transformation set that is shorter than that is a problem. Keep the gap and overlap timing checks. Add MAX_SHOTS_PER_SEGMENT = 5.
+
+5. Direction words. The comparison stays, now against seedance.MAX_DIRECTION_WORDS = 240 (was 230). The message changes to "cut the sound list and light words first, never speed, force or consequence words". Over SOFT_DIRECTION_WORDS (200), notes() reports it instead.
+
+6. Narration budget: keep word_budget as the ceiling. Add NARRATION_TARGET = (12, 24) words per 15 s segment: above 24 is a problem ("narration crowds the action; 15-22 words per 15 s"), and fewer than 8 in a segment with fact lines is a note.
+
+KEEP unchanged: research URL checks, material, keywords, TEXT_ON_SCREEN/NEGATED, fact-id and number checks on lines, NUMBERISH for non-fact lines, HEAD_S, TAIL_S, line overlap, padding (same fact repeated), subtitles match, English only, MAX_REFS_PER_SEGMENT = 4, and expect.json forbidden.
+
+ADD (the new centre in code)
+7. ALIVENESS:
+- each segment has exactly one shot with beat == "act", and its action matches FORCE = r"\b(fast|quickly|hard|snaps?|wrench(es)?|leaps?|lunges?|bursts?|surges?|slams?|violently|heaves?|races?|gallops?|pours?|crashes|shakes|whips?)\b". Otherwise: "no high-amplitude beat; the model defaults to gentle motion".
+- shot 1's beat is still, and the last shot's beat is return.
+- script.hero_mover is non-empty.
+- in awaken or character mode, at least one stir or act shot names the hero_mover, or lists a living_form ref.
+
+8. ONE HERO: if script.still_parts is empty and the subject_lock names a count of identical parts ("four rams", "two lions"), that is a problem: "name the parts that stay still".
+
+9. ONE TRANSFORMATION: a shot whose action contains two or more of (turns into|becomes|morphs|dissolves|melts|transforms|solidifies|reassembles), or that has transformation set as well as one of those verbs in its action, is a problem.
+
+10. RETURN: the last shot of the last segment lists an exhibit_now asset or the in-place environment asset, and its action does not match r"\b(missing|gone|empty corner|three rams|broken)\b".
+
+11. ACT GAP: no narration line overlaps [act.t_start + 0.3, act.t_end - 0.3]. The message: "leave the big beat without a voice".
+
+12. FANTASY LEGIBILITY: RECORD = r"\b(documentary|archival|newsreel|re-?enact\w*|reconstruction of|excavat\w+|foundry|casting workshop|air raid|bombing|bombers?|soldiers?|priests?|archaeologists?|the finders?)\b" in shot action, visual or setting, unless script.style is "stylized" or the shot's transition_in or visual names a stated style (ink-wash, shadow puppet, rubbing). Message: "this shot stages history as record; show it as fantasy or in one stated stylised look".
+
+13. ADJECTIVES: r"\b(magical|majestic|stunning|epic|breathtaking|8k|cinematic masterpiece|mystical)\b" in a shot is a problem: "write the action as verbs and physics".
+
+14. SOUND: seg.audio.sfx has at least 3 entries, and music_style is set (including 'no music').
+
+15. ORBIT: a camera matching r"orbit|arc|360|180" with no living_form, turnaround or side-view asset in the shot's refs is a note, not a problem.
+
+stats(): add mode, hero_mover, act_shot_index and amplitude_words (FORCE matches).
+
+##### s1b_changes
+S1b (s1b_assets.md). Replace "The standard set, in this order" (items 1-4) and the sheet rule with this.
+
+1. Exhibit now (identity anchor; always). A clean view of the real object, alone, glare and reflections removed, even neutral light, plain background, at the visitor's photo angle, or the angle that best shows its shape. The video model is told this is never altered. Upload it first.
+
+2. In-place view (setting and final framing; always when there is a visitor photo). Unchanged rule: the photo cleaned up, same angle and framing, in its hall, glare, signs, readable text and visitor reflections removed. It is the reference for the RETURN shot.
+
+3. Living form of the hero mover (awaken or character mode). ONE single-view image of the one part that wakes, as a whole living creature or figure in the SAME material, patina, motifs and proportions as on the object, now flexible: a 3/4 standing pose on a plain light background, even light, no text. For the zun: the front ram as a whole four-legged bronze animal with the same grey-green verdigris, forward-curling ridged horn spiral and scale-and-spiral relief, small eyes, mouth closed, nothing held. Its prompt must restate the exhibit's colours and markings in the same words as the exhibit-now prompt, so the two references agree about the material. Call it "<part>_awake" (not "*_sheet").
+
+4. Turnaround (only when a shot orbits past about 90 degrees or shows the back). A label-free strip of the same living form in ONE pose from front, 3/4, side and back, evenly spaced on a plain background, no text, no expression variants. Mark its kind as "turnaround". This replaces the old "character sheet + _side" pair. Expression or state grids (calm, curious, delighted) are never sent to the video model, because several states of one subject in one image cause flicker. Plan them only if a human wants them for design (kind "expression_sheet").
+
+5. Keyframe (optional, act beat). One image of the hero at the big pose (mid-leap, landing crouch), same material and motifs, plain background. Plan it only if the first draft deforms the move.
+
+6. World plates (world-returns mode, or an awakening that changes the room). One environment image per world the film visits (a ritual hall by torchlight, a red-earth terraced hillside, the gallery at night), WITHOUT the exhibit in it, so the vessel always comes from the identity anchor. Mark it as artistic in purpose. No people's faces, no named site, no dated event, no casting scene.
+
+Delete:
+- the "Restoration" image as a video reference (the whole exhibit newly made, a different colour, in its world). It disagrees with the identity anchor about the same subject. Show newness through firelight on the identity anchor instead.
+- "A sheet is never sent to the video model."
+- the per-state single images (slice_dusty) as default. Allow them only for an image-to-video start or end frame (a buried state), never alongside the exhibit-now image in one reference-to-video call.
+
+Keep: "From this photo, show..." prompts, one subject alone, must_avoid lists (text, labels, captions, watermarks, people, glass cases, second copies), and consistent colour words across all prompts. Reword "Even light, no dramatic mood" to apply to 1, 3, 4 and 5; world plates (6) may carry their world's light.
+
+Locks: add hero_mover_name (e.g. 'the front ram') and still_parts (e.g. 'the other three rams'). living_form_lock now describes the awakened PART (15-30 words), not a restoration of the whole object.
+
+Budget: 2-4 references per segment, upload order identity, in-place, living form or turnaround, then world plate or keyframe. Never two images that disagree about the same subject.
+
+For exact start or end states (fragments reassembling, a buried vessel washed clean), S1b may plan a start_frame/end_frame pair for a separate fal seedance-2.0 image-to-video call. Note that it cannot be mixed with the multi-image references.
+
+##### FAILS_AT
+- Stacked camera moves in one shot (for example orbit, crane and dolly-in at once) give jitter, drift or a direction change mid-clip. Cut, or write timed beats. (heyuan110; skills.sh seedance-camera)
+- Cramming several locations or transformations into a short clip gives smeared morphing. Budget about one transformation per 4-5 s shot. (heyuan110)
+- Instruction overflow: with about 8 requirements, only 4-5 get honoured. Keep each prompt to roughly 60-100 words (up to about 200 per multi-shot block) and put the essentials first. (heyuan110, Atlabs)
+- A reference with no stated job bleeds its lighting, framing and pacing into the output. Two images showing different versions of the same subject cause identity flicker. (heyuan110, Magic Hour)
+- Orbits reveal sides the reference does not show, and the model invents them. Supply extra views of anything that will be orbited. (Magic Hour)
+- Very fast motion and complex contact: objects float or disappear, limbs deform, interactions look unnatural. The technical report also lists minor deformation artifacts, implausible motion in edge cases, high-frequency noise, and failures on out-of-distribution physics or composition. (WaveSpeed; Emergent Mind summary of arXiv 2604.14148)
+- Imperfect fidelity to complex compound references: references condition the output but do not guarantee an identical object. Fine surface detail on a real artifact, such as inscriptions or exact decoration, can drift once it moves. (arXiv report; Magic Hour)
+- Multi-subject consistency is weaker. Four rams moving at once is riskier than one hero ram. (official launch post, eWeek)
+- Text rendering in frame is unreliable, especially with mixed languages or rare glyphs (seal script, for instance). Do not rely on the model for captions. (official post, heyuan110)
+- Long dialogue drifts out of lip-sync. Multi-speaker lip-sync errors and occasional audio distortion. Unspecified audio comes back with music. (fal guide; arXiv)
+- No negative prompts: write positive constraints instead. No motion-amplitude or reference-strength parameter on fal; the '75% reference strength' advice comes from other hosts. (Atlabs; fal llms.txt)
+- First and last frame cannot be combined with omni references in one call. On fal, an exact end state (reassembly, for instance) needs the image-to-video endpoint and loses the multi-image references. (Magic Hour; fal image-to-video llms.txt)
+- Hard limit of 4-15 s per generation. Extension quality is behind Veo 3.1, so a 30 s film should be planned as 2 generations sharing references. Identifiable real faces in references can be blocked. (fal docs; Moonlight review; heyuan110)
+##### PROMPT STRUCTURE
+Build each 15 s generation as a short drama beat, not a documentary pan.
+
+(1) Reference binding header, one role per asset. "@Image1 = the real Four-Ram Zun exactly as photographed (identity anchor). @Image2 = character sheet of the living ram, front/side/back. @Image3 = the world it wakes into (optional). @Video1 = camera path only (optional)."
+
+(2) One look line: a photoreal museum grade, or a single named style.
+
+(3) Numbered, timecoded shots, 3-4 per 15 s. Each shot gets a size, one camera move with speed and endpoint, a subject action written as a verb chain with physical consequence, and a sound. Escalate motion amplitude across the shots: shot 1 grounded in the real exhibit (locked or slow); shot 2 the inciting change (crack, glow, blink, breath, head turn); shot 3 a big move (the ram leaps off, the gallery transforms, an FPV chase or a fast orbit); shot 4 resolution or return (a match cut back to the still bronze, the camera pulls out to the vitrine).
+
+(4) Transitions stated explicitly: cut, match cut on the horn spiral, whip pan, pass through the glass.
+
+(5) Audio: quoted lines at one sentence per shot, voiced by the character or a narrator; named foley; "no music" or a named score.
+
+(6) Positive constraints, for example "@Image1 vessel shape and decoration preserved; one ram moves, the others stay bronze."
+
+Keep each block to about 100-200 words. Split 30 s into two generations that share the same references, passing generation 1's last shot as @Video1 or an anchor still into generation 2. Amplitude comes only from wording (speed and force verbs, the "slow motion at 7 s, then snap to full speed" ramp), from the timeline, or from a motion video reference. Spoken facts must stay sourced. Visual invention should be readable as fantasy (waking, leaping, the world changing) rather than staged as a historical record, for example not showing a fake casting scene presented as documentary.
+##### REFS
+The most useful set for an exhibit-as-character film, up to 9 images on fal reference-to-video, each with an explicit @ role.
+
+(a) The cleaned visitor photo of the real object. This is the identity anchor; state that the object keeps its shape, decoration and patina.
+
+(b) A character sheet of the living form, made with an image model from the photo: front, 3/4, side and back views of the awakened ram or creature, keeping the same material and motifs but posed as a living animal. Add a face close-up. Plain background, nothing held. Add a side view if you will orbit.
+
+(c) Optionally one in-motion keyframe of the living form, such as a ram mid-leap, so a large pose is anchored rather than invented.
+
+(d) An environment or world plate for the transformation target (Shang workshop by firelight, an ink-wash landscape, the gallery at night). This locks continuity across cuts.
+
+(e) Optionally one style plate, only if you are stylising.
+
+Binding rules:
+- Name each image's job in the first lines of the prompt.
+- Refer to it again in the shot where it matters (\"Shot 3: the ram from @Image2 leaps...\").
+- Never give two images that disagree about the same subject.
+- Keep 2-5 images; more dilutes adherence.
+- Keep upload order stable, because @Image numbering follows order.
+
+For exact start and end states (fragments reassembling into the vessel, bronze turning to flesh), use fal seedance-2.0 image-to-video with image_url and end_image_url instead, since frame anchors cannot be mixed with omni references.
+
+For continuity across a 30 s two-part film, reuse the same sheet and photo in both calls, and add the first generation's best frame or tail clip as an extra reference.
+
+Sources: https://magichour.ai/blog/seedance-20-reference-guide, https://www.atlabs.ai/blog/seedance-2-prompts-guide, https://www.kapwing.com/resources/how-to-create-consistent-ai-characters-with-seedance-2-0/, https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt
