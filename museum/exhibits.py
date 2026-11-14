@@ -9,6 +9,10 @@ exhibits/<id>/
   overrides/shot_03.mp3   ready-made narration for shot 3 (+ optional shot_03.words.json)
   overrides/ambient.mp3   ready-made sound bed
   demo/<lang>-<style>/    known-good film (final.mp4 + manifest.json), see `promote`
+
+Exhibits the script agent knows (harness/knowledge/<id>/meta.json) but that have no folder here are
+listed too, read-only: their facts live in the agent's knowledge pack, and their films are kept in
+exhibits/<id>/demo/ like any other.
 """
 from __future__ import annotations
 
@@ -64,15 +68,21 @@ class Exhibit:
         return None
 
     def demo_dir(self, language: str, style: str) -> Path:
-        return self.dir / "demo" / f"{language}-{style}"
+        return config.EXHIBITS_DIR / self.id / "demo" / f"{language}-{style}"
 
     def demos(self) -> list[dict]:
         out = []
-        for manifest in sorted(self.dir.glob("demo/*/manifest.json")):
+        for manifest in sorted((config.EXHIBITS_DIR / self.id).glob("demo/*/manifest.json")):
             if (manifest.parent / "final.mp4").exists():
                 language, _, style = manifest.parent.name.partition("-")
-                out.append({"language": language, "style": style, "manifest": self.url(manifest)})
+                out.append({"language": language, "style": style, "manifest": config.url_for(manifest)})
         return out
+
+    @property
+    def pack(self) -> Path | None:
+        """The script agent's knowledge pack for this exhibit, if it has one."""
+        p = config.HARNESS_DIR / "knowledge" / self.id / "pack.md"
+        return p if p.exists() else None
 
     def url(self, path: Path) -> str:
         return f"/exhibits/{self.id}/{path.relative_to(self.dir).as_posix()}"
@@ -98,6 +108,8 @@ class Exhibit:
 
 def load(exhibit_id: str) -> Exhibit:
     folder = config.EXHIBITS_DIR / exhibit_id
+    if not (folder / "exhibit.json").exists():
+        return _from_pack(exhibit_id)
     data = json.loads((folder / "exhibit.json").read_text())
     refs = {
         p.stem.lower(): p
@@ -107,5 +119,16 @@ def load(exhibit_id: str) -> Exhibit:
     return Exhibit(id=exhibit_id, dir=folder, data=data, refs=refs)
 
 
+def _from_pack(exhibit_id: str) -> Exhibit:
+    """An exhibit known only to the script agent: name and look from its meta.json, no facts of ours."""
+    folder = config.HARNESS_DIR / "knowledge" / exhibit_id
+    meta = json.loads((folder / "meta.json").read_text())
+    data = {"name": meta["name"], "museum": meta.get("museum", ""), "location": meta.get("location", ""),
+            "hints": meta.get("looks_like", ""), "facts": [], "from_pack": True}
+    return Exhibit(id=exhibit_id, dir=folder, data=data)
+
+
 def all_exhibits() -> list[Exhibit]:
-    return [load(p.parent.name) for p in sorted(config.EXHIBITS_DIR.glob("*/exhibit.json"))]
+    ours = [p.parent.name for p in sorted(config.EXHIBITS_DIR.glob("*/exhibit.json"))]
+    packs = [p.parent.name for p in sorted((config.HARNESS_DIR / "knowledge").glob("*/meta.json")) if p.parent.name not in ours]
+    return [load(exhibit_id) for exhibit_id in ours + packs]

@@ -136,25 +136,27 @@ def conform(src: Path, out: Path) -> float:
     return duration(out)
 
 
-def scene_timeline(lengths: list[float]) -> list[dict]:
+def scene_timeline(lengths: list[float], fade: float | None = None) -> list[dict]:
     """Where each clip sits when neighbours overlap by the cross-fade."""
+    fade = config.XFADE if fade is None else fade
     slots, t = [], 0.0
     for i, length in enumerate(lengths):
         slots.append({"start": round(t, 3), "length": round(length, 3), "voice_at": round(t, 3)})
-        t += length - (config.XFADE if i < len(lengths) - 1 else 0)
+        t += length - (fade if i < len(lengths) - 1 else 0)
     return slots
 
 
-def join(clips: list[Path], slots: list[dict], out: Path) -> float:
-    """Cross-fade conformed clips into one film, picture and sound together."""
+def join(clips: list[Path], slots: list[dict], out: Path, fade: float | None = None) -> float:
+    """Cross-fade conformed clips into one film, picture and sound together. A tiny `fade` is a clean cut."""
+    fade = config.XFADE if fade is None else fade
     total = slots[-1]["start"] + slots[-1]["length"]
     args: list = []
     for clip in clips:
         args += ["-i", clip]
     graph, picture, sound = [], "0:v", "0:a"
     for i in range(1, len(clips)):
-        graph.append(f"[{picture}][{i}:v]xfade=transition=fade:duration={config.XFADE}:offset={slots[i]['start']:.3f}[v{i}]")
-        graph.append(f"[{sound}][{i}:a]acrossfade=d={config.XFADE}[a{i}]")
+        graph.append(f"[{picture}][{i}:v]xfade=transition=fade:duration={fade}:offset={slots[i]['start']:.3f}[v{i}]")
+        graph.append(f"[{sound}][{i}:a]acrossfade=d={fade}[a{i}]")
         picture, sound = f"v{i}", f"a{i}"
     graph.append(f"[{picture}]fade=t=in:d=0.5,fade=t=out:st={total - 0.6:.3f}:d=0.6,format=yuv420p[vout]")
     graph.append(f"[{sound}]afade=t=in:d=0.3,afade=t=out:st={total - 0.6:.3f}:d=0.6[aout]")

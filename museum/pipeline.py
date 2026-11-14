@@ -8,7 +8,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Callable
 
-from . import cache, config, edit, exhibits, storyboard, video, voice
+from . import cache, config, edit, exhibits, script_agent, storyboard, video, voice
 from .exhibits import Exhibit
 
 Emit = Callable[..., None]
@@ -56,6 +56,11 @@ def _vtt(cues: list[dict]) -> str:
 
 def fingerprint(exhibit: Exhibit, language: str, style: str) -> str:
     """Changes whenever the material a film is made from changes, so stale films are not reused."""
+    if config.use_agent():
+        # The agent's prompts change often; a film stays good until the facts or reference images behind it change.
+        assets = config.HARNESS_DIR / "knowledge" / exhibit.id / "assets"
+        files = [f for f in [exhibit.pack, *sorted(assets.glob("*"))] if f and f.is_file()]
+        return cache.key("film-agent-v1", config.VIDEO_MODEL, exhibit.id, language, style, [(f.name, cache.file_hash(f)) for f in files])
     board = exhibit.storyboard_file(language, style)
     if not board.exists():
         board = exhibit.storyboard_file(language, "first_person")
@@ -164,18 +169,9 @@ def _narrated_film(job_dir: Path, exhibit: Exhibit, board, language: str, emit: 
             "voices": [n.origin for n in narrations], "cues": cues, "ambient": bed_origin, "cost": cost}
 
 
-def _native_film(job_dir: Path, exhibit: Exhibit, board, language: str, emit: Emit, photo: Path | None) -> dict:
-    """Model that makes its own sound: each clip arrives with the narration spoken in it, so clips are only joined."""
-    emit("step", step="video", status="start")
-    plans = [video.plan(shot, exhibit, shot.seconds or config.VIDEO_MAX_SECONDS, photo, language) for shot in board.shots]
-    cost = video.check_budget(plans)
-    paid = [p for p in plans if p.source == "generate"]
-    if paid:
-        seconds = sum(p.seconds for p in paid)
-        emit("thought", text=f"Rendering {len(paid)} new scene(s) with sound on fal, {seconds} s at {config.VIDEO_RESOLUTION}, about ${cost:.2f}.")
-    elif not config.is_live("video"):
-        emit("thought", text="Video is in mock mode: drawing animatic cards with a stand-in voice instead of spending fal credits.")
-
+def _shoot(job_dir: Path, exhibit: Exhibit, plans: list, language: str, emit: Emit, paid: bool,
+           fade: float | None = None) -> tuple[list[dict], float]:
+    """Render (or fetch) every scene with its own sound, then join them. Returns the timeline and the film length."""
     def draw(p):
         emit("thought", text=f"Filming scene {p.shot.id}: {p.shot.action}")
         emit("shot", id=p.shot.id, stage="video", status="start", source=p.source)
@@ -195,8 +191,24 @@ def _native_film(job_dir: Path, exhibit: Exhibit, board, language: str, emit: Em
 
     emit("step", step="edit", status="start")
     emit("thought", text="Joining the scenes and writing subtitles.")
-    slots = edit.scene_timeline([length for _, length in rendered])
-    total = edit.join([clip for clip, _ in rendered], slots, job_dir / "final.mp4")
+    slots = edit.scene_timeline([length for _, length in rendered], fade)
+    total = edit.join([clip for clip, _ in rendered], slots, job_dir / "final.mp4", fade)
+    return slots, total
+
+
+def _native_film(job_dir: Path, exhibit: Exhibit, board, language: str, emit: Emit, photo: Path | None) -> dict:
+    """Model that makes its own sound: each clip arrives with the narration spoken in it, so clips are only joined."""
+    emit("step", step="video", status="start")
+    plans = [video.plan(shot, exhibit, shot.seconds or config.VIDEO_MAX_SECONDS, photo, language) for shot in board.shots]
+    cost = video.check_budget(plans)
+    paid = [p for p in plans if p.source == "generate"]
+    if paid:
+        seconds = sum(p.seconds for p in paid)
+        emit("thought", text=f"Rendering {len(paid)} new scene(s) with sound on fal, {seconds} s at {config.VIDEO_RESOLUTION}, about ${cost:.2f}.")
+    elif not config.is_live("video"):
+        emit("thought", text="Video is in mock mode: drawing animatic cards with a stand-in voice instead of spending fal credits.")
+
+    slots, total = _shoot(job_dir, exhibit, plans, language, emit, bool(paid))
 
     # The model does not say when each word falls, so subtitle lines are spread over the scene by their length.
     cues = []
@@ -208,6 +220,124 @@ def _native_film(job_dir: Path, exhibit: Exhibit, board, language: str, emit: Em
         cues += lines
     (job_dir / "captions.vtt").write_text(_vtt(cues))
     voiced = "model" if config.is_live("video") else "mock"
+    return {"slots": slots, "total": total, "plans": plans, "fits": [{"how": "native", "speed": 1.0, "freeze": 0.0} for _ in plans],
+            "voices": [voiced if p.source != "override" else "override" for p in plans], "cues": cues, "ambient": "model", "cost": cost}
+
+
+# ---------- script agent (harness/) ----------
+
+AGENT_CUT = 0.12  # the agent writes each scene to end on a near-still frame, so scenes meet with a short cut
+
+
+def _agent_exhibit(run: script_agent.AgentRun) -> Exhibit:
+    """The exhibit the agent settled on: a prepared one, or one it only knows from the photo and its research."""
+    exhibit_id = run.final["exhibit_id"]
+    try:
+        return exhibits.load(exhibit_id)
+    except FileNotFoundError:
+        seen = run.identity()
+        museum, _, location = (seen.get("museum") or "").partition(",")
+        data = {"name": seen.get("short_name") or run.final.get("title", exhibit_id), "museum": museum.strip(),
+                "location": location.strip(), "facts": []}
+        return Exhibit(id=exhibit_id, dir=config.EXHIBITS_DIR / exhibit_id, data=data)
+
+
+def _board_from_agent(run: script_agent.AgentRun) -> storyboard.Storyboard:
+    """One shot per video segment, in the shape the rest of the pipeline and the page expect."""
+    shots = []
+    for n, segment in enumerate(run.script.get("segments", []), start=1):
+        lines = segment.get("narration", [])
+        parts = segment.get("shots", [])
+        shots.append(storyboard.Shot(
+            id=n,
+            narration=" ".join(line["text"] for line in lines),
+            action=" Then ".join(part["action"].rstrip(".") + "." for part in parts) or segment.get("setting", ""),
+            camera=parts[0]["camera"] if parts else "",
+            location=segment.get("setting", ""),
+            mood=run.script.get("narrator_attitude", ""),
+            fact_ids=sorted({fact for line in lines for fact in line.get("fact_ids", [])}),
+            seconds=round(segment.get("duration_s") or config.VIDEO_MAX_SECONDS),
+        ))
+    return storyboard.Storyboard(title=run.final.get("title") or run.script.get("title", ""), shots=shots, origin="agent")
+
+
+def _agent_film(job_dir: Path, exhibit: Exhibit, run: script_agent.AgentRun, board, emit: Emit) -> dict:
+    """Make the agent's script: its reference images from the visitor's photo, then its Seedance requests."""
+    emit("step", step="video", status="start")
+    final, live = run.final, config.is_live("video")
+    photo = run.photo()
+    jobs = {job["id"]: job for job in final.get("image_jobs", [])}
+    requests = final.get("video_requests", [])
+    if len(requests) != len(board.shots):
+        raise RuntimeError(f"The script has {len(board.shots)} segment(s) but {len(requests)} video request(s).")
+
+    def prompt_of(job: dict) -> str:
+        return job["input"]["prompt"]
+
+    def photo_for(job: dict) -> Path | None:
+        return photo if "<visitor_photo>" in job["input"].get("image_urls", []) else None
+
+    # Budget first, before anything is paid for. A clip whose pictures are all cached may itself be cached.
+    image_cost = sum(config.IMAGE_PRICE_USD for job in jobs.values() if live and not video.cached_image(prompt_of(job), photo_for(job)))
+    if image_cost:
+        emit("thought", text=f"Making {round(image_cost / config.IMAGE_PRICE_USD)} reference picture(s) from the photo, about ${image_cost:.2f}.")
+
+    def resolve(tag: str, make: bool) -> Path | None:
+        kind, _, asset = tag.strip("<>").partition(":")
+        if kind == "existing":
+            return run.existing_image(asset)
+        if kind == "job" and asset in jobs:
+            job = jobs[asset]
+            return video.reference_image(prompt_of(job), photo_for(job)) if make else video.cached_image(prompt_of(job), photo_for(job))
+        return None
+
+    planned_cost = image_cost
+    for request in requests:
+        refs = [resolve(tag, make=False) for tag in request.get("image_urls", [])]
+        if not live:
+            continue
+        if all(refs):
+            probe = video.plan_request(board.shots[0], exhibit, request["prompt"], refs, int(request["duration"]))
+            if probe.source == "cache":
+                continue
+        planned_cost += config.clip_price_usd(int(request["duration"]))
+    if planned_cost > config.MAX_FAL_USD:
+        raise RuntimeError(f"This film would spend about ${planned_cost:.2f} on fal, above MAX_FAL_USD=${config.MAX_FAL_USD:.2f}. "
+                           f"Check with the team, then raise MAX_FAL_USD to go ahead.")
+
+    plans = []
+    for shot, request in zip(board.shots, requests):
+        refs = []
+        for tag in request.get("image_urls", []):
+            path = resolve(tag, make=live)
+            if path:
+                refs.append(path)
+            elif live:
+                emit("thought", text=f"Reference {tag} is missing; scene {shot.id} goes ahead without it.", level="warn")
+        plans.append(video.plan_request(shot, exhibit, request["prompt"], refs, int(request["duration"])))
+    paid = [p for p in plans if p.source == "generate"]
+    cost = round(image_cost + video.estimate_usd(plans), 2)
+    if paid:
+        emit("thought", text=f"Rendering {len(paid)} scene(s) with sound on fal, {sum(p.seconds for p in paid)} s at {config.VIDEO_RESOLUTION}.")
+    elif not live:
+        emit("thought", text="Video is in mock mode: drawing animatic cards with a stand-in voice instead of spending fal credits.")
+
+    slots, total = _shoot(job_dir, exhibit, plans, "en", emit, bool(paid), fade=AGENT_CUT)
+
+    # The agent times its subtitles against back-to-back segments; move each onto the real timeline.
+    starts, t = [], 0.0
+    for shot in board.shots:
+        starts.append(t)
+        t += shot.seconds
+    cues = []
+    for cue in final.get("subtitles", []):
+        k = max(i for i, start in enumerate(starts) if start <= cue["t_start"] + 1e-6) if starts else 0
+        shift = slots[k]["start"] - starts[k]
+        start, end = round(cue["t_start"] + shift, 3), round(min(cue["t_end"] + shift, total), 3)
+        cues.append({"start": start, "end": end, "text": cue["text"],
+                     "words": [{"w": w, "t0": start, "t1": end} for w in cue["text"].split()]})
+    (job_dir / "captions.vtt").write_text(_vtt(cues))
+    voiced = "model" if live else "mock"
     return {"slots": slots, "total": total, "plans": plans, "fits": [{"how": "native", "speed": 1.0, "freeze": 0.0} for _ in plans],
             "voices": [voiced if p.source != "override" else "override" for p in plans], "cues": cues, "ambient": "model", "cost": cost}
 
@@ -232,22 +362,39 @@ def make_film(job_dir: Path, language: str, style: str, emit: Emit, photo: Path 
     candidates = [exhibits.load(exhibit_id)] if exhibit_id else exhibits.all_exhibits()
     if not candidates:
         raise RuntimeError("No exhibits are set up. Add exhibits/<id>/exhibit.json.")
-    exhibit = storyboard.identify(photo, candidates, emit)
-    emit("exhibit", exhibit=exhibit.public())
-    sources = sorted({f["source"].split("/")[2] for f in exhibit.facts})
-    emit("thought", text=f"Reading the label: {len(exhibit.facts)} facts, each with a source ({', '.join(sources)}).")
-    for fact in exhibit.unsourced_facts:
-        emit("thought", text=f"Leaving out \"{fact['text']}\" because it has no source yet.", level="warn")
+    try:
+        exhibit = storyboard.identify(photo, candidates, emit)
+    except LookupError:
+        if not (config.use_agent() and photo):
+            raise
+        exhibit = None
+        emit("thought", text="This is not one of the exhibits I know yet, so I will research it from scratch.")
+    if exhibit:
+        emit("exhibit", exhibit=exhibit.public())
+        if exhibit.facts:
+            sources = sorted({f["source"].split("/")[2] for f in exhibit.facts})
+            emit("thought", text=f"Reading the label: {len(exhibit.facts)} facts, each with a source ({', '.join(sources)}).")
+        for fact in exhibit.unsourced_facts:
+            emit("thought", text=f"Leaving out \"{fact['text']}\" because it has no source yet.", level="warn")
     emit("step", step="identify", status="done")
 
-    saved = None if fresh else library_hit(exhibit, language, style)
+    saved = None if fresh or exhibit is None else library_hit(exhibit, language, style)
     if saved:
         replay(saved, emit)
         return json.loads((saved / "manifest.json").read_text()), saved
 
-    # 2. Storyboard
+    # 2. Storyboard: the script agent when it is on, otherwise storyboard.py or a hand-written file
     emit("step", step="story", status="start")
-    board = storyboard.build(exhibit, language, style, emit)
+    agent_run = None
+    if config.use_agent():
+        agent_run = script_agent.run(emit, exhibit_id=exhibit.id if exhibit else None, photo=photo)
+        exhibit = exhibit or _agent_exhibit(agent_run)
+        board = _board_from_agent(agent_run)
+        emit("thought", text=f"Script ready: \"{board.title}\", {len(board.shots)} scene(s), {agent_run.status}.")
+        if not agent_run.passed:
+            emit("thought", text="The script did not fully pass its own review; this film will not be reused for other visitors.", level="warn")
+    else:
+        board = storyboard.build(exhibit, language, style, emit)
     emit("storyboard", title=board.title, origin=board.origin, shots=[
         {"id": s.id, "narration": storyboard.spoken(s.narration), "action": s.action, "fact_ids": s.fact_ids}
         for s in board.shots
@@ -255,10 +402,15 @@ def make_film(job_dir: Path, language: str, style: str, emit: Emit, photo: Path 
     emit("step", step="story", status="done")
 
     # 3-5. Sound and picture: either the model voices its own clips, or we record narration and fit clips to it.
-    made = (_native_film(job_dir, exhibit, board, language, emit, photo) if config.NATIVE_AUDIO
-            else _narrated_film(job_dir, exhibit, board, language, emit))
+    if agent_run:
+        made = _agent_film(job_dir, exhibit, agent_run, board, emit)
+    elif config.NATIVE_AUDIO:
+        made = _native_film(job_dir, exhibit, board, language, emit, photo)
+    else:
+        made = _narrated_film(job_dir, exhibit, board, language, emit)
     slots, total, plans, cues, cost = made["slots"], made["total"], made["plans"], made["cues"], made["cost"]
 
+    facts = agent_run.facts if agent_run else exhibit.facts
     used = {fact_id for shot in board.shots for fact_id in shot.fact_ids}
     manifest = {
         "title": board.title,
@@ -287,7 +439,7 @@ def make_film(job_dir: Path, language: str, style: str, emit: Emit, photo: Path 
             for shot, slot, p, voiced, fit in zip(board.shots, slots, plans, made["voices"], made["fits"])
         ],
         "captions": cues,
-        "facts": [dict(f, used=f["id"] in used) for f in exhibit.facts],
+        "facts": [{k: f[k] for k in ("id", "text", "source")} | {"used": f["id"] in used} for f in facts],
         "modes": {name: m["live"] for name, m in config.modes().items()},
         "fingerprint": fingerprint(exhibit, language, style),
         "ambient_source": made["ambient"],
@@ -295,14 +447,18 @@ def make_film(job_dir: Path, language: str, style: str, emit: Emit, photo: Path 
         "fal_cost_usd": cost,
         "seconds_to_make": round(time.time() - started, 1),
     }
+    if agent_run:
+        manifest["agent"] = {"run": agent_run.dir.name, "status": agent_run.status, "claude_cost_usd": agent_run.cost_usd,
+                             "voice": agent_run.final.get("voice"), "music": agent_run.final.get("music_style")}
     (job_dir / "manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2))
     emit("step", step="edit", status="done")
     (job_dir / "events.json").write_text(json.dumps(recorded, ensure_ascii=False))
-    if save:
+    # Only a script that passed the agent's own review is reused for other visitors.
+    if save and (agent_run is None or agent_run.passed):
         try:
             promote(job_dir)
-        except RuntimeError:
-            pass  # the library already holds a real film and this one is a mock
+        except (RuntimeError, FileNotFoundError):
+            pass  # the library holds a real film and this one is a mock, or the exhibit has no home to keep films in
     return manifest, job_dir
 
 

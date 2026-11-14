@@ -75,6 +75,51 @@ def plan(shot: Shot, exhibit: Exhibit, clip_length: float, photo: Path | None = 
     return ShotPlan(shot, seconds, prompt, refs, "cache" if hit else "generate", cache_key=cache_key)
 
 
+def plan_request(shot: Shot, exhibit: Exhibit, prompt: str, refs: list[Path], seconds: int) -> ShotPlan:
+    """A clip whose prompt and reference images were prepared elsewhere (the script agent), in @Image order."""
+    seconds = min(config.VIDEO_MAX_SECONDS, max(config.VIDEO_MIN_SECONDS, int(seconds)))
+    override = exhibit.override(shot.id, ".mp4")
+    if override:
+        return ShotPlan(shot, seconds, prompt, refs, "override", override=override)
+    if not config.is_live("video"):
+        return ShotPlan(shot, seconds, prompt, refs, "mock")
+    cache_key = cache.key("video-v2", config.VIDEO_MODEL, prompt, [cache.file_hash(r) for r in refs], seconds,
+                          config.VIDEO_RESOLUTION, config.VIDEO_ASPECT)
+    hit = cache.path("video", cache_key, ".mp4").exists()
+    return ShotPlan(shot, seconds, prompt, refs, "cache" if hit else "generate", cache_key=cache_key)
+
+
+# ---------- reference images made from the visitor's photo (script agent) ----------
+
+def _image_key(prompt: str, photo: Path | None) -> str:
+    return cache.key("image-v1", config.IMAGE_MODEL, prompt, cache.file_hash(photo) if photo else None)
+
+
+def cached_image(prompt: str, photo: Path | None) -> Path | None:
+    path = cache.path("images", _image_key(prompt, photo), ".png")
+    return path if path.exists() else None
+
+
+def reference_image(prompt: str, photo: Path | None) -> Path:
+    """One reference image: the visitor's photo edited by a prompt. Paid once, then cached by its inputs."""
+    def produce(tmp: Path) -> None:
+        import fal_client
+        import httpx
+
+        arguments = {"prompt": prompt, "resolution": "1K", "output_format": "png"}
+        if photo:
+            arguments["image_urls"] = [_upload(photo)]
+        result = fal_client.subscribe(config.IMAGE_MODEL, arguments=arguments, client_timeout=600)
+        with httpx.stream("GET", result["images"][0]["url"], timeout=120, follow_redirects=True) as response:
+            response.raise_for_status()
+            with tmp.open("wb") as fh:
+                for chunk in response.iter_bytes():
+                    fh.write(chunk)
+
+    path, _ = cache.cached_file("images", _image_key(prompt, photo), ".png", produce)
+    return path
+
+
 def estimate_usd(plans: list[ShotPlan]) -> float:
     return round(sum(config.clip_price_usd(p.seconds) for p in plans if p.source == "generate"), 2)
 
@@ -134,6 +179,12 @@ def _upload(path: Path) -> str:
         known = json.loads(index.read_text()) if index.exists() else {}
         digest = cache.file_hash(path)
         if digest not in known:
+            if Path(path).suffix.lower() in (".webp", ".heic"):  # JPEG is accepted everywhere
+                from PIL import Image
+
+                jpg = cache.path("uploads", digest, ".jpg")
+                Image.open(path).convert("RGB").save(jpg, quality=92)
+                path = jpg
             known[digest] = fal_client.upload_file(path)
             index.write_text(json.dumps(known, indent=2))
         return known[digest]

@@ -123,6 +123,19 @@ def frame_size() -> tuple[int, int]:
     return int(w) // 2 * 2, int(h) // 2 * 2
 
 
+# --- script agent (harness/, maintained separately; we only call it) ---
+HARNESS_DIR = Path(_env("HARNESS_DIR", str(ROOT / "harness")))
+SCRIPT_AGENT = _env("SCRIPT_AGENT", "harness")  # "harness" or "builtin" (storyboard.py)
+HARNESS_TIMEOUT = int(_env("HARNESS_TIMEOUT", "1500"))
+IMAGE_MODEL = _env("IMAGE_MODEL", "fal-ai/nano-banana-pro/edit")
+IMAGE_PRICE_USD = 0.15  # per reference image, nano-banana-pro/edit
+
+
+def use_agent() -> bool:
+    """Write the script with the harness agent (needs LIVE=llm); otherwise with storyboard.py or a hand-written file."""
+    return SCRIPT_AGENT == "harness" and is_live("llm") and (HARNESS_DIR / "run.py").exists()
+
+
 # A film already in the library is shown through the same making-of steps, replayed in this many seconds.
 REPLAY_SECONDS = float(_env("REPLAY_SECONDS", "12"))
 

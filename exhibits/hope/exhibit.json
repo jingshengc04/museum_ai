@@ -17,8 +17,14 @@
   "facts": [
     {
       "id": "stranding",
-      "text": "Hope was a juvenile female blue whale. She stranded on a sandbar at the mouth of Wexford Harbour, Ireland, on the morning of 25 March 1891.",
+      "text": "Hope was a female blue whale. She stranded on a sandbar at the mouth of Wexford Harbour, Ireland, on the morning of 25 March 1891.",
       "source": "https://www.nhm.ac.uk/discover/news/2018/march/a-cetacean-relation.html"
+    },
+    {
+      "id": "not_grown",
+      "text": "The whale was not yet fully grown when she stranded.",
+      "source": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html",
+      "note": "Do not call her a juvenile or a calf: the NHM pages say she was about 15 years old."
     },
     {
       "id": "sale",

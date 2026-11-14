@@ -137,6 +137,11 @@
   .status { font-size: 10px; color: #d8d2c8; letter-spacing: .17em; text-transform: uppercase; margin: 0; }
   .status.problem { color: #f0b9a0; letter-spacing: .08em; text-transform: none; font-size: 13px; max-width: 520px; line-height: 1.5; }
   .loading-screen .result-actions { margin-bottom: 0; }
+  /* Words the script agent picks out while it researches: they light up one by one under the progress bar. */
+  .keywords { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 460px; min-height: 30px; margin: 14px auto 0; }
+  .keywords span { font-size: 11px; letter-spacing: .06em; padding: 6px 12px; border-radius: 99px; color: #f3dbb5;
+    background: rgba(215,185,140,.14); border: 1px solid rgba(215,185,140,.35); animation: word-in .6s cubic-bezier(.2, .7, .2, 1) both; }
+  @keyframes word-in { from { opacity: 0; transform: translateY(6px) scale(.96); filter: blur(4px); } }
 
   /* result */
   .result { width: min(1120px, 100%); margin: auto; }
@@ -249,6 +254,7 @@
       <h2 class="loadlabel" id="loadlabel">Awakening<span class="loading-dots">...</span></h2>
       <div class="progress"><div class="bar" id="bar"></div></div>
       <p class="status" id="status">READING THE ARTIFACT</p>
+      <div class="keywords" id="keywords"></div>
       <div class="result-actions" id="problem-actions" hidden></div>
     </section>
 
@@ -454,7 +460,8 @@ async function startJob(exhibitId) {
 }
 
 function progress(percent, text) {
-  $("bar").style.width = `${percent}%`;
+  S.percent = Math.max(S.percent || 0, percent);  // the agent revisits stages; the bar never goes back
+  $("bar").style.width = `${S.percent}%`;
   if (text) $("status").textContent = text;
 }
 
@@ -463,6 +470,8 @@ function showLoading() {
   $("loadlabel").hidden = false;
   $("problem-actions").hidden = true;
   $("bar").style.width = "0%";
+  S.percent = 0;
+  $("keywords").replaceChildren();
   show("loading");
   requestAnimationFrame(() => progress(...STEPS.identify));
 }
@@ -480,6 +489,16 @@ function listen(job, run) {
     const ev = JSON.parse(message.data);
     if (ev.type === "step" && ev.status === "start") {
       progress(...STEPS[ev.step]);
+    } else if (ev.type === "progress") {
+      progress(ev.percent, ev.text);
+    } else if (ev.type === "keywords") {
+      const box = $("keywords");
+      ev.words.forEach((word, i) => {
+        const chip = el("span", { textContent: word });
+        chip.style.animationDelay = `${i * 120}ms`;
+        box.append(chip);
+      });
+      while (box.children.length > 10) box.firstChild.remove();
     } else if (ev.type === "storyboard") {
       shots = ev.shots.length;
     } else if (ev.type === "shot" && ev.stage === "video" && ev.status === "done" && shots) {
