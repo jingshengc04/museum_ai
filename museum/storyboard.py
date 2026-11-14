@@ -40,6 +40,7 @@ class Shot(BaseModel):
     refs: list[str] = Field(default_factory=list, description="Reference image names to use, 2-4.")
     fact_ids: list[str] = Field(default_factory=list, description="Ids of the facts this narration states.")
     movement: Literal["auto", "small", "medium", "large"] = "auto"
+    seconds: int = Field(default=0, description="Length of this scene's clip in seconds, 4-15.")
 
 
 class Storyboard(BaseModel):
@@ -82,9 +83,10 @@ def narration_units(text: str, language: str) -> int:
     return len(text.split())
 
 
-def unit_budget(language: str) -> int:
-    """Longest narration that still fits one 8 s clip (CLAUDE.md: ~12.5 words or ~19 characters per 5 s)."""
-    return 30 if language == "zh" else 20
+def unit_budget(language: str, seconds: int = 0) -> int:
+    """Longest narration that still fits a clip of `seconds` (about 2.4 English words or 4 Chinese characters a second)."""
+    seconds = seconds or config.VIDEO_MAX_SECONDS
+    return round(seconds * (4 if language == "zh" else 2.4))
 
 
 def video_prompt(shot: Shot, exhibit: Exhibit) -> str:
@@ -98,6 +100,25 @@ def video_prompt(shot: Shot, exhibit: Exhibit) -> str:
         exhibit.data.get("style_suffix", ""),
     ]
     return " ".join(p for p in parts if p)
+
+
+def scene_prompt(shot: Shot, exhibit: Exhibit, images: list[str]) -> str:
+    """Prompt for a model that also makes the sound: the picture, then the exact words the character speaks."""
+    character = exhibit.data.get("character", {})
+    look = character.get("description", "")
+    voice = character.get("voice_description", "a warm, calm voice")
+    lines = [f"Action: {shot.action}", f"Camera: {shot.camera}", f"Location: {shot.location}", f"Mood: {shot.mood}"]
+    if look:
+        lines.append(f"Character: {look}.")
+    if images:
+        lines.append("References: " + "; ".join(f"@Image{i} is {what}" for i, what in enumerate(images, start=1)) + ".")
+    lines.append(
+        f"Voice-over: {character.get('name', 'the character')} narrates off-screen in {voice}, speaking clearly and unhurried, "
+        f"saying exactly these words and nothing else: \"{spoken(shot.narration)}\""
+    )
+    lines.append(f"Sound: {exhibit.data.get('ambience', 'soft ambient sound')}, kept low under the voice. No music with lyrics.")
+    lines.append(exhibit.data.get("style_suffix", ""))
+    return " ".join(line for line in lines if line)
 
 
 def validate(board: Storyboard, exhibit: Exhibit) -> list[str]:
@@ -117,8 +138,8 @@ def validate(board: Storyboard, exhibit: Exhibit) -> list[str]:
         if missing and exhibit.refs:
             problems.append(f"shot {shot.id}: reference image(s) not found: {missing}")
         units = narration_units(shot.narration, board.language)
-        if units > unit_budget(board.language):
-            problems.append(f"shot {shot.id}: narration is long ({units} units), the clip will freeze on its last frame")
+        if units > unit_budget(board.language, shot.seconds):
+            problems.append(f"shot {shot.id}: narration is long ({units} units) for its clip and may be cut off")
     return problems
 
 
@@ -159,8 +180,8 @@ def _facts_block(exhibit: Exhibit) -> str:
 
 
 WRITER_SYSTEM = """You write storyboards for short animated films about museum exhibits. \
-The exhibit is the main character and tells its own story. The film is a sequence of 5-8 second \
-video clips, each with one line of voice-over, shown to a visitor standing in front of the exhibit.
+The exhibit is the main character and tells its own story. The film is a sequence of {clip} \
+video clips, each with its own voice-over, shown to a visitor standing in front of the exhibit.
 
 Facts. The narration may only state facts from the list you are given. Do not add dates, numbers, \
 names, places, causes or events that are not in that list, even if you know them to be true: the \
@@ -181,7 +202,10 @@ or game characters. No on-screen text."""
 
 
 def _generate(exhibit: Exhibit, language: str, style: str) -> Storyboard:
-    budget = unit_budget(language) - 4
+    seconds = config.VIDEO_MAX_SECONDS
+    budget = unit_budget(language, seconds) - 4
+    shape = (f"2 scenes of {seconds} seconds each (a scene may hold two or three shots, described in order)"
+             if config.NATIVE_AUDIO else "8-9 shots that run 45-60 seconds in total")
     unit = "Chinese characters" if language == "zh" else "English words"
     user = (
         f"Exhibit: {exhibit.name}, {exhibit.data.get('location', '')}, {exhibit.data.get('museum', '')}\n"
@@ -190,10 +214,11 @@ def _generate(exhibit: Exhibit, language: str, style: str) -> Storyboard:
         f"Facts (the only facts the narration may state):\n{_facts_block(exhibit)}\n\n"
         f"Narration language: {config.LANGUAGES[language]}\n"
         f"Audience and tone: {STYLE_GUIDE[style]}\n\n"
-        "Write a storyboard of 8-9 shots that runs 45-60 seconds, with a clear opening hook, "
-        "the story in order, and a closing line that stays with the visitor. Number shots from 1."
+        f"Write a storyboard of {shape}, with a clear opening hook, "
+        f"the story in order, and a closing line that stays with the visitor. Number shots from 1 and set seconds to {seconds}."
     )
-    board = _ask(Storyboard, WRITER_SYSTEM.format(budget=budget, unit=unit), user, effort="high")
+    clip = f"{seconds}-second" if config.NATIVE_AUDIO else "5-8 second"
+    board = _ask(Storyboard, WRITER_SYSTEM.format(budget=budget, unit=unit, clip=clip), user, effort="high")
     return board
 
 
@@ -216,7 +241,7 @@ def _review(board: Storyboard, exhibit: Exhibit) -> list[ShotFix]:
 
 
 def _write_with_claude(exhibit: Exhibit, language: str, style: str, emit: Emit) -> Storyboard:
-    cache_key = cache.key("storyboard-v1", config.STORY_MODEL, exhibit.data, sorted(exhibit.refs), language, style)
+    cache_key = cache.key("storyboard-v2", config.VIDEO_MODEL, config.STORY_MODEL, exhibit.data, sorted(exhibit.refs), language, style)
 
     def produce() -> dict:
         emit("thought", text=f"Writing a {config.STYLES[style].lower()} script from {len(exhibit.facts)} sourced facts…")

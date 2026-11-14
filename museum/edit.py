@@ -113,3 +113,51 @@ def assemble(clips: list[Path], slots: list[dict], voices: list[Path], ambient: 
          "-t", f"{total:.3f}", "-c:v", "libx264", "-preset", "veryfast", "-crf", "20",
          "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", out])
     return total
+
+
+# ---------- clips that already carry their own sound ----------
+
+def has_audio(path: Path) -> bool:
+    result = subprocess.run(
+        ["ffprobe", "-v", "error", "-select_streams", "a", "-show_entries", "stream=index", "-of", "csv=p=0", str(path)],
+        capture_output=True, text=True, timeout=60,
+    )
+    return bool(result.stdout.strip())
+
+
+def conform(src: Path, out: Path) -> float:
+    """Re-encode a clip to the film's size, frame rate and sound format, keeping its own audio. Returns its length."""
+    w, h = config.frame_size()
+    look = f"scale={w}:{h}:force_original_aspect_ratio=increase,crop={w}:{h},fps={config.FPS},format=yuv420p"
+    sound = ["-i", src] if has_audio(src) else ["-f", "lavfi", "-i", "anullsrc=r=44100:cl=stereo"]
+    length = duration(src)
+    run(["-i", src, *sound, "-map", "0:v:0", "-map", "1:a:0", "-vf", look, "-t", f"{length:.3f}",
+         "-c:v", "libx264", "-preset", "veryfast", "-crf", "18", "-c:a", "aac", "-ar", "44100", "-ac", "2", "-b:a", "160k", out])
+    return duration(out)
+
+
+def scene_timeline(lengths: list[float]) -> list[dict]:
+    """Where each clip sits when neighbours overlap by the cross-fade."""
+    slots, t = [], 0.0
+    for i, length in enumerate(lengths):
+        slots.append({"start": round(t, 3), "length": round(length, 3), "voice_at": round(t, 3)})
+        t += length - (config.XFADE if i < len(lengths) - 1 else 0)
+    return slots
+
+
+def join(clips: list[Path], slots: list[dict], out: Path) -> float:
+    """Cross-fade conformed clips into one film, picture and sound together."""
+    total = slots[-1]["start"] + slots[-1]["length"]
+    args: list = []
+    for clip in clips:
+        args += ["-i", clip]
+    graph, picture, sound = [], "0:v", "0:a"
+    for i in range(1, len(clips)):
+        graph.append(f"[{picture}][{i}:v]xfade=transition=fade:duration={config.XFADE}:offset={slots[i]['start']:.3f}[v{i}]")
+        graph.append(f"[{sound}][{i}:a]acrossfade=d={config.XFADE}[a{i}]")
+        picture, sound = f"v{i}", f"a{i}"
+    graph.append(f"[{picture}]fade=t=in:d=0.5,fade=t=out:st={total - 0.6:.3f}:d=0.6,format=yuv420p[vout]")
+    graph.append(f"[{sound}]afade=t=in:d=0.3,afade=t=out:st={total - 0.6:.3f}:d=0.6[aout]")
+    run([*args, "-filter_complex", ";".join(graph), "-map", "[vout]", "-map", "[aout]", "-t", f"{total:.3f}",
+         "-c:v", "libx264", "-preset", "veryfast", "-crf", "20", "-c:a", "aac", "-b:a", "160k", "-movflags", "+faststart", out])
+    return total

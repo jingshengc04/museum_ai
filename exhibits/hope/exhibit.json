@@ -6,7 +6,11 @@
   "character": {
     "name": "Hope",
     "description": "Hope, an original semi-realistic stylized CG blue whale with deep blue mottled skin, a pale ribbed throat and small gentle eyes",
-    "voice": { "en": "", "zh": "" }
+    "voice": {
+      "en": "",
+      "zh": ""
+    },
+    "voice_description": "the warm, gentle voice of a young woman with a soft British accent"
   },
   "style_suffix": "Semi-realistic stylized CG animation, deep blue mottled whale skin, soft volumetric light, cinematic composition, consistent character design, no text, no captions, no logos.",
   "ambience": "Deep underwater ocean ambience, slow distant whale song, soft low rumble, seamless loop",

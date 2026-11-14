@@ -9,10 +9,10 @@ import uuid
 from pathlib import Path
 
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
-from fastapi.responses import FileResponse, StreamingResponse
+from fastapi.responses import FileResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
-from . import config, exhibits, pipeline, video
+from . import config, exhibits, outline, pipeline, video
 
 MAX_PHOTO_BYTES = 15 * 1024 * 1024
 PHOTO_TYPES = {"image/jpeg": ".jpg", "image/png": ".png", "image/webp": ".webp"}
@@ -21,13 +21,14 @@ app = FastAPI(title="Museum AI")
 config.OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 app.mount("/output", StaticFiles(directory=config.OUTPUT_DIR), name="output")
 app.mount("/exhibits", StaticFiles(directory=config.EXHIBITS_DIR), name="exhibits")
+app.mount("/assets", StaticFiles(directory=config.WEB_DIR / "assets"), name="assets")
 
 
 class Job:
-    def __init__(self, language: str, style: str, exhibit_id: str | None):
+    def __init__(self, language: str, style: str, exhibit_id: str | None, fresh: bool = False):
         self.id = time.strftime("%m%d-%H%M%S-") + uuid.uuid4().hex[:6]
         self.dir = config.OUTPUT_DIR / self.id
-        self.language, self.style, self.exhibit_id = language, style, exhibit_id
+        self.language, self.style, self.exhibit_id, self.fresh = language, style, exhibit_id, fresh
         self.events: list[dict] = []
         self.finished = False
 
@@ -44,8 +45,9 @@ class Job:
 
     def run(self, photo: Path | None) -> None:
         try:
-            pipeline.make_film(self.dir, self.language, self.style, self.emit, photo=photo, exhibit_id=self.exhibit_id)
-            self.emit("done", manifest=f"/output/{self.id}/manifest.json")
+            _, folder = pipeline.make_film(self.dir, self.language, self.style, self.emit, photo=photo,
+                                           exhibit_id=self.exhibit_id, fresh=self.fresh)
+            self.emit("done", manifest=config.url_for(folder / "manifest.json"))
         except Exception as error:  # any failure must reach the visitor as a message, never a hang
             self.emit("error", message=str(error), fallback=self._fallback())
         finally:
@@ -78,18 +80,64 @@ def state() -> dict:
     }
 
 
+@app.post("/api/outline")
+def outline_photo(photo: UploadFile = File(...)) -> Response:
+    """Outline of the exhibit in a photo, as a transparent PNG. 204 when there is nothing to draw."""
+    if photo.content_type not in PHOTO_TYPES:
+        raise HTTPException(400, "The photo must be a JPEG, PNG or WebP image.")
+    blob = photo.file.read(MAX_PHOTO_BYTES + 1)
+    if len(blob) > MAX_PHOTO_BYTES:
+        raise HTTPException(400, "The photo is larger than 15 MB.")
+    try:
+        png = outline.outline_png(blob)
+    except Exception:  # the outline is decoration: without it the scan still runs
+        png = None
+    if png is None:
+        return Response(status_code=204)
+    return Response(png, media_type="image/png")
+
+
+@app.get("/api/stories")
+def stories() -> list[dict]:
+    """Every film made so far, newest first: the film library plus the runs still in output/."""
+    folders = [m.parent for e in exhibits.all_exhibits() for m in sorted(e.dir.glob("demo/*/manifest.json"))]
+    folders += [m.parent for m in config.OUTPUT_DIR.glob("*/manifest.json")]
+    found, seen = [], set()
+    for folder in folders:
+        film = folder / "final.mp4"
+        if not film.exists():
+            continue
+        manifest = json.loads((folder / "manifest.json").read_text())
+        # A film saved to the library also sits in output/; show it once.
+        identity = (manifest.get("fingerprint"), manifest["title"], manifest.get("seconds_to_make"))
+        if identity in seen or manifest["language"] != "en":
+            continue
+        seen.add(identity)
+        found.append({
+            "manifest": config.url_for(folder / "manifest.json"),
+            "title": manifest["title"],
+            "exhibit": manifest["exhibit"]["name"],
+            "museum": manifest["exhibit"].get("museum", ""),
+            "duration": manifest["duration"],
+            "thumb": config.url_for(folder / manifest["shots"][0]["thumb"]),
+            "made": film.stat().st_mtime,
+        })
+    return sorted(found, key=lambda story: story["made"], reverse=True)
+
+
 @app.post("/api/jobs")
 async def create_job(
     language: str = Form("en"),
     style: str = Form("first_person"),
     exhibit_id: str | None = Form(None),
+    fresh: bool = Form(False),
     photo: UploadFile | None = File(None),
 ) -> dict:
     if language not in config.LANGUAGES or style not in config.STYLES:
         raise HTTPException(400, "Unknown language or style.")
     if exhibit_id and exhibit_id not in {e.id for e in exhibits.all_exhibits()}:
         raise HTTPException(400, "Unknown exhibit.")
-    job = Job(language, style, exhibit_id or None)
+    job = Job(language, style, exhibit_id or None, fresh)
     saved = None
     if photo is not None and photo.filename:
         if photo.content_type not in PHOTO_TYPES:

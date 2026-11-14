@@ -1425,7 +1425,8 @@
     "voice": false,
     "video": false
   },
+  "fingerprint": "8bc8076ae19dc3efd32828d9",
   "ambient_source": "mock",
   "fal_cost_usd": 0.0,
-  "seconds_to_make": 5.4
+  "seconds_to_make": 5.0
 }

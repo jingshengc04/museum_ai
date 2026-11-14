@@ -69,20 +69,36 @@ STORY_MODEL = _env("STORY_MODEL", "claude-opus-5-5")
 
 # --- voice (ElevenLabs) ---
 ELEVEN_MODEL = _env("ELEVEN_MODEL", "eleven_v3")
-# Fallback voice when an exhibit does not set one ("Rachel", an ElevenLabs premade voice).
+# Fallback voice when an exhibit does not set one (an ElevenLabs premade voice).
 ELEVEN_VOICE_ID = _env("ELEVEN_VOICE_ID", "21m00Tcm4TlvDq8ikWAM")
 
 # --- video (fal) ---
-VIDEO_MODEL = _env("VIDEO_MODEL", "fal-ai/vidu/q2/reference-to-video")
-VIDEO_RESOLUTION = _env("VIDEO_RESOLUTION", "360p")
+VIDEO_MODEL = _env("VIDEO_MODEL", "bytedance/seedance-2.0/fast/reference-to-video")
+VIDEO_RESOLUTION = _env("VIDEO_RESOLUTION", "720p")
 VIDEO_ASPECT = _env("VIDEO_ASPECT", "16:9")
-VIDEO_MAX_SECONDS = 8  # Vidu Q2 limit on fal
-VIDEO_MAX_REFS = 7
 FAL_CONCURRENCY = int(_env("FAL_CONCURRENCY", "2"))
-# Listed fal price per Vidu Q2 clip. 1080p is $0.20 + $0.10/s; estimated at 8 s.
-VIDEO_PRICE_USD = {"360p": 0.10, "520p": 0.20, "720p": 0.30, "1080p": 1.00}
-# A job whose estimated fal cost is above this refuses to start.
-MAX_FAL_USD = float(_env("MAX_FAL_USD", "2.0"))
+# Seedance speaks the narration and makes the sound itself, so the film needs no separate voice track.
+# With a silent model (Vidu) the narration is recorded first with ElevenLabs and the clips are fitted to it.
+NATIVE_AUDIO = "seedance" in VIDEO_MODEL
+if NATIVE_AUDIO:
+    VIDEO_MIN_SECONDS, VIDEO_MAX_SECONDS, VIDEO_MAX_REFS = 4, 15, 9
+    # fal bills Seedance 2.0 Fast by the second: $0.0112 per 1000 tokens, tokens = height * width * seconds * 24 / 1024.
+    VIDEO_PRICE_PER_SECOND_USD = {"480p": 0.1076, "720p": 0.2419}
+    VIDEO_PRICE_PER_CLIP_USD = {}
+else:
+    VIDEO_MIN_SECONDS, VIDEO_MAX_SECONDS, VIDEO_MAX_REFS = 2, 8, 7
+    VIDEO_PRICE_PER_SECOND_USD = {}
+    # Listed fal price per Vidu Q2 clip. 1080p is $0.20 + $0.10/s; estimated at 8 s.
+    VIDEO_PRICE_PER_CLIP_USD = {"360p": 0.10, "520p": 0.20, "720p": 0.30, "1080p": 1.00}
+# A job whose estimated fal cost is above this refuses to start. One 2 x 15 s Seedance film at 720p is about $7.30.
+MAX_FAL_USD = float(_env("MAX_FAL_USD", "8.0"))
+
+
+def clip_price_usd(seconds: float) -> float:
+    """Estimated fal price of one generated clip at the configured resolution."""
+    if NATIVE_AUDIO:
+        return VIDEO_PRICE_PER_SECOND_USD[VIDEO_RESOLUTION] * seconds
+    return VIDEO_PRICE_PER_CLIP_USD[VIDEO_RESOLUTION]
 
 # --- edit ---
 FPS = 24
@@ -92,7 +108,7 @@ LEAD = 0.15  # narration starts this long after its shot does
 MAX_SLOWDOWN = 1.25
 AMBIENT_VOLUME = 0.18
 
-_HEIGHT = {"360p": 360, "520p": 520, "720p": 720, "1080p": 1080}
+_HEIGHT = {"360p": 360, "480p": 480, "520p": 520, "720p": 720, "1080p": 1080}
 _ASPECT = {"16:9": (16, 9), "9:16": (9, 16), "1:1": (1, 1)}
 
 
@@ -105,6 +121,18 @@ def frame_size() -> tuple[int, int]:
     else:
         w, h = short, short * ah / aw
     return int(w) // 2 * 2, int(h) // 2 * 2
+
+
+# A film already in the library is shown through the same making-of steps, replayed in this many seconds.
+REPLAY_SECONDS = float(_env("REPLAY_SECONDS", "12"))
+
+
+def url_for(path: Path) -> str:
+    """Web address of a file under output/ or exhibits/."""
+    for prefix, root in (("/output", OUTPUT_DIR), ("/exhibits", EXHIBITS_DIR)):
+        if path.is_relative_to(root):
+            return f"{prefix}/{path.relative_to(root).as_posix()}"
+    raise ValueError(f"{path} is not served by the web app")
 
 
 LANGUAGES = {"en": "English", "zh": "中文"}

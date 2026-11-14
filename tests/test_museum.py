@@ -32,7 +32,7 @@ def test_crossfades_do_not_eat_narration_time():
     assert slots[1]["start"] == pytest.approx(slots[0]["length"])
     assert edit.clip_length(slots[0], is_last=False) == pytest.approx(slots[0]["length"] + config.XFADE)
     assert edit.clip_length(slots[2], is_last=True) == slots[2]["length"]
-    assert video.request_seconds(11.2) == config.VIDEO_MAX_SECONDS
+    assert video.request_seconds(40) == config.VIDEO_MAX_SECONDS and video.request_seconds(0.5) == config.VIDEO_MIN_SECONDS
 
 
 # ---------- word timings ----------
@@ -67,10 +67,10 @@ def test_hand_written_storyboards_only_cite_sourced_facts(path):
     exhibit = exhibits.load(path.parent.parent.name)
     language, _, style = path.stem.partition("-")
     board = storyboard.build(exhibit, language, style, lambda *a, **k: None)
-    assert 5 <= len(board.shots) <= 10
+    assert 1 <= len(board.shots) <= 10
     assert all(f["source"].startswith("https://") for f in exhibit.facts)
     for shot in board.shots:
-        assert storyboard.narration_units(shot.narration, language) <= storyboard.unit_budget(language), shot.narration
+        assert storyboard.narration_units(shot.narration, language) <= storyboard.unit_budget(language, shot.seconds), shot.narration
 
 
 def test_unsourced_fact_is_refused():
@@ -106,12 +106,27 @@ def test_budget_guard_stops_an_expensive_film(monkeypatch, tiny_exhibit):
     assert video.plan(shot.model_copy(update={"id": 2}), exhibit, 5.0).source == "override"
 
 
+def test_seedance_request_and_price(monkeypatch, tiny_exhibit):
+    monkeypatch.setenv("LIVE", "video")
+    monkeypatch.setenv("FAL_KEY", "x")
+    exhibit = exhibits.load("hope")
+    shot = storyboard.Shot(id=1, narration="[softly] I am Hope.", action="a", camera="c", location="l", mood="m", refs=["side"], seconds=15)
+    p = video.plan(shot, exhibit, 15, photo=tiny_exhibit / "photo.jpg")
+    assert [r.name for r in p.refs] == ["photo.jpg", "side.png"], "the visitor's photo leads the references"
+    assert "@Image1 is the visitor's photo" in p.prompt and "[softly]" not in p.prompt
+    request = video.request_arguments(p, ["u1", "u2"])
+    assert request == {"prompt": p.prompt, "duration": "15", "resolution": "720p", "aspect_ratio": "16:9", "generate_audio": True, "image_urls": ["u1", "u2"]}
+    assert video.estimate_usd([p, p]) == pytest.approx(7.26, abs=0.01), "two 15 s scenes at 720p"
+    assert video.check_budget([p, p]) <= config.MAX_FAL_USD
+
+
 # ---------- the whole thing, mock ----------
 
 def test_mock_film_uses_drop_in_material(tiny_exhibit, tmp_path):
     events = []
-    job = tmp_path / "job"
-    manifest = pipeline.make_film(job, "en", "kids", lambda kind, **data: events.append((kind, data)))
+    job = config.OUTPUT_DIR / tmp_path.name / "job"
+    manifest, folder = pipeline.make_film(job, "en", "kids", lambda kind, **data: events.append((kind, data)))
+    assert folder == job
 
     assert manifest["storyboard_origin"] == "fallback"  # no kids script and the LLM is mock
     assert [s["video_source"] for s in manifest["shots"]] == ["mock", "override"]
@@ -120,11 +135,14 @@ def test_mock_film_uses_drop_in_material(tiny_exhibit, tmp_path):
     assert edit.duration(job / "final.mp4") == pytest.approx(manifest["duration"], abs=0.15)
     assert manifest["captions"][-1]["end"] <= manifest["duration"] + 0.3
     assert all((job / s["thumb"]).exists() for s in manifest["shots"])
-    assert {f["id"] for f in manifest["facts"] if f["used"]} == {"name", "stranding"}
+    assert {f["id"] for f in manifest["facts"] if f["used"]} == {"name", "stranding", "sale", "hintze"}
+    assert edit.has_audio(job / "final.mp4"), "the clips carry their own voice track"
+    assert [s["voice_source"] for s in manifest["shots"]] == ["mock", "override"]
+    assert 'saying exactly these words and nothing else: "I am Hope.' in manifest["shots"][0]["prompt"]
     assert "WEBVTT" in (job / "captions.vtt").read_text()
-    assert [d["step"] for k, d in events if k == "step" and d["status"] == "done"] == ["identify", "story", "voice", "video", "edit"]
+    assert [d["step"] for k, d in events if k == "step" and d["status"] == "done"] == ["identify", "story", "video", "edit"]
 
-    demo = pipeline.promote(job)
+    demo = tiny_exhibit / "demo" / "en-kids"  # a finished film goes into the library by itself
     assert exhibits.load("hope").demos()[0]["manifest"] == "/exhibits/hope/demo/en-kids/manifest.json"
     stored = json.loads((demo / "manifest.json").read_text())
     stored["modes"]["video"] = True
@@ -133,8 +151,36 @@ def test_mock_film_uses_drop_in_material(tiny_exhibit, tmp_path):
         pipeline.promote(job)
 
 
+def test_second_visitor_gets_the_library_film_through_the_same_steps(tiny_exhibit, tmp_path, monkeypatch):
+    monkeypatch.setattr(config, "REPLAY_SECONDS", 0.2)
+    quiet = lambda *a, **k: None  # noqa: E731
+    first, seen = [], []
+    out = config.OUTPUT_DIR / tmp_path.name
+    made, _ = pipeline.make_film(out / "a", "en", "first_person", lambda kind, **data: first.append((kind, data)))
+
+    reused, folder = pipeline.make_film(out / "b", "en", "first_person", lambda kind, **data: seen.append((kind, data)))
+    assert folder == tiny_exhibit / "demo" / "en-first_person" and reused == made
+    assert not (out / "b" / "final.mp4").exists(), "nothing was rendered again"
+    shape = lambda log: [(k, d.get("step"), d.get("status"), d.get("id"), d.get("stage")) for k, d in log]  # noqa: E731
+    assert sorted(shape(seen), key=str) == sorted(shape(first), key=str), "the visitor sees the same events"
+    thumbs = [d["thumb"] for k, d in seen if "thumb" in d]
+    assert thumbs and all(t.startswith("/exhibits/hope/demo/en-first_person/thumbs/") for t in thumbs)
+
+    exhibit = exhibits.load("hope")
+    assert pipeline.make_film(out / "c", "en", "first_person", quiet, fresh=True)[1] == out / "c"
+    assert pipeline.library_hit(exhibit, "zh", "first_person") is None, "other languages are other films"
+    monkeypatch.setenv("LIVE", "video")
+    monkeypatch.setenv("FAL_KEY", "x")
+    assert pipeline.library_hit(exhibit, "en", "first_person") is None, "a mock film is not served once video is live"
+    monkeypatch.setenv("LIVE", "")
+    (tiny_exhibit / "refs" / "side.png").write_bytes((tiny_exhibit / "photo.jpg").read_bytes())
+    assert pipeline.library_hit(exhibits.load("hope"), "en", "first_person") is None, "new material means a new film"
+
+
 def test_server_runs_a_job_and_falls_back_to_a_saved_film(tiny_exhibit, monkeypatch):
     from museum import server
+
+    monkeypatch.setattr(config, "REPLAY_SECONDS", 0.2)
 
     client = TestClient(server.app)
     state = client.get("/api/state").json()
@@ -142,6 +188,16 @@ def test_server_runs_a_job_and_falls_back_to_a_saved_film(tiny_exhibit, monkeypa
     assert state["video"]["worst_case_usd"] == 0
     assert client.post("/api/jobs", data={"style": "nope"}).status_code == 400
     assert client.post("/api/jobs", data={"exhibit_id": "hope"}, files={"photo": ("x.txt", b"hi", "text/plain")}).status_code == 400
+
+    photo = {"photo": ("x.jpg", (tiny_exhibit / "photo.jpg").read_bytes(), "image/jpeg")}
+    monkeypatch.setattr(server.outline, "outline_png", lambda blob: b"\x89PNG fake")
+    found = client.post("/api/outline", files=photo)
+    assert found.status_code == 200 and found.headers["content-type"] == "image/png"
+    monkeypatch.setattr(server.outline, "outline_png", lambda blob: None)
+    assert client.post("/api/outline", files=photo).status_code == 204, "nothing stands out: the page scans without an outline"
+    monkeypatch.setattr(server.outline, "outline_png", lambda blob: 1 / 0)
+    assert client.post("/api/outline", files=photo).status_code == 204, "a broken model must not break the scan"
+    assert client.post("/api/outline", files={"photo": ("x.txt", b"hi", "text/plain")}).status_code == 400
 
     def run(data):
         job_id = client.post("/api/jobs", data=data).json()["job_id"]
@@ -153,8 +209,16 @@ def test_server_runs_a_job_and_falls_back_to_a_saved_film(tiny_exhibit, monkeypa
     assert client.get(events[-1]["manifest"]).json()["video"] == "final.mp4"
     assert client.get(f"/output/{job_id}/final.mp4", headers={"Range": "bytes=0-99"}).status_code == 206
 
-    pipeline.promote(config.OUTPUT_DIR / job_id)
-    monkeypatch.setattr(edit, "assemble", lambda *a, **k: (_ for _ in ()).throw(RuntimeError("ffmpeg exploded")))
+    shelf = client.get("/api/stories").json()
+    assert [s["title"] for s in shelf] == ["Hope: the whale who came ashore"], "library copy and output copy show once"
+    assert shelf[0]["manifest"] == "/exhibits/hope/demo/en-first_person/manifest.json" and shelf[0]["thumb"].endswith("thumbs/shot_01.jpg")
+
+    _, events = run({"exhibit_id": "hope", "language": "en", "style": "first_person"})
+    assert events[-1] == {"type": "done", "manifest": "/exhibits/hope/demo/en-first_person/manifest.json"}
+    job_id, events = run({"exhibit_id": "hope", "language": "en", "style": "first_person", "fresh": "true"})
+    assert events[-1]["manifest"] == f"/output/{job_id}/manifest.json"
+
+    monkeypatch.setattr(edit, "join", lambda *a, **k: (_ for _ in ()).throw(RuntimeError("ffmpeg exploded")))
     _, events = run({"exhibit_id": "hope", "language": "en", "style": "funny"})
     assert events[-1]["type"] == "error" and "ffmpeg exploded" in events[-1]["message"]
     assert events[-1]["fallback"] == "/exhibits/hope/demo/en-first_person/manifest.json"

@@ -3,102 +3,42 @@
   "shots": [
     {
       "id": 1,
-      "narration": "[softly] Look up. Yes, me. I am Hope, and I have a story for you.",
-      "action": "A blue whale glides slowly through the air above the crowd and turns her head toward the viewer.",
-      "camera": "Low angle from the floor, slow tilt up.",
-      "location": "A grand Romanesque museum hall with terracotta arches, daylight through high windows.",
-      "mood": "Wonder, a quiet invitation.",
-      "refs": ["side", "curious"],
-      "fact_ids": ["name"],
-      "movement": "small"
+      "narration": "[softly] I am Hope. Long ago I was a young blue whale. On the morning of 25 March 1891, I stranded on a sandbar at the mouth of Wexford Harbour, in Ireland.",
+      "action": "First the huge blue whale skeleton hanging in a museum hall softly fills out into a living blue whale. Then she swims through open ocean and does one slow roll. Then, at dawn, she drifts into shallow water and comes to rest on a pale sandbar as small waves wash around her.",
+      "camera": "Slow rise from the floor of the hall, then a gentle tracking shot beside her, ending in a slow push in at water level.",
+      "location": "A grand Romanesque museum hall with terracotta arches, then deep blue open ocean, then the mouth of a harbour on the Irish coast at dawn in 1891.",
+      "mood": "Wonder turning quiet and still.",
+      "refs": [
+        "side",
+        "curious",
+        "calm"
+      ],
+      "fact_ids": [
+        "name",
+        "stranding"
+      ],
+      "movement": "medium",
+      "seconds": 15
     },
     {
       "id": 2,
-      "narration": "Long ago I was a young blue whale. A girl. The ocean was my whole world.",
-      "action": "The whale swims forward and does one slow barrel roll.",
-      "camera": "Tracking shot alongside her, gentle drift.",
-      "location": "Open deep blue ocean, cool rippling light from the surface far above.",
-      "mood": "Free, joyful.",
-      "refs": ["side", "delighted"],
-      "fact_ids": ["stranding"],
-      "movement": "medium"
-    },
-    {
-      "id": 3,
-      "narration": "[softly] Then, on the morning of 25 March 1891, I stranded on a sandbar.",
-      "action": "The whale drifts into shallow water and comes to rest on a pale sandbar as small waves wash around her.",
-      "camera": "Slow push in at water level.",
-      "location": "A shallow harbour mouth on the Irish coast at dawn, 1891, grey-pink sky.",
-      "mood": "Quiet, sad, still.",
-      "refs": ["side", "calm"],
-      "fact_ids": ["stranding"],
-      "movement": "small"
-    },
-    {
-      "id": 4,
-      "narration": "It was the mouth of Wexford Harbour, in Ireland. Far from the deep water I knew.",
-      "action": "The whale lies still on the sandbar while the tide slowly pulls back around her.",
-      "camera": "High wide aerial shot, slowly rising.",
-      "location": "The mouth of a wide harbour on the Irish coast at dawn, long sandbars, distant low shore.",
-      "mood": "Lonely, wide and hushed.",
-      "refs": ["side", "thoughtful"],
-      "fact_ids": ["stranding"],
-      "movement": "small"
-    },
-    {
-      "id": 5,
-      "narration": "My skeleton, all four and a half tonnes, was sold to the Natural History Museum. For 250 pounds!",
-      "action": "The whale floats past and her body turns softly translucent, a glowing skeleton showing inside.",
-      "camera": "Slow sideways dolly.",
-      "location": "A dim Victorian museum storeroom with wooden crates and warm gas lamps.",
-      "mood": "Curious, a little wry.",
-      "refs": ["side", "thoughtful"],
-      "fact_ids": ["sale"],
-      "movement": "small"
-    },
-    {
-      "id": 6,
-      "narration": "From 1934, I hung in the Mammal Hall. Decades of quiet, watching from above.",
-      "action": "The whale hangs almost still high in the air while tiny visitors pass far below.",
-      "camera": "Static high angle looking down past her, light shifting from day to dusk.",
-      "location": "A long old museum gallery with a glass roof, 1930s.",
-      "mood": "Patient, calm.",
-      "refs": ["front", "calm"],
-      "fact_ids": ["mammal_hall"],
-      "movement": "small"
-    },
-    {
-      "id": 7,
-      "narration": "Then, July 2017: Hintze Hall. I took the place of Dippy the Diplodocus, here since 1979.",
-      "action": "The whale sweeps down into the hall in one long diving lunge as visitors look up.",
-      "camera": "Wide shot from a balcony, following her dive.",
-      "location": "A grand Romanesque museum hall with terracotta arches, bright daylight.",
-      "mood": "Triumphant, soaring.",
-      "refs": ["side", "delighted"],
-      "fact_ids": ["hintze", "dippy"],
-      "movement": "large"
-    },
-    {
-      "id": 8,
-      "narration": "I am 25.2 metres long. Big enough to carry a big name.",
-      "action": "The whale glides the full length of the hall, passing slowly over the camera from nose to tail.",
-      "camera": "Directly below, looking up as she passes overhead.",
-      "location": "A grand Romanesque museum hall with terracotta arches, daylight through high windows.",
-      "mood": "Awe at her scale.",
-      "refs": ["side", "front"],
-      "fact_ids": ["length"],
-      "movement": "medium"
-    },
-    {
-      "id": 9,
-      "narration": "They named me Hope: a symbol of humanity's power to shape a sustainable future. [whispers] That part is up to you.",
-      "action": "The whale turns to face the viewer and glides gently closer.",
-      "camera": "Eye level, slow push in to her eye.",
-      "location": "A grand Romanesque museum hall, the light slowly turning to rippling ocean blue.",
-      "mood": "Warm, hopeful.",
-      "refs": ["front", "calm"],
-      "fact_ids": ["name"],
-      "movement": "small"
+      "narration": "My skeleton was sold to the museum for 250 pounds. In July 2017 I was unveiled here in Hintze Hall. They named me Hope: a symbol of humanity's power to shape a sustainable future.",
+      "action": "First the whale floats past wooden crates in a storeroom as her body turns softly translucent, a glowing skeleton showing inside. Then she sweeps down into a grand museum hall in one long glide as visitors look up, turns to face the viewer and comes gently closer.",
+      "camera": "Slow sideways dolly, then a wide shot following her glide, ending at eye level with a slow push in to her eye.",
+      "location": "A dim Victorian museum storeroom with warm gas lamps, then a grand Romanesque museum hall with terracotta arches in bright daylight.",
+      "mood": "Curious, then soaring, then warm and hopeful.",
+      "refs": [
+        "side",
+        "delighted",
+        "front"
+      ],
+      "fact_ids": [
+        "sale",
+        "hintze",
+        "name"
+      ],
+      "movement": "medium",
+      "seconds": 15
     }
   ]
 }
