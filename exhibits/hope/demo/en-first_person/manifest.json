@@ -1,0 +1,1122 @@
+{
+  "title": "Hope: the whale who came ashore",
+  "exhibit": {
+    "id": "hope",
+    "name": "Hope the blue whale",
+    "museum": "Natural History Museum, London",
+    "location": "Hintze Hall",
+    "character": "Hope"
+  },
+  "language": "en",
+  "style": "first_person",
+  "storyboard_origin": "hand-written",
+  "video": "final.mp4",
+  "captions_vtt": "captions.vtt",
+  "duration": 57.428,
+  "word_joiner": " ",
+  "shots": [
+    {
+      "id": 1,
+      "start": 0.0,
+      "end": 5.123,
+      "narration": "Look up. Yes, me. I am Hope, and I have a story for you.",
+      "fact_ids": [
+        "name"
+      ],
+      "thumb": "thumbs/shot_01.jpg",
+      "prompt": "Action: A blue whale glides slowly through the air above the crowd and turns her head toward the viewer. Camera: Low angle from the floor, slow tilt up. Location: A grand Romanesque museum hall with terracotta arches, daylight through high windows. Mood: Wonder, a quiet invitation. Character: Hope, an original semi-realistic stylized CG blue whale with deep blue mottled skin, a pale ribbed throat and small gentle eyes. Semi-realistic stylized CG animation, deep blue mottled whale skin, soft volumetric light, cinematic composition, consistent character design, no text, no captions, no logos.",
+      "refs": [],
+      "video_source": "mock",
+      "voice_source": "say",
+      "fit": {
+        "how": "trim",
+        "speed": 1.0,
+        "freeze": 0.0
+      }
+    },
+    {
+      "id": 2,
+      "start": 5.123,
+      "end": 10.328,
+      "narration": "Long ago I was a young blue whale. A girl. The ocean was my whole world.",
+      "fact_ids": [
+        "stranding"
+      ],
+      "thumb": "thumbs/shot_02.jpg",
+      "prompt": "Action: The whale swims forward and does one slow barrel roll. Camera: Tracking shot alongside her, gentle drift. Location: Open deep blue ocean, cool rippling light from the surface far above. Mood: Free, joyful. Character: Hope, an original semi-realistic stylized CG blue whale with deep blue mottled skin, a pale ribbed throat and small gentle eyes. Semi-realistic stylized CG animation, deep blue mottled whale skin, soft volumetric light, cinematic composition, consistent character design, no text, no captions, no logos.",
+      "refs": [],
+      "video_source": "mock",
+      "voice_source": "say",
+      "fit": {
+        "how": "trim",
+        "speed": 1.0,
+        "freeze": 0.0
+      }
+    },
+    {
+      "id": 3,
+      "start": 10.328,
+      "end": 16.877,
+      "narration": "Then, on the morning of 25 March 1891, I stranded on a sandbar.",
+      "fact_ids": [
+        "stranding"
+      ],
+      "thumb": "thumbs/shot_03.jpg",
+      "prompt": "Action: The whale drifts into shallow water and comes to rest on a pale sandbar as small waves wash around her. Camera: Slow push in at water level. Location: A shallow harbour mouth on the Irish coast at dawn, 1891, grey-pink sky. Mood: Quiet, sad, still. Character: Hope, an original semi-realistic stylized CG blue whale with deep blue mottled skin, a pale ribbed throat and small gentle eyes. Semi-realistic stylized CG animation, deep blue mottled whale skin, soft volumetric light, cinematic composition, consistent character design, no text, no captions, no logos.",
+      "refs": [],
+      "video_source": "mock",
+      "voice_source": "say",
+      "fit": {
+        "how": "trim",
+        "speed": 1.0,
+        "freeze": 0.0
+      }
+    },
+    {
+      "id": 4,
+      "start": 16.877,
+      "end": 22.198,
+      "narration": "It was the mouth of Wexford Harbour, in Ireland. Far from the deep water I knew.",
+      "fact_ids": [
+        "stranding"
+      ],
+      "thumb": "thumbs/shot_04.jpg",
+      "prompt": "Action: The whale lies still on the sandbar while the tide slowly pulls back around her. Camera: High wide aerial shot, slowly rising. Location: The mouth of a wide harbour on the Irish coast at dawn, long sandbars, distant low shore. Mood: Lonely, wide and hushed. Character: Hope, an original semi-realistic stylized CG blue whale with deep blue mottled skin, a pale ribbed throat and small gentle eyes. Semi-realistic stylized CG animation, deep blue mottled whale skin, soft volumetric light, cinematic composition, consistent character design, no text, no captions, no logos.",
+      "refs": [],
+      "video_source": "mock",
+      "voice_source": "say",
+      "fit": {
+        "how": "trim",
+        "speed": 1.0,
+        "freeze": 0.0
+      }
+    },
+    {
+      "id": 5,
+      "start": 22.198,
+      "end": 30.143,
+      "narration": "My skeleton, all four and a half tonnes, was sold to the Natural History Museum. For 250 pounds!",
+      "fact_ids": [
+        "sale"
+      ],
+      "thumb": "thumbs/shot_05.jpg",
+      "prompt": "Action: The whale floats past and her body turns softly translucent, a glowing skeleton showing inside. Camera: Slow sideways dolly. Location: A dim Victorian museum storeroom with wooden crates and warm gas lamps. Mood: Curious, a little wry. Character: Hope, an original semi-realistic stylized CG blue whale with deep blue mottled skin, a pale ribbed throat and small gentle eyes. Semi-realistic stylized CG animation, deep blue mottled whale skin, soft volumetric light, cinematic composition, consistent character design, no text, no captions, no logos.",
+      "refs": [],
+      "video_source": "mock",
+      "voice_source": "say",
+      "fit": {
+        "how": "slow",
+        "speed": 1.0431,
+        "freeze": 0.0
+      }
+    },
+    {
+      "id": 6,
+      "start": 30.143,
+      "end": 36.383,
+      "narration": "From 1934, I hung in the Mammal Hall. Decades of quiet, watching from above.",
+      "fact_ids": [
+        "mammal_hall"
+      ],
+      "thumb": "thumbs/shot_06.jpg",
+      "prompt": "Action: The whale hangs almost still high in the air while tiny visitors pass far below. Camera: Static high angle looking down past her, light shifting from day to dusk. Location: A long old museum gallery with a glass roof, 1930s. Mood: Patient, calm. Character: Hope, an original semi-realistic stylized CG blue whale with deep blue mottled skin, a pale ribbed throat and small gentle eyes. Semi-realistic stylized CG animation, deep blue mottled whale skin, soft volumetric light, cinematic composition, consistent character design, no text, no captions, no logos.",
+      "refs": [],
+      "video_source": "mock",
+      "voice_source": "say",
+      "fit": {
+        "how": "trim",
+        "speed": 1.0,
+        "freeze": 0.0
+      }
+    },
+    {
+      "id": 7,
+      "start": 36.382,
+      "end": 45.52,
+      "narration": "Then, July 2017: Hintze Hall. I took the place of Dippy the Diplodocus, here since 1979.",
+      "fact_ids": [
+        "hintze",
+        "dippy"
+      ],
+      "thumb": "thumbs/shot_07.jpg",
+      "prompt": "Action: The whale sweeps down into the hall in one long diving lunge as visitors look up. Camera: Wide shot from a balcony, following her dive. Location: A grand Romanesque museum hall with terracotta arches, bright daylight. Mood: Triumphant, soaring. Character: Hope, an original semi-realistic stylized CG blue whale with deep blue mottled skin, a pale ribbed throat and small gentle eyes. Semi-realistic stylized CG animation, deep blue mottled whale skin, soft volumetric light, cinematic composition, consistent character design, no text, no captions, no logos.",
+      "refs": [],
+      "video_source": "mock",
+      "voice_source": "say",
+      "fit": {
+        "how": "slow",
+        "speed": 1.1923,
+        "freeze": 0.0
+      }
+    },
+    {
+      "id": 8,
+      "start": 45.52,
+      "end": 50.552,
+      "narration": "I am 25.2 metres long. Big enough to carry a big name.",
+      "fact_ids": [
+        "length"
+      ],
+      "thumb": "thumbs/shot_08.jpg",
+      "prompt": "Action: The whale glides the full length of the hall, passing slowly over the camera from nose to tail. Camera: Directly below, looking up as she passes overhead. Location: A grand Romanesque museum hall with terracotta arches, daylight through high windows. Mood: Awe at her scale. Character: Hope, an original semi-realistic stylized CG blue whale with deep blue mottled skin, a pale ribbed throat and small gentle eyes. Semi-realistic stylized CG animation, deep blue mottled whale skin, soft volumetric light, cinematic composition, consistent character design, no text, no captions, no logos.",
+      "refs": [],
+      "video_source": "mock",
+      "voice_source": "say",
+      "fit": {
+        "how": "trim",
+        "speed": 1.0,
+        "freeze": 0.0
+      }
+    },
+    {
+      "id": 9,
+      "start": 50.553,
+      "end": 57.428,
+      "narration": "They named me Hope: a symbol of humanity's power to shape a sustainable future. That part is up to you.",
+      "fact_ids": [
+        "name"
+      ],
+      "thumb": "thumbs/shot_09.jpg",
+      "prompt": "Action: The whale turns to face the viewer and glides gently closer. Camera: Eye level, slow push in to her eye. Location: A grand Romanesque museum hall, the light slowly turning to rippling ocean blue. Mood: Warm, hopeful. Character: Hope, an original semi-realistic stylized CG blue whale with deep blue mottled skin, a pale ribbed throat and small gentle eyes. Semi-realistic stylized CG animation, deep blue mottled whale skin, soft volumetric light, cinematic composition, consistent character design, no text, no captions, no logos.",
+      "refs": [],
+      "video_source": "mock",
+      "voice_source": "say",
+      "fit": {
+        "how": "trim",
+        "speed": 1.0,
+        "freeze": 0.0
+      }
+    }
+  ],
+  "captions": [
+    {
+      "start": 0.2,
+      "end": 0.911,
+      "text": "Look up.",
+      "words": [
+        {
+          "w": "Look",
+          "t0": 0.2,
+          "t1": 0.516
+        },
+        {
+          "w": "up.",
+          "t0": 0.595,
+          "t1": 0.832
+        }
+      ]
+    },
+    {
+      "start": 0.911,
+      "end": 1.622,
+      "text": "Yes, me.",
+      "words": [
+        {
+          "w": "Yes,",
+          "t0": 0.911,
+          "t1": 1.227
+        },
+        {
+          "w": "me.",
+          "t0": 1.306,
+          "t1": 1.543
+        }
+      ]
+    },
+    {
+      "start": 1.622,
+      "end": 4.873,
+      "text": "I am Hope, and I have a story for you.",
+      "words": [
+        {
+          "w": "I",
+          "t0": 1.622,
+          "t1": 1.701
+        },
+        {
+          "w": "am",
+          "t0": 1.78,
+          "t1": 1.938
+        },
+        {
+          "w": "Hope,",
+          "t0": 2.017,
+          "t1": 2.412
+        },
+        {
+          "w": "and",
+          "t0": 2.491,
+          "t1": 2.728
+        },
+        {
+          "w": "I",
+          "t0": 2.807,
+          "t1": 2.886
+        },
+        {
+          "w": "have",
+          "t0": 2.965,
+          "t1": 3.281
+        },
+        {
+          "w": "a",
+          "t0": 3.36,
+          "t1": 3.438
+        },
+        {
+          "w": "story",
+          "t0": 3.517,
+          "t1": 3.912
+        },
+        {
+          "w": "for",
+          "t0": 3.991,
+          "t1": 4.228
+        },
+        {
+          "w": "you.",
+          "t0": 4.307,
+          "t1": 4.623
+        }
+      ]
+    },
+    {
+      "start": 5.323,
+      "end": 7.513,
+      "text": "Long ago I was a young blue whale.",
+      "words": [
+        {
+          "w": "Long",
+          "t0": 5.323,
+          "t1": 5.573
+        },
+        {
+          "w": "ago",
+          "t0": 5.636,
+          "t1": 5.824
+        },
+        {
+          "w": "I",
+          "t0": 5.886,
+          "t1": 5.949
+        },
+        {
+          "w": "was",
+          "t0": 6.011,
+          "t1": 6.199
+        },
+        {
+          "w": "a",
+          "t0": 6.261,
+          "t1": 6.324
+        },
+        {
+          "w": "young",
+          "t0": 6.387,
+          "t1": 6.699
+        },
+        {
+          "w": "blue",
+          "t0": 6.762,
+          "t1": 7.012
+        },
+        {
+          "w": "whale.",
+          "t0": 7.075,
+          "t1": 7.45
+        }
+      ]
+    },
+    {
+      "start": 7.513,
+      "end": 8.013,
+      "text": "A girl.",
+      "words": [
+        {
+          "w": "A",
+          "t0": 7.513,
+          "t1": 7.575
+        },
+        {
+          "w": "girl.",
+          "t0": 7.638,
+          "t1": 7.951
+        }
+      ]
+    },
+    {
+      "start": 8.013,
+      "end": 10.078,
+      "text": "The ocean was my whole world.",
+      "words": [
+        {
+          "w": "The",
+          "t0": 8.013,
+          "t1": 8.201
+        },
+        {
+          "w": "ocean",
+          "t0": 8.264,
+          "t1": 8.576
+        },
+        {
+          "w": "was",
+          "t0": 8.639,
+          "t1": 8.827
+        },
+        {
+          "w": "my",
+          "t0": 8.889,
+          "t1": 9.014
+        },
+        {
+          "w": "whole",
+          "t0": 9.077,
+          "t1": 9.39
+        },
+        {
+          "w": "world.",
+          "t0": 9.452,
+          "t1": 9.828
+        }
+      ]
+    },
+    {
+      "start": 10.528,
+      "end": 14.149,
+      "text": "Then, on the morning of 25 March 1891,",
+      "words": [
+        {
+          "w": "Then,",
+          "t0": 10.528,
+          "t1": 10.992
+        },
+        {
+          "w": "on",
+          "t0": 11.085,
+          "t1": 11.271
+        },
+        {
+          "w": "the",
+          "t0": 11.364,
+          "t1": 11.642
+        },
+        {
+          "w": "morning",
+          "t0": 11.735,
+          "t1": 12.385
+        },
+        {
+          "w": "of",
+          "t0": 12.478,
+          "t1": 12.663
+        },
+        {
+          "w": "25",
+          "t0": 12.756,
+          "t1": 12.942
+        },
+        {
+          "w": "March",
+          "t0": 13.035,
+          "t1": 13.499
+        },
+        {
+          "w": "1891,",
+          "t0": 13.592,
+          "t1": 14.056
+        }
+      ]
+    },
+    {
+      "start": 14.149,
+      "end": 16.627,
+      "text": "I stranded on a sandbar.",
+      "words": [
+        {
+          "w": "I",
+          "t0": 14.149,
+          "t1": 14.241
+        },
+        {
+          "w": "stranded",
+          "t0": 14.334,
+          "t1": 15.077
+        },
+        {
+          "w": "on",
+          "t0": 15.17,
+          "t1": 15.356
+        },
+        {
+          "w": "a",
+          "t0": 15.448,
+          "t1": 15.541
+        },
+        {
+          "w": "sandbar.",
+          "t0": 15.634,
+          "t1": 16.377
+        }
+      ]
+    },
+    {
+      "start": 17.077,
+      "end": 19.388,
+      "text": "It was the mouth of Wexford Harbour, in",
+      "words": [
+        {
+          "w": "It",
+          "t0": 17.077,
+          "t1": 17.193
+        },
+        {
+          "w": "was",
+          "t0": 17.25,
+          "t1": 17.424
+        },
+        {
+          "w": "the",
+          "t0": 17.481,
+          "t1": 17.655
+        },
+        {
+          "w": "mouth",
+          "t0": 17.712,
+          "t1": 18.001
+        },
+        {
+          "w": "of",
+          "t0": 18.059,
+          "t1": 18.175
+        },
+        {
+          "w": "Wexford",
+          "t0": 18.232,
+          "t1": 18.637
+        },
+        {
+          "w": "Harbour,",
+          "t0": 18.694,
+          "t1": 19.157
+        },
+        {
+          "w": "in",
+          "t0": 19.214,
+          "t1": 19.33
+        }
+      ]
+    },
+    {
+      "start": 19.388,
+      "end": 19.908,
+      "text": "Ireland.",
+      "words": [
+        {
+          "w": "Ireland.",
+          "t0": 19.388,
+          "t1": 19.85
+        }
+      ]
+    },
+    {
+      "start": 19.908,
+      "end": 21.948,
+      "text": "Far from the deep water I knew.",
+      "words": [
+        {
+          "w": "Far",
+          "t0": 19.908,
+          "t1": 20.081
+        },
+        {
+          "w": "from",
+          "t0": 20.139,
+          "t1": 20.37
+        },
+        {
+          "w": "the",
+          "t0": 20.427,
+          "t1": 20.601
+        },
+        {
+          "w": "deep",
+          "t0": 20.659,
+          "t1": 20.89
+        },
+        {
+          "w": "water",
+          "t0": 20.947,
+          "t1": 21.236
+        },
+        {
+          "w": "I",
+          "t0": 21.294,
+          "t1": 21.352
+        },
+        {
+          "w": "knew.",
+          "t0": 21.409,
+          "t1": 21.698
+        }
+      ]
+    },
+    {
+      "start": 22.398,
+      "end": 24.888,
+      "text": "My skeleton, all four and a half",
+      "words": [
+        {
+          "w": "My",
+          "t0": 22.398,
+          "t1": 22.549
+        },
+        {
+          "w": "skeleton,",
+          "t0": 22.624,
+          "t1": 23.304
+        },
+        {
+          "w": "all",
+          "t0": 23.379,
+          "t1": 23.605
+        },
+        {
+          "w": "four",
+          "t0": 23.681,
+          "t1": 23.983
+        },
+        {
+          "w": "and",
+          "t0": 24.058,
+          "t1": 24.285
+        },
+        {
+          "w": "a",
+          "t0": 24.36,
+          "t1": 24.436
+        },
+        {
+          "w": "half",
+          "t0": 24.511,
+          "t1": 24.813
+        }
+      ]
+    },
+    {
+      "start": 24.888,
+      "end": 27.907,
+      "text": "tonnes, was sold to the Natural History",
+      "words": [
+        {
+          "w": "tonnes,",
+          "t0": 24.888,
+          "t1": 25.417
+        },
+        {
+          "w": "was",
+          "t0": 25.492,
+          "t1": 25.718
+        },
+        {
+          "w": "sold",
+          "t0": 25.794,
+          "t1": 26.096
+        },
+        {
+          "w": "to",
+          "t0": 26.171,
+          "t1": 26.322
+        },
+        {
+          "w": "the",
+          "t0": 26.398,
+          "t1": 26.624
+        },
+        {
+          "w": "Natural",
+          "t0": 26.699,
+          "t1": 27.228
+        },
+        {
+          "w": "History",
+          "t0": 27.303,
+          "t1": 27.831
+        }
+      ]
+    },
+    {
+      "start": 27.907,
+      "end": 28.511,
+      "text": "Museum.",
+      "words": [
+        {
+          "w": "Museum.",
+          "t0": 27.907,
+          "t1": 28.435
+        }
+      ]
+    },
+    {
+      "start": 28.511,
+      "end": 29.893,
+      "text": "For 250 pounds!",
+      "words": [
+        {
+          "w": "For",
+          "t0": 28.511,
+          "t1": 28.737
+        },
+        {
+          "w": "250",
+          "t0": 28.813,
+          "t1": 29.039
+        },
+        {
+          "w": "pounds!",
+          "t0": 29.114,
+          "t1": 29.643
+        }
+      ]
+    },
+    {
+      "start": 30.343,
+      "end": 33.113,
+      "text": "From 1934, I hung in the Mammal Hall.",
+      "words": [
+        {
+          "w": "From",
+          "t0": 30.343,
+          "t1": 30.635
+        },
+        {
+          "w": "1934,",
+          "t0": 30.707,
+          "t1": 31.072
+        },
+        {
+          "w": "I",
+          "t0": 31.145,
+          "t1": 31.218
+        },
+        {
+          "w": "hung",
+          "t0": 31.291,
+          "t1": 31.582
+        },
+        {
+          "w": "in",
+          "t0": 31.655,
+          "t1": 31.801
+        },
+        {
+          "w": "the",
+          "t0": 31.874,
+          "t1": 32.092
+        },
+        {
+          "w": "Mammal",
+          "t0": 32.165,
+          "t1": 32.603
+        },
+        {
+          "w": "Hall.",
+          "t0": 32.676,
+          "t1": 33.04
+        }
+      ]
+    },
+    {
+      "start": 33.113,
+      "end": 36.133,
+      "text": "Decades of quiet, watching from above.",
+      "words": [
+        {
+          "w": "Decades",
+          "t0": 33.113,
+          "t1": 33.623
+        },
+        {
+          "w": "of",
+          "t0": 33.696,
+          "t1": 33.842
+        },
+        {
+          "w": "quiet,",
+          "t0": 33.915,
+          "t1": 34.352
+        },
+        {
+          "w": "watching",
+          "t0": 34.425,
+          "t1": 35.008
+        },
+        {
+          "w": "from",
+          "t0": 35.081,
+          "t1": 35.373
+        },
+        {
+          "w": "above.",
+          "t0": 35.445,
+          "t1": 35.883
+        }
+      ]
+    },
+    {
+      "start": 36.582,
+      "end": 39.458,
+      "text": "Then, July 2017: Hintze Hall.",
+      "words": [
+        {
+          "w": "Then,",
+          "t0": 36.582,
+          "t1": 37.061
+        },
+        {
+          "w": "July",
+          "t0": 37.157,
+          "t1": 37.541
+        },
+        {
+          "w": "2017:",
+          "t0": 37.637,
+          "t1": 38.116
+        },
+        {
+          "w": "Hintze",
+          "t0": 38.212,
+          "t1": 38.787
+        },
+        {
+          "w": "Hall.",
+          "t0": 38.883,
+          "t1": 39.363
+        }
+      ]
+    },
+    {
+      "start": 39.458,
+      "end": 42.335,
+      "text": "I took the place of Dippy the",
+      "words": [
+        {
+          "w": "I",
+          "t0": 39.458,
+          "t1": 39.554
+        },
+        {
+          "w": "took",
+          "t0": 39.65,
+          "t1": 40.034
+        },
+        {
+          "w": "the",
+          "t0": 40.13,
+          "t1": 40.417
+        },
+        {
+          "w": "place",
+          "t0": 40.513,
+          "t1": 40.993
+        },
+        {
+          "w": "of",
+          "t0": 41.089,
+          "t1": 41.28
+        },
+        {
+          "w": "Dippy",
+          "t0": 41.376,
+          "t1": 41.856
+        },
+        {
+          "w": "the",
+          "t0": 41.951,
+          "t1": 42.239
+        }
+      ]
+    },
+    {
+      "start": 42.335,
+      "end": 45.27,
+      "text": "Diplodocus, here since 1979.",
+      "words": [
+        {
+          "w": "Diplodocus,",
+          "t0": 42.335,
+          "t1": 43.39
+        },
+        {
+          "w": "here",
+          "t0": 43.486,
+          "t1": 43.869
+        },
+        {
+          "w": "since",
+          "t0": 43.965,
+          "t1": 44.444
+        },
+        {
+          "w": "1979.",
+          "t0": 44.54,
+          "t1": 45.02
+        }
+      ]
+    },
+    {
+      "start": 45.72,
+      "end": 47.565,
+      "text": "I am 25.2 metres long.",
+      "words": [
+        {
+          "w": "I",
+          "t0": 45.72,
+          "t1": 45.8
+        },
+        {
+          "w": "am",
+          "t0": 45.88,
+          "t1": 46.041
+        },
+        {
+          "w": "25.2",
+          "t0": 46.121,
+          "t1": 46.442
+        },
+        {
+          "w": "metres",
+          "t0": 46.522,
+          "t1": 47.004
+        },
+        {
+          "w": "long.",
+          "t0": 47.084,
+          "t1": 47.485
+        }
+      ]
+    },
+    {
+      "start": 47.565,
+      "end": 50.302,
+      "text": "Big enough to carry a big name.",
+      "words": [
+        {
+          "w": "Big",
+          "t0": 47.565,
+          "t1": 47.806
+        },
+        {
+          "w": "enough",
+          "t0": 47.886,
+          "t1": 48.368
+        },
+        {
+          "w": "to",
+          "t0": 48.448,
+          "t1": 48.608
+        },
+        {
+          "w": "carry",
+          "t0": 48.689,
+          "t1": 49.09
+        },
+        {
+          "w": "a",
+          "t0": 49.17,
+          "t1": 49.25
+        },
+        {
+          "w": "big",
+          "t0": 49.33,
+          "t1": 49.571
+        },
+        {
+          "w": "name.",
+          "t0": 49.651,
+          "t1": 50.052
+        }
+      ]
+    },
+    {
+      "start": 50.753,
+      "end": 52.671,
+      "text": "They named me Hope: a symbol of",
+      "words": [
+        {
+          "w": "They",
+          "t0": 50.753,
+          "t1": 50.993
+        },
+        {
+          "w": "named",
+          "t0": 51.053,
+          "t1": 51.353
+        },
+        {
+          "w": "me",
+          "t0": 51.412,
+          "t1": 51.532
+        },
+        {
+          "w": "Hope:",
+          "t0": 51.592,
+          "t1": 51.892
+        },
+        {
+          "w": "a",
+          "t0": 51.952,
+          "t1": 52.012
+        },
+        {
+          "w": "symbol",
+          "t0": 52.072,
+          "t1": 52.432
+        },
+        {
+          "w": "of",
+          "t0": 52.492,
+          "t1": 52.611
+        }
+      ]
+    },
+    {
+      "start": 52.671,
+      "end": 55.069,
+      "text": "humanity's power to shape a sustainable",
+      "words": [
+        {
+          "w": "humanity's",
+          "t0": 52.671,
+          "t1": 53.271
+        },
+        {
+          "w": "power",
+          "t0": 53.331,
+          "t1": 53.631
+        },
+        {
+          "w": "to",
+          "t0": 53.691,
+          "t1": 53.81
+        },
+        {
+          "w": "shape",
+          "t0": 53.87,
+          "t1": 54.17
+        },
+        {
+          "w": "a",
+          "t0": 54.23,
+          "t1": 54.29
+        },
+        {
+          "w": "sustainable",
+          "t0": 54.35,
+          "t1": 55.01
+        }
+      ]
+    },
+    {
+      "start": 55.069,
+      "end": 55.549,
+      "text": "future.",
+      "words": [
+        {
+          "w": "future.",
+          "t0": 55.069,
+          "t1": 55.489
+        }
+      ]
+    },
+    {
+      "start": 55.549,
+      "end": 57.178,
+      "text": "That part is up to you.",
+      "words": [
+        {
+          "w": "That",
+          "t0": 55.549,
+          "t1": 55.789
+        },
+        {
+          "w": "part",
+          "t0": 55.849,
+          "t1": 56.089
+        },
+        {
+          "w": "is",
+          "t0": 56.149,
+          "t1": 56.268
+        },
+        {
+          "w": "up",
+          "t0": 56.328,
+          "t1": 56.448
+        },
+        {
+          "w": "to",
+          "t0": 56.508,
+          "t1": 56.628
+        },
+        {
+          "w": "you.",
+          "t0": 56.688,
+          "t1": 56.928
+        }
+      ]
+    }
+  ],
+  "facts": [
+    {
+      "id": "stranding",
+      "text": "Hope was a juvenile female blue whale. She stranded on a sandbar at the mouth of Wexford Harbour, Ireland, on the morning of 25 March 1891.",
+      "source": "https://www.nhm.ac.uk/discover/news/2018/march/a-cetacean-relation.html",
+      "used": true
+    },
+    {
+      "id": "sale",
+      "text": "The 4.5-tonne skeleton was sold to the Natural History Museum for £250.",
+      "source": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html",
+      "used": true
+    },
+    {
+      "id": "mammal_hall",
+      "text": "The skeleton hung in the museum's Mammal Hall from 1934.",
+      "source": "https://nhm.ac.uk/discover/news/2017/july/museum-unveils-hope-the-blue-whale-skeleton.html",
+      "used": true
+    },
+    {
+      "id": "hintze",
+      "text": "The skeleton was moved to Hintze Hall and unveiled there in July 2017.",
+      "source": "https://nhm.ac.uk/discover/news/2017/july/museum-unveils-hope-the-blue-whale-skeleton.html",
+      "used": true
+    },
+    {
+      "id": "dippy",
+      "text": "In Hintze Hall she replaced the cast of Dippy the Diplodocus, which stood there from 1979 until January 2017.",
+      "source": "https://nhm.ac.uk/discover/news/2017/july/museum-unveils-hope-the-blue-whale-skeleton.html",
+      "used": true
+    },
+    {
+      "id": "name",
+      "text": "She was named Hope \"as a symbol of humanity's power to shape a sustainable future\".",
+      "source": "https://nhm.ac.uk/discover/news/2017/july/museum-unveils-hope-the-blue-whale-skeleton.html",
+      "used": true
+    },
+    {
+      "id": "length",
+      "text": "The skeleton is 25.2 metres long.",
+      "source": "https://artsandculture.google.com/asset/GAG_J9wcz31GXw",
+      "used": true
+    }
+  ],
+  "modes": {
+    "llm": false,
+    "voice": false,
+    "video": false
+  },
+  "ambient_source": "mock",
+  "fal_cost_usd": 0.0,
+  "seconds_to_make": 5.0
+}

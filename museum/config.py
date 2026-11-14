@@ -1,0 +1,116 @@
+"""Settings, paths and the mock/live switch.
+
+Everything is mock by default so nothing costs money. A service only goes live
+when it is named in LIVE (e.g. LIVE=llm,voice,video) *and* its key is present.
+"""
+from __future__ import annotations
+
+import os
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+EXHIBITS_DIR = ROOT / "exhibits"
+WEB_DIR = ROOT / "web"
+
+
+def _load_dotenv(path: Path) -> None:
+    """Tiny .env reader; real environment variables win."""
+    if not path.exists():
+        return
+    for line in path.read_text().splitlines():
+        line = line.strip()
+        if not line or line.startswith("#") or "=" not in line:
+            continue
+        key, _, value = line.partition("=")
+        os.environ.setdefault(key.strip(), value.strip().strip("'\""))
+
+
+_load_dotenv(ROOT / ".env")
+
+
+def _env(name: str, default: str) -> str:
+    return os.environ.get(name, "").strip() or default
+
+
+CACHE_DIR = Path(_env("MUSEUM_CACHE_DIR", str(ROOT / "cache")))
+OUTPUT_DIR = Path(_env("MUSEUM_OUTPUT_DIR", str(ROOT / "output")))
+
+SERVICES = ("llm", "voice", "video")
+_KEYS = {
+    "llm": ("ANTHROPIC_API_KEY", "ANTHROPIC_AUTH_TOKEN"),
+    "voice": ("ELEVENLABS_API_KEY",),
+    "video": ("FAL_KEY",),
+}
+
+
+def live_requested() -> set[str]:
+    return {s.strip().lower() for s in os.environ.get("LIVE", "").split(",") if s.strip()}
+
+
+def mode(service: str) -> dict:
+    """{'live': bool, 'reason': str} for one of SERVICES."""
+    if service not in live_requested():
+        return {"live": False, "reason": f"mock ('{service}' not in LIVE)"}
+    if not any(os.environ.get(k) for k in _KEYS[service]):
+        return {"live": False, "reason": f"mock ({_KEYS[service][0]} not set)"}
+    return {"live": True, "reason": "live"}
+
+
+def is_live(service: str) -> bool:
+    return mode(service)["live"]
+
+
+def modes() -> dict:
+    return {s: mode(s) for s in SERVICES}
+
+
+# --- story (Claude) ---
+STORY_MODEL = _env("STORY_MODEL", "claude-opus-5-5")
+
+# --- voice (ElevenLabs) ---
+ELEVEN_MODEL = _env("ELEVEN_MODEL", "eleven_v3")
+# Fallback voice when an exhibit does not set one ("Rachel", an ElevenLabs premade voice).
+ELEVEN_VOICE_ID = _env("ELEVEN_VOICE_ID", "21m00Tcm4TlvDq8ikWAM")
+
+# --- video (fal) ---
+VIDEO_MODEL = _env("VIDEO_MODEL", "fal-ai/vidu/q2/reference-to-video")
+VIDEO_RESOLUTION = _env("VIDEO_RESOLUTION", "360p")
+VIDEO_ASPECT = _env("VIDEO_ASPECT", "16:9")
+VIDEO_MAX_SECONDS = 8  # Vidu Q2 limit on fal
+VIDEO_MAX_REFS = 7
+FAL_CONCURRENCY = int(_env("FAL_CONCURRENCY", "2"))
+# Listed fal price per Vidu Q2 clip. 1080p is $0.20 + $0.10/s; estimated at 8 s.
+VIDEO_PRICE_USD = {"360p": 0.10, "520p": 0.20, "720p": 0.30, "1080p": 1.00}
+# A job whose estimated fal cost is above this refuses to start.
+MAX_FAL_USD = float(_env("MAX_FAL_USD", "2.0"))
+
+# --- edit ---
+FPS = 24
+XFADE = 0.4  # seconds of cross-fade between shots
+TAIL = 0.35  # breathing room after each line of narration
+LEAD = 0.15  # narration starts this long after its shot does
+MAX_SLOWDOWN = 1.25
+AMBIENT_VOLUME = 0.18
+
+_HEIGHT = {"360p": 360, "520p": 520, "720p": 720, "1080p": 1080}
+_ASPECT = {"16:9": (16, 9), "9:16": (9, 16), "1:1": (1, 1)}
+
+
+def frame_size() -> tuple[int, int]:
+    """Output frame (w, h) for the configured resolution and aspect, even numbers."""
+    short = _HEIGHT[VIDEO_RESOLUTION]
+    aw, ah = _ASPECT[VIDEO_ASPECT]
+    if aw >= ah:
+        w, h = short * aw / ah, short
+    else:
+        w, h = short, short * ah / aw
+    return int(w) // 2 * 2, int(h) // 2 * 2
+
+
+LANGUAGES = {"en": "English", "zh": "中文"}
+STYLES = {
+    "first_person": "First person",
+    "kids": "For kids",
+    "expert": "Expert",
+    "funny": "Funny",
+}

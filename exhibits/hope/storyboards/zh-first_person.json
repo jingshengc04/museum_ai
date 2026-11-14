@@ -1,0 +1,104 @@
+{
+  "title": "希望：搁浅的蓝鲸",
+  "shots": [
+    {
+      "id": 1,
+      "narration": "[softly] 抬头看。对，就是我。我叫“希望”，想给你讲个故事。",
+      "action": "A blue whale glides slowly through the air above the crowd and turns her head toward the viewer.",
+      "camera": "Low angle from the floor, slow tilt up.",
+      "location": "A grand Romanesque museum hall with terracotta arches, daylight through high windows.",
+      "mood": "Wonder, a quiet invitation.",
+      "refs": ["side", "curious"],
+      "fact_ids": ["name"],
+      "movement": "small"
+    },
+    {
+      "id": 2,
+      "narration": "很久以前，我是一头年幼的雌性蓝鲸，大海就是我的整个世界。",
+      "action": "The whale swims forward and does one slow barrel roll.",
+      "camera": "Tracking shot alongside her, gentle drift.",
+      "location": "Open deep blue ocean, cool rippling light from the surface far above.",
+      "mood": "Free, joyful.",
+      "refs": ["side", "delighted"],
+      "fact_ids": ["stranding"],
+      "movement": "medium"
+    },
+    {
+      "id": 3,
+      "narration": "[softly] 1891年3月25日的清晨，我搁浅在一片沙洲上。",
+      "action": "The whale drifts into shallow water and comes to rest on a pale sandbar as small waves wash around her.",
+      "camera": "Slow push in at water level.",
+      "location": "A shallow harbour mouth on the Irish coast at dawn, 1891, grey-pink sky.",
+      "mood": "Quiet, sad, still.",
+      "refs": ["side", "calm"],
+      "fact_ids": ["stranding"],
+      "movement": "small"
+    },
+    {
+      "id": 4,
+      "narration": "那里是爱尔兰的韦克斯福德港口，远离我熟悉的深海。",
+      "action": "The whale lies still on the sandbar while the tide slowly pulls back around her.",
+      "camera": "High wide aerial shot, slowly rising.",
+      "location": "The mouth of a wide harbour on the Irish coast at dawn, long sandbars, distant low shore.",
+      "mood": "Lonely, wide and hushed.",
+      "refs": ["side", "thoughtful"],
+      "fact_ids": ["stranding"],
+      "movement": "small"
+    },
+    {
+      "id": 5,
+      "narration": "我的骨架重达四点五吨，被自然历史博物馆买下，只花了250英镑！",
+      "action": "The whale floats past and her body turns softly translucent, a glowing skeleton showing inside.",
+      "camera": "Slow sideways dolly.",
+      "location": "A dim Victorian museum storeroom with wooden crates and warm gas lamps.",
+      "mood": "Curious, a little wry.",
+      "refs": ["side", "thoughtful"],
+      "fact_ids": ["sale"],
+      "movement": "small"
+    },
+    {
+      "id": 6,
+      "narration": "从1934年起，我悬挂在哺乳动物展厅，静静地从高处望着人们。",
+      "action": "The whale hangs almost still high in the air while tiny visitors pass far below.",
+      "camera": "Static high angle looking down past her, light shifting from day to dusk.",
+      "location": "A long old museum gallery with a glass roof, 1930s.",
+      "mood": "Patient, calm.",
+      "refs": ["front", "calm"],
+      "fact_ids": ["mammal_hall"],
+      "movement": "small"
+    },
+    {
+      "id": 7,
+      "narration": "2017年7月，我搬进辛兹大厅，接替了1979年起在此的梁龙“迪皮”。",
+      "action": "The whale sweeps down into the hall in one long diving lunge as visitors look up.",
+      "camera": "Wide shot from a balcony, following her dive.",
+      "location": "A grand Romanesque museum hall with terracotta arches, bright daylight.",
+      "mood": "Triumphant, soaring.",
+      "refs": ["side", "delighted"],
+      "fact_ids": ["hintze", "dippy"],
+      "movement": "large"
+    },
+    {
+      "id": 8,
+      "narration": "我身长25.2米。这么大的身体，配得上一个大大的名字。",
+      "action": "The whale glides the full length of the hall, passing slowly over the camera from nose to tail.",
+      "camera": "Directly below, looking up as she passes overhead.",
+      "location": "A grand Romanesque museum hall with terracotta arches, daylight through high windows.",
+      "mood": "Awe at her scale.",
+      "refs": ["side", "front"],
+      "fact_ids": ["length"],
+      "movement": "medium"
+    },
+    {
+      "id": 9,
+      "narration": "人们叫我“希望”，象征人类有力量塑造可持续的未来。[whispers] 而这，要靠你们。",
+      "action": "The whale turns to face the viewer and glides gently closer.",
+      "camera": "Eye level, slow push in to her eye.",
+      "location": "A grand Romanesque museum hall, the light slowly turning to rippling ocean blue.",
+      "mood": "Warm, hopeful.",
+      "refs": ["front", "calm"],
+      "fact_ids": ["name"],
+      "movement": "small"
+    }
+  ]
+}

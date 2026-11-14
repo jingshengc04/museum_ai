@@ -1,0 +1,21 @@
+[project]
+name = "museum-ai"
+version = "0.1.0"
+description = "A photo of a museum exhibit becomes a short animated film narrated by the exhibit."
+requires-python = ">=3.11"
+dependencies = [
+    "anthropic>=2.8",
+    "fal-client",
+    "fastapi",
+    "httpx",
+    "pillow",
+    "python-multipart",
+    "uvicorn[standard]",
+]
+
+[dependency-groups]
+dev = ["pytest"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]

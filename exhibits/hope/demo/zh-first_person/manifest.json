@@ -1,0 +1,1431 @@
+{
+  "title": "希望：搁浅的蓝鲸",
+  "exhibit": {
+    "id": "hope",
+    "name": "Hope the blue whale",
+    "museum": "Natural History Museum, London",
+    "location": "Hintze Hall",
+    "character": "Hope"
+  },
+  "language": "zh",
+  "style": "first_person",
+  "storyboard_origin": "hand-written",
+  "video": "final.mp4",
+  "captions_vtt": "captions.vtt",
+  "duration": 59.807,
+  "word_joiner": "",
+  "shots": [
+    {
+      "id": 1,
+      "start": 0.0,
+      "end": 5.797,
+      "narration": "抬头看。对，就是我。我叫“希望”，想给你讲个故事。",
+      "fact_ids": [
+        "name"
+      ],
+      "thumb": "thumbs/shot_01.jpg",
+      "prompt": "Action: A blue whale glides slowly through the air above the crowd and turns her head toward the viewer. Camera: Low angle from the floor, slow tilt up. Location: A grand Romanesque museum hall with terracotta arches, daylight through high windows. Mood: Wonder, a quiet invitation. Character: Hope, an original semi-realistic stylized CG blue whale with deep blue mottled skin, a pale ribbed throat and small gentle eyes. Semi-realistic stylized CG animation, deep blue mottled whale skin, soft volumetric light, cinematic composition, consistent character design, no text, no captions, no logos.",
+      "refs": [],
+      "video_source": "mock",
+      "voice_source": "say",
+      "fit": {
+        "how": "trim",
+        "speed": 1.0,
+        "freeze": 0.0
+      }
+    },
+    {
+      "id": 2,
+      "start": 5.797,
+      "end": 12.434,
+      "narration": "很久以前，我是一头年幼的雌性蓝鲸，大海就是我的整个世界。",
+      "fact_ids": [
+        "stranding"
+      ],
+      "thumb": "thumbs/shot_02.jpg",
+      "prompt": "Action: The whale swims forward and does one slow barrel roll. Camera: Tracking shot alongside her, gentle drift. Location: Open deep blue ocean, cool rippling light from the surface far above. Mood: Free, joyful. Character: Hope, an original semi-realistic stylized CG blue whale with deep blue mottled skin, a pale ribbed throat and small gentle eyes. Semi-realistic stylized CG animation, deep blue mottled whale skin, soft volumetric light, cinematic composition, consistent character design, no text, no captions, no logos.",
+      "refs": [],
+      "video_source": "mock",
+      "voice_source": "say",
+      "fit": {
+        "how": "trim",
+        "speed": 1.0,
+        "freeze": 0.0
+      }
+    },
+    {
+      "id": 3,
+      "start": 12.434,
+      "end": 18.441,
+      "narration": "1891年3月25日的清晨，我搁浅在一片沙洲上。",
+      "fact_ids": [
+        "stranding"
+      ],
+      "thumb": "thumbs/shot_03.jpg",
+      "prompt": "Action: The whale drifts into shallow water and comes to rest on a pale sandbar as small waves wash around her. Camera: Slow push in at water level. Location: A shallow harbour mouth on the Irish coast at dawn, 1891, grey-pink sky. Mood: Quiet, sad, still. Character: Hope, an original semi-realistic stylized CG blue whale with deep blue mottled skin, a pale ribbed throat and small gentle eyes. Semi-realistic stylized CG animation, deep blue mottled whale skin, soft volumetric light, cinematic composition, consistent character design, no text, no captions, no logos.",
+      "refs": [],
+      "video_source": "mock",
+      "voice_source": "say",
+      "fit": {
+        "how": "trim",
+        "speed": 1.0,
+        "freeze": 0.0
+      }
+    },
+    {
+      "id": 4,
+      "start": 18.441,
+      "end": 23.915,
+      "narration": "那里是爱尔兰的韦克斯福德港口，远离我熟悉的深海。",
+      "fact_ids": [
+        "stranding"
+      ],
+      "thumb": "thumbs/shot_04.jpg",
+      "prompt": "Action: The whale lies still on the sandbar while the tide slowly pulls back around her. Camera: High wide aerial shot, slowly rising. Location: The mouth of a wide harbour on the Irish coast at dawn, long sandbars, distant low shore. Mood: Lonely, wide and hushed. Character: Hope, an original semi-realistic stylized CG blue whale with deep blue mottled skin, a pale ribbed throat and small gentle eyes. Semi-realistic stylized CG animation, deep blue mottled whale skin, soft volumetric light, cinematic composition, consistent character design, no text, no captions, no logos.",
+      "refs": [],
+      "video_source": "mock",
+      "voice_source": "say",
+      "fit": {
+        "how": "trim",
+        "speed": 1.0,
+        "freeze": 0.0
+      }
+    },
+    {
+      "id": 5,
+      "start": 23.915,
+      "end": 31.246,
+      "narration": "我的骨架重达四点五吨，被自然历史博物馆买下，只花了250英镑！",
+      "fact_ids": [
+        "sale"
+      ],
+      "thumb": "thumbs/shot_05.jpg",
+      "prompt": "Action: The whale floats past and her body turns softly translucent, a glowing skeleton showing inside. Camera: Slow sideways dolly. Location: A dim Victorian museum storeroom with wooden crates and warm gas lamps. Mood: Curious, a little wry. Character: Hope, an original semi-realistic stylized CG blue whale with deep blue mottled skin, a pale ribbed throat and small gentle eyes. Semi-realistic stylized CG animation, deep blue mottled whale skin, soft volumetric light, cinematic composition, consistent character design, no text, no captions, no logos.",
+      "refs": [],
+      "video_source": "mock",
+      "voice_source": "say",
+      "fit": {
+        "how": "trim",
+        "speed": 1.0,
+        "freeze": 0.0
+      }
+    },
+    {
+      "id": 6,
+      "start": 31.246,
+      "end": 38.464,
+      "narration": "从1934年起，我悬挂在哺乳动物展厅，静静地从高处望着人们。",
+      "fact_ids": [
+        "mammal_hall"
+      ],
+      "thumb": "thumbs/shot_06.jpg",
+      "prompt": "Action: The whale hangs almost still high in the air while tiny visitors pass far below. Camera: Static high angle looking down past her, light shifting from day to dusk. Location: A long old museum gallery with a glass roof, 1930s. Mood: Patient, calm. Character: Hope, an original semi-realistic stylized CG blue whale with deep blue mottled skin, a pale ribbed throat and small gentle eyes. Semi-realistic stylized CG animation, deep blue mottled whale skin, soft volumetric light, cinematic composition, consistent character design, no text, no captions, no logos.",
+      "refs": [],
+      "video_source": "mock",
+      "voice_source": "say",
+      "fit": {
+        "how": "trim",
+        "speed": 1.0,
+        "freeze": 0.0
+      }
+    },
+    {
+      "id": 7,
+      "start": 38.464,
+      "end": 46.539,
+      "narration": "2017年7月，我搬进辛兹大厅，接替了1979年起在此的梁龙“迪皮”。",
+      "fact_ids": [
+        "hintze",
+        "dippy"
+      ],
+      "thumb": "thumbs/shot_07.jpg",
+      "prompt": "Action: The whale sweeps down into the hall in one long diving lunge as visitors look up. Camera: Wide shot from a balcony, following her dive. Location: A grand Romanesque museum hall with terracotta arches, bright daylight. Mood: Triumphant, soaring. Character: Hope, an original semi-realistic stylized CG blue whale with deep blue mottled skin, a pale ribbed throat and small gentle eyes. Semi-realistic stylized CG animation, deep blue mottled whale skin, soft volumetric light, cinematic composition, consistent character design, no text, no captions, no logos.",
+      "refs": [],
+      "video_source": "mock",
+      "voice_source": "say",
+      "fit": {
+        "how": "slow",
+        "speed": 1.0594,
+        "freeze": 0.0
+      }
+    },
+    {
+      "id": 8,
+      "start": 46.539,
+      "end": 52.569,
+      "narration": "我身长25.2米。这么大的身体，配得上一个大大的名字。",
+      "fact_ids": [
+        "length"
+      ],
+      "thumb": "thumbs/shot_08.jpg",
+      "prompt": "Action: The whale glides the full length of the hall, passing slowly over the camera from nose to tail. Camera: Directly below, looking up as she passes overhead. Location: A grand Romanesque museum hall with terracotta arches, daylight through high windows. Mood: Awe at her scale. Character: Hope, an original semi-realistic stylized CG blue whale with deep blue mottled skin, a pale ribbed throat and small gentle eyes. Semi-realistic stylized CG animation, deep blue mottled whale skin, soft volumetric light, cinematic composition, consistent character design, no text, no captions, no logos.",
+      "refs": [],
+      "video_source": "mock",
+      "voice_source": "say",
+      "fit": {
+        "how": "trim",
+        "speed": 1.0,
+        "freeze": 0.0
+      }
+    },
+    {
+      "id": 9,
+      "start": 52.569,
+      "end": 59.807,
+      "narration": "人们叫我“希望”，象征人类有力量塑造可持续的未来。 而这，要靠你们。",
+      "fact_ids": [
+        "name"
+      ],
+      "thumb": "thumbs/shot_09.jpg",
+      "prompt": "Action: The whale turns to face the viewer and glides gently closer. Camera: Eye level, slow push in to her eye. Location: A grand Romanesque museum hall, the light slowly turning to rippling ocean blue. Mood: Warm, hopeful. Character: Hope, an original semi-realistic stylized CG blue whale with deep blue mottled skin, a pale ribbed throat and small gentle eyes. Semi-realistic stylized CG animation, deep blue mottled whale skin, soft volumetric light, cinematic composition, consistent character design, no text, no captions, no logos.",
+      "refs": [],
+      "video_source": "mock",
+      "voice_source": "say",
+      "fit": {
+        "how": "trim",
+        "speed": 1.0,
+        "freeze": 0.0
+      }
+    }
+  ],
+  "captions": [
+    {
+      "start": 0.2,
+      "end": 1.016,
+      "text": "抬头看。",
+      "words": [
+        {
+          "w": "抬",
+          "t0": 0.2,
+          "t1": 0.404
+        },
+        {
+          "w": "头",
+          "t0": 0.404,
+          "t1": 0.608
+        },
+        {
+          "w": "看。",
+          "t0": 0.608,
+          "t1": 1.016
+        }
+      ]
+    },
+    {
+      "start": 1.016,
+      "end": 2.239,
+      "text": "对，就是我。",
+      "words": [
+        {
+          "w": "对，",
+          "t0": 1.016,
+          "t1": 1.423
+        },
+        {
+          "w": "就",
+          "t0": 1.423,
+          "t1": 1.627
+        },
+        {
+          "w": "是",
+          "t0": 1.627,
+          "t1": 1.831
+        },
+        {
+          "w": "我。",
+          "t0": 1.831,
+          "t1": 2.239
+        }
+      ]
+    },
+    {
+      "start": 2.239,
+      "end": 5.547,
+      "text": "我叫“希望”，想给你讲个故事。",
+      "words": [
+        {
+          "w": "我",
+          "t0": 2.239,
+          "t1": 2.443
+        },
+        {
+          "w": "叫“",
+          "t0": 2.443,
+          "t1": 2.85
+        },
+        {
+          "w": "希",
+          "t0": 2.85,
+          "t1": 3.054
+        },
+        {
+          "w": "望”，",
+          "t0": 3.054,
+          "t1": 3.666
+        },
+        {
+          "w": "想",
+          "t0": 3.666,
+          "t1": 3.87
+        },
+        {
+          "w": "给",
+          "t0": 3.87,
+          "t1": 4.074
+        },
+        {
+          "w": "你",
+          "t0": 4.074,
+          "t1": 4.278
+        },
+        {
+          "w": "讲",
+          "t0": 4.278,
+          "t1": 4.481
+        },
+        {
+          "w": "个",
+          "t0": 4.481,
+          "t1": 4.685
+        },
+        {
+          "w": "故",
+          "t0": 4.685,
+          "t1": 4.889
+        },
+        {
+          "w": "事。",
+          "t0": 4.889,
+          "t1": 5.297
+        }
+      ]
+    },
+    {
+      "start": 5.997,
+      "end": 9.178,
+      "text": "很久以前，我是一头年幼的雌性蓝",
+      "words": [
+        {
+          "w": "很",
+          "t0": 5.997,
+          "t1": 6.209
+        },
+        {
+          "w": "久",
+          "t0": 6.209,
+          "t1": 6.421
+        },
+        {
+          "w": "以",
+          "t0": 6.421,
+          "t1": 6.633
+        },
+        {
+          "w": "前，",
+          "t0": 6.633,
+          "t1": 7.057
+        },
+        {
+          "w": "我",
+          "t0": 7.057,
+          "t1": 7.269
+        },
+        {
+          "w": "是",
+          "t0": 7.269,
+          "t1": 7.481
+        },
+        {
+          "w": "一",
+          "t0": 7.481,
+          "t1": 7.693
+        },
+        {
+          "w": "头",
+          "t0": 7.693,
+          "t1": 7.905
+        },
+        {
+          "w": "年",
+          "t0": 7.905,
+          "t1": 8.117
+        },
+        {
+          "w": "幼",
+          "t0": 8.117,
+          "t1": 8.33
+        },
+        {
+          "w": "的",
+          "t0": 8.33,
+          "t1": 8.542
+        },
+        {
+          "w": "雌",
+          "t0": 8.542,
+          "t1": 8.754
+        },
+        {
+          "w": "性",
+          "t0": 8.754,
+          "t1": 8.966
+        },
+        {
+          "w": "蓝",
+          "t0": 8.966,
+          "t1": 9.178
+        }
+      ]
+    },
+    {
+      "start": 9.178,
+      "end": 12.184,
+      "text": "鲸，大海就是我的整个世界。",
+      "words": [
+        {
+          "w": "鲸，",
+          "t0": 9.178,
+          "t1": 9.602
+        },
+        {
+          "w": "大",
+          "t0": 9.602,
+          "t1": 9.814
+        },
+        {
+          "w": "海",
+          "t0": 9.814,
+          "t1": 10.026
+        },
+        {
+          "w": "就",
+          "t0": 10.026,
+          "t1": 10.238
+        },
+        {
+          "w": "是",
+          "t0": 10.238,
+          "t1": 10.45
+        },
+        {
+          "w": "我",
+          "t0": 10.45,
+          "t1": 10.662
+        },
+        {
+          "w": "的",
+          "t0": 10.662,
+          "t1": 10.874
+        },
+        {
+          "w": "整",
+          "t0": 10.874,
+          "t1": 11.086
+        },
+        {
+          "w": "个",
+          "t0": 11.086,
+          "t1": 11.298
+        },
+        {
+          "w": "世",
+          "t0": 11.298,
+          "t1": 11.51
+        },
+        {
+          "w": "界。",
+          "t0": 11.51,
+          "t1": 11.934
+        }
+      ]
+    },
+    {
+      "start": 12.634,
+      "end": 15.951,
+      "text": "1891年3月25日的清晨，我",
+      "words": [
+        {
+          "w": "1891",
+          "t0": 12.634,
+          "t1": 13.518
+        },
+        {
+          "w": "年",
+          "t0": 13.518,
+          "t1": 13.74
+        },
+        {
+          "w": "3",
+          "t0": 13.74,
+          "t1": 13.961
+        },
+        {
+          "w": "月",
+          "t0": 13.961,
+          "t1": 14.182
+        },
+        {
+          "w": "25",
+          "t0": 14.182,
+          "t1": 14.624
+        },
+        {
+          "w": "日",
+          "t0": 14.624,
+          "t1": 14.845
+        },
+        {
+          "w": "的",
+          "t0": 14.845,
+          "t1": 15.066
+        },
+        {
+          "w": "清",
+          "t0": 15.066,
+          "t1": 15.287
+        },
+        {
+          "w": "晨，",
+          "t0": 15.287,
+          "t1": 15.73
+        },
+        {
+          "w": "我",
+          "t0": 15.73,
+          "t1": 15.951
+        }
+      ]
+    },
+    {
+      "start": 15.951,
+      "end": 18.191,
+      "text": "搁浅在一片沙洲上。",
+      "words": [
+        {
+          "w": "搁",
+          "t0": 15.951,
+          "t1": 16.172
+        },
+        {
+          "w": "浅",
+          "t0": 16.172,
+          "t1": 16.393
+        },
+        {
+          "w": "在",
+          "t0": 16.393,
+          "t1": 16.614
+        },
+        {
+          "w": "一",
+          "t0": 16.614,
+          "t1": 16.835
+        },
+        {
+          "w": "片",
+          "t0": 16.835,
+          "t1": 17.056
+        },
+        {
+          "w": "沙",
+          "t0": 17.056,
+          "t1": 17.277
+        },
+        {
+          "w": "洲",
+          "t0": 17.277,
+          "t1": 17.498
+        },
+        {
+          "w": "上。",
+          "t0": 17.498,
+          "t1": 17.941
+        }
+      ]
+    },
+    {
+      "start": 18.641,
+      "end": 21.625,
+      "text": "那里是爱尔兰的韦克斯福德港口，",
+      "words": [
+        {
+          "w": "那",
+          "t0": 18.641,
+          "t1": 18.84
+        },
+        {
+          "w": "里",
+          "t0": 18.84,
+          "t1": 19.039
+        },
+        {
+          "w": "是",
+          "t0": 19.039,
+          "t1": 19.238
+        },
+        {
+          "w": "爱",
+          "t0": 19.238,
+          "t1": 19.437
+        },
+        {
+          "w": "尔",
+          "t0": 19.437,
+          "t1": 19.636
+        },
+        {
+          "w": "兰",
+          "t0": 19.636,
+          "t1": 19.835
+        },
+        {
+          "w": "的",
+          "t0": 19.835,
+          "t1": 20.033
+        },
+        {
+          "w": "韦",
+          "t0": 20.033,
+          "t1": 20.232
+        },
+        {
+          "w": "克",
+          "t0": 20.232,
+          "t1": 20.431
+        },
+        {
+          "w": "斯",
+          "t0": 20.431,
+          "t1": 20.63
+        },
+        {
+          "w": "福",
+          "t0": 20.63,
+          "t1": 20.829
+        },
+        {
+          "w": "德",
+          "t0": 20.829,
+          "t1": 21.028
+        },
+        {
+          "w": "港",
+          "t0": 21.028,
+          "t1": 21.227
+        },
+        {
+          "w": "口，",
+          "t0": 21.227,
+          "t1": 21.625
+        }
+      ]
+    },
+    {
+      "start": 21.625,
+      "end": 23.665,
+      "text": "远离我熟悉的深海。",
+      "words": [
+        {
+          "w": "远",
+          "t0": 21.625,
+          "t1": 21.824
+        },
+        {
+          "w": "离",
+          "t0": 21.824,
+          "t1": 22.023
+        },
+        {
+          "w": "我",
+          "t0": 22.023,
+          "t1": 22.222
+        },
+        {
+          "w": "熟",
+          "t0": 22.222,
+          "t1": 22.421
+        },
+        {
+          "w": "悉",
+          "t0": 22.421,
+          "t1": 22.619
+        },
+        {
+          "w": "的",
+          "t0": 22.619,
+          "t1": 22.818
+        },
+        {
+          "w": "深",
+          "t0": 22.818,
+          "t1": 23.017
+        },
+        {
+          "w": "海。",
+          "t0": 23.017,
+          "t1": 23.415
+        }
+      ]
+    },
+    {
+      "start": 24.115,
+      "end": 27.323,
+      "text": "我的骨架重达四点五吨，被自然历",
+      "words": [
+        {
+          "w": "我",
+          "t0": 24.115,
+          "t1": 24.329
+        },
+        {
+          "w": "的",
+          "t0": 24.329,
+          "t1": 24.543
+        },
+        {
+          "w": "骨",
+          "t0": 24.543,
+          "t1": 24.757
+        },
+        {
+          "w": "架",
+          "t0": 24.757,
+          "t1": 24.971
+        },
+        {
+          "w": "重",
+          "t0": 24.971,
+          "t1": 25.184
+        },
+        {
+          "w": "达",
+          "t0": 25.184,
+          "t1": 25.398
+        },
+        {
+          "w": "四",
+          "t0": 25.398,
+          "t1": 25.612
+        },
+        {
+          "w": "点",
+          "t0": 25.612,
+          "t1": 25.826
+        },
+        {
+          "w": "五",
+          "t0": 25.826,
+          "t1": 26.04
+        },
+        {
+          "w": "吨，",
+          "t0": 26.04,
+          "t1": 26.468
+        },
+        {
+          "w": "被",
+          "t0": 26.468,
+          "t1": 26.682
+        },
+        {
+          "w": "自",
+          "t0": 26.682,
+          "t1": 26.896
+        },
+        {
+          "w": "然",
+          "t0": 26.896,
+          "t1": 27.109
+        },
+        {
+          "w": "历",
+          "t0": 27.109,
+          "t1": 27.323
+        }
+      ]
+    },
+    {
+      "start": 27.323,
+      "end": 30.318,
+      "text": "史博物馆买下，只花了250英",
+      "words": [
+        {
+          "w": "史",
+          "t0": 27.323,
+          "t1": 27.537
+        },
+        {
+          "w": "博",
+          "t0": 27.537,
+          "t1": 27.751
+        },
+        {
+          "w": "物",
+          "t0": 27.751,
+          "t1": 27.965
+        },
+        {
+          "w": "馆",
+          "t0": 27.965,
+          "t1": 28.179
+        },
+        {
+          "w": "买",
+          "t0": 28.179,
+          "t1": 28.393
+        },
+        {
+          "w": "下，",
+          "t0": 28.393,
+          "t1": 28.821
+        },
+        {
+          "w": "只",
+          "t0": 28.821,
+          "t1": 29.034
+        },
+        {
+          "w": "花",
+          "t0": 29.034,
+          "t1": 29.248
+        },
+        {
+          "w": "了",
+          "t0": 29.248,
+          "t1": 29.462
+        },
+        {
+          "w": "250",
+          "t0": 29.462,
+          "t1": 30.104
+        },
+        {
+          "w": "英",
+          "t0": 30.104,
+          "t1": 30.318
+        }
+      ]
+    },
+    {
+      "start": 30.318,
+      "end": 30.996,
+      "text": "镑！",
+      "words": [
+        {
+          "w": "镑！",
+          "t0": 30.318,
+          "t1": 30.746
+        }
+      ]
+    },
+    {
+      "start": 31.446,
+      "end": 34.705,
+      "text": "从1934年起，我悬挂在哺乳动",
+      "words": [
+        {
+          "w": "从",
+          "t0": 31.446,
+          "t1": 31.663
+        },
+        {
+          "w": "1934",
+          "t0": 31.663,
+          "t1": 32.532
+        },
+        {
+          "w": "年",
+          "t0": 32.532,
+          "t1": 32.75
+        },
+        {
+          "w": "起，",
+          "t0": 32.75,
+          "t1": 33.184
+        },
+        {
+          "w": "我",
+          "t0": 33.184,
+          "t1": 33.401
+        },
+        {
+          "w": "悬",
+          "t0": 33.401,
+          "t1": 33.619
+        },
+        {
+          "w": "挂",
+          "t0": 33.619,
+          "t1": 33.836
+        },
+        {
+          "w": "在",
+          "t0": 33.836,
+          "t1": 34.053
+        },
+        {
+          "w": "哺",
+          "t0": 34.053,
+          "t1": 34.27
+        },
+        {
+          "w": "乳",
+          "t0": 34.27,
+          "t1": 34.488
+        },
+        {
+          "w": "动",
+          "t0": 34.488,
+          "t1": 34.705
+        }
+      ]
+    },
+    {
+      "start": 34.705,
+      "end": 38.214,
+      "text": "物展厅，静静地从高处望着人们。",
+      "words": [
+        {
+          "w": "物",
+          "t0": 34.705,
+          "t1": 34.922
+        },
+        {
+          "w": "展",
+          "t0": 34.922,
+          "t1": 35.139
+        },
+        {
+          "w": "厅，",
+          "t0": 35.139,
+          "t1": 35.574
+        },
+        {
+          "w": "静",
+          "t0": 35.574,
+          "t1": 35.791
+        },
+        {
+          "w": "静",
+          "t0": 35.791,
+          "t1": 36.009
+        },
+        {
+          "w": "地",
+          "t0": 36.009,
+          "t1": 36.226
+        },
+        {
+          "w": "从",
+          "t0": 36.226,
+          "t1": 36.443
+        },
+        {
+          "w": "高",
+          "t0": 36.443,
+          "t1": 36.66
+        },
+        {
+          "w": "处",
+          "t0": 36.66,
+          "t1": 36.878
+        },
+        {
+          "w": "望",
+          "t0": 36.878,
+          "t1": 37.095
+        },
+        {
+          "w": "着",
+          "t0": 37.095,
+          "t1": 37.312
+        },
+        {
+          "w": "人",
+          "t0": 37.312,
+          "t1": 37.529
+        },
+        {
+          "w": "们。",
+          "t0": 37.529,
+          "t1": 37.964
+        }
+      ]
+    },
+    {
+      "start": 38.664,
+      "end": 41.614,
+      "text": "2017年7月，我搬进辛兹大",
+      "words": [
+        {
+          "w": "2017",
+          "t0": 38.664,
+          "t1": 39.507
+        },
+        {
+          "w": "年",
+          "t0": 39.507,
+          "t1": 39.718
+        },
+        {
+          "w": "7",
+          "t0": 39.718,
+          "t1": 39.928
+        },
+        {
+          "w": "月，",
+          "t0": 39.928,
+          "t1": 40.35
+        },
+        {
+          "w": "我",
+          "t0": 40.35,
+          "t1": 40.56
+        },
+        {
+          "w": "搬",
+          "t0": 40.56,
+          "t1": 40.771
+        },
+        {
+          "w": "进",
+          "t0": 40.771,
+          "t1": 40.982
+        },
+        {
+          "w": "辛",
+          "t0": 40.982,
+          "t1": 41.193
+        },
+        {
+          "w": "兹",
+          "t0": 41.193,
+          "t1": 41.403
+        },
+        {
+          "w": "大",
+          "t0": 41.403,
+          "t1": 41.614
+        }
+      ]
+    },
+    {
+      "start": 41.614,
+      "end": 44.775,
+      "text": "厅，接替了1979年起在此的梁",
+      "words": [
+        {
+          "w": "厅，",
+          "t0": 41.614,
+          "t1": 42.035
+        },
+        {
+          "w": "接",
+          "t0": 42.035,
+          "t1": 42.246
+        },
+        {
+          "w": "替",
+          "t0": 42.246,
+          "t1": 42.457
+        },
+        {
+          "w": "了",
+          "t0": 42.457,
+          "t1": 42.668
+        },
+        {
+          "w": "1979",
+          "t0": 42.668,
+          "t1": 43.51
+        },
+        {
+          "w": "年",
+          "t0": 43.51,
+          "t1": 43.721
+        },
+        {
+          "w": "起",
+          "t0": 43.721,
+          "t1": 43.932
+        },
+        {
+          "w": "在",
+          "t0": 43.932,
+          "t1": 44.143
+        },
+        {
+          "w": "此",
+          "t0": 44.143,
+          "t1": 44.353
+        },
+        {
+          "w": "的",
+          "t0": 44.353,
+          "t1": 44.564
+        },
+        {
+          "w": "梁",
+          "t0": 44.564,
+          "t1": 44.775
+        }
+      ]
+    },
+    {
+      "start": 44.775,
+      "end": 46.289,
+      "text": "龙“迪皮”。",
+      "words": [
+        {
+          "w": "龙“",
+          "t0": 44.775,
+          "t1": 45.196
+        },
+        {
+          "w": "迪",
+          "t0": 45.196,
+          "t1": 45.407
+        },
+        {
+          "w": "皮”。",
+          "t0": 45.407,
+          "t1": 46.039
+        }
+      ]
+    },
+    {
+      "start": 46.739,
+      "end": 48.516,
+      "text": "我身长25.2米。",
+      "words": [
+        {
+          "w": "我",
+          "t0": 46.739,
+          "t1": 46.936
+        },
+        {
+          "w": "身",
+          "t0": 46.936,
+          "t1": 47.134
+        },
+        {
+          "w": "长",
+          "t0": 47.134,
+          "t1": 47.331
+        },
+        {
+          "w": "25.2",
+          "t0": 47.331,
+          "t1": 48.121
+        },
+        {
+          "w": "米。",
+          "t0": 48.121,
+          "t1": 48.516
+        }
+      ]
+    },
+    {
+      "start": 48.516,
+      "end": 51.477,
+      "text": "这么大的身体，配得上一个大大的",
+      "words": [
+        {
+          "w": "这",
+          "t0": 48.516,
+          "t1": 48.713
+        },
+        {
+          "w": "么",
+          "t0": 48.713,
+          "t1": 48.911
+        },
+        {
+          "w": "大",
+          "t0": 48.911,
+          "t1": 49.108
+        },
+        {
+          "w": "的",
+          "t0": 49.108,
+          "t1": 49.305
+        },
+        {
+          "w": "身",
+          "t0": 49.305,
+          "t1": 49.503
+        },
+        {
+          "w": "体，",
+          "t0": 49.503,
+          "t1": 49.898
+        },
+        {
+          "w": "配",
+          "t0": 49.898,
+          "t1": 50.095
+        },
+        {
+          "w": "得",
+          "t0": 50.095,
+          "t1": 50.292
+        },
+        {
+          "w": "上",
+          "t0": 50.292,
+          "t1": 50.49
+        },
+        {
+          "w": "一",
+          "t0": 50.49,
+          "t1": 50.687
+        },
+        {
+          "w": "个",
+          "t0": 50.687,
+          "t1": 50.885
+        },
+        {
+          "w": "大",
+          "t0": 50.885,
+          "t1": 51.082
+        },
+        {
+          "w": "大",
+          "t0": 51.082,
+          "t1": 51.28
+        },
+        {
+          "w": "的",
+          "t0": 51.28,
+          "t1": 51.477
+        }
+      ]
+    },
+    {
+      "start": 51.477,
+      "end": 52.319,
+      "text": "名字。",
+      "words": [
+        {
+          "w": "名",
+          "t0": 51.477,
+          "t1": 51.674
+        },
+        {
+          "w": "字。",
+          "t0": 51.674,
+          "t1": 52.069
+        }
+      ]
+    },
+    {
+      "start": 52.769,
+      "end": 55.653,
+      "text": "人们叫我“希望”，象征人类有力",
+      "words": [
+        {
+          "w": "人",
+          "t0": 52.769,
+          "t1": 52.961
+        },
+        {
+          "w": "们",
+          "t0": 52.961,
+          "t1": 53.154
+        },
+        {
+          "w": "叫",
+          "t0": 53.154,
+          "t1": 53.346
+        },
+        {
+          "w": "我“",
+          "t0": 53.346,
+          "t1": 53.73
+        },
+        {
+          "w": "希",
+          "t0": 53.73,
+          "t1": 53.923
+        },
+        {
+          "w": "望”，",
+          "t0": 53.923,
+          "t1": 54.5
+        },
+        {
+          "w": "象",
+          "t0": 54.5,
+          "t1": 54.692
+        },
+        {
+          "w": "征",
+          "t0": 54.692,
+          "t1": 54.884
+        },
+        {
+          "w": "人",
+          "t0": 54.884,
+          "t1": 55.077
+        },
+        {
+          "w": "类",
+          "t0": 55.077,
+          "t1": 55.269
+        },
+        {
+          "w": "有",
+          "t0": 55.269,
+          "t1": 55.461
+        },
+        {
+          "w": "力",
+          "t0": 55.461,
+          "t1": 55.653
+        }
+      ]
+    },
+    {
+      "start": 55.653,
+      "end": 57.769,
+      "text": "量塑造可持续的未来。",
+      "words": [
+        {
+          "w": "量",
+          "t0": 55.653,
+          "t1": 55.846
+        },
+        {
+          "w": "塑",
+          "t0": 55.846,
+          "t1": 56.038
+        },
+        {
+          "w": "造",
+          "t0": 56.038,
+          "t1": 56.23
+        },
+        {
+          "w": "可",
+          "t0": 56.23,
+          "t1": 56.423
+        },
+        {
+          "w": "持",
+          "t0": 56.423,
+          "t1": 56.615
+        },
+        {
+          "w": "续",
+          "t0": 56.615,
+          "t1": 56.807
+        },
+        {
+          "w": "的",
+          "t0": 56.807,
+          "t1": 56.999
+        },
+        {
+          "w": "未",
+          "t0": 56.999,
+          "t1": 57.192
+        },
+        {
+          "w": "来。",
+          "t0": 57.192,
+          "t1": 57.576
+        }
+      ]
+    },
+    {
+      "start": 57.769,
+      "end": 59.557,
+      "text": "而这，要靠你们。",
+      "words": [
+        {
+          "w": "而",
+          "t0": 57.769,
+          "t1": 57.961
+        },
+        {
+          "w": "这，",
+          "t0": 57.961,
+          "t1": 58.345
+        },
+        {
+          "w": "要",
+          "t0": 58.345,
+          "t1": 58.538
+        },
+        {
+          "w": "靠",
+          "t0": 58.538,
+          "t1": 58.73
+        },
+        {
+          "w": "你",
+          "t0": 58.73,
+          "t1": 58.922
+        },
+        {
+          "w": "们。",
+          "t0": 58.922,
+          "t1": 59.307
+        }
+      ]
+    }
+  ],
+  "facts": [
+    {
+      "id": "stranding",
+      "text": "Hope was a juvenile female blue whale. She stranded on a sandbar at the mouth of Wexford Harbour, Ireland, on the morning of 25 March 1891.",
+      "source": "https://www.nhm.ac.uk/discover/news/2018/march/a-cetacean-relation.html",
+      "used": true
+    },
+    {
+      "id": "sale",
+      "text": "The 4.5-tonne skeleton was sold to the Natural History Museum for £250.",
+      "source": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html",
+      "used": true
+    },
+    {
+      "id": "mammal_hall",
+      "text": "The skeleton hung in the museum's Mammal Hall from 1934.",
+      "source": "https://nhm.ac.uk/discover/news/2017/july/museum-unveils-hope-the-blue-whale-skeleton.html",
+      "used": true
+    },
+    {
+      "id": "hintze",
+      "text": "The skeleton was moved to Hintze Hall and unveiled there in July 2017.",
+      "source": "https://nhm.ac.uk/discover/news/2017/july/museum-unveils-hope-the-blue-whale-skeleton.html",
+      "used": true
+    },
+    {
+      "id": "dippy",
+      "text": "In Hintze Hall she replaced the cast of Dippy the Diplodocus, which stood there from 1979 until January 2017.",
+      "source": "https://nhm.ac.uk/discover/news/2017/july/museum-unveils-hope-the-blue-whale-skeleton.html",
+      "used": true
+    },
+    {
+      "id": "name",
+      "text": "She was named Hope \"as a symbol of humanity's power to shape a sustainable future\".",
+      "source": "https://nhm.ac.uk/discover/news/2017/july/museum-unveils-hope-the-blue-whale-skeleton.html",
+      "used": true
+    },
+    {
+      "id": "length",
+      "text": "The skeleton is 25.2 metres long.",
+      "source": "https://artsandculture.google.com/asset/GAG_J9wcz31GXw",
+      "used": true
+    }
+  ],
+  "modes": {
+    "llm": false,
+    "voice": false,
+    "video": false
+  },
+  "ambient_source": "mock",
+  "fal_cost_usd": 0.0,
+  "seconds_to_make": 5.4
+}

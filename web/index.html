@@ -1,0 +1,502 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Living Exhibit</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%23050d18'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%237fdbda'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --deep: #050d18; --sea: #0a1f33; --panel: rgba(255,255,255,.045); --line: rgba(255,255,255,.11);
+    --ink: #f4eee2; --muted: #8fa6ba; --aqua: #7fdbda; --amber: #f2b872; --red: #ff8f80;
+    --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Songti SC", serif;
+    --sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    --mono: ui-monospace, "SF Mono", Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { background: var(--deep); }
+  body { margin: 0; min-height: 100vh; color: var(--ink); font: 16px/1.5 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  [hidden] { display: none !important; }
+
+  /* slow light through water */
+  .sea { position: fixed; inset: -20%; z-index: -1; pointer-events: none;
+    background:
+      radial-gradient(42% 36% at 22% 18%, rgba(46,139,160,.30), transparent 70%),
+      radial-gradient(38% 42% at 82% 8%, rgba(127,219,218,.13), transparent 70%),
+      radial-gradient(60% 50% at 60% 100%, rgba(18,58,96,.55), transparent 70%),
+      linear-gradient(180deg, var(--sea), var(--deep) 70%);
+    animation: drift 26s ease-in-out infinite alternate; }
+  @keyframes drift { to { transform: translate3d(3%, 2%, 0) scale(1.06); } }
+  @media (prefers-reduced-motion: reduce) { .sea, .shimmer::after { animation: none !important; } }
+
+  header { display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+    padding: 20px clamp(16px, 4vw, 48px); }
+  .mark { font: 600 15px/1 var(--sans); letter-spacing: .22em; text-transform: uppercase; color: var(--ink);
+    background: none; border: 0; cursor: pointer; padding: 0; display: flex; align-items: center; gap: 10px; }
+  .mark i { width: 9px; height: 9px; border-radius: 50%; background: var(--aqua); box-shadow: 0 0 14px var(--aqua); }
+  .modes { display: flex; gap: 6px; flex-wrap: wrap; }
+  .mode { font: 500 11px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+    border: 1px solid var(--line); border-radius: 99px; padding: 6px 10px; display: flex; gap: 6px; align-items: center; }
+  .mode b { width: 6px; height: 6px; border-radius: 50%; background: #4d6074; }
+  .mode.live { color: var(--ink); } .mode.live b { background: var(--aqua); box-shadow: 0 0 8px var(--aqua); }
+
+  main { max-width: 1180px; margin: 0 auto; padding: 8px clamp(16px, 4vw, 48px) 64px; }
+  h1 { font: 400 clamp(34px, 6vw, 64px)/1.05 var(--serif); letter-spacing: -.015em; margin: 4vh 0 12px; }
+  h1 em { font-style: italic; color: var(--aqua); }
+  .lede { color: var(--muted); max-width: 54ch; margin: 0 0 32px; font-size: 17px; }
+  .label { font: 600 11px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; color: var(--muted); margin: 0 0 10px; }
+
+  /* capture */
+  .capture { display: grid; grid-template-columns: 1.15fr 1fr; gap: 28px; align-items: start; }
+  .drop { position: relative; display: grid; place-items: center; aspect-ratio: 4/3; border-radius: 22px; cursor: pointer;
+    border: 1.5px dashed rgba(127,219,218,.45); background: var(--panel) center/cover no-repeat; overflow: hidden;
+    transition: border-color .2s, transform .2s; text-align: center; }
+  .drop:hover, .drop.over { border-color: var(--aqua); transform: translateY(-2px); }
+  .drop.has { border-style: solid; border-color: var(--line); }
+  .drop .hint { padding: 24px; }
+  .drop .hint svg { width: 46px; height: 46px; stroke: var(--aqua); margin-bottom: 12px; }
+  .drop .hint strong { display: block; font: 400 24px/1.2 var(--serif); }
+  .drop .hint span { color: var(--muted); font-size: 14px; }
+  .drop.has .hint { position: absolute; left: 12px; bottom: 12px; padding: 8px 12px; border-radius: 99px;
+    background: rgba(5,13,24,.72); backdrop-filter: blur(8px); }
+  .drop.has .hint svg, .drop.has .hint strong { display: none; }
+  .drop.has .hint span { color: var(--ink); }
+  .panel { display: grid; gap: 24px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { font: 500 14px/1 var(--sans); color: var(--ink); background: var(--panel); border: 1px solid var(--line);
+    border-radius: 99px; padding: 11px 16px; cursor: pointer; transition: all .15s; }
+  .chip:hover { border-color: rgba(127,219,218,.6); }
+  .chip[aria-pressed="true"] { background: var(--aqua); border-color: var(--aqua); color: #06202b; }
+  .chip.sample { display: flex; align-items: center; gap: 10px; padding: 6px 16px 6px 6px; }
+  .chip.sample img, .chip.sample .ph { width: 34px; height: 34px; border-radius: 50%; object-fit: cover; background: #12324a; }
+  .go { font: 600 17px/1 var(--sans); color: #06202b; background: linear-gradient(180deg, #a5efe9, var(--aqua));
+    border: 0; border-radius: 16px; padding: 19px 24px; cursor: pointer; width: 100%;
+    box-shadow: 0 10px 40px -12px rgba(127,219,218,.7); transition: transform .15s, opacity .15s; }
+  .go:hover:not(:disabled) { transform: translateY(-2px); }
+  .go:disabled { opacity: .35; cursor: not-allowed; box-shadow: none; }
+  .note { color: var(--muted); font-size: 13px; margin: -12px 0 0; }
+  .saved a { color: var(--aqua); cursor: pointer; text-decoration: underline; text-underline-offset: 3px; margin-right: 14px; font-size: 14px; }
+
+  /* making of */
+  .steps { display: flex; gap: 6px; margin: 4vh 0 22px; }
+  .step { flex: 1; font: 600 11px/1 var(--sans); letter-spacing: .14em; text-transform: uppercase; color: #52677b;
+    padding-top: 12px; border-top: 2px solid #1c3147; transition: all .3s; }
+  .step.on { color: var(--ink); border-color: var(--aqua); }
+  .step.done { color: var(--muted); border-color: rgba(127,219,218,.45); }
+  .making { display: grid; grid-template-columns: minmax(280px, 380px) 1fr; gap: 28px; align-items: start; }
+  .making h2, .film h2 { font: 400 clamp(24px, 3.4vw, 34px)/1.15 var(--serif); margin: 0 0 4px; }
+  .sub { color: var(--muted); font-size: 14px; margin: 0 0 18px; }
+  .thoughts { font: 13px/1.55 var(--mono); color: #b9c9d8; max-height: 62vh; overflow-y: auto; padding-right: 8px;
+    mask-image: linear-gradient(180deg, transparent, #000 28px); }
+  .thoughts p { margin: 0 0 9px; padding-left: 16px; position: relative; animation: rise .35s ease both; }
+  .thoughts p::before { content: ""; position: absolute; left: 0; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: var(--aqua); opacity: .7; }
+  .thoughts p.warn { color: var(--amber); } .thoughts p.warn::before { background: var(--amber); }
+  .thoughts p.head { color: var(--ink); font: 600 11px/1 var(--sans); letter-spacing: .16em; text-transform: uppercase; padding: 10px 0 2px; }
+  .thoughts p.head::before { display: none; }
+  @keyframes rise { from { opacity: 0; transform: translateY(6px); } }
+  .board { display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 14px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; animation: rise .4s ease both; }
+  .card .pic { position: relative; aspect-ratio: 16/9; background: #0c2135 center/cover; }
+  .card .pic span { position: absolute; left: 8px; top: 8px; font: 600 11px/1 var(--mono); background: rgba(5,13,24,.7); padding: 4px 6px; border-radius: 6px; }
+  .shimmer::after { content: ""; position: absolute; inset: 0; background: linear-gradient(100deg, transparent 30%, rgba(127,219,218,.16) 50%, transparent 70%);
+    background-size: 220% 100%; animation: sweep 1.3s linear infinite; }
+  @keyframes sweep { from { background-position: 120% 0; } to { background-position: -100% 0; } }
+  .card p { margin: 0; padding: 10px 12px 6px; font: 15px/1.35 var(--serif); }
+  .card .ticks { display: flex; gap: 10px; padding: 0 12px 10px; font: 500 11px/1 var(--sans); letter-spacing: .06em; text-transform: uppercase; color: #52677b; }
+  .card .ticks .ok { color: var(--aqua); }
+  .error { border: 1px solid rgba(255,143,128,.5); background: rgba(255,143,128,.08); color: var(--red); border-radius: 14px; padding: 14px 16px; margin: 0 0 18px; }
+  .error button { margin-left: 10px; }
+  .ghost { font: 500 14px/1 var(--sans); color: var(--ink); background: none; border: 1px solid var(--line); border-radius: 99px; padding: 9px 14px; cursor: pointer; }
+  .ghost:hover { border-color: var(--aqua); }
+
+  /* film */
+  .stage { position: relative; border-radius: 20px; overflow: hidden; background: #000;
+    box-shadow: 0 30px 90px -30px rgba(0,0,0,.9), 0 0 0 1px var(--line); }
+  .stage video { display: block; width: 100%; aspect-ratio: 16/9; background: #000; }
+  .captions { position: absolute; left: 0; right: 0; bottom: 13%; text-align: center; pointer-events: none; padding: 0 5%; }
+  .captions span.line { display: inline-block; font: 400 clamp(17px, 2.9vw, 32px)/1.3 var(--serif); padding: .2em .6em; border-radius: 10px;
+    background: rgba(5,13,24,.55); backdrop-filter: blur(6px); text-shadow: 0 1px 8px rgba(0,0,0,.6); }
+  .captions i { font-style: normal; color: rgba(244,238,226,.42); transition: color .12s; }
+  .captions i.said { color: var(--ink); }
+  .endcard { position: absolute; inset: 0; display: grid; place-content: center; gap: 16px; text-align: center; padding: 24px;
+    background: rgba(5,13,24,.82); backdrop-filter: blur(10px); animation: rise .5s ease both; }
+  .endcard h3 { font: 400 clamp(22px, 3.6vw, 36px)/1.15 var(--serif); margin: 0; }
+  .endcard .chips { justify-content: center; }
+  .banner { color: var(--amber); font-size: 14px; margin: 14px 0 0; }
+  .filmgrid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(260px, 340px); gap: 28px; margin-top: 2vh; align-items: start; }
+  .filmgrid h2 { margin-top: 22px; }
+  .strip { display: grid; grid-template-columns: repeat(auto-fill, minmax(104px, 1fr)); gap: 8px; margin-top: 18px; }
+  .strip button { position: relative; padding: 0; border: 2px solid transparent; border-radius: 9px; overflow: hidden; cursor: pointer; background: #0c2135; aspect-ratio: 16/9; }
+  .strip button img { width: 100%; height: 100%; object-fit: cover; display: block; opacity: .6; transition: opacity .2s; }
+  .strip button.now { border-color: var(--aqua); } .strip button.now img { opacity: 1; }
+  .sources { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 18px; position: sticky; top: 16px; }
+  .fact { padding: 10px 0 10px 14px; border-left: 2px solid #1c3147; margin: 0 0 6px; color: var(--muted); font-size: 14px; transition: all .3s; }
+  .fact a { display: block; color: inherit; font: 12px/1.3 var(--mono); opacity: .75; margin-top: 4px; word-break: break-all; }
+  .fact.now { border-color: var(--amber); color: var(--ink); background: linear-gradient(90deg, rgba(242,184,114,.12), transparent); }
+  .fact.now a { color: var(--amber); opacity: 1; }
+  .fact.unused { opacity: .5; }
+  details { margin-top: 18px; color: var(--muted); font-size: 13px; } summary { cursor: pointer; }
+  details pre { white-space: pre-wrap; font: 12px/1.5 var(--mono); color: #b9c9d8; }
+
+  @media (max-width: 860px) {
+    .capture, .making, .filmgrid { grid-template-columns: 1fr; }
+    .sources { position: static; }
+    .thoughts { max-height: 30vh; }
+    .step { font-size: 9px; letter-spacing: .08em; }
+  }
+</style>
+</head>
+<body>
+<div class="sea"></div>
+<header>
+  <button class="mark" id="home"><i></i>Living Exhibit</button>
+  <div class="modes" id="modes"></div>
+</header>
+
+<main>
+  <!-- 1. photo -->
+  <section id="v-capture">
+    <h1>Photograph an exhibit.<br><em>It tells you its own story.</em></h1>
+    <p class="lede">One photo becomes a short animated film, narrated by the exhibit itself. Every fact it tells you comes with its source.</p>
+    <div class="capture">
+      <label class="drop" id="drop" for="photo">
+        <div class="hint">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h3l1.6-2.2h6.8L17 8h3v11H4z"/><circle cx="12" cy="13.2" r="3.4"/></svg>
+          <strong>Take or choose a photo</strong>
+          <span id="drop-text">Tap here, or drop an image</span>
+        </div>
+        <input type="file" id="photo" accept="image/jpeg,image/png,image/webp" hidden>
+      </label>
+      <div class="panel">
+        <div id="samples-wrap">
+          <p class="label">No photo to hand? Start from an exhibit</p>
+          <div class="chips" id="samples"></div>
+        </div>
+        <div>
+          <p class="label">Who is watching</p>
+          <div class="chips" id="styles"></div>
+        </div>
+        <div>
+          <p class="label">Language</p>
+          <div class="chips" id="langs"></div>
+        </div>
+        <button class="go" id="go" disabled>Bring it to life</button>
+        <p class="note" id="cost"></p>
+        <div class="saved" id="saved" hidden>
+          <p class="label">Saved films</p>
+          <div id="saved-list"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. making of -->
+  <section id="v-making" hidden>
+    <div class="steps" id="steps"></div>
+    <div class="error" id="error" hidden></div>
+    <div class="making">
+      <div>
+        <h2 id="making-title">Looking at your photo</h2>
+        <p class="sub">What the film-maker is doing right now</p>
+        <div class="thoughts" id="thoughts"></div>
+      </div>
+      <div>
+        <h2 id="board-title">Storyboard</h2>
+        <p class="sub" id="board-sub">Shots appear here as they are written, voiced and drawn</p>
+        <div class="board" id="board"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. film -->
+  <section id="v-film" class="film" hidden>
+    <p class="banner" id="banner" hidden></p>
+    <div class="filmgrid">
+      <div>
+        <div class="stage">
+          <video id="video" playsinline controls preload="auto"></video>
+          <div class="captions" id="captions"></div>
+          <div class="endcard" id="endcard" hidden>
+            <h3 id="end-title">What next?</h3>
+            <div class="chips" id="end-choices"></div>
+          </div>
+        </div>
+        <h2 id="film-title"></h2>
+        <p class="sub" id="film-meta"></p>
+        <div class="strip" id="strip"></div>
+        <details><summary>How this film was made</summary><pre id="film-log"></pre></details>
+      </div>
+      <aside class="sources">
+        <p class="label">Sources, lit up as they are spoken</p>
+        <div id="facts"></div>
+      </aside>
+    </div>
+  </section>
+</main>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const el = (tag, props = {}, ...kids) => {
+  const node = Object.assign(document.createElement(tag), props);
+  node.append(...kids);
+  return node;
+};
+const STEPS = [["identify", "Recognise"], ["story", "Write"], ["voice", "Voice"], ["video", "Draw"], ["edit", "Cut"]];
+const S = { app: null, photo: null, exhibitId: null, style: "first_person", lang: "en", jobId: null, source: null, film: null, log: [] };
+
+function show(view) {
+  for (const v of ["capture", "making", "film"]) $("v-" + v).hidden = v !== view;
+  if (view !== "film") $("video").pause();
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+// ---------- 1. capture ----------
+function chips(host, entries, current, onPick) {
+  host.replaceChildren(...entries.map(([value, label]) => {
+    const chip = el("button", { className: "chip", type: "button", textContent: label });
+    chip.setAttribute("aria-pressed", String(value === current));
+    chip.onclick = () => { onPick(value); chips(host, entries, value, onPick); };
+    return chip;
+  }));
+}
+
+function renderCapture() {
+  const { app } = S;
+  $("modes").replaceChildren(...Object.entries({ llm: "Story", voice: "Voice", video: "Video" }).map(([key, label]) => {
+    const m = app.modes[key];
+    return el("span", { className: "mode" + (m.live ? " live" : ""), title: m.reason }, el("b"), `${label} · ${m.live ? "live" : "mock"}`);
+  }));
+  chips($("styles"), Object.entries(app.styles), S.style, (v) => (S.style = v));
+  chips($("langs"), Object.entries(app.languages), S.lang, (v) => (S.lang = v));
+
+  $("samples").replaceChildren(...app.exhibits.map((ex) => {
+    const face = ex.photo ? el("img", { src: ex.photo, alt: "" }) : el("span", { className: "ph" });
+    const chip = el("button", { className: "chip sample", type: "button" }, face, ex.name);
+    chip.setAttribute("aria-pressed", String(S.exhibitId === ex.id));
+    chip.onclick = () => {
+      S.exhibitId = S.exhibitId === ex.id ? null : ex.id;
+      if (S.exhibitId && !S.photo && ex.photo) setPreview(ex.photo, ex.name);
+      if (!S.exhibitId && !S.photo) setPreview(null);
+      renderCapture();
+    };
+    return chip;
+  }));
+  $("go").disabled = !(S.photo || S.exhibitId);
+
+  const v = app.video;
+  $("cost").textContent = app.modes.video.live
+    ? `Video is live: up to $${v.worst_case_usd.toFixed(2)} of fal credits per film at ${v.resolution} (cached shots are free).`
+    : "Video is in mock mode: nothing here spends fal credits.";
+
+  const demos = app.exhibits.flatMap((ex) => ex.demos.map((d) => ({ ...d, name: ex.name })));
+  $("saved").hidden = demos.length === 0;
+  $("saved-list").replaceChildren(...demos.map((d) => {
+    const link = el("a", { textContent: `${d.name} · ${app.styles[d.style] || d.style} · ${app.languages[d.language] || d.language}` });
+    link.onclick = () => loadFilm(d.manifest, { saved: true });
+    return link;
+  }));
+}
+
+function setPreview(url, text) {
+  const drop = $("drop");
+  drop.style.backgroundImage = url ? `url("${url}")` : "";
+  drop.classList.toggle("has", Boolean(url));
+  $("drop-text").textContent = url ? `${text} · tap to change` : "Tap here, or drop an image";
+}
+
+function takePhoto(file) {
+  if (!file || !file.type.startsWith("image/")) return;
+  S.photo = file;
+  setPreview(URL.createObjectURL(file), "Your photo");
+  renderCapture();
+}
+$("photo").onchange = (e) => takePhoto(e.target.files[0]);
+const drop = $("drop");
+drop.ondragover = (e) => { e.preventDefault(); drop.classList.add("over"); };
+drop.ondragleave = () => drop.classList.remove("over");
+drop.ondrop = (e) => { e.preventDefault(); drop.classList.remove("over"); takePhoto(e.dataTransfer.files[0]); };
+$("home").onclick = () => { if (S.source) S.source.close(); show("capture"); };
+$("go").onclick = () => start();
+
+// ---------- 2. making of ----------
+async function start(overrides = {}) {
+  Object.assign(S, overrides);
+  S.log = [];
+  $("thoughts").replaceChildren();
+  $("board").replaceChildren();
+  $("error").hidden = true;
+  $("making-title").textContent = S.photo ? "Looking at your photo" : "Opening the exhibit";
+  $("board-title").textContent = "Storyboard";
+  $("steps").replaceChildren(...STEPS.map(([key, label]) => el("div", { className: "step", id: "step-" + key, textContent: label })));
+  show("making");
+
+  const form = new FormData();
+  form.append("language", S.lang);
+  form.append("style", S.style);
+  if (S.exhibitId) form.append("exhibit_id", S.exhibitId);
+  if (S.photo) form.append("photo", S.photo);
+  let job;
+  try {
+    const response = await fetch("/api/jobs", { method: "POST", body: form });
+    job = await response.json();
+    if (!response.ok) throw new Error(job.detail || "The film could not be started.");
+  } catch (error) {
+    return fail(error.message, null);
+  }
+  S.jobId = job.job_id;
+
+  // EventSource reconnects by replaying from the start, so count what we have handled.
+  let handled = 0, seen = 0;
+  if (S.source) S.source.close();
+  S.source = new EventSource(`/api/jobs/${S.jobId}/events`);
+  S.source.onopen = () => { seen = 0; };
+  S.source.onmessage = (message) => {
+    if (seen++ < handled) return;
+    handled++;
+    onEvent(JSON.parse(message.data));
+  };
+}
+
+function think(text, cls = "") {
+  S.log.push(text);
+  const box = $("thoughts");
+  box.append(el("p", { className: cls, textContent: text }));
+  box.scrollTop = box.scrollHeight;
+}
+
+function onEvent(ev) {
+  const base = `/output/${S.jobId}/`;
+  if (ev.type === "step") {
+    const [, label] = STEPS.find(([key]) => key === ev.step);
+    $("step-" + ev.step).className = "step " + (ev.status === "start" ? "on" : "done");
+    if (ev.status === "start") think(label, "head");
+  } else if (ev.type === "thought") {
+    think(ev.text, ev.level === "warn" ? "warn" : "");
+  } else if (ev.type === "exhibit") {
+    S.exhibitId = ev.exhibit.id;
+    $("making-title").textContent = `Waking ${ev.exhibit.character || ev.exhibit.name}`;
+  } else if (ev.type === "storyboard") {
+    $("board-title").textContent = ev.title;
+    $("board").replaceChildren(...ev.shots.map((shot, i) => {
+      const card = el("div", { className: "card", id: "card-" + shot.id },
+        el("div", { className: "pic" }, el("span", { textContent: String(shot.id).padStart(2, "0") })),
+        el("p", { textContent: shot.narration }),
+        el("div", { className: "ticks" }, el("span", { className: "t-voice", textContent: "voice" }), el("span", { className: "t-video", textContent: "picture" })));
+      card.style.animationDelay = `${i * 60}ms`;
+      return card;
+    }));
+  } else if (ev.type === "shot") {
+    const card = $("card-" + ev.id);
+    if (!card) return;
+    if (ev.stage === "voice") {
+      card.querySelector(".t-voice").className = "t-voice ok";
+      card.querySelector(".t-voice").textContent = `voice ${ev.seconds.toFixed(1)}s`;
+    } else if (ev.status === "start") {
+      card.querySelector(".pic").classList.add("shimmer");
+    } else {
+      const pic = card.querySelector(".pic");
+      pic.classList.remove("shimmer");
+      pic.style.backgroundImage = `url("${base}${ev.thumb}")`;
+      card.querySelector(".t-video").className = "t-video ok";
+      card.querySelector(".t-video").textContent = ev.source === "generate" ? "picture" : `picture · ${ev.source}`;
+    }
+  } else if (ev.type === "done") {
+    S.source.close();
+    loadFilm(ev.manifest, {});
+  } else if (ev.type === "error") {
+    S.source.close();
+    fail(ev.message, ev.fallback);
+  }
+}
+
+function fail(message, fallback) {
+  const box = $("error");
+  box.hidden = false;
+  box.replaceChildren(el("span", { textContent: message }));
+  if (fallback) {
+    const play = el("button", { className: "ghost", textContent: "Play the saved film instead" });
+    play.onclick = () => loadFilm(fallback, { saved: true, failed: true });
+    box.append(play);
+  }
+  const back = el("button", { className: "ghost", textContent: "Back" });
+  back.onclick = () => show("capture");
+  box.append(back);
+}
+
+// ---------- 3. film ----------
+async function loadFilm(manifestUrl, { saved = false, failed = false }) {
+  const film = await (await fetch(manifestUrl, { cache: "no-store" })).json();
+  film.base = manifestUrl.slice(0, manifestUrl.lastIndexOf("/") + 1);
+  S.film = film;
+  S.exhibitId = film.exhibit.id;
+  const { app } = S;
+
+  $("banner").hidden = !saved;
+  $("banner").textContent = failed ? "Making a new film failed, so this is a saved one." : "This is a saved film.";
+  $("film-title").textContent = film.title;
+  const mock = Object.entries(film.modes).filter(([, live]) => !live).map(([name]) => name);
+  $("film-meta").textContent = [
+    film.exhibit.name, film.exhibit.museum, `${Math.round(film.duration)} s`,
+    app.styles[film.style], app.languages[film.language],
+    mock.length ? `mock: ${mock.join(", ")}` : "",
+  ].filter(Boolean).join(" · ");
+
+  $("strip").replaceChildren(...film.shots.map((shot) => {
+    const button = el("button", { id: "strip-" + shot.id, title: shot.narration }, el("img", { src: film.base + shot.thumb, alt: `Shot ${shot.id}` }));
+    button.onclick = () => { video.currentTime = shot.start + 0.05; video.play(); };
+    return button;
+  }));
+  $("facts").replaceChildren(...film.facts.map((fact) =>
+    el("div", { className: "fact" + (fact.used ? "" : " unused"), id: "fact-" + fact.id },
+      fact.text, el("a", { href: fact.source, target: "_blank", rel: "noopener", textContent: new URL(fact.source).hostname + " ↗" }))));
+  $("film-log").textContent = S.log.length && !saved ? S.log.join("\n") : film.shots.map((s) => `${s.id}. ${s.prompt}`).join("\n\n");
+
+  $("endcard").hidden = true;
+  $("captions").replaceChildren();
+  cueShown = null;
+  const video = $("video");
+  video.src = film.base + film.video;
+  show("film");
+  video.play().catch(() => {});  // autoplay may be blocked; the controls are there
+}
+
+let cueShown = null;
+function tick() {
+  const film = S.film, video = $("video");
+  if (film && !$("v-film").hidden) {
+    const t = video.currentTime;
+    const cue = film.captions.find((c) => t >= c.start && t < c.end) || null;
+    if (cue !== cueShown) {
+      cueShown = cue;
+      const line = el("span", { className: "line" });
+      if (cue) cue.words.forEach((w, i) => line.append(el("i", { textContent: w.w + (i < cue.words.length - 1 ? film.word_joiner : "") })));
+      $("captions").replaceChildren(...(cue ? [line] : []));
+    }
+    if (cue) $("captions").querySelectorAll("i").forEach((node, i) => node.classList.toggle("said", t >= cue.words[i].t0));
+    const shot = film.shots.find((s) => t >= s.start && t < s.end);
+    for (const s of film.shots) $("strip-" + s.id).classList.toggle("now", s === shot);
+    for (const f of film.facts) $("fact-" + f.id).classList.toggle("now", Boolean(shot && shot.fact_ids.includes(f.id)));
+  }
+  requestAnimationFrame(tick);
+}
+
+$("video").onplay = () => { $("endcard").hidden = true; };
+$("video").onended = () => {
+  const film = S.film, { app } = S;
+  const name = film.exhibit.character || film.exhibit.name;
+  $("end-title").textContent = `Hear ${name} tell it another way?`;
+  const choices = [el("button", { className: "chip", textContent: "Watch again", onclick: () => { $("video").currentTime = 0; $("video").play(); } })];
+  for (const [style, label] of Object.entries(app.styles)) {
+    if (style !== film.style) choices.push(el("button", { className: "chip", textContent: label, onclick: () => start({ style, lang: film.language, exhibitId: film.exhibit.id }) }));
+  }
+  for (const [lang, label] of Object.entries(app.languages)) {
+    if (lang !== film.language) choices.push(el("button", { className: "chip", textContent: label, onclick: () => start({ lang, style: film.style, exhibitId: film.exhibit.id }) }));
+  }
+  $("end-choices").replaceChildren(...choices);
+  $("endcard").hidden = false;
+};
+
+fetch("/api/state").then((r) => r.json()).then((app) => { S.app = app; renderCapture(); requestAnimationFrame(tick); });
+</script>
+</body>
+</html>
