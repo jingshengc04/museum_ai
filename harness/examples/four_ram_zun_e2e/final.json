@@ -1,0 +1,209 @@
+{
+  "exhibit_id": "adhoc-four-ram-square-zun",
+  "status": "NEEDS_HUMAN",
+  "title": "You Framed My Rams",
+  "duration_s": 15,
+  "photo": "photos/four_ram_zun.webp",
+  "keywords": [
+    {
+      "t_run": 5.09,
+      "stage": "kw_identify",
+      "type": "keywords_batch",
+      "label": "identify",
+      "keywords": [
+        {
+          "kind": "name",
+          "text": "Four-Ram Square Zun",
+          "basis": "photo"
+        },
+        {
+          "kind": "name",
+          "text": "四羊青铜方尊",
+          "basis": "photo"
+        },
+        {
+          "kind": "period",
+          "text": "Late Shang dynasty",
+          "basis": "photo"
+        },
+        {
+          "kind": "material",
+          "text": "bronze",
+          "basis": "photo"
+        },
+        {
+          "kind": "theme",
+          "text": "ritual wine vessel",
+          "basis": "photo"
+        },
+        {
+          "kind": "visual",
+          "text": "curled-horn ram foreparts",
+          "basis": "photo"
+        },
+        {
+          "kind": "visual",
+          "text": "flaring square mouth",
+          "basis": "photo"
+        },
+        {
+          "kind": "visual",
+          "text": "flanged square foot",
+          "basis": "photo"
+        },
+        {
+          "kind": "place",
+          "text": "National Museum of China, Beijing",
+          "basis": "photo"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "t_run": 87.14,
+      "stage": "kw_research",
+      "type": "keywords_batch",
+      "label": "research",
+      "keywords": [
+        {
+          "kind": "name",
+          "text": "Four-goat Square Zun",
+          "basis": "https://en.wikipedia.org/wiki/Four-goat_Square_Zun"
+        },
+        {
+          "kind": "period",
+          "text": "late Shang Dynasty",
+          "basis": "https://link.springer.com/rwe/10.1007/978-981-99-5009-6_10369"
+        },
+        {
+          "kind": "place",
+          "text": "Ningxiang County, Hunan Province",
+          "basis": "https://link.springer.com/rwe/10.1007/978-981-99-5009-6_10369"
+        },
+        {
+          "kind": "date",
+          "text": "April 1938",
+          "basis": "https://en.wikipedia.org/wiki/Four-goat_Square_Zun"
+        },
+        {
+          "kind": "theme",
+          "text": "largest bronze fang zun",
+          "basis": "https://link.springer.com/rwe/10.1007/978-981-99-5009-6_10369"
+        },
+        {
+          "kind": "person",
+          "text": "Jiang Jingshu",
+          "basis": "https://en.wikipedia.org/wiki/Four-goat_Square_Zun"
+        },
+        {
+          "kind": "place",
+          "text": "Tanheli site",
+          "basis": "https://link.springer.com/rwe/10.1007/978-981-99-5009-6_10369"
+        },
+        {
+          "kind": "measure",
+          "text": "400 silver dollars",
+          "basis": "https://en.wikipedia.org/wiki/Four-goat_Square_Zun"
+        },
+        {
+          "kind": "theme",
+          "text": "sacrificial ceremonies",
+          "basis": "https://govt.chinadaily.com.cn/s/202206/06/WS629d9cd4498e6a12c122e1df/bronze-vessel-with-ram-head-sculptures-masterpiece-from-the-shang-dynasty.html"
+        }
+      ],
+      "flags": []
+    }
+  ],
+  "image_jobs": [
+    {
+      "id": "zun_now",
+      "kind": "subject_view",
+      "endpoint": "fal-ai/nano-banana-pro/edit",
+      "input": {
+        "image_urls": [
+          "<visitor_photo>"
+        ],
+        "prompt": "From this photo, show the same square bronze zun exactly as it is now, from the same corner-on angle with one ram head facing the camera, alone and centred on a plain light grey background, even neutral light, no glare or reflections. Dark grey-green bronze with lighter grey highlights on raised edges: wide flared square mouth with tall hooked ridged flanges, narrower neck, four ram foreparts at the shoulder corners with large horns spiralling forward and down, fine scale and spiral patterns over the ram bodies, high square flanged foot. Whole vessel in frame with margin. Avoid: No text, labels, captions, watermarks, people, reflections of visitors, glass case, plinth, museum ceiling lights, other objects, second copies of the zun."
+      },
+      "purpose": "Identity reference for the exhibit as it is now.",
+      "est_usd": 0.15
+    },
+    {
+      "id": "detail_ram_head",
+      "kind": "detail",
+      "endpoint": "fal-ai/nano-banana-pro/edit",
+      "input": {
+        "image_urls": [
+          "<visitor_photo>"
+        ],
+        "prompt": "From this photo, show a close-up of the front ram head of the same square bronze zun, filling the frame, on a plain dark-neutral background, even soft light. Dark grey-green bronze: long narrow ram face with small eyes, large ridged horns curling in spirals around each side of the head, fine scale and spiral patterns on the neck and chest below, part of the flared flanged neck visible above. Avoid: No text, labels, watermarks, people, reflections, glass, plinth, other objects, glare."
+      },
+      "purpose": "Detail for a close shot on the ram head and its curled horns.",
+      "est_usd": 0.15
+    },
+    {
+      "id": "zun_in_place",
+      "kind": "environment",
+      "endpoint": "fal-ai/nano-banana-pro/edit",
+      "input": {
+        "image_urls": [
+          "<visitor_photo>"
+        ],
+        "prompt": "From this photo, keep the same angle and framing: the same dark grey-green square bronze zun with its flared flanged mouth and four ram heads with spiralling horns, standing on its white plinth in the dim warm gallery with small spotlights dotting the dark ceiling. Remove the glare, the reflections of visitors in the glass and the label card; the background stays softly lit and calm. Avoid: No readable text, label cards, signs, watermarks, visible people or reflected people, phones, glare, second copies of the zun."
+      },
+      "purpose": "Reference for the final shot of the exhibit in its hall.",
+      "est_usd": 0.15
+    }
+  ],
+  "existing_images_used": [],
+  "missing_images": [],
+  "video_requests": [
+    {
+      "endpoint": "bytedance/seedance-2.0/reference-to-video",
+      "image_urls": [
+        "<job:zun_now>",
+        "<job:zun_in_place>",
+        "<job:detail_ram_head>"
+      ],
+      "duration": "15",
+      "resolution": "480p",
+      "aspect_ratio": "16:9",
+      "generate_audio": true,
+      "prompt": "References: @Image1 is the Four-Ram Square Zun (copy its shape, pose and colour exactly; ignore its background); @Image2 is @Image1 on its white plinth in the gallery, visitor's corner-on view (setting reference only: architecture, light and space); @Image3 is a close-up of front ram head and curled horns, part of the Four-Ram Square Zun (@Image1).\nStyle: photorealistic documentary footage, natural light. Setting: Dim warm museum gallery, glass case, spotlights in dark ceiling.\nShot 1 (@Image3): extreme close-up through case glass, corner-on, slow push-in; A visitor's faint reflection raises a phone beside the horns; warm amber spotlight from above, dark blurred gallery behind. Cut to shot 2 (@Image1): close-up, corner-on, slightly below eye level, slow tilt up; A thin band of spotlight glides up the bronze edges; deep shadow between flanges. Cut to shot 3 (@Image2): medium wide, corner-on, visitor eye level, slow pull-back settling to stillness; Ceiling spotlights glow softly brighter above the white plinth; front ram facing lens, rams in profile either side.\nVoiceover, an unseen narrator, a man in his sixties, low grainy baritone, neutral English, slow, quietly amused: \"You photographed my rams as if untouched.\" \"In nineteen thirty-eight, a Hunan hillside gave me up.\" \"Look up. During the war, bombs destroyed me.\"\nSound: Hushed gallery room tone; one soft shutter click before the voice. Music: Sparse slow struck bronze bells, long metallic decay, fading to silence by the end.\nKeep it subtitle-free: no subtitles, captions, letters, numbers, logos or watermark anywhere. Only one Four-Ram Square Zun in any frame.",
+      "prompt_words": 252,
+      "direction_words": 228,
+      "prompt_parts": {
+        "refs": 55,
+        "style": 17,
+        "shots": 92,
+        "voice": 17,
+        "sound": 27,
+        "constraint": 20
+      },
+      "est_usd": 1.95
+    }
+  ],
+  "subtitles": [
+    {
+      "t_start": 1.0,
+      "t_end": 3.8,
+      "text": "You photographed my rams as if untouched."
+    },
+    {
+      "t_start": 5.0,
+      "t_end": 8.6,
+      "text": "In 1938, a Hunan hillside gave me up."
+    },
+    {
+      "t_start": 10.0,
+      "t_end": 13.2,
+      "text": "Look up. During the war, bombs destroyed me."
+    }
+  ],
+  "voice": "A man in his sixties, low grainy baritone, neutral English, slow, quietly amused.",
+  "music_style": "Sparse slow struck bronze bells, long metallic decay.",
+  "est_usd": {
+    "images": 0.45,
+    "video": 1.95
+  }
+}

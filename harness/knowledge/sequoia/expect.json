@@ -1,0 +1,12 @@
+{
+ "forbidden": [
+  "1891",
+  "eighteen ninety-one",
+  "diameter",
+  "metres across",
+  "meters across",
+  "felled in 1893",
+  "cut down in 1893"
+ ],
+ "why": "length free (user: 30 s is fine; use --user-input to force); felling year conflicts between text and caption; diameter is unsourced"
+}

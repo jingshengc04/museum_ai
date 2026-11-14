@@ -1,0 +1,15 @@
+{
+ "forbidden": [
+  "221",
+  "38 years",
+  "a baby",
+  "died alone",
+  "juvenile",
+  "lunge",
+  "only a calf",
+  "renamed",
+  "thirty-eight",
+  "two hundred and twenty-one"
+ ],
+ "why": "length free since v1.4 (15 s default, 30 s only if the second half adds a turn fact); bone count and pose are UNSOURCED; Dippy's 1979-2017 span invites arithmetic; no death/solitude/renaming in the pack"
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "endpoint": "bytedance/seedance-2.0/reference-to-video",
+    "image_urls": [
+      "<zun_now>",
+      "<zun_in_place>",
+      "<detail_ram_head>"
+    ],
+    "duration": "15",
+    "resolution": "480p",
+    "aspect_ratio": "16:9",
+    "generate_audio": true,
+    "prompt": "References: @Image1 is the Four-Ram Square Zun (copy its shape, pose and colour exactly; ignore its background); @Image2 is @Image1 on its white plinth in the gallery, visitor's corner-on view (setting reference only: architecture, light and space); @Image3 is a close-up of front ram head and curled horns, part of the Four-Ram Square Zun (@Image1).\nStyle: photorealistic documentary footage, natural light. Setting: Dim warm museum gallery, glass case, spotlights in dark ceiling.\nShot 1 (@Image3): extreme close-up through case glass, corner-on, slow push-in; A visitor's faint reflection raises a phone beside the horns; warm amber spotlight from above, dark blurred gallery behind. Cut to shot 2 (@Image1): close-up, corner-on, slightly below eye level, slow tilt up; A thin band of spotlight glides up the bronze edges; deep shadow between flanges. Cut to shot 3 (@Image2): medium wide, corner-on, visitor eye level, slow pull-back settling to stillness; Ceiling spotlights glow softly brighter above the white plinth; front ram facing lens, rams in profile either side.\nVoiceover, an unseen narrator, a man in his sixties, low grainy baritone, neutral English, slow, quietly amused: \"You photographed my rams as if untouched.\" \"In nineteen thirty-eight, a Hunan hillside gave me up.\" \"Look up. During the war, bombs destroyed me.\"\nSound: Hushed gallery room tone; one soft shutter click before the voice. Music: Sparse slow struck bronze bells, long metallic decay, fading to silence by the end.\nKeep it subtitle-free: no subtitles, captions, letters, numbers, logos or watermark anywhere. Only one Four-Ram Square Zun in any frame.",
+    "prompt_words": 252,
+    "direction_words": 228,
+    "prompt_parts": {
+      "refs": 55,
+      "style": 17,
+      "shots": 92,
+      "voice": 17,
+      "sound": 27,
+      "constraint": 20
+    },
+    "est_usd": 1.95
+  }
+]

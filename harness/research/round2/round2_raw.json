@@ -1,0 +1,655 @@
+{
+ "tally": [
+  {
+   "judge": "director",
+   "winner": "v1",
+   "confidence": "medium"
+  },
+  {
+   "judge": "visitor",
+   "winner": "v1",
+   "confidence": "medium"
+  },
+  {
+   "judge": "educator",
+   "winner": "v1",
+   "confidence": "medium"
+  }
+ ],
+ "judges": [
+  {
+   "per_criterion": [
+    {
+     "criterion": "Hook (first 2-3 s)",
+     "better": "B",
+     "why": "B opens on the visitor's own action: \"You had to go up a floor and step back just to fit all of me in.\" It speaks to the person holding the phone and matches the balcony photo. A's \"Twenty-five metres of me.\" is a bare number that only restates the size the visitor is already looking at. B's line is long, though, and runs to about 5 s."
+    },
+    {
+     "criterion": "Answers what a visitor wonders",
+     "better": "tie",
+     "why": "Both answer 'how big is it?' and then turn it into 'it was only young'. A also covers when and where it died and why it has its name. That answers more questions, but it buries the turn."
+    },
+    {
+     "criterion": "One idea",
+     "better": "B",
+     "why": "B holds to one idea throughout: huge, yet young (\"All of this — and I was young\"). A piles up length, youth, tonnage, life at sea, the date, the sandbar, the pose and the naming. Its ending (\"a future you can still shape\") switches to a second, sustainability idea."
+    },
+    {
+     "criterion": "Counterpoint",
+     "better": "A",
+     "why": "A's lines add things the picture can't show: \"Four and a half tonnes, just in bone\", \"Out there, I was blue, not bone\" and the 1891 date. In Segment 1, B's lines describe what is already in view (\"I measure just over twenty-five metres\"). B only adds hidden information with \"juvenile\"."
+    },
+    {
+     "criterion": "Truth",
+     "better": "B",
+     "why": "A uses the exact qualifier the quality bar bans: \"not finished growing\". It also shows a \"lone\" whale (the banned 'alone') and a flank \"lying motionless\" (implies death). It invents stained glass that is not in the facts, and \"I'm still diving\" leans on the unsourced dive pose. Everything B claims is sourced: \"just over twenty-five metres\" is 25.2 m, and \"a juvenile. Just a girl.\" is accurate. B's \"step back\" assumes a little about what the visitor did."
+    },
+    {
+     "criterion": "Renderability",
+     "better": "A",
+     "why": "Each of A's shots has one move, one action and detailed visual descriptions. B also keeps one move per shot, but its prompts are thin: \"The living whale glides slowly overhead\" never describes the whale, and the 6-11 s shot repeats itself. A video model may render a generic whale. Neither script puts text on screen. A's harbour shots each hold a single subject state."
+    },
+    {
+     "criterion": "Spoken quality and timing",
+     "better": "B",
+     "why": "A crams eight lines into 30 s, mostly fragments, and the delivery feels list-like. B has five lines with room to breathe and a clean setup and payoff (\"That number isn't the surprising part.\"). Its weak spots are the long opening line and the VO at 19.0 s starting just before the cut at 19.5 s."
+    },
+    {
+     "criterion": "Ending that lands and returns eye to object",
+     "better": "B",
+     "why": "B's last shot is framed from the balcony to match the visitor's photo, under \"Look up again. All of this — and I was young.\" That sends the eye straight back to the real skeleton and closes the single idea. A's stained-glass close-up and its line about the name are moving, but they bring in a new idea and an invented visual. Its \"Look up\" comes in the third-to-last shot, not at the end."
+    }
+   ],
+   "overall": "B",
+   "confidence": "medium",
+   "best_line_overall": "\"You had to go up a floor and step back just to fit all of me in.\" (Script B)",
+   "weakest_point_of_winner": "The Segment 1 lines mostly restate what the photo already shows (the length). The underwater shots are underspecified for a video model (\"The living whale glides...\" with no description of the whale), so the reveal shot could render as a generic whale.",
+   "reasoning": "Script A is the more cinematic and textured of the two: the tonnage line, \"blue, not bone\" and the Wexford date all add real counterpoint. But it fails the two bars a brand film for a museum can't afford to fail. It breaks truth: it uses the explicitly banned \"not finished growing\", adds a \"lone\" whale and a motionless flank that imply death, and invents stained glass. It also tries to hold too many ideas, ending on a sustainability pivot rather than its own turn. Script B is leaner, and its visuals are thinner. Still, it hooks on the visitor's actual balcony moment and sticks to one idea (huge, yet young). It stays inside the facts and ends on a shot matching the visitor's photo, which sends the eye back to the real skeleton. A director would fix B's thin shot prompts sooner than A's factual and structural problems."
+  },
+  {
+   "per_criterion": [
+    {
+     "criterion": "Hook (first 2-3 s)",
+     "better": "B",
+     "why": "B's line at 1.2s, \"You had to go up a floor and step back just to fit all of me in,\" speaks to what this visitor just did on the balcony. A's \"Twenty-five metres of me\" is a bare number. A's shot is also from the hall floor, not from where the visitor stood."
+    },
+    {
+     "criterion": "Answers what a visitor wonders",
+     "better": "tie",
+     "why": "Both answer 'how big is it?' and then give the surprise that she was young. A also says how she came to be here, with the date and Wexford, which a visitor might wonder about, but A has to crowd its lines to fit it in."
+    },
+    {
+     "criterion": "One idea",
+     "better": "B",
+     "why": "B keeps to one idea, 'all this, and I was young'. A piles up length, juvenile, 4.5 tonnes, 'blue, not bone', date, place, 'still diving' and the meaning of the name: seven beats in 30 s."
+    },
+    {
+     "criterion": "Counterpoint",
+     "better": "A",
+     "why": "A's lines and pictures each add something: 'Out there, I was blue, not bone' plays over the living whale, and the date plays over the harbour. B's \"From jaw to tail, I measure...\" is spoken over a jaw-to-tail drift, which only repeats the picture. B's underwater whale does illustrate 'juvenile' well."
+    },
+    {
+     "criterion": "Truth",
+     "better": "B",
+     "why": "A breaks the bar outright with \"not finished growing\", which is a forbidden added qualifier. Its logline adds \"cut short\", and the shot of her lying 'motionless' on the sand implies a death the facts don't state. B stays inside the facts: 'just over twenty-five metres' and 'a juvenile. Just a girl.'"
+    },
+    {
+     "criterion": "Renderable",
+     "better": "B",
+     "why": "B uses six simple shots with one move each. A is mostly fine, but its 9.5-15s shot has two moves ('drift alongside, then gentle tilt up') and its 22.5-26s crane needs faces and then a reveal. A also has more shots and more complex scenes to generate."
+    },
+    {
+     "criterion": "Spoken quality and timing",
+     "better": "B",
+     "why": "A's lines come every 2-3 s ('Twenty-five metres of me' at 1.2, then a new line at 3.4), which is rushed and list-like. B is paced in a natural, conversational way, though it leaves a long gap with no voice from about 10 s to 16 s."
+    },
+    {
+     "criterion": "Ending sends eye back",
+     "better": "B",
+     "why": "B ends on a shot matching the visitor's own photo from the balcony with \"Look up again. All of this — and I was young.\" That is a clean payoff on its one idea, though 'look up' slightly misfits a visitor who is on the balcony. A's \"Look up. I'm still diving\" is strong, but the line about the name that follows piles a second ending on top and weakens it."
+    }
+   ],
+   "overall": "B",
+   "confidence": "medium",
+   "best_line_overall": "\"You had to go up a floor and step back just to fit all of me in.\" (Script B)",
+   "weakest_point_of_winner": "The lines are thin and in places don't add to the picture. \"From jaw to tail, I measure just over twenty-five metres\" just describes a jaw-to-tail camera drift, and \"That number isn't the surprising part\" is a filler line. It also leaves about 6 s with no voice.",
+   "reasoning": "A has richer material and some lovely lines ('Out there, I was blue, not bone', 'Look up. I'm still diving'). But it breaks the truth bar in two ways. 'Not finished growing' is the exact kind of added qualifier the bar names. The motionless-on-sandbar shot, with 'cut short' in its logline, implies a death the facts don't give. It also crams seven ideas into 30 s with rushed VO. B is the script you can safely ship: its hook is tied to where the visitor stood, it has one clear idea, its facts stay accurate and its ending returns to the visitor's own view. Its weakness is lean, slightly redundant narration."
+  },
+  {
+   "per_criterion": [
+    {
+     "criterion": "Hook (first 2-3 s)",
+     "better": "B",
+     "why": "B's \"You had to go up a floor and step back just to fit all of me in.\" names exactly what this visitor just did on the first-floor balcony, which makes it personal and immediate. A's \"Twenty-five metres of me.\" is clean and fast but generic. It is a number, and it does not acknowledge the visitor."
+    },
+    {
+     "criterion": "Answers what a visitor wonders",
+     "better": "A",
+     "why": "A covers size, age, weight, the date and place of the stranding, and the name, so it touches every likely question, including \"why is it called Hope?\". B only covers size and youth and never says her name or where she came from, which is a real gap for a visitor standing in front of Hope."
+    },
+    {
+     "criterion": "One idea",
+     "better": "B",
+     "why": "B builds one turn: the length (\"just over twenty-five metres\"), then \"That number isn't the surprising part\", then \"I was a juvenile. Just a girl\", then the closing \"All of this — and I was young.\" A packs in eight separate facts (length, girlhood, tonnage, colour, date, sandbar, diving, naming), and the closing Hope line is a second idea grafted on, not the payoff of the first."
+    },
+    {
+     "criterion": "Counterpoint",
+     "better": "A",
+     "why": "A's lines mostly add what the picture can't show: \"Four and a half tonnes, just in bone\" over the ribs, the 1891 date over the harbour, \"Out there, I was blue, not bone.\" B's \"From jaw to tail, I measure...\" plays over a drift from jaw to tail, so the words just describe the shot. B also leaves about 8 s of silence (8-16 s) over the bones."
+    },
+    {
+     "criterion": "Truth / factual integrity",
+     "better": "B",
+     "why": "A's \"I was a girl, not finished growing\" adds exactly the qualifier the bar forbids (\"finished growing\"); the sources say only juvenile. A's visuals of a \"lone\" whale and a flank \"lying motionless\", plus \"cut short\" in its logline, push toward alone and died. B stays within the sources: juvenile, \"just a girl\", \"just over twenty-five metres\". Both lean on the mid-dive pose, but the brief states it as what the visitor sees, and A goes further with \"I'm still diving.\""
+    },
+    {
+     "criterion": "Renderability",
+     "better": "A",
+     "why": "A's shot prompts are rich and self-contained, with one move each and a defined subject (a slender young blue whale, ivory-cream bone, terracotta arches). B's prompts are thin and repetitive (\"From jaw tips along the spine toward the tail.\"), and \"the living whale\" is never described for the model. Neither has text on screen or two subject states in one shot. A's coloured stained-glass light is an unsourced visual detail, but it is only a visual."
+    },
+    {
+     "criterion": "Spoken quality and timing",
+     "better": "B",
+     "why": "B's five lines are conversational and well spaced, and the line \"That number isn't the surprising part\" works as a spoken pivot. A's eight lines come in quick bursts (about one every 3 s), which feels crowded for 30 s and leaves fragments like \"Morning, on a sandbar in Wexford Harbour.\" B's long silent stretch is its timing weakness."
+    },
+    {
+     "criterion": "Ending that lands and returns the eye",
+     "better": "B",
+     "why": "B closes on a wide from the first-floor balcony that matches the visitor's photo, with \"Look up again. All of this — and I was young.\", which sends the eye straight back to the real object from where they stand. A's \"They named me Hope — for a future you can still shape.\" is resonant and well sourced, but it ends on a stained-glass close-up of the skull rather than the visitor's view, and it changes subject at the last moment."
+    }
+   ],
+   "overall": "B",
+   "confidence": "medium",
+   "best_line_overall": "\"You had to go up a floor and step back just to fit all of me in.\" (B)",
+   "weakest_point_of_winner": "B leaves out the name Hope and the Wexford/1891 origin, both sourced and both things a visitor would wonder about. Its middle (8-16 s) is silent, and its one length line just describes the jaw-to-tail shot. Its shot prompts are also underspecified for a video model.",
+   "reasoning": "Judged strictly on factual integrity, A breaks an explicit rule. \"Not finished growing\" is a forbidden qualifier, and A's visuals and logline (\"lone\", \"lying motionless\", \"cut short\") add the implications of being alone and having died. A is richer and better at counterpoint and renderability, but it scatters eight facts and has no single spine. B is narrower and has weaknesses: it never says the name Hope, has a silent gap, and gives thin prompts. But it builds one clear idea (huge, yet young), opens with a hook that speaks to this visitor's actual balcony viewpoint, ends on the visitor's own framing, and says nothing beyond the sources. For a museum that will not let interpretation go beyond the evidence, B is the safer and more coherent piece. Adding the Hope line could be a revision."
+  }
+ ],
+ "diagnostics": [
+  {
+   "lens": "loop",
+   "findings": [
+    {
+     "title": "The 250-word Seedance cap is the one blocker left in all three runs, and most of the excess comes from the renderer and fixed text the writer cannot touch",
+     "severity": "high",
+     "evidence": "In all 9 S3 attempts (3 runs x 3) the request-length check fired. Hope went 350/410 -> 293/355 -> 271/325. Sophie went 333/328 -> 245/294 -> 254/250. Sequoia went 299 -> 250/360 -> 250/291. Per-part word counts for Hope's final attempt, segment 2 (08_s3_script, rendered with seedance.render): References 76, states note 22, Style+Setting 18, voice line 53, constraint line 17. That is 186 words of fixed text before any shot or sound, which leaves 64 words for 3 shots plus sound. Sequoia segment 2 references come to 81 words because seedance.py:53 `first = described.get(\"exhibit_now\")` only works when the exhibit_now image comes before the detail image. Sequoia's ref_assets are ['detail_rings','exhibit_now','hintze_balcony'], so the full subject_lock is pasted twice. 09_s4_review says: \"The @Image1 and @Image2 labels each repeat the full subject lock (about 60 words)\". The reviewer named the true owner in Hope 09_s4_review: \"Have the prompt builder name references briefly instead of pasting locks\". prompts/s3_script.md says \"Copy the asset plan's subject_lock and living_form_lock into the script unchanged\", so the writer is not allowed to shorten the lock. The cap has no hard source: research/round1_raw.json says \"no official recommended length ... Practical target ... ~120-250 words (inferred)\" and \"Do not ... re-describe what the reference images already show\". The cap also drags down scores. Hope 09 thinking: \"visual feasibility drops to a 2 because the blocking checks still fail\". Sequoia 09: \"segment 2 request still fails the word count, so visual feasibility drops to 3\". That single score alone fails min>=4.",
+     "root_cause": "Renderer/template fault (seedance.py:41 pastes the full 28-35-word lock into every binding, and the detail binding depends on reference order). On top of that, the check threshold measures text the writer does not control: quoted narration (about 20-30 words, already limited by word_budget) and fixed boilerplate. This is not a writer failure and not a genuine content conflict.",
+     "change": "One change to the request-length contract.\n(1) seedance.py render(): bind each subject by a short name instead of the full lock. For example `name = lambda t: ' '.join(t.split(':')[0].split()[:10])`, and use `lock = {\"exhibit_now\": name(script.subject_lock), \"detail\": name(script.subject_lock), \"living_form\": name(script.living_form_lock)}`. Better still, add `subject_name` and `living_form_name` (<=8 words) to AssetPlan and Script. Keep the full locks for asset-generation prompts only.\n(2) In the binding loop, iterate `sorted(seg.ref_assets, key=lambda a: assets[a].depicts in ('detail','environment'))` so primary subjects are bound first, but keep the @Image numbers from upload order.\n(3) checks.py:198: count only direction words, i.e. `len(re.sub(r'\"[^\"]*\"', '', prompt).split())`, because narration is already limited by word_budget. Keep MAX_PROMPT_WORDS = 250.\n(4) Replace the message \"(shorten shot visuals)\" with a per-part breakdown (references N / shots N / sound N / fixed N), so the writer cuts the part that is actually long.",
+     "expected_effect": "Simulated on the archived final attempts with a patched copy of seedance.py (short names plus order fix only), the counts become Hope 249/277, Sophie 254/228 and Sequoia 232/250. Adding (3) brings every final segment in all three runs to 250 or fewer direction words (Hope ~222/249, Sophie ~235/~196, Sequoia ~205/~230). Sophie's final attempt then has no remaining blocker: truth 5, every score >=4, only polish left, so it becomes PASS_WITH_OPEN_POLISH. Sequoia's only blocker goes away, and its visual_feasibility 3 is explicitly blamed on the word count. Hope still needs finding 2, but it gets much closer. Quality goes up, because the requests follow the research advice not to re-describe references, and writers stop cutting shot visuals down to 4 words."
+    },
+    {
+     "title": "The writer is blind to the request it is judged on, and the check message sends it to cut the wrong field, so shot content was gutted",
+     "severity": "high",
+     "evidence": "agent.s3_script (agent.py) never passes seedance.render output or prompt_words to S3. Only S4 gets <seedance_requests>. Hope 08_s3_script thinking: \"keeping in mind that the request builder assembles the prompt from the script fields ... trimming the opening visual to tiny visitors walking below\". In Hope the shot-visual word counts fell from (25,24,21) at attempt 0 to (4,5,6) at attempt 2, while the References line stayed at 63/76 words. The final visuals read \"Pale bone in soft daylight\", against S3's own rule to describe \"place, light, colour, texture\". The reviewer twice wrote complete replacement prompts (~160-205 words) that the writer cannot apply, because the prompt is produced by code. Convergence was slow: Hope fell about 14% per round and still missed by 21/75 words after 3 attempts.",
+     "root_cause": "Harness information flow. The writer cannot observe the metric it is graded on, and the check text (\"shorten shot visuals\") points at the wrong field. The writer did fix what it could each round, so this is not a case of the writer ignoring feedback.",
+     "change": "agent.py s3_script: on revisions, append `<rendered_requests>` holding json.dumps([seedance.render(previous, i) for i in range(len(previous.segments))]) together with the per-part word breakdown from finding 1. Add one sentence to prompts/s3_script.md: \"Each segment's request (references, shots, sound, excluding quoted narration) must stay at or under 250 words; the renderer adds about 60 fixed words; spend words on concrete visuals, not on repeating the action in the visual or on long sound lists.\" Also change the ShotSpec.visual description from \"at most 25 words\" to \"at most 15 words; do not repeat the action\", because 3 x (framing+camera+action+25-word visual) cannot fit beside the fixed overhead.",
+     "expected_effect": "The writer can bring a revision under the cap in one pass instead of shrinking it by about 14% per round. Shot visuals keep concrete detail. Together with finding 1, Hope-like runs should clear the cap by attempt 1, which leaves attempts for real polish."
+    },
+    {
+     "title": "Reviewer-supplied fixes are forwarded unvalidated and create the next round's blockers; polish is mixed into blocking rounds",
+     "severity": "high",
+     "evidence": "Sequoia 05_s4_review proposed segment-2 line 1 \"That work brought my rings back into view.\" Attempt 1 adopted it, and 07_s4_review then marked it unsupported (truth 1): \"the line came from my own previous fix\". The same review proposed \"Look up. Those rings are thirteen hundred years, uncovered.\" at 10.5s. That is 9 spoken words / 2.5 = 3.6s, ending at 14.1s, which fails the 14.0 tail check in 06_s3_script/checks.json. In Sophie, 05_s4_review's timing fix (start at 9.5s) would have overrun further, and 07 admits \"my earlier fix was wrong\". Sophie's polish item (grey-buff rock) was applied while blockers were still open. 09_s4_review: \"This change pushed the segment 1 request to 254 words, which is a new failure\" (it had been 245 and passing). run.py:118 builds feedback from `blocking + polish` with no ordering or gating.",
+     "root_cause": "Each fix created a new problem. The cause is reviewer strictness the other way round: the reviewer audits the writer's lines but does not check its own proposed lines against the facts or the timing math. The loop design adds to this by sending polish edits in the same round as blocking fixes, so a polish edit can break a hard check.",
+     "change": "(a) run.py:118: when `problems` or any blocking issue exists, send only `[check]` and `[blocking]` items. Send polish only in the round after a passing attempt, which the existing `ok and attempt > 0` branch already supports. (b) prompts/s4_review.md, step 3, add: \"Before proposing a replacement line, check it yourself: quote the cited fact's own verb (do not add back/again/still), and compute its end time as t_start + spoken words / 2.5; it must end at least 1 s before the segment ends.\" (c) Optional and cheap: after S3, run checks.script, and if only timing, subtitle or segment-count problems appear, re-ask S3 once at effort=low with only those problems before calling S4.",
+     "expected_effect": "This removes the oscillation seen in Sequoia (attempt 1 truth 1 came from the reviewer's own wording) and Sophie's regression from 245 to 254 words. Each revision round should then strictly reduce the number of blockers, so 3 attempts are enough."
+    },
+    {
+     "title": "TEXT_ON_SCREEN negation stops at the first comma, so negative lists in asset prompts are flagged as requests for text",
+     "severity": "medium",
+     "evidence": "Sequoia 04_s3_script/checks.json: \"asset 'sheet_realistic' prompt asks for text in the image\", \"asset 'exhibit_now' prompt asks for text in the image\". Re-running checks.TEXT_ON_SCREEN on the archived prompts matches 'captions' in \"No text, labels, panel numbers, captions, rulers, watermarks;\" and 'watermarks' in \"No text, labels, plaques, watermarks;\". checks.py:26 is `NEGATED = re.compile(r\"\\bno (?:text|...)[^.;,]*\")`, which stops at ','. The false positive then shaped the edits. The writer deleted the explicit negative lists, and 07_s4_review raised a polish item to strip detail_rings' list too: \"The checker flagged this same pattern on the other assets last round\". S3 itself tells the writer to ask for \"no text or people\" in asset prompts.",
+     "root_cause": "Check false positive (regex). It cost one blocking item and pushed the writer to remove useful negative constraints from image prompts.",
+     "change": "checks.py:26: `NEGATED = re.compile(r\"\\b(?:no|without) (?:text|lettering|labels?|captions?|logos?|watermarks?|subtitles?|signage|plaques?|annotations?)[^.;]*\", re.I)`, which consumes comma-separated negative lists up to '.' or ';'. Add a unit case with both Sequoia prompts.",
+     "expected_effect": "No spurious asset blockers. Writers can keep explicit 'no text, labels, captions' lists, which help nano-banana and seedream avoid lettering."
+    },
+    {
+     "title": "Pass rule ignores S1/S2 check problems: a regression failure (Sequoia 30 s vs expected 15 s) is invisible in the status",
+     "severity": "medium",
+     "evidence": "Sequoia report: \"s1: length chosen 30s; regression expectation for this exhibit is 15s\". run.py:83 `note(\"s1\", checks.material(...))` only logs it. passed() (run.py:32) sees only script problems, so this run could have printed PASS at 30 s. checks.script compares against sheet.duration_s, not expect.json. METHOD lists sequoia as thin, but S1 extracted 16 facts (richness 'medium') and justified 30 s with \"the forest-loss figures giving a strong closing turn\", which is the off-topic drift expect.json warns about (\"thin pack, one headline fact -> 15 s\").",
+     "root_cause": "Harness pass rule and reporting gap. It may also be a genuine expectation/prompt mismatch: the pack is richer than the expectation assumes.",
+     "change": "run.py: collect upstream problems with `upstream = [p for e in ctx['log'] if e['stage'] in ('s0','s1','s2') for p in e['problems']]`. Print the status as `PASS` / ... plus ` · REGRESSION_FAIL (n)` when upstream is non-empty, and write the list at the top of report.md. Do not feed these into S3 feedback, because the writer cannot change the length. Then decide deliberately between tightening s1_digest.md (\"facts about the wider forest are context, not the exhibit's arc\") and updating knowledge/sequoia/expect.json.",
+     "expected_effect": "A run can no longer count as a clean pass while failing its regression expectation. It also separates harness-level failures from script-level ones when comparing prompt versions."
+    },
+    {
+     "title": "Renderer cosmetic faults: empty sfx gives 'ambience; ; music', and action and visual are emitted as two sentences that the writer duplicates",
+     "severity": "low",
+     "evidence": "Hope 09_s4_review: \"the Sound line contains an empty '; ;'\". The cause is seedance.py:83 `f\"Sound: {_s(a.ambience)}; {sfx}; {music}.\"` with sfx=[] after the gasp was dropped. seedance.py:73 always renders `{action}. {visual}.`. Hope 07_s4_review quotes \"Camera glides from the jaw tips along the spine toward the tail. From jaw tips along the spine toward the tail.\" The voice line also renders as \"Voiceover, unseen narrator, A young woman...\" with a stray capital.",
+     "root_cause": "Renderer/template.",
+     "change": "seedance.py:83 -> `parts.append('Sound: ' + '; '.join(x for x in (_s(a.ambience), sfx, music) if x) + '.')`. seedance.py:73: omit `_s(s.visual)` when it is empty or when its words are a subset of the action's. Lower-case the first character of script.voice when splicing it after the comma.",
+     "expected_effect": "Requests are cleaner, with a few words saved and no reviewer issues spent on template artefacts."
+    },
+    {
+     "title": "Tail-timing check has no tolerance while the overlap check has 0.1 s",
+     "severity": "low",
+     "evidence": "Sequoia 06_s3_script/checks.json: \"ends at about 14.1s; the last line must finish by 14.0s\". 10.5 + 9/2.5 = 14.1. checks.py:193 `end > seg.duration_s - TAIL_S` has no slack, but the overlap check uses `+ 0.1`. Sophie's 15.3s was a real overrun. No NUMBERISH false positives appeared in any v1.2 attempt.",
+     "root_cause": "Check threshold slightly too tight relative to the 2.5 w/s estimate. In this case the overrun was caused by the reviewer's suggested line, not by the writer.",
+     "change": "checks.py:193: `if k + 1 == len(lines) and end > seg.duration_s - TAIL_S + 0.15:`. Keep TAIL_S = 1.0.",
+     "expected_effect": "Avoids blocking on estimation noise of 0.1 s while still catching real overruns like Sophie's 15.3 s."
+    }
+   ],
+   "keep": [
+    "Code decides the pass, not S4 (run.py:32 passed(): no check problems, no blocking, truth == 5, min score >= 4). The rule is sound; the problem is the inputs it is given (the word cap measured on renderer text).",
+    "The S4 truth audit worked. It caught 'in pieces' (Sophie, truth 1), 'again' and 'back into view' (Sequoia), and it flagged its own earlier wrong fixes. Keep the rule that any unsupported claim scores truth 1.",
+    "previous_issues_resolved tracking is honest and specific. There is no evidence of moved goalposts or rising strictness: polish counts fell and scores stayed level or rose across attempts. Keep the rule that the reviewer must not reverse its own requests.",
+    "S3 edits the previous script instead of redrafting. Narration stayed stable across attempts (Hope's lines barely changed) and earlier fixes held.",
+    "The v1.2 binding of separate subjects plus the line 'These are different states ... never in the same shot, hard cut, no morphing'. The living-whale/skeleton blocker from v1/v1.1 did not return.",
+    "Best-attempt ranking by (check count, blocking count, -truth, -min, -sum), and the PASS / PASS_WITH_OPEN_POLISH / NEEDS_HUMAN statuses.",
+    "Hard checks fed to both the writer and the reviewer. spoken_words year/number counting, head/tail timing, segment-count and subtitle checks caught real defects (Sequoia's missing segment 2 and empty subtitles; Sophie's 15.3 s overrun).",
+    "MAX_PROMPT_WORDS = 250 as a target, once it measures direction words the writer controls and the renderer stops pasting locks.",
+    "The full per-stage archive (request.json, thinking.md, checks.json, feedback.md). It is what made this diagnosis possible from files alone."
+   ]
+  },
+  {
+   "lens": "length",
+   "findings": [
+    {
+     "title": "S1 picks length from a chronology of the whole pack, but S2 then films a different, smaller story; 30 s is never re-checked, so S3 pads",
+     "severity": "high",
+     "evidence": "Across all 6 runs S1 has never chosen 15 s (hope v0/v1/v1.1/v1.2 = 11 facts, 30 s; sophie 33 facts, 30 s; sequoia 16 facts, 30 s against expect 15). Every duration_reason argues from the pack's timeline. Hope v1.2 01_s1_digest says 'beginning (the 1891 stranding), a turn (sold for £250, hung in the Mammal Hall from 1934, then replacing Dippy...)'. Sequoia's says '...with the forest-loss figures giving a strong closing turn'. S2 then drops that arc. In sequoia 03_s2_concept/thinking.md the forest-loss idea 'leans on too many facts and risky claims to keep'. Hope S2 chose 'Still Growing' with fact_ids [length, juvenile_female] and wrote 'It needs just two facts, so it fits thirty seconds without crowding'. Sophie chose 'Almost Whole' and rejected the journey concept because it 'needs many facts'. The padding shows in the scripts. Sequoia S3 attempt 0 wrote a single 15 s segment for a '30 s' film (checks: '1 segment(s) for a 30s film'). After the revise it split one fact over two lines, 'That work revealed my many rings.' / 'They show how long I lived.' (both [rings_revealed]), and used filler shots ('Light glides.', 'Light settles.'). It ran at 1.57 words/s against a 2.5 pace. Hope seg 2 has 'That number isn't the surprising part.' plus two consecutive lines both tagged [juvenile_female]. The same padding appears in v1 and v1.1 ('Look again.' / 'All of that… and I was only young.'). S4 still gave length_fit 4 in all three runs.",
+     "root_cause": "Prompt plus harness design. S1 chooses length before any concept exists, using 'a beginning, a turn and an end' with 'turn' left undefined, so a list of dates passes as an arc. S2 receives 'Film length: 30 seconds' as fixed. Its own rule ('15 s carries one idea; 30 s one idea with one turn. A concept that needs many facts is usually the wrong one') pushes it to choose 15-second-sized ideas and call one extra reveal a 'turn'. No stage or check ties the chosen concept back to the arc that justified 30 s. checks.material's length regression is only logged (run.py note('s1', ...)) and never fed back.",
+     "change": "(1) Replace prompts/s1_digest.md (full text in the next finding). S1 must name up to three through-lines, each with a spoken 'spine' and the length it needs, then take the film length from the lead through-line only. (2) prompts/s2_concept.md: replace the last two sentences ('Prefer focus over coverage: ... usually the wrong one.') with: \"The film length was set from the material's lead through-line (lead_line). At 30 seconds the chosen concept must tell that through-line, turn included, in whatever engine you like: a concept whose story fits in about 25 spoken words is a 15-second film, however uncrowded it would feel at 30. One more surprising fact is a reveal, not a turn. At 15 seconds any single idea will do, and the lead through-line is a suggestion, not a requirement. Never justify a length by how few facts a concept needs; prefer focus over coverage within the length you are given.\" (3) Structural option, to try as its own A/B after (2): add `duration_s: Literal[15, 30]` and `through_line: int` to schemas.Concept. In agent.s3_script/s4_review and checks.script, take the length from the chosen concept instead of sheet.duration_s, so a good 15-second concept is never stretched. Move the expect.json duration check to the chosen concept.",
+     "expected_effect": "Sequoia goes to 15 s: every through-line spine is about 20-25 words ('Under this shine was an inch of dust. Three conservators spent twelve weeks on me. Underneath: thirteen hundred years of rings.'), and the forest figures are context facts that cannot carry a turn. Sophie and Hope get 30 s only when the lead line is the journey (Wyoming hilltop → 70 donors → London, named for Sophie Herrmann; Wexford sandbar 1891 → £250 → Mammal Hall → Dippy's place, named Hope). That journey is then what S2 must film. The filler lines and fact-splitting disappear because the length matches the story actually told."
+    },
+    {
+     "title": "Exact replacement text for prompts/s1_digest.md",
+     "severity": "high",
+     "evidence": "Current prompt: 'Choose 30 only if the facts support a real arc: a beginning, a turn and an end.' Nothing defines a turn, nothing ties length to a single story, and 'be accurate and generous with material' plus 'List every usable fact' make the pack's size the model's proxy for richness. The schema field `richness` (thin/medium/rich) appears nowhere in the prompt. It is decorative and uncorrelated with fact count: hope gets 'rich' from 11 facts, sequoia 'medium' from 16, sophie 'rich' from 33.",
+     "root_cause": "The prompt's length rule asks about the pack ('the facts support an arc') instead of about one story. It gives no operational test, and the undefined 'richness' label invites a judgement by volume.",
+     "change": "Replace the whole file with:\n\nYou prepare the raw material for a very short film about one museum exhibit. A screenwriter will work only from what you hand over, so be accurate, never invent, and decide how long the film should be.\n\nYou get the exhibit's knowledge pack (each section ends with its source) and, when there is one, the visitor's photo.\n\nFacts. List every usable fact as a short plain statement with its source URL copied exactly from the pack. Give each separate claim its own fact so that every spoken line can cite exactly what supports it. Keep numbers, dates, tense and quoted words exactly as the pack has them; do not round, convert or combine them, and never work out new figures (durations between two dates, totals, ages). Leave out anything marked UNSOURCED, anything the pack says may no longer be true, and the appearance notes: those are for pictures, not for narration. Mark each fact about: \"exhibit\" when it is about this object's own story (what it was, its size, where it came from, what happened to it, why it is here), or \"context\" when it is general background (how a process works in general, world statistics, the species in general). How many facts there are says nothing about how long the film should be.\n\nConflicts. When the pack reports two versions of something (two counts, two dates), list the conflict and say which wording is safe. Also list anything a writer could easily confuse (a date that belongs to one event but not another).\n\nNo invention anywhere. The same rule covers everything else you write: through-lines, motifs, questions, the emotional core and the length reason. You may combine and contrast facts, but not add events, durations, causes, intentions, feelings or qualities the pack does not contain. Do not say an animal suffered, died alone, was lost, was the first, last or only, was found by chance, or was renamed, unless a fact says so, and do not give a person an age the pack does not give. When you interpret, put the interpretation in its own sentence beginning \"This suggests\" and keep every factual sentence exact. Leave out general knowledge about the species or period, even if true.\n\nVisitor questions. List the three to five questions a person standing in front of this object most likely has (is it real? how big was it? how did it get here? what was it like alive or in use? why is it called that?). If there is a photo, put first the question its framing suggests. Ask what a visitor would wonder, not what the pack happens to answer. For each, give the ids of the facts that answer it, or none if the pack cannot answer it.\n\nThrough-lines. Find one to three stories this object could tell about itself in one film. Each has a beginning, a turn and an end, each resting on exhibit facts (context facts may colour a story, but never carry its turn). A turn is a change in what the object is or means: from animal to specimen, from buried to displayed, from hidden to seen, from there to here. A list of dates is not a turn, and neither is one more surprising fact. For each through-line, write its spine: the fewest plain spoken sentences that tell the whole story, using only listed facts, with numbers written in words. Then give the length it needs. It is 15 if the spine fits in about 28 spoken words, or if there is no real turn. It is 30 only if the spine needs more than that because the turn carries the story into a second time or place that can fill its own 15-second segment.\n\nVisual motifs. Concrete things a camera could show: places, objects, light, movement, textures, including what the visitor can see in front of them right now. Never text, numbers, prices, labels or documents on screen.\n\nEmotional core. One sentence: the single thing about this exhibit most likely to move a visitor standing in front of it.\n\nLength. Choose the lead through-line: the one that best answers the visitor's first question and is most likely to move them. The film's length is the length that through-line needs, never the length the pack could fill. A big pack often makes a 15-second film. A small pack makes a 30-second one only if its best story truly has two halves. When unsure, choose 15. In one or two sentences, explain the choice by the lead through-line's spine, not by how much material there is.\n\nSchema (schemas.py): add `about: Literal[\"exhibit\",\"context\"]` to Fact. Replace `visitor_questions: list[str]` with `list[VisitorQuestion]`, where VisitorQuestion has `question: str` and `answer_fact_ids: list[str]`. Add a ThroughLine model with `name`, `beginning`, `turn` and `end` (str); `turn_fact_ids` and `fact_ids` (list[str]); `spine` (str, described as 'fewest spoken sentences telling the whole story, numbers in words, listed facts only'); and `needs_s: Literal[15,30]`. Replace `richness` with `through_lines: list[ThroughLine]` (1-3) and `lead_line: int`. Keep `duration_s` and `duration_reason`. Update run.py line 176 (prints sh.richness) and the report's visitor-question/story-material sections to the new fields. Archive the current file as prompts/archive/v1.2/s1_digest.md.",
+     "expected_effect": "The length decision becomes checkable and story-based. Sequoia's best spine is about 22 words with no exhibit-level turn beyond the reveal, so the film is 15 s. Hope's and Sophie's journey spines run about 45-55 words with a then/there to now/here turn that maps onto the two segments and the hard cut, so they get 30 s, which matches expect.json. Fact atomicity is kept for audit, while volume no longer reads as richness."
+    },
+    {
+     "title": "Add code checks that enforce the length rule and catch padding (S1, S2, S3)",
+     "severity": "high",
+     "evidence": "checks.material only verifies sources, digits and the expect.json duration, and its output is printed but not acted on ('s1: length chosen 30s; regression expectation for this exhibit is 15s' sat in the sequoia report while the run continued). Padding was invisible to every check: sequoia lines 4-5 both cite [rings_revealed], and hope seg 2 lines 2-3 both cite [juvenile_female]. Hope's S1 visual_motifs include 'A price of £250 written as on an old ledger' (text on screen), and no check covers motifs.",
+     "root_cause": "The harness has no consistency link between the S1 length, the chosen concept and the script's fact use. The text-on-screen regex is applied to concepts and assets but not to S1 motifs. S1 problems never trigger a retry.",
+     "change": "checks.material: (a) lead = sheet.through_lines[sheet.lead_line]. Add a problem if sheet.duration_s != lead.needs_s. (b) n = spoken_words(lead.spine). Add a problem if lead.needs_s == 30 and n <= 28 ('lead spine is n spoken words: a 15 s story'), and if lead.needs_s == 15 and n > 32. (c) Add a problem if needs_s == 30 and every id in lead.turn_fact_ids is an about=='context' fact, or turn_fact_ids is empty. (d) Add a problem for unknown ids in through_lines, visitor_questions or story fields. (e) Add a problem when _text_on_screen(motif) is true for any visual_motif. In run.py, if material() returns problems other than the expect.json one, rerun S1 once with them as feedback (never feed the expect.json value back: it is the regression oracle). checks.concepts: if sheet.duration_s == 30, add a problem when the chosen concept's fact_ids miss every id in the lead line's turn_fact_ids ('30 s film but the chosen concept drops the lead turn: it is a 15 s story'). checks.script: add a problem when two consecutive narration lines in a segment have the same non-empty fact_ids set ('two lines carry one fact: padding'), and add a problem when sc.duration_s == 30 and total spoken words < 40.",
+     "expected_effect": "Each check fires on these runs. Sequoia trips (b) or (c) at S1. Hope v1.2 trips the concept check ([length, juvenile_female] does not include the journey turn) and the consecutive-fact check. Sequoia's attempt 2 trips the consecutive-fact check, and attempt 0 (23 words) trips the 40-word floor. Hope's ledger motif is flagged before S2 can use it. A length mismatch is caught at S1 or S2, where fixing it costs one cheap call, instead of surviving three S3/S4 rounds."
+    },
+    {
+     "title": "S1 truthfulness: facts are clean, but S1's free-text fields add small inventions; the 'this suggests' marker is used as a blanket prefix",
+     "severity": "medium",
+     "evidence": "The fact lists are correct in all three runs: UNSOURCED items excluded (221 bones, lunge, diameter, 80-90%), numbers exact, 360 dropped from sophie digital_model, 'only Stegosaurus outside USA' excluded, the sequoia 1893/1891 conflict reported plus a good extra note that 1893 is the arrival year only, sophie 'over 300' given as the safe wording, and hope's 'do not say renamed' guard. Inventions appear in the other fields. Sequoia duration_reason: 'sits under dust for over a century' (the pack never says how long the dust lay; this conflates display_century with dust_inch). Sequoia story_material: 'outlasting a century of change outside' (unmarked) and 'kept for keepers not yet born' (adds intent). Sophie story_material: 'buried on a hilltop in Wyoming for 150 million years, she was found by chance' (neither the duration of burial nor 'by chance' is in the pack). Sophie emotional_core: 'This suggests the most moving thing: an animal that lay almost whole ... for 150 million years was found by chance ... carrying the name of a girl, Sophie' (the pack says 'daughter', with no age; one 'This suggests' prefix covers several unmarked claims). Hope: 'a single lost animal' ('lost' is a quality) and 'Hope is a skeleton of an actual whale' (an inference). There are minor tense rewrites: 'The skeleton weighs 4.5 tonnes' for 'The 4.5-tonne skeleton was sold', and '15 billion trees are being cut down every year'. Downstream, S3 rounded 25.2 m to 'just over twenty-five metres' and wrote 'Just a girl' / 'I was a juvenile when I swam', echoing the same anthropomorphising drift.",
+     "root_cause": "The prompt's no-invention list covers facts and 'story material' but names neither durations, chance and intent, nor the length reason. 'Mark it as yours' lets one marker at the front launder a whole sentence. 'Keep numbers exactly' does not mention tense.",
+     "change": "These are covered by the replacement prompt's 'No invention anywhere' paragraph: it extends the rule to the through-lines, questions, emotional core and length reason; adds 'durations, causes, intentions', 'was lost', 'was found by chance' and 'do not give a person an age the pack does not give'; requires each interpretation in its own sentence starting 'This suggests' with factual sentences kept exact; and adds 'tense' to the exact-wording rule. Optionally add an S4 instruction or check: flag a spoken number that is a rounded form of a cited fact number ('twenty-five' vs 25.2) unless the fact itself says 'about'.",
+     "expected_effect": "S2/S3 stop inheriting quiet S1 embellishments ('by chance', 'for 150 million years', 'a girl', 'under dust for a century') that the reviewer must otherwise catch line by line. The exact-number guarantee S1 already meets carries through to the spoken numbers."
+    },
+    {
+     "title": "Visitor questions are good, but they mix in pack-led questions and do not say which ones the pack can answer",
+     "severity": "medium",
+     "evidence": "Hope (with photo) is good: the first question comes from the framing ('Just how big is this whale? (The wide shot with tiny people beneath...)'), and 'What used to hang here before her?' is a real question the pack answers (Dippy). Sophie is good ('Is this a real skeleton, and how much of it is actually her?'). Sequoia (no photo) includes 'Why does the wood look so clean and glossy?', which follows the pack's conservation section rather than a likely first-time question, yet S2 built the chosen film on it ('Answers: Why does the wood look so clean and glossy?'). Sequoia's 'how did it end up in the museum?' cannot be answered from the pack (only 'since 1893'), and nothing marks it as unanswerable, so S2 could promise an answer it cannot source.",
+     "root_cause": "The schema has questions as bare strings. The prompt does not separate 'what a visitor wonders' from 'what the pack covers', and it does not ask for answerability.",
+     "change": "Use the VisitorQuestion {question, answer_fact_ids} schema and the replacement wording 'Ask what a visitor would wonder, not what the pack happens to answer. For each, give the ids of the facts that answer it, or none if the pack cannot answer it.' Add one line to S2: 'Answer a question whose answer_fact_ids are not empty; prefer the first one.' Add to checks.concepts: a problem if the chosen concept's answers_question matches a question with empty answer_fact_ids (fuzzy match on text, or add an `answers_question_index: int` to Concept).",
+     "expected_effect": "S2 targets questions the pack can actually answer, starting with the visitor's real first question. For sequoia that is age and rings, which supports the 15 s 'You're counting my rings' or the dust-to-rings film told at 15 s. Unanswerable questions no longer pull concepts toward invention."
+    },
+    {
+     "title": "S4 length_fit has no anchor for padding, so a 15 s story at 30 s scores 4",
+     "severity": "medium",
+     "evidence": "length_fit = 4 on all three v1.2 chosen scripts. The sequoia reviewer saw the padding and kept it: 'two short lines carrying one fact... Keep both lines, since they are true and give the breathing room'. In hope, 'That number isn't the surprising part.' and the repeated 'young' ending went unflagged in v1, v1.1 and v1.2.",
+     "root_cause": "prompts/s4_review.md line 20, 'length_fit: the narration breathes, and the chosen length suits the amount of story', rewards breathing room and never names padding.",
+     "change": "In prompts/s4_review.md replace that line with: \"length_fit: 5 = every line adds something the previous one did not and the film needs every second; 3 = one line only restates, delays or splits a fact ('That number isn't the surprising part', one fact spread over two lines), or a shot exists only to fill time; 2 or lower = the story could be told in one 15-second segment, so the film should be 15 seconds (say so as a blocking issue at the material stage, not a rewrite).\" Because a 30→15 change cannot be fixed by S3, run.py should treat an S4 issue tagged where='length' as needing S1/S2 to rerun at 15 s, or as NEEDS_HUMAN with that reason.",
+     "expected_effect": "The reviewer stops scoring stretched films 4 and reports length mismatches as a material-stage fault. This also gives the S1/S2 changes a second, independent signal in A/B comparisons."
+    },
+    {
+     "title": "Regression expectations for hope/sophie assume the journey is the lead story; make that explicit so the new rule does not 'fail' a valid 15 s choice",
+     "severity": "low",
+     "evidence": "Under the new rule the size-reveal through-line for Hope ('twenty-five point two metres, and I was a juvenile', about 12 words) and the completeness one for Sophie ('Almost Whole', about 27 words) are 15 s stories. Hope's photo-led first question (size) might make S1 pick the size line as lead and choose 15, which contradicts expect.json duration_s 30.",
+     "root_cause": "expect.json fixes a length per exhibit, not a length per lead story. The METHOD table says 'rich → 30 s', which encodes the old fact-volume rule.",
+     "change": "Keep expect.json duration_s, but document in METHOD.md section 3 and the expect 'why' that hope and sophie are 30 s because their strongest story is the journey (sandbar → hall / hilltop → London). Add an optional expect field `lead_line_hint` ('journey') that checks.material compares by fact ids: for hope the lead fact_ids must include stranding_date and hintze_unveiling or replaced_dippy, and for sophie found_2003 and arrived_2013 or named_sophie. In the S1 prompt's Length paragraph, the tie-break 'best answers the visitor's first question and is most likely to move them' should be kept as written. Do not weight toward 30.",
+     "expected_effect": "Regression failures will tell you whether S1 chose the wrong story or chose the right story at the wrong length. Those are different bugs."
+    }
+   ],
+   "keep": [
+    "S1's fact-level accuracy rules: copy source URLs exactly, keep numbers and dates as written, no derived figures (no '38 years' appeared in any Hope run), leave out UNSOURCED, may-no-longer-be-true and appearance notes. All three v1.2 fact lists are clean.",
+    "Atomic, one-claim-per-fact splitting with snake_case ids: S4's claim audit and the numbers-vs-cited-facts check depend on it. Only stop treating fact count as richness.",
+    "The conflicts section, including the extra 'easily confused' notes the model added on its own (sequoia: 1893 is the arrival year, not the felling year; no gap may be stated; no slice size). Also the safe-wording guidance (sophie 'over 300', hope 'named, not renamed').",
+    "The explicit banned-claims list (suffered, died alone, first/last/only, renamed) and 'leave out general knowledge'. Extend it rather than rewrite it.",
+    "When there is a photo, the photo-led first visitor question (Hope v1.2: size, from the wide framing).",
+    "Sending the photo to S1 and the visual_motifs field, which S1b and S2 use well (the dust/clean before-after and the visitor's own viewpoint).",
+    "checks.material's source and digit checks, and the expect.json duration regression check. Keep the expect value out of any feedback sent to the model.",
+    "One change at a time. Ship the S1 prompt with its schema and checks as one A/B (s1 variant), then the S2 wording, then the concept-owned duration as a separate step, comparing with --sample 2 on all three exhibits."
+   ]
+  },
+  {
+   "lens": "craft",
+   "findings": [
+    {
+     "title": "Narration captions the picture: almost every line is a 'fact' read over an image of that same fact, so counterpoint is near zero",
+     "severity": "high",
+     "evidence": "Across the three chosen scripts, 15 lines are 13 fact, 1 visible and 1 voice (report.md lines_by_kind: hope 3/1/1, sophie 4/0/0, sequoia 6/0/0). Sequoia seg1: 'Under this shine, there was once about an inch of dust' over 'top edge under thick matte grey dust; a gloved hand pulls a soft brush'; seg2 'That work revealed my many rings' over 'tightly packed glossy rings'. Sophie seg1: 'Most Stegosaurus skeletons are found with parts missing' over 'a few separate dark fossil bones lying far apart'; 'Mine lay almost fully joined' over 'A long row of joined dark vertebrae'; seg2 'My plates and tail spikes...' over 'Thin plates' / 'Tail spikes'. Hope: 'From jaw to tail, I measure just over twenty-five metres' over 'Camera glides from the jaw tips along the spine toward the tail'. S4 still scored counterpoint 4 on all three. The narrators were cast as 'gently amused' / 'faintly amused' but no line expresses it.",
+     "root_cause": "Prompt (s3_script.md): shots are planned to illustrate each line; the counterpoint rule is stated as an abstract principle ('Picture and words must not say the same thing') with a mute test that a literal illustration passes (the number is not visible, so the picture 'loses' nothing). There is no requirement for any voice line or for a specific image/line collision. Reviewer strictness (s4_review.md counterpoint anchor too loose) lets it through.",
+     "change": "prompts/s3_script.md, replace the paragraph starting 'Narration. English, first person...' through '...rewrite or cut it.' with:\n\"Narration. English, first person, spoken by the exhibit. Write the picture and the words as two separate tracks that meet only at the key moment. Rule of thumb: the shot under a line must NOT show the noun the line is about. If the line says dust, show the clean gloss; if the line says pieces, show her whole; if the line gives a length, show the people under it, not the bones being measured. Plan, for each segment, one collision: a single image that changes the meaning of the line over it (youth spoken over the full adult-sized skeleton, the sea spoken over bare bone, a century of dust spoken over a mirror-clean face). Name it in the shot's purpose. Test every line two ways: muted, does the picture still tell its half? Eyes closed, does the line still tell its half? If either half is a duplicate, change the shot, not only the line. At least one line per segment is kind voice and carries the narrator's attitude (a reaction, a confession, a joke at its own expense), with no claims; no voice line may be a line that only announces what comes next ('That number isn't the surprising part').\"\nAlso prompts/s4_review.md: change the counterpoint anchor to 'counterpoint: 5 only if no line names what its own shot shows and at least one image changes how its line is heard; a film where the picture illustrates each line is 2.'",
+     "expected_effect": "Shots stop being illustrations; each film gains one memorable image/line collision and at least two lines of personality, which is where 'spoken' and 'hook' scores currently cap at 4. Reviewer will start blocking literal captioning instead of passing it at 4."
+    },
+    {
+     "title": "Shot 'action' and 'visual' duplicate each other or degrade to stubs; this alone pushes 4 of 6 requests over the 250-word cap",
+     "severity": "high",
+     "evidence": "Hope seg1 rendered: 'Camera glides from the jaw tips along the spine toward the tail. From jaw tips along the spine toward the tail.'; seg2 'The living whale glides slowly overhead beneath the bright rippling surface. The whale glides overhead under the sunlit rippling surface.' Sequoia seg2 actions are stubs 'Light glides.' 'Light settles.' 'Daylight catches the rings.' Sophie seg1 actions are lower-case fragments ('fine dust drifts in the wind.'). Every run's final blocking issue is the word check (hope 293/355, sophie 254, sequoia 291); every S4 rewrite says 'merge each shot's action and visual into one clause'. Three revisions never fixed it because the writer re-fills both fields each time.",
+     "root_cause": "Schema/renderer + prompt: schemas.py has both action ('The one main motion') and visual ('What is on screen'), seedance.py line 73 concatenates '{action}. {visual}.' and s3_script.md asks for 'one main action, described as motion' and also a visual 'concretely and briefly', without saying the two are joined verbatim. The writer never sees the 250-word budget, only the reviewer does.",
+     "change": "Best fix is harness (render one sentence, or drop 'action' when its words overlap 'visual'), but in prompts/s3_script.md replace 'Describe what is on screen concretely and briefly (at most 25 words per shot visual): place, light, colour, texture, ...' with:\n\"The request builder prints each shot as: framing, camera. action. visual. — one after the other, so never repeat a word between them. action = the single thing that moves, as subject + verb + direction, 4 to 8 words ('dust drifts down through a skylight beam'). visual = the still contents of the frame, no verbs of motion, at most 15 words ('ribs against the bright glass roof, tiny visitors far below'). Never restate the camera move in either field. Budget: each segment's whole request must stay under 230 words, and the voice description, references and constraint line already take about 110, so the three shots together get about 90 words.\"",
+     "expected_effect": "Requests drop by roughly 40-70 words each (to ~180-220), removing the single blocking issue that left all three v1.2 runs at NEEDS_HUMAN; revision rounds can then be spent on craft instead of word trimming."
+    },
+    {
+     "title": "Renderer pastes the full subject lock twice when a detail reference is listed before exhibit_now",
+     "severity": "high",
+     "evidence": "Sequoia seg2 request: '@Image1 is a close detail (a close detail of the slice's rings) of A large round cross-section of giant sequoia trunk ... bark; @Image2 is A large round cross-section of giant sequoia trunk ... bark' (~60 words duplicated, request 291 words). ref_assets order was ['detail_rings','exhibit_now','hintze_balcony'].",
+     "root_cause": "Harness code, seedance.py render(): the detail branch looks up described.get('exhibit_now') before exhibit_now has been processed, so it falls back to the full subject_lock, then exhibit_now pastes it again. Also asset.view is wrapped as '(a close detail of ...)' producing 'a close detail (a close detail ...)'.",
+     "change": "seedance.py: bind references in two passes (non-detail assets first, then details pointing to the exhibit_now tag), or emit details as 'a close detail of the same subject as @ImageN' using the exhibit_now tag from seg.ref_assets regardless of order. Interim prompt rule in s3_script.md (Reference images paragraph): \"In ref_assets list the full current view of the exhibit before any detail of it, and write each asset's view as a short noun phrase ('rings near the bark'), not a sentence starting 'a close detail of'.\"",
+     "expected_effect": "Sequoia seg2 drops ~60 words to under 250 with no writer change; prevents the same failure on any future exhibit whose film opens on a detail."
+    },
+    {
+     "title": "Every film ends on an imperative 'Look up (again)' or an equivalent instruction; endings command instead of land",
+     "severity": "high",
+     "evidence": "Hope final line 'Look up again. All of this — and I was young.' (S2 ending 'Look up again. That's a whale who hadn't finished growing.'); Sequoia 'Look up. Thirteen hundred years of rings, uncovered.'; Hope concept 2 'Look again and tell me what I'm worth'; Sophie concept 2 'Count them.' Only Sophie's chosen ending ('The rest of what you see is me.') lands without an instruction, and it is the strongest line in the three films.",
+     "root_cause": "Prompt (s2_concept.md): 'The film should answer the question they actually have and make them look up at the real object again at the end' is read literally as a line to say; METHOD.md's '画面让观众抬头' meant the image should do it.",
+     "change": "prompts/s2_concept.md, replace 'and make them look up at the real object again at the end.' with: \"and leave them wanting to check the real object themselves. The picture does that work: the last shot matches what they will see when they lower the phone. The last line must not tell them to look, count, notice or imagine (no 'look up', 'look again', 'see', 'count them'); it states the thought that will be in their head when they do look, in eight words or fewer, ideally a reframe of something visible ('The rest of what you see is me.').\" In prompts/s3_script.md after 'The ending completes that idea; it does not open a new one' add: \"The last line is never an instruction to the viewer; it is the turned thought, short enough to hang in the silence after it, and at least 1.5 seconds of picture and sound follow it.\"",
+     "expected_effect": "Endings shift from stage directions to payoff lines (Hope e.g. 'All of this, and I was young.'), raising the ending score toward 5 and removing the template feel that would be obvious when four or six films play back to back in a 2-minute demo."
+    },
+    {
+     "title": "One-size template across three very different objects: 30 s, 2x3 shots, voiceover, sparse solo cello every time",
+     "severity": "medium",
+     "evidence": "All three chosen scripts are 30 s / 2 segments / 6 shots / realistic / voiceover. Music: hope 'Sparse solo cello with soft piano, slow and warm', sophie 'Sparse solo cello, slow low sustained notes, no percussion', sequoia 'Sparse low solo cello, slow sustained notes'. Sequoia expect.json requires 15 s ('thin pack, one headline fact'); S1 chose 30 s and S2/S3 padded it to six fact lines (narration words 47, 1.57 w/s) including a split fact ('That work revealed my many rings.' / 'They show how long I lived.'). Sequoia seg1 music 'holds a low note across the cut, no fade', violating the S3 rule to stop cleanly at the cut, and S4 missed it.",
+     "root_cause": "Prompts: s3_script.md gives no guidance on choosing music from the object's world, so the model defaults to the 'museum-poignant' cliche; s2_concept.md never asks whether the concept fits 15 s, it accepts S1's length (length decision itself is an S1 issue).",
+     "change": "prompts/s3_script.md, replace 'and a music direction. Describe one music style for the whole film and repeat it in both segments.' with: \"and a music direction drawn from the exhibit's own world and the concept's emotion, not a generic museum score: name instrumentation, tempo and one texture (for example sea: low synth swells and a single distant whale-like tone; quarry: dry plucked guitar, wind; workshop: no music, only brush and breath). Solo cello and 'soft piano' are banned as defaults; use them only if you can say why this exhibit needs them. 'No music' is often right for a 15-second film. Use one style for the whole film and repeat it word for word in both segments.\" prompts/s2_concept.md, append to the last paragraph: \"Before choosing, say whether the chosen concept fits in 15 seconds. If its idea needs only one fact and one image change, it is a 15-second film even if the material was rated 30; say so in your choice, and write the hook and ending lines to fit 25 words in total.\"",
+     "expected_effect": "Distinct sonic identity per exhibit (audio is generated by Seedance, so this is a free quality lever), and thin exhibits like the sequoia come out at 15 s with one tight idea, matching expect.json and the demo mix of 2x30 + 4x15."
+    },
+    {
+     "title": "Announcer and filler lines spend scarce seconds: hook-level energy collapses after line 1",
+     "severity": "medium",
+     "evidence": "Hope seg2 opens with 'That number isn't the surprising part.' (signposts the twist, carries nothing) then says the twist three ways: 'I was a juvenile. Just a girl.' ... 'and I was young.' Sophie's hook 'Most Stegosaurus skeletons are found with parts missing.' is a textbook sentence, not a hook (S2 version 'come out of the ground in pieces' was better and was flattened in revision). Sequoia 'Beneath it, cloudy old varnish and wax.' is a list item. Sophie seg1 line 'on a hilltop in Wyoming, USA' adds geography that serves no turn.",
+     "root_cause": "Prompt (s3_script.md 'Write for the ear') covers diction but not line economy; revision feedback about truth wording ('incomplete' vs 'in pieces') pushed the writer to the pack's literal phrasing because nothing tells it to keep the spoken rhythm while fixing truth.",
+     "change": "prompts/s3_script.md, append to the 'Write for the ear' paragraph: \"Every line must earn its seconds: no line that only announces what is coming ('here's the surprising part'), no saying the same point twice in different words, no place name or date unless the turn needs it. Say the twist once, as late and as short as possible. Keep the concept's hook and ending lines word for word unless a truth problem forces a change; when it does, change the fewest words and keep the rhythm and the concrete image ('in pieces', not 'with parts missing', if the fact allows it).\"",
+     "expected_effect": "Frees 3-6 seconds per film for silence and the collision image; keeps the strongest concept lines alive through revisions; raises 'spoken' and 'hook' from 4 to 5."
+    },
+    {
+     "title": "Concepts answer a second-order question or skip the living form the visitor came for",
+     "severity": "medium",
+     "evidence": "Sequoia chose 'Under the Dust', answering 'Why does the wood look so clean and glossy?', a question few visitors have; the age arrives only in the last line, and the 101-metre height (the scale shock) is dropped. 'You're Counting' answered the primary question and fitted 15 s. Sophie planned alive_restoration and sheet_living but the chosen film never shows her alive, so 'it was a real animal' (the emotional answer to 'is it real?') stays abstract. Hope is the only film whose concept answers the visitor's first question (size) and turns it (youth).",
+     "root_cause": "Prompt (s2_concept.md): 'Choose the concept that will work best for this visitor' plus 'most filmable' reasoning lets feasibility and novelty outrank the visitor's primary question; nothing asks the agent to rank visitor questions.",
+     "change": "prompts/s2_concept.md, insert before 'Write three concepts': \"First rank the visitor questions: the one almost everyone in front of this object has (usually size, age, or 'is it real?') comes first. At least two of your three concepts must answer that first question, and the third may answer a less common one only if its turn is clearly stronger. In your choice, name which question the film answers and why a visitor would rather have that answered than the first one, if it is not the first.\"",
+     "expected_effect": "Sequoia would land on age-through-rings at 15 s; future exhibits stop optimising for clever angles that miss what the visitor wonders, raising visitor_view from 4 to 5."
+    },
+    {
+     "title": "Shot planning leans on risky references (multi-panel sheet as sole reference, shots under 3 s, rules smuggled into 'setting')",
+     "severity": "low",
+     "evidence": "Sequoia seg1 uses only sheet_realistic (a five-panel grid incl. dusty and half-cleaned states) for all three shots, inviting grid layouts or multiple slices. Sophie seg2 shot 2 is 18.0-20.5 s (2.5 s) though s3 says 'at least three seconds' (checks.MIN_SHOT_S = 2.5 lets it pass). Hope seg2 setting repeats 'the living whale and the skeleton are different states, never in the same shot, no morphing', duplicating the renderer's own warning (S4 flagged it).",
+     "root_cause": "Prompt (s3_script.md) does not say a character sheet is an identity aid only, nor that setting is scene only; check threshold disagrees with the prompt.",
+     "change": "prompts/s3_script.md, add to the Reference images paragraph: \"A character or reference sheet with several panels is never the only reference for a shot; pair it with a single-view image of the same state, or plan a single-view asset. 'setting' names the place and light only, in under 15 words; never put production rules in it, the request builder adds them.\" Set checks.MIN_SHOT_S = 3.0 to match the prompt.",
+     "expected_effect": "Fewer Seedance failures from grid/duplicate artefacts; a further 15-25 words saved in two-state segments; prompt and checks agree."
+    }
+   ],
+   "keep": [
+    "Truth discipline: all three chosen attempts reached truth 5 with claim kinds and fact ids, and no forbidden figures (no '38 years', no felling year, no bone counts, no percentages). Do not loosen the fact/visible/voice rules or the qualifier ban while pushing for more voice lines.",
+    "The Hope hook 'You had to go up a floor and step back just to fit all of me in.' over a pull-back through the arch: the best moment across the three films; direct address built from what the photo shows. Keep sending the photo to S2/S3 and engine (e).",
+    "Sophie's ending 'The rest of what you see is me.' as the model ending: a reframe of what the visitor sees, no instruction, directly answers 'is it real?'.",
+    "S2 'Why this one' reasoning written from the visitor's side and the rule 'A concept that needs many facts to work is usually the wrong one' (Sophie and Hope choices both used 2-4 facts).",
+    "Cut design: putting the world jump at the segment cut with matched brightness (Hope bright glass roof -> sunlit sea surface) and near-still end frames.",
+    "Specific voice casting repeated verbatim in both segments (Hope's young woman with a gentle Irish lilt is a good, motivated choice).",
+    "Revision-edits-previous-draft rule: narration stayed stable across attempts and earlier truth fixes were not undone.",
+    "Pass/fail computed in code, not by the reviewer.",
+    "Closest to demo-ready: Sophie 'Almost Whole' (all scores >= 4, truth 5, one 254-word request 4 words over the cap; one trim from PASS). Hope 'Young Giant' is the better film (best hook, the only real image/line collision: youth spoken over a living whale, then over the adult-sized skeleton) and will overtake it once action/visual duplication and the announcer line are fixed. Sequoia is furthest: wrong length, literal captioning, a second-order question.",
+    "Single biggest craft gap: the words caption the pictures. Image and line are planned to show and say the same thing, there are almost no voice lines, and so the narrator's announced personality never appears."
+   ]
+  },
+  {
+   "lens": "render",
+   "findings": [
+    {
+     "title": "The renderer pastes the full lock into every @Image binding, so the 250-word check fails on every run and the writer cannot fix it",
+     "severity": "high",
+     "evidence": "All three v1.2 runs fail mainly on length. Hope runs/1114-173547-hope-v1.2: seg1 350/293/271 words and seg2 410/355/325 over 3 attempts, never under 250. Sequoia seg2 is 360/291. Sophie seg1 is 254. The S4 reviews (05/07/09_s4_review) give the same cause every time: \"@Image1 is still described with the whole subject lock (35 words)\". In sequoia seg2, @Image1 and @Image2 each carry the full ~30-word lock (\"@Image1 is a close detail (a close detail of the slice's rings) of A large round cross-section...\"). checks.py:199 tells the writer to \"shorten shot visuals\", but S3 is told to copy the locks unchanged, so the writer has no lever. Research (practice.prompt_findings, image-first) says: do not re-describe what the reference already shows; spend the words on motion, camera and sound.",
+     "root_cause": "harness code: seedance.py render() binds exhibit_now/living_form/detail by pasting script.subject_lock / living_form_lock. The check message in checks.py points at the wrong field. CHANGELOG lesson: a blocking issue that survives every revision is a template bug.",
+     "change": "schemas.py Asset: add `label: str = Field(description=\"2-5 word name used in the video prompt, e.g. 'the whale skeleton', 'the living whale', 'the hall', 'the dusty slice'\")`. seedance.py: delete the `lock` dict and bind by label plus role:\nROLE = {\"exhibit_now\": \"copy its shape, pose and colour exactly; ignore its plain background\", \"living_form\": \"copy its body shape, colours and markings; ignore its background\", \"environment\": \"setting reference only: architecture, light and space\"}\nlabel = lambda a: _s(getattr(a, 'label', '') or a.view)\nbinding: exhibit_now/living_form -> f\"{tag} is {label(a)} ({ROLE[a.depicts]})\"; detail -> f\"{tag} is a close-up of {label(a)}, part of {described.get('exhibit_now', 'the exhibit')}\"; environment -> f\"{tag} is {label(a)} ({ROLE['environment']})\"; second view of an already-described subject -> f\"{tag} is another view of {described[a.depicts]}\".\nThe locks stay in S1b image prompts only (that is where identity is fixed). checks.py:199: change the message to f\"segment {i} request is {n} words (cap {cap}); longest parts: bindings {b}, shots {s}, voice {v}, sound {so}\", using a word breakdown returned by render() as `prompt_parts`. Set MAX_PROMPT_WORDS = 220.",
+     "expected_effect": "Removes 30-70 words per request (two locks in Hope seg2, two in sequoia seg2). Combined with the shot de-duplication below, typical requests come out at about 160-200 words, so the length failure (one of the blocking issues in every v1.2 run) goes away without any writer change. Identity comes from the images, which is what Seedance actually copies."
+    },
+    {
+     "title": "Each shot is printed as action plus visual, and the two restate each other; Seedance gets the same instruction twice",
+     "severity": "high",
+     "evidence": "Hope seg1 shot 2: \"Camera glides from the jaw tips along the spine toward the tail. From jaw tips along the spine toward the tail.\" Sequoia seg2: \"slow push-in from the bark edge toward the centre. Light glides. Cinnamon-red bark giving way to...\"; \"static. Light settles.\". Sophie seg1: \"slow push-in. fine dust drifts in the wind.\" (lower-case after the full stop). S4 flags the duplication in every Hope and Sequoia review.",
+     "root_cause": "schema plus prompt: ShotSpec has action, and also visual 'what is on screen, at most 25 words', with no rule against overlap. The renderer prints both, joined by '. ', without deduplicating or capitalising.",
+     "change": "schemas.py ShotSpec.visual description: \"Optional, at most 15 words: composition, light or colour that the action does not already say. Never repeat the action or describe the exhibit's shape/colour (the reference shows it). Empty is fine.\" S3 prompt, replace \"(at most 25 words per shot visual)\" with: \"action is the one motion in the shot, written as a full clause ('the camera pulls back through a terracotta arch until the whole skeleton fits'); visual adds only light, colour or composition that the action does not say, at most 15 words, often empty.\" seedance.py shot line: body = _s(s.action); if s.visual and _overlap(s.visual, s.action) < 0.5: body += '; ' + _s(s.visual)[0].lower() + _s(s.visual)[1:], where _overlap = share of content words of visual found in action. Print f\"{lead}{refs}: {_s(s.framing)}, {_s(s.camera)}; {body}.\" so the clause after the camera is never a sentence fragment starting in lower case.",
+     "expected_effect": "About 10-25 words saved per shot, and one clear instruction per shot (camera then action), which follows the official per-shot order (camera, then action, then space, then audio). Lower risk of Seedance reading the repetition as two separate events or an extra cut."
+    },
+    {
+     "title": "Voiceover lines sit in one block after all the shots, far down the prompt and not tied to any shot",
+     "severity": "high",
+     "evidence": "Every request puts every quoted line after the third shot, ~180-250 words in: \"Voiceover, unseen narrator, A young woman in her early twenties, ...: \\\"You had to go up a floor...\\\" \\\"From jaw to tail...\\\"\". Research: the first instructions are followed most reliably, so front-load the binding and the narration (verified implications_for_script). fal and the official guide: keep lines short and split speech across cuts, one sentence per cut (\"Shot 1 line: ... Cut to detail. Shot 2 line: ...\"). The per-line t_start (1.2 s, 8.0 s) and the head-silence and tail rules are never passed to Seedance, so it may start speaking at 0 s or pile all lines into the first shot. Lower-case 'A young woman' after a comma also produces a malformed sentence.",
+     "root_cause": "seedance.py: narration is rendered as one concatenated block after the shots. Line timing is in the schema but not in the request.",
+     "change": "seedance.py: (1) put a narrator line right after the bindings/style: f\"Narration: an off-screen voiceover, {_s(script.voice)[0].lower()+_s(script.voice)[1:]}. No one on screen speaks or moves their lips. No speech in the first second; the last words end a second before the clip ends.\" For on_screen: f\"The {living label} speaks on screen in {voice}.\" (2) Give each line to the shot in which it starts: shot_of = max(i for i,s in enumerate(seg.shots) if s.t_start <= l.t_start + 1e-6), and append to that shot: f' Voiceover: \"{l.text.strip()}\"' (on_screen: f' It says: \"...\"'). (3) Delete the old trailing narration block. S3 prompt, add to Narration: \"Start each line inside the shot it belongs to and keep it within that shot; one or two short sentences per shot.\" checks.py: flag a line whose spoken end (t_start + words/2.5) passes its shot's t_end by more than 0.5 s.",
+     "expected_effect": "The narration moves into the first ~60% of the prompt and lines up with the cuts, which is the pattern Seedance documents for timing speech. That gives better word-for-word delivery and sync, less chance of a line being dropped at the end of a long prompt, and the one-second head and tail silence is requested rather than only checked."
+    },
+    {
+     "title": "Multi-panel character sheets and multi-state sheets are planned as Seedance references (twin risk), and the state shown contradicts its binding",
+     "severity": "high",
+     "evidence": "S1b prompt: the character sheet \"is the identity reference for every shot that shows the living form\". Hope 02_s1b_assets plans sheet_realistic (six whales, a redraw of a labelled sheet) and reuses the existing labelled id, which S4 marked blocking: \"<sheet_realistic> could therefore pull the version with the HOPE/FRONT/CALM labels... six copies of the whale, which invites duplicates\". Sequoia seg1 passes sheet_realistic (a five-panel grid: front, side, 3/4, dusty, half-cleaned) as its only @Image1, bound as \"glossy warm reddish-brown cut face\", while the shots ask for thick grey dust and a half-clean face. Research (official, practice.prompt_findings): \"multi-view or three-view sheets get read as different subjects and cause duplicates ('twins')\"; object multi-view is fine only when each image is one view.",
+     "root_cause": "S1b prompt wording (sheets as video references, no per-state images, ids reused) plus seedance.py (binds by depicts and never by the asset's own state).",
+     "change": "S1b prompt, replace the sentence \"It is the identity reference for every shot that shows the living form.\" with: \"A sheet is never sent to the video model. From it, plan one single-view crop, the full side view alone on the plain background, with id '<sheet id>_side'. That crop is the identity reference for living-form shots.\" Add: \"If the story needs the exhibit in another state (dusty, half-cleaned, in the ground, being excavated), plan one separate single image per state, same angle and framing as the exhibit-now view, named for the state (slice_dusty, slice_half_clean).\" Add: \"Never reuse an existing image's id for a new image; a fixed version gets a new id (sheet_realistic_clean).\" S3 prompt, Reference images: \"Never use a character sheet or any multi-panel image as a reference; use its single-view crop. A shot that shows the exhibit in another state uses that state's image.\" checks.py: problem if a ref_asset's S1b kind is character_sheet, or if the id matches an existing asset with has_text_labels=true.",
+     "expected_effect": "Removes the most likely visual failure Seedance has (duplicate whales or slices in frame), stops the labelled sheet leaking text, and makes sequoia seg1 renderable: the dusty and half-clean shots get references that show those states instead of a glossy grid."
+    },
+    {
+     "title": "No in-place view of the exhibit: S3 invents empty-hall plates, and the final 'match the visitor's view' shot has to composite a grey-background subject into a hall with the subject removed",
+     "severity": "medium",
+     "evidence": "S1b's standard set has no environment image. S3 generates hall_balcony (\"Hintze Hall from first-floor balcony level, without the whale\"), hintze_balcony (\"the empty upper balcony\"), quarry_fragments and excavation_bones with no S1b rules. The binding then reads \"@Image2 is Hintze Hall... without the whale\", which can be read as 'no whale in the shot'. Sophie S4 (05_s4_review): \"The only reference is a studio shot on a light grey seamless background... the model may render a grey void instead.\" The concept's ending is always 'the real exhibit from the visitor's photo angle', yet the visitor's photo (which already shows exactly that) is never a reference.",
+     "root_cause": "S1b prompt (standard set is missing an in-situ view) plus seedance.py (environment bound by view text, with no role).",
+     "change": "S1b prompt, add item 5: \"In-place view (when a visitor photo exists): the visitor's photo cleaned up, with the same angle and framing, the exhibit in its hall, glare removed, any signs and readable text removed, people kept small or removed. It is the reference for the final shot the visitor matches when they look up. Without a photo, plan an environment image of the place with the exhibit in it, never an 'empty' version.\" Also add: \"Give every image a 2-5 word label.\" S3 prompt: \"The final shot uses the in-place view as its reference.\" seedance.py: environment binding role \"setting reference only: architecture, light and space\" (see finding 1), and never print 'without the X'.",
+     "expected_effect": "The ending shot is anchored to a real image of the visitor's own view, so the screen-to-object match works and there is no grey-void or 'hall without whale' ambiguity. The plates S3 used to invent become planned assets that follow the no-text, no-people rules."
+    },
+    {
+     "title": "Sound block: per-shot effects are detached from their shots, the join can be empty ('; ;'), music is restated per segment and can be told to run across the cut, and end_frame is never sent",
+     "severity": "medium",
+     "evidence": "Hope final seg1 per S4 09: \"the Sound line contains an empty '; ;'\" (empty sfx list). The Sound line comes after the shots as \"ambience; sfx; music; ending clause\", e.g. \"Sound: Large stone hall: ...; a child's distant gasp...; Sparse solo cello...; ends on one held cello note...\". Sequoia seg1 music: \"holds a low note across the cut, no fade\". S4 (05) asked for this, which contradicts S3's rule and is impossible across two separate generations. Research: narration clips often end with clicks or cut-off noise, so fade in post. Segment.end_frame (\"Near-still low-angle view of pale ribs...\") appears in no request.",
+     "root_cause": "seedance.py (sound join, end_frame unused), schema (music lives per segment, no per-shot sfx field), S4 prompt (does not know the cut constraint).",
+     "change": "schemas.py: Script.music_style: str (\"one music style for the whole film, or 'no music'\"), Segment.music_cue: str (\"how the music opens or ends in this segment\"), ShotSpec.sfx: str = \"\" (\"at most one sound tied to this shot's action\"). seedance.py: after each shot's action, add f\"; sound: {_s(s.sfx)}\" when set. Sound line: \"Sound: \" + \"; \".join(p for p in [_s(a.ambience), *map(_s, a.sfx)] if p) + f\". Music: {music_style}, {cue}.\" (or \"No music.\"). On the last shot of every non-final segment, add f\"End on a near-still image: {_s(seg.end_frame)}; the music has faded out by then.\" S4 prompt, add: \"The two segments are separate generations joined by a hard cut: never ask for music, speech or a camera move to continue across it; segment 1's music ends or fades before its last second.\" S3 prompt Sound paragraph, add: \"Never let the music hold across the cut.\"",
+     "expected_effect": "Effects land on the action they belong to (Seedance's own per-shot order), with no malformed lines. The music style is identical in both requests by construction. Segment 1 ends on a still, quiet frame that hard-cuts cleanly, and the reviewer stops undoing that rule."
+    },
+    {
+     "title": "Setting and state lines are duplicated, and the states warning does not name which images it means",
+     "severity": "medium",
+     "evidence": "Hope seg2 says it twice: \"These are different states of the subject: never show them in the same shot...\" and, in the setting, \"...back to Hintze Hall balcony level; the living whale and the skeleton are different states, never in the same shot, no morphing.\" S4 (07) flags it. Settings also carry two places joined with 'then' (\"Open sea just below a sunlit surface, then one hard cut back to...\").",
+     "root_cause": "S3 prompt (no length or content rule for setting) plus seedance.py (generic states sentence).",
+     "change": "S3 prompt Structure: \"setting: the place in at most 12 words; never restate rules (states, no morphing, no text) because the request builder adds them.\" seedance.py: replace the generic states sentence with one that names the tags: f\"{tag_living} ({label_living}) and {tag_now} ({label_now}) never appear in the same shot: hard cut between them, no morphing or transformation.\" Also change the style line to f\"Style: {look}.\" with look = \"photorealistic documentary footage, natural light\" (drop 'cinematic', a mood word the fal guide says renders nothing).",
+     "expected_effect": "Saves 15-30 words and gives Seedance an unambiguous rule tied to specific images, which lowers the risk of a fleshy skeleton or a morph in the mixed-state segment."
+    },
+    {
+     "title": "The constraint line uses generic wording; use the official phrasing and name the subject",
+     "severity": "low",
+     "evidence": "Every request ends \"No subtitles, no on-screen text or lettering, no logos, no watermark, no duplicate copies of the subject.\" Research (official appendix, reported second-hand): 'Keep it subtitle-free; avoid generating any text or subtitles'; the anti-twin line is 'Keep only a single corresponding [object] in the same frame'. The model adds subtitles unprompted, especially when there is narration.",
+     "root_cause": "seedance.py constraint string",
+     "change": "seedance.py: parts.append(f\"Keep it subtitle-free: no subtitles, captions, letters, numbers, logos or watermark anywhere. Only one {label of the main subject} in any frame.\"). Keep it as the last line.",
+     "expected_effect": "Constraints follow the documented wording and are specific ('only one whale skeleton'). This is cheap and lowers the subtitle and twin risk, which is highest when narration is on."
+    },
+    {
+     "title": "Voice continuity across the two 15 s generations rests only on repeating the text; add an optional voice-chain A/B",
+     "severity": "low",
+     "evidence": "The voice description is repeated verbatim (good), but 2.0 has no seed and community reports say voices are 'recognisably similar, not identical'. Research (official tip, practice.audio): pass the same voice sample as @Audio1 and say 'in the voice of @Audio1'; one practical option is clip 1's narration as @Audio1 for clip 2. Unverified whether @Audio1 is copied as content or used only as timbre (still_open).",
+     "root_cause": "seedance.py has no audio_urls path",
+     "change": "seedance.py: env flag SEEDANCE_VOICE_CHAIN=1. When it is on and index > 0, add \"audio_urls\": [\"<segment1_voice_clip>\"] (≤15 s, voice only) and change the narrator sentence to f\"Narration: an off-screen voiceover in the voice of @Audio1 ({voice}).\" Keep the default off until an A/B on the cheap tier (mini, 480p, 5 s) shows whether the clip is only matched for timbre and not replayed.",
+     "expected_effect": "Gives a measured route to a consistent narrator while Seedance still produces all the audio, without committing to an unverified behaviour."
+    },
+    {
+     "title": "Camera angle and distance in shots must fit the reference and the shot length",
+     "severity": "low",
+     "evidence": "Hope seg2 shot 1, \"wide, looking up from below\", uses alive_underwater, which is a three-quarter side view. S4 (07): \"Seedance tends to drift from the reference, or to warp the whale's shape, when the angle differs this much.\" Hope seg1 shot 2 drifts jaw to tail along 25 m in 5 s (S4 09: \"forces a fast lateral move... motion blur\").",
+     "root_cause": "S3 prompt wording",
+     "change": "S3 prompt Shots paragraph, add: \"Frame each shot within about 45 degrees of the angle its reference image shows; for a different angle, the asset plan needs a new view. A camera move covers only what can be travelled slowly in the shot's length (a drift over the skull in five seconds, not jaw to tail).\"",
+     "expected_effect": "Fewer warped subjects and fewer fast moves that Seedance renders as blur or as an unplanned cut."
+    }
+   ],
+   "keep": [
+    "Separation of what the agent decides (schemas.Script) from how it is written for Seedance (seedance.py), and S4 seeing the rendered request: this is how every template bug in v1, v1.1 and v1.2 was found.",
+    "bytedance/seedance-2.0/reference-to-video, duration as a string \"4\"-\"15\", 720p, 16:9, generate_audio true, no seed, no 1080p, no timecodes in the prompt (only a soft hint).",
+    "@ImageN in upload order, each image bound once, tags reused in shots; at most 4 references per segment.",
+    "'Shot 1 ... Cut to shot N' in event order, 2-3 shots of at least 3 s per 15 s segment, exactly one camera move and one action per shot, and the exhibit itself never moves.",
+    "Spoken lines in English double quotes, numbers and dates in words, 2.5 words/s, at least 0.8-1 s of opening silence, the last line ending at least 1 s before the segment ends, and the checks that enforce this.",
+    "Identical voice description repeated verbatim in both segments, and the single music style repeated in both.",
+    "Hard cut between the two generations, with the big now/then jump placed at the cut, and the end_frame idea (it now needs rendering).",
+    "The v1.1/v1.2 rule that different subject states (living form vs exhibit) are bound separately, never share a shot, and carry an explicit 'no morphing' line; the checks.py mixed-state check.",
+    "Explicit sound brief in every request, with 'no music' when none is wanted.",
+    "Constraint line last: subtitle-free, no text, logos or watermark, no duplicate subject.",
+    "S1b rules: one subject alone, even light, no text, people or glass in reference prompts; existing images reused by id; reconstruction marked as artistic.",
+    "Pass/fail computed in code, best attempt kept, and the lesson that a blocking issue surviving every revision points at the template."
+   ]
+  }
+ ],
+ "synthesis": {
+  "changes": [
+   {
+    "priority": 1,
+    "title": "Renderer binds references by a short name, not by pasting the full lock, and binds them in an order-independent way",
+    "kind": "code",
+    "file": "schemas.py, seedance.py, prompts/s3_script.md",
+    "edit": "schemas.py: add to AssetPlan and Script `subject_name: str = Field(description=\"2-6 word name of the exhibit as it is now, e.g. 'the whale skeleton', 'the sequoia slice'\")` and `living_form_name: str = Field(\"\", description=\"2-6 word name of the living form, e.g. 'the living blue whale'; empty if none\")`. seedance.py render(): delete the `lock` dict and add `ROLE = {\"exhibit_now\": \"copy its shape, pose and colour exactly; ignore its plain background\", \"living_form\": \"copy its body shape, colours and markings; ignore its background\", \"environment\": \"setting reference only: architecture, light and space\"}` and `name = {\"exhibit_now\": script.subject_name, \"detail\": script.subject_name, \"living_form\": script.living_form_name}`. Bind in two passes. Pass 1 covers every non-detail asset, in seg.ref_assets order. The first asset of each depicts gets f\"{tag} is {name[d] or _s(asset.view)} ({ROLE[d]})\", and later assets of the same depicts get f\"{tag} is another view of {described[d]}\". Environment assets get f\"{tag} is {_s(asset.view)} ({ROLE['environment']})\", with any 'without the X' clause stripped (`re.sub(r',?\\s*without (the )?\\w+.*$', '', view)`). Pass 2 covers details: f\"{tag} is a close-up of {_s(asset.view)}, part of {described.get('exhibit_now', script.subject_name)}\". Print the bindings in @Image order, so the numbers still follow upload order. The full subject_lock and living_form_lock stay in S1b image prompts only. In the s3_script.md Shots paragraph, replace 'Copy the asset plan's subject_lock and living_form_lock into the script unchanged.' with 'Copy the asset plan's subject_lock, living_form_lock, subject_name and living_form_name into the script unchanged; the request builder names references by the short names, and the images carry the look.'",
+    "why": "All four render/loop diagnoses agree this is the main reason every v1.2 run ends NEEDS_HUMAN. Fixed boilerplate came to about 186 words of the 250 (Hope seg 2: References 76). In Sequoia seg 2 the lock was pasted twice because seedance.py:53 only finds exhibit_now when it comes before the detail. The writer is told to copy the locks unchanged, so it cannot fix this, and S4 then cut visual_feasibility to 2-3 because of it. I checked seedance.py:41-58 and it matches the diagnosis. Expected impact: 30-70 words saved per request. The loop lens simulated this on the archived finals: Hope 249/277, Sophie 254/228, Sequoia 232/250, and items 2 and 3 take the rest. Decision: I used Script-level names, as the loop lens proposed, rather than a per-Asset label (render lens). There is one name per subject, so states and details cannot disagree, and the environment keeps its view text.",
+    "ab_test": false
+   },
+   {
+    "title": "Request-length contract: count only the direction words the writer controls, report a per-part breakdown, and show the writer the rendered request",
+    "priority": 2,
+    "kind": "code",
+    "file": "seedance.py, checks.py, agent.py, prompts/s3_script.md",
+    "edit": "seedance.py render(): build `parts` as a dict, refs/states/style/shots/voice/sound/constraint. Return `prompt_parts = {k: len(re.sub(r'\"[^\"]*\"','',v).split()) for k,v in parts.items()}` and `direction_words = sum(prompt_parts.values())`. Keep `prompt_words` (the total) for the report. Set MAX_PROMPT_WORDS = 230 for direction words, i.e. quoted narration excluded (narration is already limited by word_budget). checks.py:198-199: `if req['direction_words'] > seedance.MAX_PROMPT_WORDS: problems.append(f\"segment {i} request has {req['direction_words']} direction words (cap {cap}, quoted narration not counted): references {p['refs']}, shots {p['shots']}, sound {p['sound']}, fixed {p['style']+p['states']+p['constraint']+p['voice']}; cut the largest part you control\")`. Also add a note (not a problem) when the total including quotes is over 300. agent.py s3_script(): on a revision, append `<rendered_requests>` + json.dumps([{k: r[k] for k in ('prompt','direction_words','prompt_parts')} for r in (seedance.render(previous,i) for i in range(len(previous.segments)))], indent=2) + `</rendered_requests>`. s3_script.md: add at the end of the Shots paragraph: 'Each segment becomes one request. Leaving out quoted narration, it must stay at or under 230 words; the builder adds about 60 fixed words, so the three shots and the sound together get about 150. Spend words on concrete light, colour and composition, not on repeating the action or on long sound lists. On a revision you can see the rendered requests and their word breakdown.'",
+    "why": "The loop lens and the render lens disagree on the cap: loop keeps 250 measured on direction words, render sets 220 on the whole prompt. My decision is to measure direction words only, since quoted lines are already controlled by timing checks and are what Seedance must say. I set the cap at 230, not 250, because once items 1, 3 and 4 remove duplication the simulated finals sit at about 160-220. A 230 cap keeps headroom against research's ~120-250 total and stops the template from growing again. The writer currently never sees seedance.render output (agent.py passes it only to S4), and the message 'shorten shot visuals' sent it to gut the visuals: Hope's went from 25/24/21 words to 4/5/6 ('Pale bone in soft daylight'). Two of the three blind judges then marked v1 down on renderability for exactly those thin shots. Expected: the cap is met in one revision instead of shrinking about 14% per round, and shot detail comes back.",
+    "ab_test": false
+   },
+   {
+    "priority": 3,
+    "title": "One clause per shot: remove action/visual duplication and fix the sound-line and voice-line template faults",
+    "kind": "code",
+    "file": "seedance.py, schemas.py, prompts/s3_script.md",
+    "edit": "schemas.py ShotSpec: action description -> 'The one motion in the shot as a full clause: subject + verb + direction, 4-12 words.' visual description -> 'At most 15 words: the light, colour, texture or composition the action does not already say. No verbs of motion, never repeat the action, never describe the exhibit's own shape or colour (the reference shows it). Describe a living form's look here the first time it appears in a segment.' seedance.py: add `def _overlap(a,b): w=lambda t:{x for x in re.findall(r'[a-z]+',t.lower()) if len(x)>3}; va=w(a); return len(va & w(b))/max(1,len(va))`. Shot body: `body=_s(s.action); v=_s(s.visual); if v and _overlap(v, s.action) < 0.5: body += '; ' + v[0].lower()+v[1:]`. Then `shots.append(f\"{lead}{refs}: {_s(s.framing)}, {_s(s.camera)}; {body}.\")`. Sound: `parts.append('Sound: ' + '; '.join(x for x in (_s(a.ambience), sfx, music) if x) + '.')`. Voice: `v=_s(script.voice); v=v[0].lower()+v[1:]`. s3_script.md: replace '(at most 25 words per shot visual)' with '(the request builder prints each shot as framing, camera; action; visual, so never repeat a word between them: action is the one motion as a full clause, visual adds at most 15 words of light, colour or composition, and the first shot of the living form says what it looks like)'.",
+    "why": "All four lenses saw the duplication, e.g. 'Camera glides from the jaw tips along the spine toward the tail. From jaw tips along the spine toward the tail.' S4 also spent issues on the '; ;' and 'Voiceover, unseen narrator, A young woman' artefacts. Craft and render agree on the fix, and the 15-word visual cap from loop, craft and render is adopted. One addition comes from the blind judges: two of three said 'the living whale' is never described, so the first living-form shot must say how it looks. Expected: 10-25 words saved per shot, one clear instruction per shot, and no review issues spent on template artefacts.",
+    "ab_test": false
+   },
+   {
+    "priority": 4,
+    "title": "Revision loop: send only checks and blocking issues while blockers remain, and make S4 check its own replacement lines",
+    "kind": "code",
+    "file": "run.py, prompts/s4_review.md",
+    "edit": "run.py:118, replace the feedback build with `items = [f\"- [check] {p}\" for p in problems] + [f\"- [blocking] [{i.where}] {i.problem} → {i.fix}\" for i in blocking]` and add `if not problems and not blocking: items += [f\"- [polish] [{i.where}] {i.problem} → {i.fix}\" for i in polish]`, then `feedback = '\\n'.join(items)`. s4_review.md: add before the scoring list: 'Before you propose a replacement line, check it yourself. Use the cited fact's own verb and add no back, again or still. Count its spoken words, compute t_start + words / 2.5, and make sure it ends at least 1 s before the segment ends and before the next line starts. Before you propose a change to a shot, sound or reference, check that it does not push the segment over its direction-word count (shown in the request). The two segments are separate generations joined by a hard cut: never ask for music, speech or a camera move to continue across it. A fix you proposed and that was adopted is your responsibility; if it was wrong, say so and give a checked replacement.'",
+    "why": "The loop lens showed that the reviewer's own fixes caused the next round's blockers. In Sequoia, 'That work brought my rings back into view' was adopted and then rated truth 1. Its suggested 'Look up...' line ran to 14.1 s. Sophie's polish item (grey-buff rock) pushed seg 1 from 245 to 254 words, and Sequoia's 'holds a low note across the cut' came from S4 and breaks the S3 rule. I verified that run.py:118 merges blocking + polish without gating. Expected: blocker counts fall strictly from round to round, so three attempts are enough, which matters most for Sophie (one trim away from passing).",
+    "ab_test": false
+   },
+   {
+    "priority": 5,
+    "title": "Counterpoint: plan picture and words as two tracks, with one collision per segment, and tighten the S4 anchor",
+    "kind": "prompt",
+    "file": "prompts/s3_script.md, prompts/s4_review.md",
+    "edit": "s3_script.md: replace the paragraph 'Narration. English, first person, ... rewrite or cut it.' with: 'Narration. English, first person, spoken by the exhibit. Write the picture and the words as two separate tracks. The shot under a line must not show the thing the line names. If the line says dust, show the clean gloss; if the line gives a length, show the people under it, not a camera measuring the bones. A line may add a fact the picture cannot show (a weight, a date, what it was like out there) or a feeling. Plan one collision per segment: an image that changes how the line over it is heard (youth over the full adult-sized skeleton, the sea over bare bone). Name it in that shot's purpose. Test every line two ways. Muted, does the picture still tell its half? Eyes closed, does the line still tell its half? If either half duplicates the other, change the shot first. At least one line in the film is a voice line that shows the narrator's attitude (a reaction, a confession, a joke at its own expense), with no claims.' s4_review.md: replace 'counterpoint: the lines add what the picture cannot show instead of describing it.' with 'counterpoint: 5 only if no line names what its own shot shows and at least one image changes how its line is heard; 3 if one line captions its shot; 2 if the picture illustrates most lines.'",
+    "why": "This is what all three blind judges said v1 lacks against v0, unanimously: counterpoint went to A every time (A: 'Four and a half tonnes, just in bone', 'Out there, I was blue, not bone'; B: 'I measure just over twenty-five metres' over a jaw-to-tail drift). The craft lens counted 13 fact lines to 1 voice line across the three chosen scripts, all captioning their shots, yet S4 still scored counterpoint 4. Decision: craft asked for a voice line in every segment. I require one per film, because a voice line per 15 s segment competes with a 25-word budget and the truth lens values fact lines. The A/B is because it changes the line mix and could cost truth or concept fidelity. Run s3+s4 as one variant against v1.3 control, --sample 2 on all three exhibits, and keep it if counterpoint and hook improve with truth still 5.",
+    "ab_test": true
+   },
+   {
+    "priority": 6,
+    "title": "S1b: never send a multi-panel sheet to Seedance; plan single-view, per-state and in-place images",
+    "kind": "prompt",
+    "file": "prompts/s1b_assets.md, prompts/s3_script.md, checks.py",
+    "edit": "s1b_assets.md: replace 'It is the identity reference for every shot that shows the living form.' with 'A sheet is never sent to the video model. From it, also plan one single-view image, the full side view alone on the plain background, with id \"<sheet id>_side\"; that image is the identity reference for living-form shots.' Add: 'If the story needs the exhibit in another state (dusty, half-cleaned, in the ground), plan one single image per state, at the same angle and framing as the exhibit-now view, named for the state (slice_dusty). Never reuse an existing image's id for a changed image; give the fixed version a new id. When there is a visitor photo, plan an in-place view: the photo cleaned up, same angle and framing, the exhibit in its hall, glare, signs and readable text removed, people small or removed. It is the reference for the final shot. Never plan an empty-hall version of the exhibit's own place.' s3_script.md Reference images paragraph, add: 'Never use a character sheet or any multi-panel image as a reference; use its single-view image. A shot that shows another state uses that state's image. The final shot uses the in-place view. In ref_assets, list the full view of the exhibit before any detail of it.' checks.py script(): add a problem when any seg.ref_assets id is an asset whose S1b kind is character_sheet (or whose prompt or id contains 'sheet' without the '_side' suffix), or an existing asset with has_text_labels true.",
+    "why": "From the render lens. Sequoia seg 1 used a five-panel sheet (including the dusty and half-clean states) as its only @Image1 and bound it as 'glossy'. Hope reused a labelled six-whale sheet id, which S4 rated blocking. Research says multi-view sheets cause twins. 'Hall without the whale' plates can read as 'no whale'. Text checks cannot see any of this, and in a demo it would surface as duplicate subjects or leaked labels. The craft lens reached the same diagnosis but only as an interim prompt line, which this replaces. Adopted outright because it removes a known Seedance failure mode and does not change the story.",
+    "ab_test": false
+   },
+   {
+    "priority": 7,
+    "title": "S1 digest rewrite: choose the length from a lead through-line with a spoken spine, not from the size of the pack",
+    "kind": "prompt",
+    "file": "prompts/s1_digest.md, schemas.py, run.py, checks.py",
+    "edit": "Archive the current file as prompts/archive/v1.2/s1_digest.md, then replace prompts/s1_digest.md with the length lens's full replacement text unchanged (sections Facts with about exhibit/context, Conflicts, No invention anywhere, Visitor questions with answer ids, Through-lines with spine and needs_s, Visual motifs, Emotional core, Length with 'When unsure, choose 15'). schemas.py: Fact gets `about: Literal['exhibit','context']`. Replace visitor_questions with list[VisitorQuestion{question, answer_fact_ids}]. Add ThroughLine{name, beginning, turn, end, turn_fact_ids, fact_ids, spine, needs_s: Literal[15,30]}. Replace richness with through_lines (1-3) and lead_line: int. run.py:176 and the report sections switch to the new fields. checks.material: problems if duration_s != lead.needs_s; if needs_s == 30 and spoken_words(lead.spine) <= 28; if needs_s == 30 and turn_fact_ids is empty or all context; for unknown ids; and for any visual_motif matching _text_on_screen. run.py: if material() returns problems other than the expect.json one, rerun S1 once with those problems as feedback (never the expect value).",
+    "why": "Across all six runs S1 has never chosen 15 s, and Sequoia's expect.json says 15. S2 then films a 15 s idea at 30 s and S3 pads it: Sequoia at 1.57 w/s with one fact split over two lines, Hope's 'That number isn't the surprising part.' and two lines tagged [juvenile_female]. This is the main remaining blocker for Sequoia, and it also clears the S1 inventions ('found by chance', 'a girl', 'under dust for over a century'). Decision: length and craft disagree on where length is decided (craft has S2 override S1). I put it in S1 because it is the root cause and the concept-owned duration is a larger schema change (item 15). The A/B is because it can flip Hope or Sophie to 15 s (see item 12). Ship prompt, schema and checks as one s1 variant.",
+    "ab_test": true
+   },
+   {
+    "priority": 8,
+    "title": "S2: tie a 30 s concept to the lead through-line and rank the visitor's first question",
+    "kind": "prompt",
+    "file": "prompts/s2_concept.md, checks.py",
+    "edit": "s2_concept.md: replace the final two sentences 'Prefer focus over coverage: ... usually the wrong one.' with the length lens text ('The film length was set from the material's lead through-line (lead_line). At 30 seconds the chosen concept must tell that through-line, turn included... Never justify a length by how few facts a concept needs; prefer focus over coverage within the length you are given.'). Insert before 'Write three concepts': 'First rank the visitor questions: the one almost everyone in front of this object has (usually size, age, or \"is it real?\") comes first. At least two of your three concepts answer that first question. Answer only questions whose answer_fact_ids are not empty. In your choice, name the question the film answers.' checks.concepts: if sheet.duration_s == 30 and the chosen concept's fact_ids contain none of the lead line's turn_fact_ids, add a problem ('30 s film but the chosen concept drops the lead turn'). Add a problem if the chosen concept answers a question with empty answer_fact_ids. To match reliably, add `answers_question_index: int` to Concept.",
+    "why": "This merges the length lens's S2 rule and the craft lens's question ranking. Sequoia chose 'Under the Dust', which answers 'why is it glossy?', a second-order question, and dropped age. One blind judge criticised v1 Hope for never saying the name Hope or its Wexford origin, both of which are in the journey through-line that justifies 30 s. Depends on item 7, so it ships in the same A/B variant.",
+    "ab_test": true
+   },
+   {
+    "priority": 9,
+    "title": "Fix the TEXT_ON_SCREEN negation regex that ends at a comma",
+    "kind": "code",
+    "file": "checks.py",
+    "edit": "checks.py:26 -> `NEGATED = re.compile(r\"\\b(?:no|without) (?:text|lettering|labels?|captions?|logos?|watermarks?|subtitles?|signage|plaques?|annotations?)[^.;]*\", re.I)`. Add a test case with Sequoia's two asset prompts ('No text, labels, panel numbers, captions, rulers, watermarks;' and 'No text, labels, plaques, watermarks;'), which must not be flagged.",
+    "why": "Verified: the current pattern `[^.;,]*` stops at the first comma, so a negative list is flagged as asking for text. That created a spurious blocker in Sequoia and taught the writer and reviewer to remove useful negative lists from image prompts. Small change, no downside.",
+    "ab_test": false
+   },
+   {
+    "priority": 10,
+    "title": "Cut design and music: render end_frame, keep one music style for the film, ban default cello",
+    "kind": "code",
+    "file": "schemas.py, seedance.py, prompts/s3_script.md",
+    "edit": "schemas.py: add `Script.music_style: str` ('one music style for the whole film, or \"no music\"'). Segment.audio.music becomes a cue: 'how the music opens or ends in this segment'. seedance.py: Sound line = 'Sound: ' + '; '.join(non-empty ambience, sfx) + f'. Music: {music_style}, {cue}.' (or 'No music.' when music_style is none or no music). For every non-final segment, append to its last shot: f' End on a near-still image: {_s(seg.end_frame)}; the music has faded out by then.' s3_script.md: replace 'and a music direction. Describe one music style for the whole film and repeat it in both segments.' with 'and a music cue. Choose one music style for the whole film (music_style), drawn from the exhibit's own world and the concept's emotion: name the instruments, tempo and one texture. Solo cello and soft piano are not defaults; use them only if you can say why this exhibit needs them. \"No music\" is often right. Never let the music hold across the cut.'",
+    "why": "Render lens: end_frame is never sent, so segment 1's end on a still frame cannot be designed. Sequoia asked for music held across the cut. Craft lens: all three films use 'sparse solo cello', which reads as a template when they are played one after another in a demo. Adopted (render's structure plus craft's music wording). The per-shot sfx field from the render lens is deferred; it adds schema for little measured benefit.",
+    "ab_test": false
+   },
+   {
+    "priority": 11,
+    "title": "Endings must not be instructions, and announcer lines are limited",
+    "kind": "prompt",
+    "file": "prompts/s2_concept.md, prompts/s3_script.md",
+    "edit": "s2_concept.md: replace 'and make them look up at the real object again at the end.' with 'and leave them wanting to check the real object themselves. The picture does that work: the last shot matches what they will see when they lower the phone. The last line states the thought that will be in their head when they look, in ten words or fewer, ideally a reframe of something visible (\"The rest of what you see is me.\"). It is not an instruction to look, count or notice.' s3_script.md, append to 'Write for the ear': 'Every line must earn its seconds. Do not say the same point twice in different words, and use no place name or date the turn does not need. A line that only announces what is coming is allowed at most once, as the film's turn, in six words or fewer. Keep the concept's hook and ending lines word for word unless a truth problem forces a change; then change the fewest words and keep the rhythm and the concrete image.' After 'The ending completes that idea; it does not open a new one' add: 'At least 1.5 seconds of picture and sound follow the last line.'",
+    "why": "The craft lens wanted to ban both 'Look up again' and 'That number isn't the surprising part'. The blind judges disagree with part of that: two of three praised the pivot line as a clean spoken turn, and all three praised the ending, mainly for its matched visitor-view shot (one noted 'look up' misfits a visitor on the balcony). Decision: allow one short pivot, ban repetition (Hope says 'young' three ways), and move the 'look back' job to the picture. A/B, because the judges rated the current ending well and this could lower that score.",
+    "ab_test": true
+   },
+   {
+    "priority": 12,
+    "title": "Regression oracle: report upstream failures and pin which story the 30 s expectation means",
+    "kind": "pack",
+    "file": "run.py, knowledge/hope/expect.json, knowledge/sophie/expect.json, METHOD.md",
+    "edit": "run.py: `upstream = [p for e in ctx['log'] if e['stage'] in ('s0','s1','s2') for p in e['problems']]`. Append f' · REGRESSION_FAIL ({len(upstream)})' to the status and list the failures at the top of report.md, without passing them to S3. expect.json: add `lead_line_hint` with fact ids. For hope, the lead line's fact_ids include stranding_date and one of hintze_unveiling/replaced_dippy. For sophie, they include found_2003 and one of arrived_2013/named_sophie. checks.material compares these (regression only, never fed back). Keep sequoia duration_s = 15. Edit METHOD.md section 3: replace 'rich → 30 s' with 'the length follows the lead story: journey stories with a then/there to now/here turn are 30 s; single-reveal stories are 15 s'.",
+    "why": "The Sequoia run printed 'length chosen 30s; expectation 15s' but could still have shown PASS. Under item 7, Hope's photo-led size question could make S1 choose 15 s. The hint lets the A/B tell 'wrong story' from 'right story, wrong length'. Decision on the length lens's open question: tighten S1 rather than relax Sequoia's expectation, because its best spine is about 22 words.",
+    "ab_test": false
+   },
+   {
+    "priority": 13,
+    "title": "Per-shot narration placement in the Seedance request",
+    "kind": "code",
+    "file": "seedance.py, checks.py, prompts/s3_script.md",
+    "edit": "seedance.py: after Style/Setting, emit f\"Narration: an off-screen voiceover, {voice_lc}. No one on screen speaks. No speech in the first second; the last words end a second before the clip ends.\" Assign each line to the shot it starts in, `k = max(i for i,s in enumerate(seg.shots) if s.t_start <= l.t_start + 1e-6)`, and append f' Voiceover: \"{text}\"' to that shot. Remove the trailing narration block. Put this behind the env flag SEEDANCE_VO_PLACEMENT=per_shot, defaulting to the current block. checks.py: add a note when a line's spoken end passes its shot's t_end by more than 0.5 s. s3_script.md Narration: 'Start each line inside the shot it belongs to and keep it within that shot.'",
+    "why": "From the render lens. The research says early instructions are followed best and recommends one line per cut, but neither has been verified on these clips. It changes what Seedance does, not the script quality, so it can only be judged from rendered video. Run an A/B on the cheap tier (480p, one segment per exhibit) before switching the default.",
+    "ab_test": true
+   },
+   {
+    "priority": 14,
+    "title": "Small threshold and template alignments",
+    "kind": "threshold",
+    "file": "checks.py, seedance.py, prompts/s3_script.md",
+    "edit": "checks.py:18 MIN_SHOT_S = 3.0, to match the prompt's 'at least three seconds'. checks.py:193 tail check becomes `end > seg.duration_s - TAIL_S + 0.15`. seedance.py: the states sentence names the tags, f'{tag_living} and {tag_now} never appear in the same shot: hard cut between them, no morphing.' Style for realistic becomes 'photorealistic documentary footage, natural light'. The constraint line becomes f'Keep it subtitle-free: no subtitles, captions, letters, numbers, logos or watermark anywhere. Only one {script.subject_name} in any frame.' s3_script.md Structure: 'setting: the place and light in at most 12 words; never restate production rules (states, no morphing, no text); the builder adds them.' Shots: 'Frame each shot within about 45 degrees of its reference image's angle, and move the camera only as far as can be travelled slowly in the shot (a drift over the skull in five seconds, not jaw to tail).'",
+    "why": "Low impact individually. Prompt and checks now agree on shot length, a 0.1 s estimation noise no longer blocks (Sophie's real 15.3 s overrun is still caught), Hope's duplicated states-in-setting text goes, and the constraint follows the documented wording. Hope's 25 m jaw-to-tail drift in 5 s is flagged.",
+    "ab_test": false
+   },
+   {
+    "priority": 15,
+    "title": "Concept owns the duration (structural follow-up to item 7) and S4 length_fit anchor",
+    "kind": "prompt",
+    "file": "schemas.py, agent.py, checks.py, prompts/s4_review.md",
+    "edit": "Only after item 7 settles. Add `duration_s: Literal[15,30]` and `through_line: int` to Concept. agent.s3_script/s4_review and checks.script take the length from the chosen concept, and the expect.json duration check moves to the concept. s4_review.md: replace 'length_fit: the narration breathes, and the chosen length suits the amount of story.' with the length lens anchor (5 = every line adds something new; 3 = a line only restates, delays or splits a fact, or a shot only fills time; 2 = the story fits one 15 s segment). Tag that issue where='length'. run.py treats a where='length' blocking issue as NEEDS_HUMAN('length mismatch') rather than sending it to S3.",
+    "why": "This lets S2 pick a good 15 s concept from a 30 s digest without stretching it (the craft lens's S2 self-check). The length_fit anchor gives an independent padding signal, since all three v1.2 scripts scored 4 despite clear padding. Run it as its own A/B after item 7, one change at a time.",
+    "ab_test": true
+   },
+   {
+    "priority": 16,
+    "title": "Optional voice chaining across segments",
+    "kind": "code",
+    "file": "seedance.py",
+    "edit": "With env SEEDANCE_VOICE_CHAIN=1 and index > 0, add audio_urls ['<segment1_voice_clip>'] and narrator sentence f'... in the voice of @Audio1 ({voice}).' Default off.",
+    "why": "Whether @Audio1 is used as timbre only or replayed as content is unverified. Test it on the cheap tier before relying on it. It does not affect script quality.",
+    "ab_test": true
+   }
+  ],
+  "v1_vs_v0": "All three blind judges picked v1 (B) overall, each with medium confidence. v1 won hook, one idea, truth, spoken quality and ending. It is ahead because v0 breaks truth ('not finished growing', 'lone', 'lying motionless', 'cut short', invented stained glass) and crams 7-8 beats into 30 s. Where v1 still lacks against v0:\n(1) Counterpoint, lost unanimously. v0's lines added what the picture cannot show ('Four and a half tonnes, just in bone', 'Out there, I was blue, not bone', the 1891 date over the harbour). v1's 'From jaw to tail, I measure just over twenty-five metres' only narrates a jaw-to-tail drift.\n(2) Renderability and visual specificity, lost 2 of 3. v1's shot prompts are thin and repetitive ('From jaw tips along the spine toward the tail'), and 'the living whale' is never described, so a generic whale could render. This is a side effect of writers cutting visuals to meet the word cap.\n(3) Coverage, lost 1 of 3 (2 ties). v1 never says the name Hope or the Wexford/1891 origin, both sourced, and v0 answered more visitor questions.\n(4) Pacing. Two judges noted a 6-8 s stretch with no voice (8-16 s) and one weak filler line, although two judges liked 'That number isn't the surprising part' as a pivot.\nItems 1-3 (renderer, budget, visual field), 5 (counterpoint) and 7-8 (the journey through-line brings back name and origin at 30 s) target these gaps without bringing back v0's truth failures.",
+  "decisions_on_disagreements": [
+   "Binding labels: loop proposed Script-level subject_name/living_form_name, render proposed a per-Asset label. I chose the Script-level names: one name per subject keeps states and details consistent, and environment assets keep their view text. Render's role phrases ('copy its shape...; ignore its background') are adopted on top.",
+   "Word cap: loop said keep 250 but exclude quoted narration; render said 220 on the whole prompt; craft said under 230 total. I chose 230 direction words with quoted narration excluded. Narration is already controlled by the timing checks, and once the duplication is gone the measured finals land around 160-220, so 230 leaves margin without the writer gutting the visuals again. The total over 300 is a note only.",
+   "Where length is decided: length lens says S1 through-lines, craft says S2 may declare a concept 15 s. S1 is the root cause, since length is currently chosen before any story exists, so it goes first (item 7). The S2 override needs concept-owned duration, a bigger schema change, so it is held for a later A/B (item 15). That keeps one change at a time.",
+   "Sequoia expectation: I keep expect.json at 15 s rather than relaxing it. The best spine is about 22 words with no exhibit-level turn, and the 30 s case relied on the forest-loss figures, which are context.",
+   "Announcer and ending lines: craft wanted to ban 'That number isn't the surprising part' and every 'Look up' ending. Two of three blind judges praised the pivot, and all three praised the ending, mainly for its matched visitor-view shot (one said 'look up' misfits a balcony visitor). I allow one six-word pivot, ban repetition, move the 'look back' job to the final picture, and A/B it rather than adopt it.",
+   "Voice lines: craft wanted at least one voice line per segment. I require one per film, because a 15 s segment holds about 25 words and the fact lines are what the truth audit and the coverage criticism (the name Hope, Wexford) depend on.",
+   "Sound structure: render wanted per-shot sfx, a film-level music_style, per-segment cues and end_frame; loop wanted only the join fix. I adopt music_style, cues, end_frame and the join fix, which fix real faults (music held across the cut, end_frame never sent), and defer per-shot sfx as extra schema with no observed failure behind it.",
+   "Narration placement per shot (render): plausible from the research but unverified, and it only shows in rendered video. It goes behind a flag and gets a cheap-tier render A/B, not adopted outright.",
+   "Tail tolerance: loop proposed 0.15 s and craft and render were silent. I adopt it because item 4 now makes S4 verify its own timing. Sophie's real 15.3 s overrun is still caught.",
+   "MIN_SHOT_S: raised to 3.0 to match the prompt (craft). A threshold that disagrees with the prompt invites borderline shots."
+  ],
+  "demo_readiness": "Sophie ('Almost Whole') is the closest. It has truth 5, every score >= 4, and only one blocker: seg 1 at 254 words, 4 over the cap, which its own polish edit caused. Items 1-4 alone should bring it to PASS or PASS_WITH_OPEN_POLISH: the short-name binding and direction-word count put it at about 235/196, and the polish gating stops the regression. Its ending 'The rest of what you see is me.' is the strongest across the three. The remaining risk is a grey-void final shot from a studio-only reference, which item 6's in-place view fixes, and literal captioning (item 5).\n\nHope ('Young Giant') is the best film: the judges' best line, and the only real image/line collision. It is blocked by the template (271/325 words), and two judges flagged thin, duplicated shot visuals and an undescribed living whale. Items 1-3 clear the word cap and bring the visuals back. Item 6 replaces the labelled six-whale sheet reference. Item 5 or 7-8 would add counterpoint and the name and origin. It should be demo-ready after one v1.3 run plus the A/B.\n\nSequoia is furthest away. It is the wrong length (30 s against an expected 15 s, padded to 1.57 w/s with a split fact), answers a second-order question ('why so glossy?'), captions every line, uses a five-panel dusty and clean sheet as its only seg-1 reference, and its seg-2 lock is pasted twice (291 words). Items 1, 3 and 9 fix the mechanical blockers. Item 6 makes seg 1 renderable. Items 7-8 are needed to get a 15 s age-through-rings film. It needs the s1/s2 A/B before it is demo-ready."
+ }
+}

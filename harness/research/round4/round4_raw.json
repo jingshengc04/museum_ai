@@ -1,0 +1,615 @@
+{
+ "counts": {
+  "supported": 53,
+  "partly_supported": 8,
+  "page_unreachable": 3,
+  "unsupported": 1
+ },
+ "merged": [
+  {
+   "exhibit": "hope",
+   "kind": "narration",
+   "items": [
+    {
+     "claim": "Twenty-five point two metres long, the largest of this museum's more than eighty million specimens.",
+     "url": "https://artsandculture.google.com/asset/GAG_J9wcz31GXw ; https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html",
+     "verdict": "supported",
+     "what_the_page_says": "Google Arts & Culture calls it the original 25.2-metre-long blue whale skeleton. The NHM page says Hope ended up as the largest of 'our more than 80 million specimens'.",
+     "problem": ""
+    },
+    {
+     "claim": "But I was a juvenile. Not yet fully grown.",
+     "url": "https://www.nhm.ac.uk/discover/news/2018/march/a-cetacean-relation.html",
+     "verdict": "partly_supported",
+     "what_the_page_says": "The September NHM page says the whale 'wasn't yet fully grown' and mentions her youth. The cited March page (headline 'Hope the blue whale: How the largest animal in the world came to the Natural History Museum') never uses the word 'juvenile' or 'female'. It says she was about 15 years old, uses 'she', and says she spent about a year raising her calf.",
+     "problem": "The juvenile claim fails on https://www.nhm.ac.uk/discover/news/2018/march/a-cetacean-relation.html. Neither page uses the word 'juvenile', and the March page says she had raised a calf, which argues against calling her a juvenile. Only 'not yet fully grown' is supported, by the September page."
+    },
+    {
+     "claim": "One March morning in eighteen ninety-one, I stranded on a sandbar at the mouth of Wexford Harbour, Ireland.",
+     "url": "https://www.nhm.ac.uk/discover/news/2018/march/a-cetacean-relation.html",
+     "verdict": "supported",
+     "what_the_page_says": "On the morning of 25 March 1891, Hope stranded on a sandy ridge called Swantons Bank at the mouth of Wexford Harbour. Elsewhere the page says a blue whale migrating up the east coast of Ireland was caught by the low tide on a sandbar near Wexford.",
+     "problem": ""
+    },
+    {
+     "claim": "The largest specimen in this museum, and I wasn't fully grown.",
+     "url": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html",
+     "verdict": "supported",
+     "what_the_page_says": "Hope is the largest of the museum's more than 80 million specimens, and 'the whale wasn't yet fully grown'.",
+     "problem": ""
+    }
+   ],
+   "summary": "Three of the four lines are supported. Line 2 ('I was a juvenile') is only partly supported. Neither NHM page uses the word 'juvenile'. The cited March page (a-cetacean-relation.html) gives her age as about 15 and says she raised a calf, which argues against 'juvenile'. 'Not yet fully grown' is supported by the September page. Suggest cutting 'juvenile' and keeping 'Not yet fully grown', or saying 'about fifteen years old'. The length (25.2 m), 'largest of more than 80 million specimens', and the stranding on the morning of 25 March 1891 at the mouth of Wexford Harbour, Ireland, are all supported by the cited pages."
+  },
+  {
+   "exhibit": "hope",
+   "kind": "web",
+   "items": [
+    {
+     "claim": "Hope the blue whale",
+     "url": "https://nhm.ac.uk/discover/news/2017/july/museum-unveils-hope-the-blue-whale-skeleton.html",
+     "verdict": "supported",
+     "what_the_page_says": "The blue whale skeleton is now called Hope, a name chosen to mark the recovery of her species after decades of commercial hunting.",
+     "problem": ""
+    },
+    {
+     "claim": "25.2 metres long",
+     "url": "https://nhm.ac.uk/discover/news/2017/july/museum-unveils-hope-the-blue-whale-skeleton.html",
+     "verdict": "supported",
+     "what_the_page_says": "Under the question of how long Hope is, the page gives 25.2 metres.",
+     "problem": ""
+    },
+    {
+     "claim": "25 March 1891",
+     "url": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html",
+     "verdict": "supported",
+     "what_the_page_says": "The whale stranded on a sandbar near Wexford on the morning of 25 March 1891.",
+     "problem": ""
+    },
+    {
+     "claim": "Swantons Bank, Wexford Harbour",
+     "url": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html",
+     "verdict": "partly_supported",
+     "what_the_page_says": "Hope stranded on a sandy ridge called Swantons Bank at the mouth of Wexford Harbour.",
+     "problem": "The keyword shortens 'at the mouth of Wexford Harbour' to 'Wexford Harbour', which could read as inside the harbour. A safer wording is 'Swantons Bank, mouth of Wexford Harbour'."
+    },
+    {
+     "claim": "Ned Wickham",
+     "url": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html",
+     "verdict": "supported",
+     "what_the_page_says": "Names Edward Wickham, known to many as Ned, a lifeboat pilot who later became coxswain of the Wexford lifeboat.",
+     "problem": ""
+    },
+    {
+     "claim": "221 bones",
+     "url": "https://nhm.ac.uk/discover/news/2017/july/museum-unveils-hope-the-blue-whale-skeleton.html",
+     "verdict": "supported",
+     "what_the_page_says": "Mentions 'the 221 bones' when describing the inspection of the skeleton that began in 2015.",
+     "problem": ""
+    },
+    {
+     "claim": "Lunge-feeding dive pose",
+     "url": "https://nhm.ac.uk/discover/news/2017/july/museum-unveils-hope-the-blue-whale-skeleton.html",
+     "verdict": "supported",
+     "what_the_page_says": "The mounting team chose to focus on lunge feeding for the new pose, and visitors see her diving towards them as they enter the Museum.",
+     "problem": ""
+    },
+    {
+     "claim": "13.5 metres above ground",
+     "url": "https://nhm.ac.uk/discover/news/2017/july/museum-unveils-hope-the-blue-whale-skeleton.html",
+     "verdict": "supported",
+     "what_the_page_says": "The arch of her back is the highest point, 13.5 metres above the ground. At its lowest the jaw is 4.2 metres above the floor.",
+     "problem": "The figure is the height of the highest point (the arch of the back), not of the whole skeleton. The keyword is accurate only if it is shown in that context."
+    },
+    {
+     "claim": "Sold for £250",
+     "url": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html",
+     "verdict": "supported",
+     "what_the_page_says": "William Armstrong sold the skeleton to the Museum for £250, which the page says is worth over £28,000 today.",
+     "problem": ""
+    },
+    {
+     "claim": "Mammals Hall, 1934",
+     "url": "https://nhm.ac.uk/discover/news/2017/july/museum-unveils-hope-the-blue-whale-skeleton.html",
+     "verdict": "supported",
+     "what_the_page_says": "Hope made her public debut in 1934 in the gallery now known as the Mammals Hall, where she stayed for 81 years.",
+     "problem": "The page says the gallery is 'now known as' the Mammals Hall, so it may not have had that name in 1934."
+    }
+   ],
+   "summary": "I checked all 10 URL keywords against the two NHM pages they cite; there were no web facts to check. 9 are supported and 1 is partly supported: 'Swantons Bank, Wexford Harbour'. The page puts Swantons Bank at the mouth of Wexford Harbour, so a safer wording is 'Swantons Bank, mouth of Wexford Harbour'. Two supported keywords need context. '13.5 metres above ground' is the height of the arch of the back, the highest point. 'Mammals Hall, 1934' names the gallery by its current name. Both pages loaded."
+  },
+  {
+   "exhibit": "sophie",
+   "kind": "narration",
+   "items": [
+    {
+     "claim": "Look closer. This is bone.",
+     "url": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html",
+     "verdict": "partly_supported",
+     "what_the_page_says": "Sir Michael Dixon says that, unlike the Museum's Diplodocus cast, Sophie is the real thing: a real fossil, not a cast. Elsewhere the page says the skeleton has over 300 bones.",
+     "problem": "The cited fact only says Sophie is the real thing and not a cast. 'This is bone' goes further: it is a statement about the material, and the cited fact never says it. A fossil is mineralised bone, so the wording is loose. Saying 'this is real fossil bone' or 'this is the real thing' would stay with the source."
+    },
+    {
+     "claim": "Spring, two thousand and three. Bob Simon found me buried on a Wyoming hilltop, almost all connected.",
+     "url": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html",
+     "verdict": "supported",
+     "what_the_page_says": "In spring 2003 at Red Canyon Ranch, Wyoming, USA, Bob Simon, who runs a dinosaur quarry there, found a nearly fully connected stegosaur skeleton buried at the top of a hill while expanding the quarry.",
+     "problem": ""
+    },
+    {
+     "claim": "Seventy donors helped buy me.",
+     "url": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html",
+     "verdict": "supported",
+     "what_the_page_says": "The Museum thanks 70 donors, with particular thanks to Jeremy Herrmann, for making the acquisition possible.",
+     "problem": ""
+    },
+    {
+     "claim": "I became the first complete dinosaur on show here in nearly a hundred years.",
+     "url": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html",
+     "verdict": "supported",
+     "what_the_page_says": "Sophie is described as the first complete dinosaur specimen to go on display at the Natural History Museum in nearly 100 years.",
+     "problem": ""
+    },
+    {
+     "claim": "The real thing. One animal, from a Wyoming hilltop to here.",
+     "url": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html",
+     "verdict": "partly_supported",
+     "what_the_page_says": "Dixon says 'this is the real thing' and contrasts it with the Diplodocus cast. The skeleton was nearly fully connected and was found buried at the top of a hill in Wyoming. Elsewhere the page calls it 'the animal', which was a young adult when it died.",
+     "problem": "Neither cited fact says 'one animal'. That claim comes from combining 'nearly fully connected' with the page's other wording ('the animal'). The page never says outright that the skeleton is a single individual. 'Real thing' and 'Wyoming hilltop' are supported."
+    }
+   ],
+   "summary": "I opened the cited NHM press release (one source for every line). Three of the five lines are fully supported: the 2003 Wyoming find by Bob Simon, the 70 donors, and 'first complete dinosaur on show in nearly 100 years'. Two lines are only partly supported and need small wording changes. Line 1, 'This is bone': the cited fact only says Sophie is the real thing and not a cast. Line 5, 'One animal': neither cited fact says this, and the page never says outright that the skeleton is a single individual."
+  },
+  {
+   "exhibit": "sophie",
+   "kind": "web",
+   "items": [
+    {
+     "claim": "The museum's collection page calls her the most complete Stegosaurus ever found and says she was acquired in 2013.",
+     "url": "https://www.nhm.ac.uk/our-science/services/collections/palaeontology/dinosaurs.html",
+     "verdict": "supported",
+     "what_the_page_says": "It says the Stegosaurus specimen, nicknamed Sophie, is the most complete example ever found and was acquired for the museum in 2013.",
+     "problem": ""
+    },
+    {
+     "claim": "The museum holds Late Jurassic dinosaur specimens from the Morrison Formation in the USA.",
+     "url": "https://www.nhm.ac.uk/our-science/services/collections/palaeontology/dinosaurs.html",
+     "verdict": "supported",
+     "what_the_page_says": "It lists the Morrison Formation (USA) as a Late Jurassic locality in the collection, and says the Sophie specimen comes from the Late Jurassic Morrison Formation of Wyoming.",
+     "problem": ""
+    },
+    {
+     "claim": "Her diggers first named her Sarah, after the daughter of the landowners; she was renamed Sophie after the daughter of a donor who helped the museum buy her.",
+     "url": "https://cowboystatedaily.com/2026/08/08/digging-wyoming-sophie-the-worlds-most-complete-stegosaurus-was-found-in-shell/",
+     "verdict": "supported",
+     "what_the_page_says": "It says Simon and Boscarelli named the skeleton Sarah after the landowners' daughter while digging. When the NHM acquired it in 2013, it was renamed Sophie after the daughter of a donor who made the purchase possible.",
+     "problem": ""
+    },
+    {
+     "claim": "Bob Simon dug her out together with Robert Boscarelli.",
+     "url": "https://cowboystatedaily.com/2026/08/08/digging-wyoming-sophie-the-worlds-most-complete-stegosaurus-was-found-in-shell/",
+     "verdict": "supported",
+     "what_the_page_says": "It says a three-man crew of Bob Simon, Robert Boscarelli and Don Pfister excavated the skeleton in summer 2004.",
+     "problem": "The claim is accurate, but the page names a third digger, Don Pfister. The film should not suggest that Simon and Boscarelli worked alone."
+    },
+    {
+     "claim": "Sophie was found in the Morrison Formation near Shell, Wyoming; the rock dates to the Late Jurassic, around 150 million years ago.",
+     "url": "https://cowboystatedaily.com/2026/08/08/digging-wyoming-sophie-the-worlds-most-complete-stegosaurus-was-found-in-shell/",
+     "verdict": "supported",
+     "what_the_page_says": "It says she was found in the Morrison Formation near Shell, Wyoming, in Late Jurassic rock from around 150 million years ago.",
+     "problem": ""
+    },
+    {
+     "claim": "According to TNT Magazine, Professor Barrett found Sophie at an international event, and she was bought with the help of 70 donations.",
+     "url": "https://www.tntmagazine.com/archive/sophie-the-stegosaurus-set-to-wow-museum-visitors/",
+     "verdict": "supported",
+     "what_the_page_says": "It says Professor Barrett found her at an international fossil fair in the United States and that she was bought with the help of 70 donations. It also says Bob Simon discovered the bones at Red Canyon Ranch in 2003.",
+     "problem": "The claim is accurate, but \"found\" means Barrett found her for sale at a fossil fair. Bob Simon discovered the fossils, so the film's wording should make clear which kind of finding it means."
+    },
+    {
+     "claim": "Keyword: Sophie the Stegosaurus",
+     "url": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html",
+     "verdict": "partly_supported",
+     "what_the_page_says": "It says the specimen was named in honour of Jeremy Herrmann's daughter, Sophie Herrmann. The phrase \"Sophie the Stegosaurus\" does not appear.",
+     "problem": "The page supports the name Sophie only indirectly. It never uses the exact phrase \"Sophie the Stegosaurus\" or calls the dinosaur Sophie directly."
+    },
+    {
+     "claim": "Keyword: Stegosaurus stenops",
+     "url": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html",
+     "verdict": "supported",
+     "what_the_page_says": "It calls the specimen a 150 million year old Stegosaurus stenops.",
+     "problem": ""
+    },
+    {
+     "claim": "Keyword: Red Canyon Ranch, Wyoming",
+     "url": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html",
+     "verdict": "supported",
+     "what_the_page_says": "It says Bob Simon discovered her at the Red Canyon Ranch in Wyoming, USA, in spring 2003.",
+     "problem": ""
+    },
+    {
+     "claim": "Keyword: Morrison Formation, Late Jurassic",
+     "url": "https://cowboystatedaily.com/2026/08/08/digging-wyoming-sophie-the-worlds-most-complete-stegosaurus-was-found-in-shell/",
+     "verdict": "supported",
+     "what_the_page_says": "It says she was found in the Morrison Formation in Late Jurassic rock.",
+     "problem": ""
+    },
+    {
+     "claim": "Keyword: Bob Simon",
+     "url": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html",
+     "verdict": "supported",
+     "what_the_page_says": "It names Bob Simon as the person who discovered the specimen at Red Canyon Ranch in 2003.",
+     "problem": ""
+    },
+    {
+     "claim": "Keyword: Originally named Sarah",
+     "url": "https://cowboystatedaily.com/2026/08/08/digging-wyoming-sophie-the-worlds-most-complete-stegosaurus-was-found-in-shell/",
+     "verdict": "supported",
+     "what_the_page_says": "It says the excavators named her Sarah, and that Sarah became Sophie after the NHM acquired her.",
+     "problem": ""
+    },
+    {
+     "claim": "Keyword: 560 cm long",
+     "url": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html",
+     "verdict": "supported",
+     "what_the_page_says": "It says she is 560 centimetres long and 290 centimetres tall.",
+     "problem": ""
+    },
+    {
+     "claim": "Keyword: around 1,600 kg",
+     "url": "https://www.imperial.ac.uk/news/164246/scientists-reveal-body-weight-worlds-most/",
+     "verdict": "supported",
+     "what_the_page_says": "It says scientists calculated that Sophie would have weighed around 1,600 kg, about as much as a small rhino.",
+     "problem": ""
+    },
+    {
+     "claim": "Keyword: Professor Paul Barrett",
+     "url": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html",
+     "verdict": "supported",
+     "what_the_page_says": "It quotes Professor Paul Barrett, the museum's lead dinosaur researcher.",
+     "problem": ""
+    },
+    {
+     "claim": "Keyword: 4 December 2014",
+     "url": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html",
+     "verdict": "supported",
+     "what_the_page_says": "It says the specimen will go on show inside the Exhibition Road entrance from 4 December 2014. The page shows no publication date of its own.",
+     "problem": "The date is when she went on public display. It is not the date of the press release or of the acquisition, so it should be labelled as the date she went on show."
+    }
+   ],
+   "summary": "All 16 items could be checked, and none are wrong. Fifteen are supported by their cited pages. One, the keyword \\\"Sophie the Stegosaurus\\\", is only partly supported: the NHM press release says the specimen was named after Sophie Herrmann but never uses that exact phrase. Three supported items need careful wording. The Cowboy State Daily article names a third digger, Don Pfister, alongside Simon and Boscarelli. In the TNT article, Barrett found her for sale at a US fossil fair, while Bob Simon discovered the bones. And 4 December 2014 is the date she went on show, not the date of the press release."
+  },
+  {
+   "exhibit": "sequoia",
+   "kind": "narration",
+   "items": [
+    {
+     "claim": "I was one thousand three hundred years old. One hundred and one metres tall.",
+     "url": "https://www.nhm.ac.uk/discover/giant-sequoia-slice.html",
+     "verdict": "supported",
+     "what_the_page_says": "The tree was 1,300 years old and 101 metres tall when it was felled in California.",
+     "problem": ""
+    },
+    {
+     "claim": "They felled me so museums could show me to you.",
+     "url": "https://theplosblog.plos.org/2018/05/mark-twain-and-the-big-stump-can-we-save-nature-from-ourselves/",
+     "verdict": "page_unreachable",
+     "what_the_page_says": "The cited PLOS blog returned HTTP 403 to WebFetch and gave no content to curl. A search found no copy that had moved. Other sources (Wikipedia's Mark Twain Tree article) say it was felled in 1891 as an exhibition tree, with sections going to AMNH New York and NHM London. The NHM page itself does not say why the tree was felled.",
+     "problem": "The cited source could not be opened, so the claim cannot be confirmed from it. The other cited page (NHM) does not give a reason for the felling. Re-cite the claim to a reachable page, such as the Wikipedia Mark Twain Tree article, or drop it."
+    },
+    {
+     "claim": "I've been at this museum since eighteen ninety-three.",
+     "url": "https://www.nhm.ac.uk/discover/giant-sequoia-slice.html",
+     "verdict": "supported",
+     "what_the_page_says": "The specimen has been in the Museum since 1893, after the tree was felled in California.",
+     "problem": ""
+    },
+    {
+     "claim": "My top lay under about an inch of dust.",
+     "url": "https://www.nhm.ac.uk/discover/giant-sequoia-slice.html",
+     "verdict": "supported",
+     "what_the_page_says": "Conservators found a layer of dust an inch thick on its top sections. Under it were older layers of varnish and wax from past restorations, and the varnish had gone cloudy.",
+     "problem": ""
+    },
+    {
+     "claim": "Cleaning revealed my rings.",
+     "url": "https://www.nhm.ac.uk/discover/giant-sequoia-slice.html",
+     "verdict": "supported",
+     "what_the_page_says": "The treatment exposed the wood's natural surface and revealed the sequoia's growth rings. Experts can tell a tree's age from its number of growth rings.",
+     "problem": ""
+    },
+    {
+     "claim": "Thirteen hundred years of rings, cut down to be seen.",
+     "url": "https://theplosblog.plos.org/2018/05/mark-twain-and-the-big-stump-can-we-save-nature-from-ourselves/",
+     "verdict": "partly_supported",
+     "what_the_page_says": "NHM supports the 1,300 years and the rings that were revealed and show age. The PLOS page that is meant to support 'cut down to be seen' returned 403 and could not be read.",
+     "problem": "The 'cut down to be seen' part depends on the PLOS URL, which could not be reached. The NHM page gives no reason for the felling. '1,300 years of rings' also joins two NHM facts: the page never says the slice shows 1,300 rings."
+    }
+   ],
+   "summary": "Four of the six lines are fully supported by the NHM page: the age and height, at the museum since 1893, the inch of dust, and the rings revealed by cleaning. The line saying the tree was felled for museums could not be checked, because the cited PLOS blog returned 403 and no moved copy was found. The closing line is therefore only partly supported. It needs a reachable source for the felling motive, for example the Wikipedia Mark Twain Tree article, which says sections went to AMNH New York and NHM London. Also note that the NHM page contradicts itself on the felling date: one passage says it was felled in 1893 and a photo caption says 1891. The narration does not state a felling year, so this is not a problem for the film."
+  },
+  {
+   "exhibit": "sequoia",
+   "kind": "web",
+   "summary": "I checked 24 items. 15 are supported, 4 partly supported, 3 unsupported and 2 unreachable. Five things need attention. (1) The keyword \"Mark Twain Tree\" is based on the natsca blog, and that page never names the tree. The name is only on an NHM interpretation board (per thehallofeinar.com) and on Wikimedia/Wikipedia. (2) The keyword \"101 metres tall\" appears on the NHM slice page. The same page says the tree was 1,300 years old and gives the felling date inconsistently: 1893 in the text, 1891 in a photo caption. Natsca also gives 101 m, with 1891 and 1,341 years. (3) The NHM species page says Lindley proposed Wellingtonia gigantea, but it does not say \"in Britain\", and it notes the name was invalid. (4) The PLOS blog returned 403 and the X/Twitter post returned 402, so neither could be verified. (5) The species-range fact drops the page's \"about 94 metres\" hedge.",
+   "items": [
+    {
+     "claim": "The conservation work was carried out in 2016.",
+     "url": "https://natsca.blog/2020/04/23/giant-sequoia-at-the-natural-history-museum/",
+     "verdict": "supported",
+     "what_the_page_says": "The conservation treatment took place in 2016 and lasted 12 weeks.",
+     "problem": ""
+    },
+    {
+     "claim": "The giant sequoia came from what is now Kings Canyon National Park, California.",
+     "url": "https://natsca.blog/2020/04/23/giant-sequoia-at-the-natural-history-museum/",
+     "verdict": "supported",
+     "what_the_page_says": "The tree came from what is now Kings Canyon National Park, California, USA.",
+     "problem": ""
+    },
+    {
+     "claim": "Two sections were cut for display: the bottom, slightly larger one went to the AMNH.",
+     "url": "https://natsca.blog/2020/04/23/giant-sequoia-at-the-natural-history-museum/",
+     "verdict": "supported",
+     "what_the_page_says": "Two sections were cut. The bottom, slightly larger one went to the AMNH.",
+     "problem": ""
+    },
+    {
+     "claim": "The top section was split into 12 pieces (one central disc and 11 radial segments) so it could be shipped to the UK.",
+     "url": "https://natsca.blog/2020/04/23/giant-sequoia-at-the-natural-history-museum/",
+     "verdict": "supported",
+     "what_the_page_says": "The top section was split into 12 pieces, a central disc and 11 radial segments, for shipping to London.",
+     "problem": "Supported as summarised. The summary did not explicitly confirm that shipping was the stated reason for the split."
+    },
+    {
+     "claim": "The pieces arrived at South Kensington in April 1893.",
+     "url": "https://natsca.blog/2020/04/23/giant-sequoia-at-the-natural-history-museum/",
+     "verdict": "supported",
+     "what_the_page_says": "The pieces arrived at South Kensington in April 1893.",
+     "problem": ""
+    },
+    {
+     "claim": "The section went on display the following year in one of the bays of the central hall.",
+     "url": "https://natsca.blog/2020/04/23/giant-sequoia-at-the-natural-history-museum/",
+     "verdict": "supported",
+     "what_the_page_says": "It went on display in 1894 in one of the bays of the central hall.",
+     "problem": ""
+    },
+    {
+     "claim": "The section was moved in 1902 to stand against the wall between the north and central halls, and again in 1971 to its current place on the second-floor balcony.",
+     "url": "https://natsca.blog/2020/04/23/giant-sequoia-at-the-natural-history-museum/",
+     "verdict": "supported",
+     "what_the_page_says": "In 1902 it was moved against the wall dividing the north and central halls. In 1971 it moved to its current second-floor balcony location.",
+     "problem": ""
+    },
+    {
+     "claim": "A museum interpretation board says the slice was taken from the Mark Twain tree.",
+     "url": "https://www.thehallofeinar.com/2023/02/giant-sequoias/",
+     "verdict": "supported",
+     "what_the_page_says": "The blogger quotes an NHM London board saying the slice was taken from the 100-metre-tall Mark Twain tree.",
+     "problem": ""
+    },
+    {
+     "claim": "The Mark Twain Tree was felled so that sections of the trunk could be shown in museums in New York and London.",
+     "url": "https://theplosblog.plos.org/2018/05/mark-twain-and-the-big-stump-can-we-save-nature-from-ourselves/",
+     "verdict": "page_unreachable",
+     "what_the_page_says": "The server returned HTTP 403 Forbidden. A search found no copy of the page elsewhere.",
+     "problem": "Could not verify against the cited page."
+    },
+    {
+     "claim": "Felling the Mark Twain Tree took 13 days.",
+     "url": "https://en.wikipedia.org/wiki/Mark_Twain_Tree",
+     "verdict": "supported",
+     "what_the_page_says": "The process of felling the tree took 13 days.",
+     "problem": ""
+    },
+    {
+     "claim": "The Mark Twain Tree's stump survives in Big Stump Grove and is known as the 'Big Stump' or 'Mark Twain Stump'.",
+     "url": "https://commons.wikimedia.org/wiki/Category:Mark_Twain_Tree",
+     "verdict": "supported",
+     "what_the_page_says": "The stump remains at Big Stump Grove and is known as the Big Stump or Mark Twain Stump.",
+     "problem": ""
+    },
+    {
+     "claim": "Giant sequoias grow in the Sierra Nevada of California. They reach 94 metres tall with diameters of up to eight metres or a bit more, and individual trees have been dated to more than 3,000 years old.",
+     "url": "https://www.nhm.ac.uk/discover/giant-sequoia-sequoiadendron-giganteum-worlds-biggest-tree.html",
+     "verdict": "partly_supported",
+     "what_the_page_says": "They grow in the Sierra Nevada, California. The page gives about 94 m (over 300 ft) in height, trunks up to about 8 m or slightly more, and dated ages over 3,000 years.",
+     "problem": "The page says 'about 94 metres'. The claim drops that hedge and states 94 m as a firm maximum."
+    },
+    {
+     "claim": "The genus name Sequoia was coined in the mid-1840s by the Austrian botanist Stephan Endlicher, who gave no reason for the name. In the 1860s a Yosemite guidebook popularised the idea that he meant to honour Sequoyah, who invented the Cherokee syllabary.",
+     "url": "https://www.nhm.ac.uk/discover/giant-sequoia-sequoiadendron-giganteum-worlds-biggest-tree.html",
+     "verdict": "supported",
+     "what_the_page_says": "Austrian botanist Endlicher coined the name in the mid-1840s and gave no reason. An 1860s Yosemite guidebook popularised the Sequoyah idea, which the page calls unproven. Sequoyah created the Cherokee syllabary.",
+     "problem": "The claim matches the page, but the film should keep the page's point that the Sequoyah link is unproven."
+    },
+    {
+     "claim": "In Britain, Lindley named the tree Wellingtonia after the Duke of Wellington.",
+     "url": "https://www.nhm.ac.uk/discover/giant-sequoia-sequoiadendron-giganteum-worlds-biggest-tree.html",
+     "verdict": "partly_supported",
+     "what_the_page_says": "John Lindley proposed Wellingtonia gigantea to honour the Duke of Wellington, who had died the year before. The name was already used for an Asian plant genus and so could not stand.",
+     "problem": "The page does not say 'In Britain'. 'Named' overstates the page's 'proposed', and the claim leaves out that the name was invalid."
+    },
+    {
+     "claim": "Keyword: Mark Twain Tree",
+     "url": "https://natsca.blog/2020/04/23/giant-sequoia-at-the-natural-history-museum/",
+     "verdict": "unsupported",
+     "what_the_page_says": "The natsca page describes the tree's origin, felling and display but never names it the Mark Twain Tree.",
+     "problem": "The cited basis does not state the name. It appears only on other pages (the hallofeinar blog quoting the NHM board, and Wikipedia/Commons)."
+    },
+    {
+     "claim": "Keyword: Sequoiadendron giganteum",
+     "url": "https://www.nhm.ac.uk/discover/giant-sequoia-sequoiadendron-giganteum-worlds-biggest-tree.html",
+     "verdict": "supported",
+     "what_the_page_says": "The page gives the scientific name Sequoiadendron giganteum and explains how the name came about.",
+     "problem": ""
+    },
+    {
+     "claim": "Keyword: Kings Canyon National Park",
+     "url": "https://natsca.blog/2020/04/23/giant-sequoia-at-the-natural-history-museum/",
+     "verdict": "supported",
+     "what_the_page_says": "The tree came from what is now Kings Canyon National Park.",
+     "problem": ""
+    },
+    {
+     "claim": "Keyword: felled in 1891",
+     "url": "https://x.com/NHM_London/status/1495352550199074820",
+     "verdict": "page_unreachable",
+     "what_the_page_says": "X returned HTTP 402, so the tweet could not be read.",
+     "problem": "Could not verify against the cited basis. Natsca does say 1891, but the NHM slice page also gives 1893 in its text."
+    },
+    {
+     "claim": "Keyword: 1,341 years",
+     "url": "https://natsca.blog/2020/04/23/giant-sequoia-at-the-natural-history-museum/",
+     "verdict": "supported",
+     "what_the_page_says": "The tree was 1,341 years old when felled in 1891.",
+     "problem": "The NHM slice page gives 1,300 years instead, so the two sources differ."
+    },
+    {
+     "claim": "Keyword: 101 metres tall",
+     "url": "https://www.nhm.ac.uk/discover/giant-sequoia-slice.html",
+     "verdict": "supported",
+     "what_the_page_says": "The page says the tree was 1,300 years old and 101 metres tall when it was felled.",
+     "problem": ""
+    },
+    {
+     "claim": "Keyword: 12 pieces",
+     "url": "https://natsca.blog/2020/04/23/giant-sequoia-at-the-natural-history-museum/",
+     "verdict": "supported",
+     "what_the_page_says": "The top section was split into 12 pieces.",
+     "problem": ""
+    },
+    {
+     "claim": "Keyword: April 1893",
+     "url": "https://natsca.blog/2020/04/23/giant-sequoia-at-the-natural-history-museum/",
+     "verdict": "supported",
+     "what_the_page_says": "The pieces arrived at South Kensington in April 1893.",
+     "problem": ""
+    },
+    {
+     "claim": "Keyword: Sequoyah",
+     "url": "https://www.nhm.ac.uk/discover/giant-sequoia-sequoiadendron-giganteum-worlds-biggest-tree.html",
+     "verdict": "supported",
+     "what_the_page_says": "The page names Sequoyah, creator of the Cherokee syllabary, as the possible but unproven honoree of the name Sequoia.",
+     "problem": ""
+    },
+    {
+     "claim": "Keyword: Chelsea McKibbin",
+     "url": "https://www.nhm.ac.uk/discover/giant-sequoia-slice.html",
+     "verdict": "supported",
+     "what_the_page_says": "Conservator Chelsea McKibbin cleaned and protected the slice and is quoted on the process.",
+     "problem": ""
+    }
+   ]
+  }
+ ],
+ "report": {
+  "per_exhibit": [
+   {
+    "exhibit": "hope (narration)",
+    "checked": 4,
+    "supported": 3,
+    "partly": 1,
+    "unsupported": 0,
+    "unreachable": 0,
+    "not_fully_supported": [
+     "PARTLY: 'But I was a juvenile. Not yet fully grown.' The cited March page (a-cetacean-relation.html) never says 'juvenile'. It says she was about 15 years old and had spent about a year raising her calf, which argues against 'juvenile'. Only 'not yet fully grown' is supported, and that comes from the September page. Fix: cut 'juvenile', or say 'about fifteen years old'."
+    ]
+   },
+   {
+    "exhibit": "hope (web)",
+    "checked": 10,
+    "supported": 9,
+    "partly": 1,
+    "unsupported": 0,
+    "unreachable": 0,
+    "not_fully_supported": [
+     "PARTLY: keyword 'Swantons Bank, Wexford Harbour'. The page says the whale stranded on 'a sandy ridge called Swantons Bank at the mouth of Wexford Harbour'. The keyword drops 'mouth of', so it reads as if she stranded inside the harbour. Fix: 'Swantons Bank, mouth of Wexford Harbour'.",
+     "CONTEXT (supported): '13.5 metres above ground' is the height of the arch of the back, the highest point. The jaw is 4.2 m above the floor at its lowest.",
+     "CONTEXT (supported): 'Mammals Hall, 1934'. The page says the gallery is 'now known as' the Mammals Hall, so it may not have had that name in 1934."
+    ]
+   },
+   {
+    "exhibit": "sophie (narration)",
+    "checked": 5,
+    "supported": 3,
+    "partly": 2,
+    "unsupported": 0,
+    "unreachable": 0,
+    "not_fully_supported": [
+     "PARTLY: 'Look closer. This is bone.' The page only says Sophie is 'the real thing', a real fossil and not a cast like the Diplodocus. It says nothing about what she is made of. Fix: 'This is real fossil bone' or 'This is the real thing'.",
+     "PARTLY: 'The real thing. One animal, from a Wyoming hilltop to here.' 'Real thing' and 'Wyoming hilltop' are supported (the skeleton was nearly fully connected and found buried at the top of a hill). The page never says outright that the skeleton is a single individual. 'One animal' was inferred from 'nearly fully connected' plus the page's phrase 'the animal'."
+    ]
+   },
+   {
+    "exhibit": "sophie (web)",
+    "checked": 16,
+    "supported": 15,
+    "partly": 1,
+    "unsupported": 0,
+    "unreachable": 0,
+    "not_fully_supported": [
+     "PARTLY: keyword 'Sophie the Stegosaurus' (NHM press release). The page only says the specimen was named in honour of Sophie Herrmann, Jeremy Herrmann's daughter. It never uses the phrase 'Sophie the Stegosaurus'.",
+     "CONTEXT (supported): 'Bob Simon dug her out together with Robert Boscarelli'. Cowboy State Daily names a third digger, Don Pfister, so the film should not imply only two people did the dig.",
+     "CONTEXT (supported): 'Barrett found Sophie' (TNT). He found her for sale at a US fossil fair. Bob Simon discovered the bones in 2003.",
+     "CONTEXT (supported): '4 December 2014' is the date she went on show. It is not the date of the press release or of the acquisition."
+    ]
+   },
+   {
+    "exhibit": "sequoia (narration)",
+    "checked": 6,
+    "supported": 4,
+    "partly": 1,
+    "unsupported": 0,
+    "unreachable": 1,
+    "not_fully_supported": [
+     "UNREACHABLE: 'They felled me so museums could show me to you.' The cited PLOS blog returned HTTP 403 and no moved copy was found. The NHM slice page gives no reason for the felling. Wikipedia's Mark Twain Tree article says it was felled in 1891 as an exhibition tree, with sections sent to AMNH and NHM. Fix: cite that article or drop the line.",
+     "PARTLY: 'Thirteen hundred years of rings, cut down to be seen.' The 1,300 years and the revealed rings are on the NHM page. 'Cut down to be seen' depends on the unreachable PLOS page. The page also never says the slice shows 1,300 rings: the line joins two separate facts.",
+     "NOTE: the NHM slice page contradicts itself on the felling year (1893 in the text, 1891 in a photo caption). The narration gives no year, so the film is not affected."
+    ]
+   },
+   {
+    "exhibit": "sequoia (web)",
+    "checked": 24,
+    "supported": 19,
+    "partly": 2,
+    "unsupported": 1,
+    "unreachable": 2,
+    "not_fully_supported": [
+     "UNSUPPORTED: keyword 'Mark Twain Tree', cited to natsca.blog. That page never names the tree. The name appears only on thehallofeinar.com, which quotes an NHM board, and on Wikipedia/Commons. Fix: re-cite to one of those.",
+     "UNREACHABLE: 'The Mark Twain Tree was felled so that sections could be shown in museums in New York and London' (PLOS blog, HTTP 403).",
+     "UNREACHABLE: keyword 'felled in 1891', cited to an X/Twitter post (HTTP 402). Natsca says 1891. The NHM slice page says 1893 in its text and 1891 in a caption.",
+     "PARTLY: species range '94 metres tall...'. The page says 'about 94 m'. The fact drops that hedge and states 94 m as a firm maximum.",
+     "PARTLY: 'In Britain, Lindley named the tree Wellingtonia after the Duke of Wellington.' The page says Lindley 'proposed' Wellingtonia gigantea. It does not say 'in Britain', and it says the name was invalid because an Asian plant genus already had it.",
+     "CONTEXT (supported): '1,341 years' (natsca) conflicts with the 1,300 years on the NHM slice page.",
+     "CONTEXT (supported): the Sequoyah link is called unproven on the page, and the film should keep that.",
+     "COUNT NOTE: the checker's own summary says 15/4/3/2, but its item list gives 19 supported, 2 partly, 1 unsupported and 2 unreachable. The counts here follow the item list."
+    ]
+   }
+  ],
+  "error_sources": [
+   {
+    "stage": "(a) research: findings that go beyond the page, or that cite a page that cannot be fetched",
+    "count": 4,
+    "fix": "Check at research time: each finding must include a verbatim quote of 15 to 40 words from a page fetched with HTTP 200 in the same run. Drop any finding whose URL failed (PLOS 403) or is a social post (x.com). The finding text may not add scope ('In Britain'), strengthen verbs ('proposed' to 'named') or drop hedges ('about 94 m'). Prompt rule: 'Copy the page's qualifiers exactly; if a fact needs words not in the quote, do not write it.' Affects: Wellingtonia, the 94 m range, and the PLOS felling motive in both the web fact and the narration line."
+   },
+   {
+    "stage": "(b) digest: paraphrasing",
+    "count": 1,
+    "fix": "Make the digest carry each fact's verbatim quote and forbid swapping in new descriptive terms (age, sex, material, status). Automated check: every content word in a digested fact must appear in its quote or be on a small synonym whitelist. 'Juvenile' fails this check because the source says 'not yet fully grown' and 'about 15 years old'."
+   },
+   {
+    "stage": "(c) script: adding qualifiers or combining facts",
+    "count": 3,
+    "fix": "Make each narration line cite exactly one fact ID and allow only claims found in that fact's quote: no merging of two facts and no inferred conclusions. Add a post-script verifier that rejects any line containing a claim word missing from the cited quote. This would catch 'This is bone' (source: 'real thing, not a cast'), 'One animal' (inferred from 'nearly fully connected') and 'Thirteen hundred years of rings, cut down to be seen' (two facts joined, plus an unreachable source)."
+   },
+   {
+    "stage": "(d) keywords",
+    "count": 4,
+    "fix": "Require each keyword to be a substring, or a near-verbatim span with only stopwords removed, of the cited page's quote. Its URL must be the page that actually contains it and must have fetched with HTTP 200. This rejects 'Mark Twain Tree' cited to natsca, 'felled in 1891' cited to X, 'Sophie the Stegosaurus' (the phrase is absent from the page), and 'Swantons Bank, Wexford Harbour' (the trim dropped 'mouth of' and changed the meaning)."
+   }
+  ],
+  "verdict": "I checked 65 items: 53 are supported, 7 partly supported, 1 unsupported and 3 unreachable. Nothing is a hard factual error. Every problem is overreach (wording that goes beyond the source) or a citation that does not hold up.\n\n**Where the errors come from (12 not fully supported):**\n- **Keywords (4) and research (4)** cause the most trouble. Keywords get cited to the wrong page or trimmed in a way that changes the meaning. Research cites pages that cannot be fetched (PLOS 403, X 402) and drops or adds qualifiers.\n- **Script (3):** lines join two facts or turn \"the real thing\" into a claim about the material.\n- **Digest (1):** \"juvenile\" replaced \"not yet fully grown\".\n\n**The single most effective change:** require a verbatim quote from a page fetched with HTTP 200 for every fact and keyword, carry that quote through every stage, and automatically reject any line or keyword whose claim words are not in the quote. That one check would have caught all 12 items.\n\n**Lines to fix before release:**\n- Hope: drop \"juvenile\".\n- Hope keyword: \"mouth of Wexford Harbour\".\n- Sophie: \"This is bone\" becomes \"real fossil bone\"; soften \"one animal\".\n- Sequoia: re-cite the felling motive to the Wikipedia Mark Twain Tree article, or cut it; re-cite the \"Mark Twain Tree\" keyword; settle 1891 vs 1893 and 1,300 vs 1,341 years.\n\n**Housekeeping:** the sequoia web checker's own summary counts (15/4/3/2) do not match its item list (19/2/1/2). This report uses the item list.\n\n**Not covered by these results:** your note about hard-coding the image-generation config instead of having the LLM set it. These fact-check results say nothing about it either way."
+ }
+}

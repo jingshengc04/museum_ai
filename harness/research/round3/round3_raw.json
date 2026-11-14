@@ -1,0 +1,401 @@
+{
+ "points": {
+  "v1.2": 16,
+  "counter": 16,
+  "endings": 12,
+  "v1.3": 16
+ },
+ "decoded": [
+  {
+   "exhibit": "hope",
+   "judge": "director",
+   "ranking": [
+    "v1.2",
+    "counter",
+    "endings",
+    "v1.3"
+   ],
+   "truth_problems": [
+    {
+     "script": "endings",
+     "line": "Twenty-five point two metres of skeleton, across this whole hall.",
+     "problem": "The 25.2 m length is sourced, but 'across this whole hall' says the skeleton spans Hintze Hall. Nothing in the pack supports that, and the 'appearance' notes only say she hangs above visitors. It overstates scale as fact. Cut it to 'Twenty-five point two metres of skeleton.'"
+    },
+    {
+     "script": "endings",
+     "line": "Every bone up there once lay on an Irish sandbar.",
+     "problem": "This is a mild inference. The pack says she stranded on the sandbar, but it gives no bone count and nothing about how the skeleton was recovered. The 221-bone figure is UNSOURCED. 'Every bone' is likely true but goes beyond the pack. 'I once lay on an Irish sandbar' would be safe."
+    },
+    {
+     "script": "endings",
+     "line": "In March eighteen ninety-one, I stranded on this sandbar.",
+     "problem": "'this sandbar' points at a generated beach shot, so the viewer will read the footage as the real place. That is a small risk: the source places it at the mouth of Wexford Harbour and the shot is invented. It is not false, but it is the weakest wording among the four stranding lines."
+    },
+    {
+     "script": "v1.3",
+     "line": "I stranded on a sandbar in Wexford Harbour, Ireland.",
+     "problem": "A small precision slip. The source says 'at the mouth of Wexford Harbour', not in the harbour. The sentence is still essentially true."
+    },
+    {
+     "script": "v1.3",
+     "line": "My skeleton was sold to this museum, and in July twenty seventeen they unveiled me here.",
+     "problem": "Accurate, but it reads as if she was unveiled straight after the sale. It skips the Mammal Hall years from 1934. That elision is not a false statement."
+    }
+   ],
+   "per_script": [
+    {
+     "script": "v1.2",
+     "strongest": "P is the only script built on one idea with a turn: the visitor had to step back to fit her in, she is 25 metres long, 'that number isn't the surprising part', she was a juvenile, 'Look up again. All of this, and I was young.' The hook speaks to what the visitor just did. The ending sends them back to the real object, and the counterpoint between the hall and the living whale earns the second segment. Its sound plan is also the most directed: the cello dies into silence at the cut and a single piano note reopens.",
+     "weakest": "She never says her name, which is a real gap for an exhibit called Hope. The 30 s is mostly earned, but the first 15 s carry only two lines, and the living-whale shots risk the pale, wrong-light rendering problem. The shot descriptions are also duplicated and messy, so clean them before generation.",
+     "demo_ready": true
+    },
+    {
+     "script": "counter",
+     "strongest": "It is accurate and well paced. The middle uses image-sound counterpoint well: sand and water under the stranding line, then a return to the hall. 'They named me Hope.' lands as a short, plain button over the visitor's own camera angle.",
+     "weakest": "It is a list of facts with no single idea. 'Good eye.' is a dead filler beat. The first segment spends 15 s on dust and glass while saying only that she was a juvenile female, and the 30 s feels padded.",
+     "demo_ready": true
+    },
+    {
+     "script": "endings",
+     "strongest": "It has the best closing image-line of the fact-led scripts. 'Every bone up there once lay on an Irish sandbar' ties the hanging bones to the beach. The uilleann pipes give a distinct sense of place.",
+     "weakest": "Its opening line contains a truth problem ('across this whole hall'). It gives her name away in the first 7 s, before anything has been earned. The middle line, 'My skeleton was sold to this museum', is flat, and the tilt-up shot under it is only 3 s.",
+     "demo_ready": false
+    },
+    {
+     "script": "v1.3",
+     "strongest": "Every fact is sourced. The tonal arc, from hall to cold dawn sandbar and back to the hall, is clear.",
+     "weakest": "It reads like a museum label. The lines are long and sound bad aloud, for example 'all twenty-five point two metres of my skeleton in one frame'. It ends on the institutional quotation, 'a symbol of humanity's power to shape a sustainable future', which is brochure language rather than an emotional ending. There is no hook beyond the number and no single idea, and it is padded to 30 s.",
+     "demo_ready": false
+    }
+   ],
+   "reasoning": "P ranks first. It has no truth problems, and it is the only script a film director would recognise as a film: a personal hook tied to the visitor's photo, a setup with a reversal, and a callback ending. Its facts are just two, the 25.2 m length and 'juvenile female', and they are used as drama rather than as a list. Its sound direction is the most deliberate. Leaving out her name is its main flaw, and cleaning up the shot text plus a final 'I'm Hope' would fix it.\n\nR comes second. It is clean and correct with a good final button, but it is a fact recital, and 'Good eye' wastes a beat.\n\nS has the better ending line, but 'across this whole hall' is a spoken overstatement of scale. For a product whose hard rule is 'never invent facts', that keeps it below R, and it is not demo-ready as written.\n\nQ is accurate but has no idea of its own, uses mouthful lines and ends on a mission-statement quote.\n\nNone of the three fact-led scripts (Q, R, S) justifies 30 s. A tight 15 s cut of any of them would beat its own 30 s version."
+  },
+  {
+   "exhibit": "hope",
+   "judge": "educator",
+   "ranking": [
+    "v1.3",
+    "counter",
+    "endings",
+    "v1.2"
+   ],
+   "truth_problems": [
+    {
+     "script": "endings",
+     "line": "Twenty-five point two metres of skeleton, across this whole hall.",
+     "problem": "'across this whole hall' adds a spatial claim the pack does not support (and is likely false; Hintze Hall is much longer than 25.2 m). The figure is sourced; the qualifier is not."
+    },
+    {
+     "script": "endings",
+     "line": "In March eighteen ninety-one, I stranded on this sandbar.",
+     "problem": "'this sandbar' depends on the visual and never names Wexford Harbour or Ireland in the line itself. Not false, but the claim is vague and leans on the picture. The later 'Irish sandbar' line only partly fixes this."
+    },
+    {
+     "script": "v1.3",
+     "line": "I stranded on a sandbar in Wexford Harbour, Ireland.",
+     "problem": "Minor drift: the pack says 'at the mouth of Wexford Harbour', not 'in' it. Close enough to defend, but less exact than it could be."
+    },
+    {
+     "script": "v1.2",
+     "line": "From jaw to tail, I measure just over twenty-five metres.",
+     "problem": "Restates the sourced 25.2 m as a rounded figure ('just over twenty-five'). The rubric bans worked-out figures, and 'jaw to tail' adds a measurement basis the pack does not give."
+    },
+    {
+     "script": "v1.2",
+     "line": "Look up again. All of this — and I was young.",
+     "problem": "Together with 'That number isn't the surprising part' and 'Just a girl', this implies she would have grown much bigger as an adult. The pack has no source for adult size or growth, so the film's whole payoff rests on an unstated, unsourced inference."
+    },
+    {
+     "script": "v1.2",
+     "line": "You had to go up a floor and step back just to fit all of me in.",
+     "problem": "States as fact why the visitor took the photo from the balcony ('had to'). The note only says where the photo was taken from."
+    }
+   ],
+   "per_script": [
+    {
+     "script": "v1.3",
+     "strongest": "It covers what visitors ask most (how big, where she came from, how she got here, why 'Hope') and every line traces to the pack. The ending gives the full sourced meaning of her name over a wide balcony shot that matches the visitor's photo, which sends the eye back to the real skeleton.",
+     "weakest": "The 17-word stranding line is dense for its slot, and 'in Wexford Harbour' is slightly looser than the pack's 'at the mouth of'. Segment 2's middle close-ups (light on bone, dust motes) are generic.",
+     "demo_ready": true
+    },
+    {
+     "script": "counter",
+     "strongest": "It is clean and accurate: 25.2 m, a juvenile female, Wexford Harbour in March 1891, sold, unveiled here in July 2017, named Hope. Ending on 'They named me Hope' over the visitor's own photo angle works well.",
+     "weakest": "It is padded. 'Good eye.' is filler, and the skylight and cloud shots in segment 1 add nothing. It names her Hope without saying why, the one thing people standing there actually wonder about the name, which R answers.",
+     "demo_ready": true
+    },
+    {
+     "script": "endings",
+     "strongest": "Good emotional structure. The cut from bones to a living young whale underwater, and the closing 'Every bone up there once lay on an Irish sandbar' with a balcony shot, link the object to its story well.",
+     "weakest": "'across this whole hall' is an unsupported qualifier. 'this sandbar' is vague and leaves out Wexford, and there is no date in 2017 and no reason for the name. Saying 'My name is Hope' early with no meaning attached wastes the best line.",
+     "demo_ready": false
+    },
+    {
+     "script": "v1.2",
+     "strongest": "It has the most distinctive voice and visual idea: a pull-back to fit the whole skeleton, the living whale overhead, and a 'look up again' call that sends the visitor back to the real object.",
+     "weakest": "It is built on an unsourced inference (that she would have grown much bigger), uses a rounded figure instead of 25.2 m, and leaves out the stranding, the museum history and the name. That is 30 seconds carrying about one fact, so it is padded and the least informative of the four.",
+     "demo_ready": false
+    }
+   ],
+   "reasoning": "All four run 30 s, so length is judged by how well each uses the time. R is the only script that answers every core visitor question: size, origin, how she got here, and why she is called Hope, with her name's sourced meaning as the payoff. Its only flaw is a small 'in' versus 'at the mouth of' wording drift, which is not a real truth problem. Q is equally clean but pads with 'Good eye.' and filler skylight shots, and it never explains the name, so it ranks second. P has a real unsupported qualifier ('across this whole hall') and vaguer facts, though its emotional arc is good. S is the most creative, but its central reveal depends on an unsourced implication about growth. It also rounds the sourced figure and leaves out most of the pack, so it ranks last."
+  },
+  {
+   "exhibit": "sophie",
+   "judge": "director",
+   "ranking": [
+    "v1.2",
+    "counter",
+    "endings",
+    "v1.3"
+   ],
+   "truth_problems": [
+    {
+     "script": "counter",
+     "line": "[20.5-25.0s] \"Visitors walk beneath the skeleton across the stone floor... small figures under the arched back.\"",
+     "problem": "This is a visual error, not a spoken one. The pack says she stands on a low plinth, 290 cm tall. Showing people walking under her treats her like a suspended skeleton such as Hope's, and anyone who has stood in front of her will see it is wrong."
+    },
+    {
+     "script": "v1.3",
+     "line": "\"About one hundred and fifty million years ago, I lived here.\" ... \"On display here from December two thousand and fourteen.\"",
+     "problem": "Borderline. 'Here' means Wyoming in the first line and the London hall in the second, five seconds later. Neither claim is false, but a viewer could hear that she lived where she is displayed. R has a milder version ('I lived here' and then a hall cut)."
+    },
+    {
+     "script": "v1.2",
+     "line": "\"Only my left arm and the base of my tail are missing. The rest of what you see is me.\"",
+     "problem": "Borderline, not a real error. The missing parts are named in the same line, so it stays accurate. It would only become false if trimmed to 'what you see is me', because the pack doesn't say what fills the missing parts on the mount."
+    }
+   ],
+   "per_script": [
+    {
+     "script": "v1.2",
+     "strongest": "It has one clear idea: most Stegosaurus skeletons are found in pieces, and mine is whole. Picture and sound make the point together, with scattered bones becoming a joined row and wind becoming the hush of the hall. It ends on a line that pays off in the room, \"The rest of what you see is me.\" Every fact is quoted closely from the pack, and it is the only script whose second 15 s adds new information instead of filling time.",
+     "weakest": "\"on a hilltop in Wyoming, USA\" sounds like a form field when spoken; drop \"USA\". The 2.5 s tail-spike shot (18.0-20.5s) is hurried and gets lost under the plates line. The last 9.5 s is one long tilt carrying a two-sentence line, which may drag if the model renders it slowly.",
+     "demo_ready": true
+    },
+    {
+     "script": "counter",
+     "strongest": "It has the best moment of character in the set. The interjection \"Oh. Daylight.\" turns the dig into her waking up. The short spoken lines fit in their slots, and \"Look up. I am the skeleton from that hill\" is a good direct ending.",
+     "weakest": "The order jumps from 2003 to 150 million years ago to 2014, so there is no single idea, just a timeline. \"On display from December two thousand and fourteen\" reads like a wall label. The visitors-beneath-the-skeleton shot misrepresents the mount. The story would fit in 15 s.",
+     "demo_ready": false
+    },
+    {
+     "script": "endings",
+     "strongest": "It opens strongly by starting in the hall and turning back: \"Before this hall, there was a hill in Wyoming.\" Using no music and letting the hall reverb return is a confident choice. \"Almost all of me came off that hill\" is a neat ending.",
+     "weakest": "It says Wyoming twice in its first two lines. The film loops hall, living animal, dig, hall, so the hill/life/hall order is confused, and the narration leaves a long empty stretch (about 16.5-24.5s, after the Bob Simon line ends) in which nothing is said. It is padded to 30 s for about 15 s of story.",
+     "demo_ready": false
+    },
+    {
+     "script": "v1.3",
+     "strongest": "The opening is concrete and specific: Bob Simon, spring 2003, a hilltop dig with the bones nearly all connected. Each line in segment 1 lines up with its pictures.",
+     "weakest": "It uses the same structure as R with flatter wording. \"On display here from December two thousand and fourteen\" is a fragment that reads like a caption. Having 'here' mean two places blurs the story, and \"Look up: the skeleton from that hill\" is weaker than R's version. It has no idea of its own, and the 30 s is not earned.",
+     "demo_ready": false
+    }
+   ],
+   "reasoning": "Only P has one controlling idea, completeness: other skeletons arrive in pieces, Sophie arrived whole. The pictures (scattered bones becoming a joined row), the sound (grit and wind becoming the hush of the hall) and the ending (\\\"The rest of what you see is me\\\", said while the visitor stands in front of her) all serve it. Its facts are quoted almost word for word from the pack, and its second segment adds new facts (plates and spikes, the missing left arm and tail base), so it is the only 30 s cut that isn't padded. Q, R and S all tell a timeline instead (2003 dig, 150 million years ago, 2014 display, look up), and each would be tighter at 15 s. R beats Q on how the lines sound aloud ('Oh. Daylight.' and 'I am the skeleton from that hill'), but it puts visitors under a skeleton that stands on a low plinth. That is a visible error, and it rules R out of first place either way. S has a good hall-to-hill opening, but it repeats Wyoming, its order is confusing and it leaves the voice silent for about 8 s. Q is R with flatter lines, so it comes last. P is the only one I'd show judges as it stands, after cutting 'USA'."
+  },
+  {
+   "exhibit": "sophie",
+   "judge": "educator",
+   "ranking": [
+    "v1.2",
+    "v1.3",
+    "counter",
+    "endings"
+   ],
+   "truth_problems": [
+    {
+     "script": "v1.2",
+     "line": "Only my left arm and the base of my tail are missing. The rest of what you see is me.",
+     "problem": "Borderline inference. The pack says the specimen is virtually complete except the left arm and tail base, but it never says what the mount uses for those gaps or that every other visible element is original bone. 'The rest of what you see is me' turns a statement about the find into a claim about the display. It probably holds, but it isn't stated. A safer line: 'Only my left arm and the base of my tail were never found.'"
+    },
+    {
+     "script": "counter",
+     "line": "[20.5-25.0s] Visitors walk beneath the skeleton across the stone floor... small figures under the arched back.",
+     "problem": "The visual contradicts the pack, which describes her on a low plinth. Nobody can walk under her, so the film would show the real display wrongly."
+    },
+    {
+     "script": "counter",
+     "line": "\"About a hundred and fifty million years ago, I lived here.\"",
+     "problem": "'Here' is ambiguous. It is spoken right after the hilltop segment and just before the hall shots, so a listener could hear it as London or the hall. The pack only supports 'what is now Wyoming'."
+    },
+    {
+     "script": "v1.3",
+     "line": "\"About one hundred and fifty million years ago, I lived here.\"",
+     "problem": "Same ambiguous 'here' as Q. It is less risky because R stays on the Wyoming hilltop all through segment 1, but saying Wyoming would be exact."
+    },
+    {
+     "script": "endings",
+     "line": "\"Before this hall, there was a hill in Wyoming.\"",
+     "problem": "Not false, but it blurs the timeline. The hill (2003) and the life (150 million years ago) get folded together before the next line sorts them out. This is a clarity problem, not a factual one."
+    }
+   ],
+   "per_script": [
+    {
+     "script": "v1.2",
+     "strongest": "It answers the question a visitor actually has: how much of this is really her, and why is she special? Each line is backed by the pack: most skeletons are incomplete, hers was almost fully joined, she has the most complete set of plates and spikes, and only the left arm and tail base are missing. The camera moves along the real plates, then the spikes, then tilts up from the short front legs, so it sends the eye straight back to the object. Visitors can go and look for the missing arm themselves.",
+     "weakest": "The closing 'The rest of what you see is me' goes slightly past the pack. It also leaves out the hook of when she lived and who found her, and the 'red rock' in the dig shots is a visual guess (the pack gives no rock colour).",
+     "demo_ready": true
+    },
+    {
+     "script": "v1.3",
+     "strongest": "Clean and accurate, with a clear arc: the 2003 discovery, alive 150 million years ago, on display since December 2014, then 'look up'. The discovery lines follow the pack closely ('to expand his quarry', 'bones nearly all connected'), and the shots match the described mount.",
+     "weakest": "The facts are mostly the story of the find. It says little about the object in front of you: nothing about plates, spikes, size or completeness. 'I lived here' is vague, and the display date is a weak line for a payoff.",
+     "demo_ready": true
+    },
+    {
+     "script": "counter",
+     "strongest": "Short, punchy lines, and the 'Oh. Daylight.' beat gives her personality. It follows the same accurate arc as R and ends with a direct prompt to look up.",
+     "weakest": "Visitors are shown walking beneath a skeleton that stands on a low plinth, which misrepresents the real display. The 'here' is ambiguous, and like R it tells the visitor little about what they are looking at.",
+     "demo_ready": false
+    },
+    {
+     "script": "endings",
+     "strongest": "No factual errors. The sound design is atmospheric, and the 'nearly fully connected' and 'almost all of me' lines are faithful to the pack.",
+     "weakest": "Padded to 30 seconds with only four short lines and long empty stretches. The opening timeline is muddled, there is no 'look' prompt, and it answers none of what visitors wonder about (plates, spikes, size, what's real). It should have been a 15-second film.",
+     "demo_ready": false
+    }
+   ],
+   "reasoning": "None of the four makes a clear factual error in narration. S's only weak spot is the inference in its last line, which a one-word fix ('were never found') removes, so I don't count it as disqualifying. S wins because it is the only script built around the object itself. It answers the obvious visitor question (is this real, and how complete is it?) with pack facts, and its camera keeps returning to features the visitor can check on the real skeleton. It also earns its 30 seconds. R is the most cautious discovery story, accurate and well staged, but most of its content is about provenance rather than the object, and its 'here' is loose. Q tells nearly the same story as R, but its shot of visitors walking under a low-plinth mount gets the real display wrong, and its 'here' is more ambiguous. P is accurate but thin: four lines stretched over 30 seconds, a confusing opening and no prompt to look. A tight 15-second version would have beaten it."
+  },
+  {
+   "exhibit": "sequoia",
+   "judge": "director",
+   "ranking": [
+    "v1.3",
+    "endings",
+    "v1.2",
+    "counter"
+   ],
+   "truth_problems": [
+    {
+     "script": "v1.3",
+     "line": "Here since eighteen ninety-three. Look up.",
+     "problem": "Minor ambiguity, not a false fact. The pack says the slice has been at the museum since 1893 but only 'now' stands on the Hintze Hall balcony; before that it spent over a century in the botany displays. Said over a push-in on the balcony, 'here' suggests that exact spot since 1893. 'At this museum since 1893' would fix it. A viewer could also hear 1893 as the felling year, which the pack says must not be stated."
+    },
+    {
+     "script": "counter",
+     "line": "Since eighteen ninety-three, this slice has been here. Look up.",
+     "problem": "Same ambiguity as Q. 'Here', over the balcony shot, implies the current spot since 1893, but the pack only puts it at the museum since 1893 and on the balcony 'now'."
+    },
+    {
+     "script": "endings",
+     "line": "Count these rings, and you're counting my life.",
+     "problem": "Slight overstatement. The pack says counting rings 'estimates' age. As a poetic first-person line it is defensible, and the 1,300-year figure that follows is sourced. Borderline, not disqualifying."
+    },
+    {
+     "script": "v1.2",
+     "line": "Look up. Thirteen hundred years of rings, uncovered.",
+     "problem": "Mild compression, not an error. Conservation 'revealed the slice's many rings'; it did not uncover 1,300 years. The age is sourced separately, so this is acceptable. All the other P lines (an inch of dust, cloudy varnish and wax, three conservators in twelve weeks) match the pack."
+    }
+   ],
+   "per_script": [
+    {
+     "script": "v1.3",
+     "strongest": "The clearest one-sentence story and the biggest visual surprise: a close-up on the rings cuts to the living 101 m tree swaying in mountain wind, then to the slice high in Hintze Hall. Image and sound work against each other (hall hush, then forest wind, then hall echo). 'Look up' ends on an action the visitor can actually take, from the floor up to the balcony.",
+     "weakest": "The middle line packs two numbers into one breath ('one hundred and one metres tall, thirteen hundred years old') and reads like a spec sheet. The SOUND field has empty entries ('; ;'), so there are no spot effects to guide the generator. 'Here since 1893' is ambiguous about place.",
+     "demo_ready": true
+    },
+    {
+     "script": "endings",
+     "strongest": "The tightest single idea. 'Count these rings, and you're counting my life' is a direct, physical hook that turns the visitor's eye into the story. Dropping music for hall murmurs and a dry wood tick is a confident, gallery-quiet choice, and the light sliding out to the last ring at the bark is an elegant visual metaphor for the end of a life.",
+     "weakest": "The ending repeats the opening ('My whole life, laid out in one face of wood' restates line 1) instead of turning it, so the film lands softly with no payoff or call to look. Three shots of the same wood face give a generator little visual variety. 'Counting my life' slightly overstates 'estimates'.",
+     "demo_ready": true
+    },
+    {
+     "script": "v1.2",
+     "strongest": "The only script with a real narrative arc and a strong sensory opening. A gloved brush pulls through an inch of grey dust, a swab clears the varnish, and the half-dull, half-glossy reveal is a great process image. Brush and swab Foley over a sparse cello is precise image-sound craft, and every fact is sourced.",
+     "weakest": "Padded to 30 s. Segment 2 says the same thing three times ('revealed my many rings', 'show how long I lived', 'thirteen hundred years of rings, uncovered') over three near-static shots of the clean slice. It would be stronger cut to 15 s. 'Twelve weeks to clean me' also makes the hook a restoration fact rather than the tree's life.",
+     "demo_ready": false
+    },
+    {
+     "script": "counter",
+     "strongest": "Same scale-contrast structure as Q: close-up rings, the living crown in wind, then the slice in the hall. Its facts follow the pack's wording most literally ('Felled in California: one hundred and one metres tall...').",
+     "weakest": "It is a weaker draft of Q. The first two shots have no scene description, so 'low from the base / slow tilt up' never says it is a red-barked sequoia in a forest, and the generator may invent anything. The VO is clunkier aloud ('Since eighteen ninety-three, this slice has been here') with an inverted, deflating last line. It also has the same 'here' ambiguity.",
+     "demo_ready": false
+    }
+   ],
+   "reasoning": "None of the four has a hard truth error. Every number spoken (1,300 years, 101 m, 1893 at the museum, an inch of dust, three conservators, 12 weeks) is in the pack, and no script states the felling year or the diameter. The issues are softer: Q and R say 'here since 1893' over the balcony shot, S says 'counting my life' where the pack says 'estimates', and P compresses 'revealed the rings' into 'thirteen hundred years of rings, uncovered'. Because none of these is disqualifying, the ranking rests on craft.\n\nQ wins on hook, scale and ending. The jump from a slab of wood to a living 101 m giant in wind and back to the hall is the 'wow' a 15 s phone film needs, and 'Look up' is a real call to action for someone standing on the hall floor. S is the purest single idea with the best opening line and a brave no-music mix, but its ending repeats its opening. P has the richest image-sound craft and a real arc, yet its second 15 s is padding that restates the same rings point three times, so by the brief it loses to the tight 15 s scripts. R copies Q's structure with thinner shot prompts and clumsier lines, so it comes last."
+  },
+  {
+   "exhibit": "sequoia",
+   "judge": "educator",
+   "ranking": [
+    "counter",
+    "v1.3",
+    "endings",
+    "v1.2"
+   ],
+   "truth_problems": [
+    {
+     "script": "v1.2",
+     "line": "\"Under this shine, there was once about an inch of dust.\"",
+     "problem": "The pack puts the inch of dust on the slice's top, over the old varnish and wax. 'Under this shine' places it on the glossy cut face the camera is showing, and the layering is backwards (the dust sat on top of the finish, not under the shine). The visuals also invent a half-cleaned 'left half dull grey, right half clean' state the pack never describes."
+    },
+    {
+     "script": "v1.2",
+     "line": "\"Look up. Thirteen hundred years of rings, uncovered.\"",
+     "problem": "This implies the conservators uncovered a ring count that equals 1,300 years. The pack only says the tree was 1,300 years old and that ring counting estimates age, so this is a worked-out link the pack does not make."
+    },
+    {
+     "script": "endings",
+     "line": "\"Count these rings, and you're counting my life.\" / \"My whole life, laid out in one face of wood.\"",
+     "problem": "Minor: the pack says counting rings 'estimates' age, and this drops the hedge so it sounds exact. It is close to 'rings show how long the tree lived', so it is borderline, not a real error."
+    }
+   ],
+   "per_script": [
+    {
+     "script": "counter",
+     "strongest": "It answers the three questions people ask standing there: how old, how tall, and how it got here and since when (felled in California, 101 m, 1,300 years, here since 1893). It ends with 'Look up', which matches the slice's place on the upper balcony and sends the eye back to the real object. Every spoken claim is sourced.",
+     "weakest": "'Felled in California' followed by 'since eighteen ninety-three' lets a listener assume it was felled in 1893, the conflicting date the pack says not to state, although the script never says it. 'Look up' also assumes the visitor is on the hall floor, not on the balcony.",
+     "demo_ready": true
+    },
+    {
+     "script": "v1.3",
+     "strongest": "It has the same sourced facts as Q in slightly tighter wording. 'Here since eighteen ninety-three. Look up.' is a clean, punchy close that points to the real object.",
+     "weakest": "It drops 'felled', so it never says why only a slice is here, and 'Here' is vague (the museum? this balcony?). The last line arrives at 11 s, leaving a thin ending, and the sound line has an empty slot. 'Mountain breeze' is visual invention, not in the pack.",
+     "demo_ready": true
+    },
+    {
+     "script": "endings",
+     "strongest": "It is the most object-focused: 'Count these rings' sends the eye straight to the cut face, and the light band moving out to the bark ties picture to words. It is tight, quiet and truthful.",
+     "weakest": "It leaves out the 101 m height, the most striking fact, and says nothing about where the slice is or how long it has been there. The third line repeats the first, and 'you're counting my life' drops the pack's 'estimates' hedge.",
+     "demo_ready": true
+    },
+    {
+     "script": "v1.2",
+     "strongest": "The conservation angle (dust, varnish, three conservators, 12 weeks) is an unusual behind-the-scenes story, and most of its lines are sourced almost word for word.",
+     "weakest": "It is padded to 30 s and still never gives the height or the place. It has two truth problems: it moves the dust from the top to under the shine, and it implies a ring count of 1,300. The half-cleaned visual is invented, and lines 4 and 5 just restate pack sentences.",
+     "demo_ready": false
+    }
+   ],
+   "reasoning": "Q and R are nearly the same script: each spoken claim maps directly to a pack sentence, and each ends by pointing the visitor at the real slice on the upper balcony. Q edges ahead because 'felled' explains why only a slice is here, and its wording for 'here' is clearer. P is truthful and keeps the eye on the rings, but it leaves out the height and the museum history, so it answers less of what visitors wonder. S ranks last: it is padded to 30 s, it contains two real truth problems (the dust moved under the shine, and a ring count tied to 1,300 years), and it invents a half-cleaned visual."
+  }
+ ],
+ "decision": {
+  "adopt": [
+   "counter, in narrowed form: keep its S3 rule of one deliberate image/line collision per segment, but add a guard that every shot of the real object must match the pack's appearance or display notes. That guard targets the low-plinth Sophie shot with visitors walking underneath, and the undescribed opening shots in sequoia.",
+   "Do not adopt endings. It is the only arm that never placed first, and it has the lowest Borda score (12)."
+  ],
+  "reasons": "On Borda, v1.2, v1.3 and counter tie at 16 and endings trails at 12. First places split v1.2 3, v1.3 2, counter 1, endings 0.\n\nEndings fails its own goals. In hope, both judges flag its opening line, \"Twenty-five point two metres of skeleton, across this whole hall\". The educator calls it \"likely false; Hintze Hall is much longer\". The director calls it \"not demo-ready as written\". Both judges say it gives away \"My name is Hope\" too early, and the director says this happens \"before anything has been earned\". In sophie it leaves \"about 8 s\" with no voice (director), and the educator says it is \"padded to 30 seconds with only four short lines\". In sequoia, \"the ending repeats the opening instead of turning it\" (director). So the rules for the last line and the verbatim hook did not produce better endings. They produced repetition, and one overreaching hook line.\n\nCounter is a weak but real gain, in a narrow place. Head-to-head against v1.3 it goes 3-3. Judges praise it for image and sound working against each other: \"sand and water under the stranding line, then a return to the hall\" (hope, director). They also praise how its short lines sound aloud: \"Oh. Daylight.\" is \"the best moment of character in the set\" (sophie, director). It came first with the sequoia educator. Its failures all come from the picture track drifting away from the pack. It shows visitors walking beneath a skeleton the pack puts on a low plinth (sophie, both judges, and demo-ready false from both). In sequoia, \"the first two shots have no scene description\" (director). Writing the picture as a separate track frees it from the words but also from the facts. Keep the collision and tie the picture back to the pack.",
+  "regressions": "Yes. v1.3 regressed against v1.2 on hope and sophie with the director, who put v1.3 last on both, and with the sophie educator, who put v1.2 first.\n\nHope shows the mechanism. Choosing length by the through-line pushed v1.3 into an itinerary: hall, then a dawn sandbar in Wexford, then the sale, then the 2017 unveiling, then the meaning of the name. The director says it \"reads like a museum label\", has \"no hook beyond the number and no single idea\", and ends on \"a symbol of humanity's power to shape a sustainable future\", which he calls \"brochure language\". v1.2, which won with the hope director, has \"one idea with a turn\": \"that number isn't the surprising part\", then \"Look up again. All of this, and I was young.\" The director says it is \"the only script a film director would recognise as a film\". Sophie repeats the pattern. v1.2 is built on one idea, completeness, and wins with both judges. v1.3 is \"the same structure as R with flatter wording\" and \"no idea of its own\" (director). The educator adds that it is \"mostly the story of the find… little about the object in front of you\". The through-line rule rewards chronology, and a chronology can always justify another stop, so the scripts stretch to 30 s. All four hope scripts ran 30 s even though length was supposed to be chosen.\n\nv1.3 did not regress everywhere. With the hope educator it wins on coverage: it is \"the only script that answers every core visitor question\". It wins sequoia with the director, and v1.2 falls to third or last there because \"segment 2 says the same thing three times\". v1.3 also removed v1.2's inferential leaps. The hope educator objects to v1.2's \"whole payoff rests on an unstated, unsourced inference\" that she would have grown bigger, to its rounded \"just over twenty-five metres\", and to \"had to step back\". In sequoia v1.2 has \"dust moved under the shine\". So v1.2's idea-led approach bought drama partly by inferring beyond the pack. v1.3 bought accuracy and lost the idea.",
+  "common_weakness": "The weakness shared by the winners is words that tie a sourced fact to this place, this display or this generated shot when the pack never makes that link. It turns up in 5 of the 6 winning scripts:\n- v1.2 hope: \"You had to go up a floor and step back\"\n- v1.2 sophie: \"The rest of what you see is me\" (the educator suggests \"were never found\" instead)\n- v1.3 hope: \"in\" Wexford Harbour where the pack says \"at the mouth of\"\n- v1.3 sequoia: \"Here since eighteen ninety-three\", said over the balcony shot, though the pack has the slice in the botany displays first\n- counter sequoia: \"Felled in California… since eighteen ninety-three\", which invites the forbidden felling date\n\nThe losing scripts show the same pattern: \"across this whole hall\", \"this sandbar\", and the \"I lived here\" that means Wyoming in one line and London five seconds later. Close behind is padding. In every exhibit, judges say a non-winning 30 s cut \"would be tighter at 15 s\".",
+  "next_change": "Bring back v1.2's controlling idea as a required step in S1, before length is chosen, and make length follow from it.\n\nThe agent first writes one sentence of the form \"the visitor thinks X, but actually Y\". Y must be a fact quoted from the pack, not an inference. That sentence names the hook, the turn and the final line, which sends the visitor back to the real object. Examples the judges liked: \"I was young\" for hope, \"whole, not in pieces\" for sophie, and \"a slab of wood, but a living 101 m giant\" for sequoia.\n\nMake 15 s the default. Allow 30 s only if the second segment adds a new pack fact that advances the turn. That is what made v1.2 sophie \"the only 30 s cut that isn't padded\".\n\nAlso make the self-check flag every deictic word (\"here\", \"this\", \"what you see\", \"had to\") and require each one to rest on a pack sentence about place or display. This is part of the same step, because the turn is where v1.2 overreached.\n\nTogether these keep the two things judges rewarded most, v1.2's film shape and v1.3's sourcing. They also remove the itinerary that v1.3's through-line rule produced.",
+  "demo_picks": [
+   {
+    "exhibit": "hope",
+    "version": "counter",
+    "why": "It is the only hope script both judges marked demo-ready, and both ranked it second (director: \"clean and correct with a good final button\"). Before showing it, cut \"Good eye.\" and add the sourced reason for the name, which the educator noted is missing. v1.2 is the better film, but the educator found its central payoff rests on an unsourced inference about growth."
+   },
+   {
+    "exhibit": "sophie",
+    "version": "v1.2",
+    "why": "Both judges ranked it first and marked it demo-ready (director: \"the only one I'd show judges as it stands\"). Apply the two one-word fixes the judges gave: drop \"USA\", and change the last line to \"Only my left arm and the base of my tail were never found.\""
+   },
+   {
+    "exhibit": "sequoia",
+    "version": "v1.3",
+    "why": "The director ranked it first and the educator second, and both marked it demo-ready: the rings, then the living 101 m tree in wind, then the hall, then \"Look up\". Change \"Here since 1893\" to \"At this museum since 1893\" to remove the place ambiguity and the implied felling year, and fill in the empty sound slots."
+   }
+  ]
+ }
+}

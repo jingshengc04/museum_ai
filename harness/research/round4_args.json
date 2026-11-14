@@ -1,0 +1,466 @@
+{
+ "hope": {
+  "name": "Hope the blue whale",
+  "run": "1114-185039-hope-v1.5",
+  "narration_claims": [
+   {
+    "line": "Twenty-five point two metres long, the largest of this museum's more than eighty million specimens.",
+    "facts": [
+     {
+      "id": "length_25_2",
+      "text": "The skeleton is 25.2 metres long.",
+      "source": "https://artsandculture.google.com/asset/GAG_J9wcz31GXw"
+     },
+     {
+      "id": "largest_specimen",
+      "text": "Hope is the largest of the museum's more than 80 million specimens.",
+      "source": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html"
+     }
+    ]
+   },
+   {
+    "line": "But I was a juvenile. Not yet fully grown.",
+    "facts": [
+     {
+      "id": "juvenile_female",
+      "text": "Hope was a juvenile female blue whale.",
+      "source": "https://www.nhm.ac.uk/discover/news/2018/march/a-cetacean-relation.html"
+     },
+     {
+      "id": "not_fully_grown",
+      "text": "The whale was not yet fully grown.",
+      "source": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html"
+     }
+    ]
+   },
+   {
+    "line": "One March morning in eighteen ninety-one, I stranded on a sandbar at the mouth of Wexford Harbour, Ireland.",
+    "facts": [
+     {
+      "id": "stranded_wexford",
+      "text": "She stranded on a sandbar at the mouth of Wexford Harbour, Ireland, on the morning of 25 March 1891.",
+      "source": "https://www.nhm.ac.uk/discover/news/2018/march/a-cetacean-relation.html"
+     }
+    ]
+   },
+   {
+    "line": "The largest specimen in this museum, and I wasn't fully grown.",
+    "facts": [
+     {
+      "id": "largest_specimen",
+      "text": "Hope is the largest of the museum's more than 80 million specimens.",
+      "source": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html"
+     },
+     {
+      "id": "not_fully_grown",
+      "text": "The whale was not yet fully grown.",
+      "source": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html"
+     }
+    ]
+   }
+  ],
+  "web_facts": [],
+  "url_keywords": [
+   {
+    "keyword": "Hope the blue whale",
+    "kind": "name",
+    "basis": "https://nhm.ac.uk/discover/news/2017/july/museum-unveils-hope-the-blue-whale-skeleton.html"
+   },
+   {
+    "keyword": "25.2 metres long",
+    "kind": "measure",
+    "basis": "https://nhm.ac.uk/discover/news/2017/july/museum-unveils-hope-the-blue-whale-skeleton.html"
+   },
+   {
+    "keyword": "25 March 1891",
+    "kind": "date",
+    "basis": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html"
+   },
+   {
+    "keyword": "Swantons Bank, Wexford Harbour",
+    "kind": "place",
+    "basis": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html"
+   },
+   {
+    "keyword": "Ned Wickham",
+    "kind": "person",
+    "basis": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html"
+   },
+   {
+    "keyword": "221 bones",
+    "kind": "measure",
+    "basis": "https://nhm.ac.uk/discover/news/2017/july/museum-unveils-hope-the-blue-whale-skeleton.html"
+   },
+   {
+    "keyword": "Lunge-feeding dive pose",
+    "kind": "theme",
+    "basis": "https://nhm.ac.uk/discover/news/2017/july/museum-unveils-hope-the-blue-whale-skeleton.html"
+   },
+   {
+    "keyword": "13.5 metres above ground",
+    "kind": "measure",
+    "basis": "https://nhm.ac.uk/discover/news/2017/july/museum-unveils-hope-the-blue-whale-skeleton.html"
+   },
+   {
+    "keyword": "Sold for £250",
+    "kind": "measure",
+    "basis": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html"
+   },
+   {
+    "keyword": "Mammals Hall, 1934",
+    "kind": "period",
+    "basis": "https://nhm.ac.uk/discover/news/2017/july/museum-unveils-hope-the-blue-whale-skeleton.html"
+   }
+  ]
+ },
+ "sophie": {
+  "name": "Sophie the Stegosaurus",
+  "run": "1114-185041-sophie-v1.5",
+  "narration_claims": [
+   {
+    "line": "Look closer. This is bone.",
+    "facts": [
+     {
+      "id": "real_thing",
+      "text": "Sir Michael Dixon pointed out that, unlike the museum's Diplodocus cast, Sophie is the real thing.",
+      "source": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html"
+     }
+    ]
+   },
+   {
+    "line": "Spring, two thousand and three. Bob Simon found me buried on a Wyoming hilltop, almost all connected.",
+    "facts": [
+     {
+      "id": "found_when_where",
+      "text": "She was found in spring 2003 at Red Canyon Ranch, Wyoming, by Bob Simon, who runs a dinosaur quarry there.",
+      "source": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html"
+     },
+     {
+      "id": "found_hilltop",
+      "text": "He found her nearly fully connected skeleton buried at the top of a hill while expanding the quarry.",
+      "source": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html"
+     }
+    ]
+   },
+   {
+    "line": "Seventy donors helped buy me.",
+    "facts": [
+     {
+      "id": "seventy_donors",
+      "text": "The museum's director thanked 70 generous donors, with particular thanks to Jeremy Herrmann, for making the acquisition possible.",
+      "source": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html"
+     }
+    ]
+   },
+   {
+    "line": "I became the first complete dinosaur on show here in nearly a hundred years.",
+    "facts": [
+     {
+      "id": "first_in_100_years",
+      "text": "She was the first complete dinosaur specimen to go on display at the museum in nearly 100 years.",
+      "source": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html"
+     }
+    ]
+   },
+   {
+    "line": "The real thing. One animal, from a Wyoming hilltop to here.",
+    "facts": [
+     {
+      "id": "real_thing",
+      "text": "Sir Michael Dixon pointed out that, unlike the museum's Diplodocus cast, Sophie is the real thing.",
+      "source": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html"
+     },
+     {
+      "id": "found_hilltop",
+      "text": "He found her nearly fully connected skeleton buried at the top of a hill while expanding the quarry.",
+      "source": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html"
+     }
+    ]
+   }
+  ],
+  "web_facts": [
+   {
+    "id": "collection_page",
+    "text": "The museum's collection page calls her the most complete Stegosaurus ever found and says she was acquired in 2013.",
+    "source": "https://www.nhm.ac.uk/our-science/services/collections/palaeontology/dinosaurs.html"
+   },
+   {
+    "id": "morrison_holdings",
+    "text": "The museum holds Late Jurassic dinosaur specimens from the Morrison Formation in the USA.",
+    "source": "https://www.nhm.ac.uk/our-science/services/collections/palaeontology/dinosaurs.html"
+   },
+   {
+    "id": "first_named_sarah",
+    "text": "Her diggers first named her Sarah, after the daughter of the landowners; she was renamed Sophie after the daughter of a donor who helped the museum buy her.",
+    "source": "https://cowboystatedaily.com/2026/08/08/digging-wyoming-sophie-the-worlds-most-complete-stegosaurus-was-found-in-shell/"
+   },
+   {
+    "id": "boscarelli",
+    "text": "Bob Simon dug her out together with Robert Boscarelli.",
+    "source": "https://cowboystatedaily.com/2026/08/08/digging-wyoming-sophie-the-worlds-most-complete-stegosaurus-was-found-in-shell/"
+   },
+   {
+    "id": "shell_morrison",
+    "text": "Sophie was found in the Morrison Formation near Shell, Wyoming; the rock dates to the Late Jurassic, around 150 million years ago.",
+    "source": "https://cowboystatedaily.com/2026/08/08/digging-wyoming-sophie-the-worlds-most-complete-stegosaurus-was-found-in-shell/"
+   },
+   {
+    "id": "barrett_event",
+    "text": "According to TNT Magazine, Professor Barrett found Sophie at an international event, and she was bought with the help of 70 donations.",
+    "source": "https://www.tntmagazine.com/archive/sophie-the-stegosaurus-set-to-wow-museum-visitors/"
+   }
+  ],
+  "url_keywords": [
+   {
+    "keyword": "Sophie the Stegosaurus",
+    "kind": "name",
+    "basis": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html"
+   },
+   {
+    "keyword": "Stegosaurus stenops",
+    "kind": "species",
+    "basis": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html"
+   },
+   {
+    "keyword": "Red Canyon Ranch, Wyoming",
+    "kind": "place",
+    "basis": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html"
+   },
+   {
+    "keyword": "Morrison Formation, Late Jurassic",
+    "kind": "period",
+    "basis": "https://cowboystatedaily.com/2026/08/08/digging-wyoming-sophie-the-worlds-most-complete-stegosaurus-was-found-in-shell/"
+   },
+   {
+    "keyword": "Bob Simon",
+    "kind": "person",
+    "basis": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html"
+   },
+   {
+    "keyword": "Originally named Sarah",
+    "kind": "name",
+    "basis": "https://cowboystatedaily.com/2026/08/08/digging-wyoming-sophie-the-worlds-most-complete-stegosaurus-was-found-in-shell/"
+   },
+   {
+    "keyword": "560 cm long",
+    "kind": "measure",
+    "basis": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html"
+   },
+   {
+    "keyword": "around 1,600 kg",
+    "kind": "measure",
+    "basis": "https://www.imperial.ac.uk/news/164246/scientists-reveal-body-weight-worlds-most/"
+   },
+   {
+    "keyword": "Professor Paul Barrett",
+    "kind": "person",
+    "basis": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html"
+   },
+   {
+    "keyword": "4 December 2014",
+    "kind": "date",
+    "basis": "https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html"
+   }
+  ]
+ },
+ "sequoia": {
+  "name": "The giant sequoia slice",
+  "run": "1114-185043-sequoia-v1.5",
+  "narration_claims": [
+   {
+    "line": "I was one thousand three hundred years old. One hundred and one metres tall.",
+    "facts": [
+     {
+      "id": "age_height",
+      "text": "The tree was 1,300 years old and 101 metres tall when it was felled in California.",
+      "source": "https://www.nhm.ac.uk/discover/giant-sequoia-slice.html"
+     }
+    ]
+   },
+   {
+    "line": "They felled me so museums could show me to you.",
+    "facts": [
+     {
+      "id": "felled_for_museums",
+      "text": "The Mark Twain Tree was felled so that sections of the trunk could be shown in museums in New York and London.",
+      "source": "https://theplosblog.plos.org/2018/05/mark-twain-and-the-big-stump-can-we-save-nature-from-ourselves/"
+     }
+    ]
+   },
+   {
+    "line": "I've been at this museum since eighteen ninety-three.",
+    "facts": [
+     {
+      "id": "at_museum_since",
+      "text": "The slice has been at the museum since 1893.",
+      "source": "https://www.nhm.ac.uk/discover/giant-sequoia-slice.html"
+     }
+    ]
+   },
+   {
+    "line": "My top lay under about an inch of dust.",
+    "facts": [
+     {
+      "id": "dust_layer",
+      "text": "Before treatment the top was under a layer of dust about an inch thick, over cloudy old varnish and wax.",
+      "source": "https://www.nhm.ac.uk/discover/giant-sequoia-slice.html"
+     }
+    ]
+   },
+   {
+    "line": "Cleaning revealed my rings.",
+    "facts": [
+     {
+      "id": "rings_revealed",
+      "text": "Conservation work revealed the slice's many rings, which show how long the tree lived.",
+      "source": "https://www.nhm.ac.uk/discover/giant-sequoia-slice.html"
+     }
+    ]
+   },
+   {
+    "line": "Thirteen hundred years of rings, cut down to be seen.",
+    "facts": [
+     {
+      "id": "age_height",
+      "text": "The tree was 1,300 years old and 101 metres tall when it was felled in California.",
+      "source": "https://www.nhm.ac.uk/discover/giant-sequoia-slice.html"
+     },
+     {
+      "id": "rings_revealed",
+      "text": "Conservation work revealed the slice's many rings, which show how long the tree lived.",
+      "source": "https://www.nhm.ac.uk/discover/giant-sequoia-slice.html"
+     },
+     {
+      "id": "felled_for_museums",
+      "text": "The Mark Twain Tree was felled so that sections of the trunk could be shown in museums in New York and London.",
+      "source": "https://theplosblog.plos.org/2018/05/mark-twain-and-the-big-stump-can-we-save-nature-from-ourselves/"
+     }
+    ]
+   }
+  ],
+  "web_facts": [
+   {
+    "id": "conservation_2016",
+    "text": "The conservation work was carried out in 2016.",
+    "source": "https://natsca.blog/2020/04/23/giant-sequoia-at-the-natural-history-museum/"
+   },
+   {
+    "id": "origin_kings_canyon",
+    "text": "The giant sequoia came from what is now Kings Canyon National Park, California.",
+    "source": "https://natsca.blog/2020/04/23/giant-sequoia-at-the-natural-history-museum/"
+   },
+   {
+    "id": "two_sections",
+    "text": "Two sections were cut for display: the bottom, slightly larger one went to the AMNH.",
+    "source": "https://natsca.blog/2020/04/23/giant-sequoia-at-the-natural-history-museum/"
+   },
+   {
+    "id": "twelve_pieces",
+    "text": "The top section was split into 12 pieces (one central disc and 11 radial segments) so it could be shipped to the UK.",
+    "source": "https://natsca.blog/2020/04/23/giant-sequoia-at-the-natural-history-museum/"
+   },
+   {
+    "id": "arrived_april_1893",
+    "text": "The pieces arrived at South Kensington in April 1893.",
+    "source": "https://natsca.blog/2020/04/23/giant-sequoia-at-the-natural-history-museum/"
+   },
+   {
+    "id": "first_display",
+    "text": "The section went on display the following year in one of the bays of the central hall.",
+    "source": "https://natsca.blog/2020/04/23/giant-sequoia-at-the-natural-history-museum/"
+   },
+   {
+    "id": "moves",
+    "text": "The section was moved in 1902 to stand against the wall between the north and central halls, and again in 1971 to its current place on the second-floor balcony.",
+    "source": "https://natsca.blog/2020/04/23/giant-sequoia-at-the-natural-history-museum/"
+   },
+   {
+    "id": "mark_twain_tree_board",
+    "text": "A museum interpretation board says the slice was taken from the Mark Twain tree.",
+    "source": "https://www.thehallofeinar.com/2023/02/giant-sequoias/"
+   },
+   {
+    "id": "felled_for_museums",
+    "text": "The Mark Twain Tree was felled so that sections of the trunk could be shown in museums in New York and London.",
+    "source": "https://theplosblog.plos.org/2018/05/mark-twain-and-the-big-stump-can-we-save-nature-from-ourselves/"
+   },
+   {
+    "id": "felling_13_days",
+    "text": "Felling the Mark Twain Tree took 13 days.",
+    "source": "https://en.wikipedia.org/wiki/Mark_Twain_Tree"
+   },
+   {
+    "id": "big_stump",
+    "text": "The Mark Twain Tree's stump survives in Big Stump Grove and is known as the 'Big Stump' or 'Mark Twain Stump'.",
+    "source": "https://commons.wikimedia.org/wiki/Category:Mark_Twain_Tree"
+   },
+   {
+    "id": "species_range",
+    "text": "Giant sequoias grow in the Sierra Nevada of California. They reach 94 metres tall with diameters of up to eight metres or a bit more, and individual trees have been dated to more than 3,000 years old.",
+    "source": "https://www.nhm.ac.uk/discover/giant-sequoia-sequoiadendron-giganteum-worlds-biggest-tree.html"
+   },
+   {
+    "id": "sequoia_name",
+    "text": "The genus name Sequoia was coined in the mid-1840s by the Austrian botanist Stephan Endlicher, who gave no reason for the name. In the 1860s a Yosemite guidebook popularised the idea that he meant to honour Sequoyah, who invented the Cherokee syllabary.",
+    "source": "https://www.nhm.ac.uk/discover/giant-sequoia-sequoiadendron-giganteum-worlds-biggest-tree.html"
+   },
+   {
+    "id": "wellingtonia",
+    "text": "In Britain, Lindley named the tree Wellingtonia after the Duke of Wellington.",
+    "source": "https://www.nhm.ac.uk/discover/giant-sequoia-sequoiadendron-giganteum-worlds-biggest-tree.html"
+   }
+  ],
+  "url_keywords": [
+   {
+    "keyword": "Mark Twain Tree",
+    "kind": "name",
+    "basis": "https://natsca.blog/2020/04/23/giant-sequoia-at-the-natural-history-museum/"
+   },
+   {
+    "keyword": "Sequoiadendron giganteum",
+    "kind": "species",
+    "basis": "https://www.nhm.ac.uk/discover/giant-sequoia-sequoiadendron-giganteum-worlds-biggest-tree.html"
+   },
+   {
+    "keyword": "Kings Canyon National Park",
+    "kind": "place",
+    "basis": "https://natsca.blog/2020/04/23/giant-sequoia-at-the-natural-history-museum/"
+   },
+   {
+    "keyword": "felled in 1891",
+    "kind": "date",
+    "basis": "https://x.com/NHM_London/status/1495352550199074820"
+   },
+   {
+    "keyword": "1,341 years",
+    "kind": "measure",
+    "basis": "https://natsca.blog/2020/04/23/giant-sequoia-at-the-natural-history-museum/"
+   },
+   {
+    "keyword": "101 metres tall",
+    "kind": "measure",
+    "basis": "https://www.nhm.ac.uk/discover/giant-sequoia-slice.html"
+   },
+   {
+    "keyword": "12 pieces",
+    "kind": "measure",
+    "basis": "https://natsca.blog/2020/04/23/giant-sequoia-at-the-natural-history-museum/"
+   },
+   {
+    "keyword": "April 1893",
+    "kind": "date",
+    "basis": "https://natsca.blog/2020/04/23/giant-sequoia-at-the-natural-history-museum/"
+   },
+   {
+    "keyword": "Sequoyah",
+    "kind": "person",
+    "basis": "https://www.nhm.ac.uk/discover/giant-sequoia-sequoiadendron-giganteum-worlds-biggest-tree.html"
+   },
+   {
+    "keyword": "Chelsea McKibbin",
+    "kind": "person",
+    "basis": "https://www.nhm.ac.uk/discover/giant-sequoia-slice.html"
+   }
+  ]
+ }
+}

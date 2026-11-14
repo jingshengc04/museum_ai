@@ -1,0 +1,172 @@
+{
+  "stats": {
+    "runs": 19,
+    "harness_calls_total": 169,
+    "harness_calls_live": 138,
+    "harness_usd": 22.59,
+    "workflow_agents": 24,
+    "workflow_tool_calls": 230,
+    "main_session": {
+      "assistant_messages": 377,
+      "tool_calls": 182,
+      "by_tool": {
+        "Bash": 83,
+        "Write": 32,
+        "mcp__ccd_turn__update_plan": 17,
+        "mcp__ccd_turn__wrap_up": 14,
+        "Read": 5,
+        "Edit": 5,
+        "Workflow": 4,
+        "mcp__Claude_Browser__browser_batch": 3,
+        "ToolSearch": 3,
+        "mcp__Claude_Browser__preview_start": 2,
+        "mcp__Claude_Browser__computer": 2,
+        "mcp__Claude_Browser__preview_logs": 2,
+        "mcp__Claude_Browser__find": 2,
+        "Skill": 2,
+        "mcp__Claude_Browser__tabs_context": 1,
+        "WebFetch": 1,
+        "mcp__Claude_Browser__navigate": 1,
+        "mcp__Claude_Browser__get_page_text": 1,
+        "SendUserFile": 1,
+        "mcp__ccd_session_mgmt__export_transcript": 1
+      }
+    },
+    "prompt_versions": 25
+  },
+  "runs": [
+    {
+      "run": "1114-170208-hope-v0",
+      "title": "(no report: early run or killed)",
+      "status": "v0 (pass/revise in model)",
+      "live": 2,
+      "usd": 0.11
+    },
+    {
+      "run": "1114-170409-hope-v0",
+      "title": "Not Even Grown",
+      "status": "v0 (pass/revise in model)",
+      "live": 4,
+      "usd": 0.47
+    },
+    {
+      "run": "1114-172400-hope-v1",
+      "title": "Just a Young One",
+      "status": "NEEDS_HUMAN",
+      "live": 10,
+      "usd": 1.38
+    },
+    {
+      "run": "1114-173051-hope-v1.1",
+      "title": "Young Giant",
+      "status": "NEEDS_HUMAN",
+      "live": 6,
+      "usd": 1.09
+    },
+    {
+      "run": "1114-173547-hope-v1.2",
+      "title": "Young Giant",
+      "status": "NEEDS_HUMAN",
+      "live": 5,
+      "usd": 0.9
+    },
+    {
+      "run": "1114-173549-sophie-v1.2",
+      "title": "Almost Whole",
+      "status": "NEEDS_HUMAN",
+      "live": 9,
+      "usd": 1.34
+    },
+    {
+      "run": "1114-173551-sequoia-v1.2",
+      "title": "Under the Dust",
+      "status": "NEEDS_HUMAN",
+      "live": 9,
+      "usd": 1.17
+    },
+    {
+      "run": "1114-175519-hope-v1.3",
+      "title": "All of Me in One Frame",
+      "status": "NEEDS_HUMAN",
+      "live": 9,
+      "usd": 1.96
+    },
+    {
+      "run": "1114-175520-sophie-v1.3",
+      "title": "The Hilltop",
+      "status": "NEEDS_HUMAN",
+      "live": 9,
+      "usd": 1.69
+    },
+    {
+      "run": "1114-175523-sequoia-v1.3",
+      "title": "Only a Slice",
+      "status": "PASS_WITH_OPEN_POLISH (2)",
+      "live": 9,
+      "usd": 1.13
+    },
+    {
+      "run": "1114-180509-hope-v1.3-counter",
+      "title": "All of Me in One Frame",
+      "status": "NEEDS_HUMAN",
+      "live": 6,
+      "usd": 1.52
+    },
+    {
+      "run": "1114-180511-hope-v1.3-endings",
+      "title": "From Wexford Sand to This Hall",
+      "status": "NEEDS_HUMAN",
+      "live": 7,
+      "usd": 1.56
+    },
+    {
+      "run": "1114-180513-sophie-v1.3-counter",
+      "title": "The hilltop",
+      "status": "NEEDS_HUMAN",
+      "live": 6,
+      "usd": 1.28
+    },
+    {
+      "run": "1114-180515-sophie-v1.3-endings",
+      "title": "One Hilltop, Then Here",
+      "status": "NEEDS_HUMAN",
+      "live": 7,
+      "usd": 1.24
+    },
+    {
+      "run": "1114-180517-sequoia-v1.3-counter",
+      "title": "Only a Slice",
+      "status": "PASS_WITH_OPEN_POLISH (2)",
+      "live": 6,
+      "usd": 0.89
+    },
+    {
+      "run": "1114-180519-sequoia-v1.3-endings",
+      "title": "Read Me Like a Clock",
+      "status": "PASS_WITH_OPEN_POLISH (1)",
+      "live": 7,
+      "usd": 0.75
+    },
+    {
+      "run": "1114-181730-hope-v1.4",
+      "title": "From Up There",
+      "status": "NEEDS_HUMAN",
+      "live": 9,
+      "usd": 1.39
+    },
+    {
+      "run": "1114-181731-sophie-v1.4",
+      "title": "Found Whole",
+      "status": "PASS_WITH_OPEN_POLISH (2)",
+      "live": 9,
+      "usd": 1.31
+    },
+    {
+      "run": "1114-181734-sequoia-v1.4",
+      "title": "From the Eaves to the Forest",
+      "status": "NEEDS_HUMAN · REGRESSION_FAIL (1)",
+      "live": 9,
+      "usd": 1.41
+    }
+  ]
+}

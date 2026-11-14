@@ -1,0 +1,137 @@
+{
+  "exhibit_id": "adhoc-four-ram-square-zun",
+  "title": "You Framed My Rams",
+  "logline": "The zun notices the visitor photographing its flawless-looking ram head and tells them that this same vessel was destroyed by bomb attacks during the war.",
+  "duration_s": 15,
+  "style": "realistic",
+  "narrator_presence": "voiceover",
+  "voice": "A man in his sixties, low grainy baritone, neutral English, slow, quietly amused.",
+  "narrator_attitude": "Fond and a little wry toward the visitor who just photographed its rams. It is pleased to be admired, but it gently corrects the idea that it was never broken.",
+  "music_style": "Sparse slow struck bronze bells, long metallic decay.",
+  "subject_name": "the Four-Ram Square Zun",
+  "living_form_name": "the newly cast bronze zun",
+  "subject_lock": "Dark grey-green bronze square zun, flared square mouth with tall hooked flanges, four ram foreparts with spiralling curled horns at the corners, fine scale and spiral patterns, high square foot.",
+  "living_form_lock": "The same square zun freshly cast: polished golden-brown bronze, flared square mouth with tall hooked flanges, four ram foreparts with spiralling curled horns at the corners, crisp scale and spiral patterns, high square foot.",
+  "assets": [
+    {
+      "id": "zun_now",
+      "source": "generate",
+      "depicts": "exhibit_now",
+      "view": "full vessel, corner-on, one ram head facing camera",
+      "prompt": "From this photo, show the same square bronze zun exactly as it is now, from the same corner-on angle with one ram head facing the camera, alone and centred on a plain light grey background, even neutral light, no glare or reflections. Dark grey-green bronze with lighter grey highlights on raised edges: wide flared square mouth with tall hooked ridged flanges, narrower neck, four ram foreparts at the shoulder corners with large horns spiralling forward and down, fine scale and spiral patterns over the ram bodies, high square flanged foot. Whole vessel in frame with margin. No text, labels, captions, watermarks, people, reflections, glass case, plinth, other objects.",
+      "purpose": "Identity reference for the middle shot rising over the bronze patterns and flanges."
+    },
+    {
+      "id": "zun_in_place",
+      "source": "generate",
+      "depicts": "environment",
+      "view": "@Image1 on its white plinth in the gallery, visitor's corner-on view",
+      "prompt": "From this photo, keep the same angle and framing: the same dark grey-green square bronze zun with its flared flanged mouth and four ram heads with spiralling horns, standing on its white plinth in the dim warm gallery with small spotlights dotting the dark ceiling. Remove the glare, the reflections of visitors in the glass and the label card; the background stays softly lit and calm. No readable text, label cards, signs, watermarks, people, phones, second copies of the zun.",
+      "purpose": "Final shot of the exhibit in its hall from the visitor's own viewpoint."
+    },
+    {
+      "id": "detail_ram_head",
+      "source": "generate",
+      "depicts": "detail",
+      "view": "front ram head and curled horns",
+      "prompt": "From this photo, show a close-up of the front ram head of the same square bronze zun, filling the frame, on a plain dark-neutral background, even soft light. Dark grey-green bronze: long narrow ram face with small eyes, large ridged horns curling in spirals around each side of the head, fine scale and spiral patterns on the neck and chest below, part of the flared flanged neck visible above. No text, labels, watermarks, people, reflections, glass, plinth, other objects, glare.",
+      "purpose": "Hook shot: the ram head the visitor photographed, seen through the case glass."
+    }
+  ],
+  "segments": [
+    {
+      "duration_s": 15.0,
+      "setting": "Dim warm museum gallery, glass case, spotlights in dark ceiling.",
+      "ref_assets": [
+        "zun_now",
+        "zun_in_place",
+        "detail_ram_head"
+      ],
+      "shots": [
+        {
+          "t_start": 0.0,
+          "t_end": 5.0,
+          "refs": [
+            "detail_ram_head"
+          ],
+          "framing": "extreme close-up through case glass, corner-on",
+          "camera": "slow push-in",
+          "action": "A visitor's faint reflection raises a phone beside the horns.",
+          "visual": "Warm amber spotlight from above, dark blurred gallery behind."
+        },
+        {
+          "t_start": 5.0,
+          "t_end": 10.0,
+          "refs": [
+            "zun_now"
+          ],
+          "framing": "close-up, corner-on, slightly below eye level",
+          "camera": "slow tilt up",
+          "action": "A thin band of spotlight glides up the bronze edges.",
+          "visual": "Deep shadow between flanges."
+        },
+        {
+          "t_start": 10.0,
+          "t_end": 15.0,
+          "refs": [
+            "zun_in_place"
+          ],
+          "framing": "medium wide, corner-on, visitor eye level",
+          "camera": "slow pull-back settling to stillness",
+          "action": "Ceiling spotlights glow softly brighter above the white plinth.",
+          "visual": "Front ram facing lens, rams in profile either side."
+        }
+      ],
+      "narration": [
+        {
+          "t_start": 1.0,
+          "text": "You photographed my rams as if untouched.",
+          "kind": "voice",
+          "fact_ids": []
+        },
+        {
+          "t_start": 5.0,
+          "text": "In nineteen thirty-eight, a Hunan hillside gave me up.",
+          "kind": "fact",
+          "fact_ids": [
+            "hillside_tanheli",
+            "unearthed_1938_ningxiang"
+          ]
+        },
+        {
+          "t_start": 10.0,
+          "text": "Look up. During the war, bombs destroyed me.",
+          "kind": "fact",
+          "fact_ids": [
+            "destroyed_bombs"
+          ]
+        }
+      ],
+      "audio": {
+        "ambience": "Hushed gallery room tone",
+        "sfx": [
+          "one soft shutter click before the voice"
+        ],
+        "music": "Fading to silence by the end."
+      },
+      "end_frame": "Near-still corner-on view of the zun on its white plinth at visitor eye level, ceiling spotlights steady above."
+    }
+  ],
+  "subtitles": [
+    {
+      "t_start": 1.0,
+      "t_end": 3.8,
+      "text": "You photographed my rams as if untouched."
+    },
+    {
+      "t_start": 5.0,
+      "t_end": 8.6,
+      "text": "In 1938, a Hunan hillside gave me up."
+    },
+    {
+      "t_start": 10.0,
+      "t_end": 13.2,
+      "text": "Look up. During the war, bombs destroyed me."
+    }
+  ]
+}

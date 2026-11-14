@@ -1,0 +1,106 @@
+[
+  {
+    "id": "alive_restoration",
+    "kind": "restoration",
+    "endpoint": "fal-ai/nano-banana-pro/edit",
+    "input": {
+      "image_urls": [
+        "<visitor_photo>"
+      ],
+      "prompt": "From this photo, show the same square bronze zun as it looked when newly cast in the late Shang Dynasty, keeping exactly its shape, proportions and corner-on viewing angle: a wide flared square mouth with tall hooked ridged flanges rising at the corners and mid-sides, a narrower neck, a bulging shoulder where four ram foreparts project from the four corners, each ram head with large horns spiralling forward and down, ram chests and bodies covered in fine scale and spiral patterns, the rams' legs merging into a high square foot with flanges. The bronze is freshly polished golden-brown with crisp sharp relief, no green corrosion. It stands alone on a low rammed-earth altar in a dim timber ritual hall with wooden posts and a reed mat floor, soft even daylight from a doorway, the vessel filling most of the frame, a faint gleam of wine at the rim. Avoid: No text, labels, captions, titles, watermarks, people, hands, glass cases, museum plinth, spotlights, second vessels or extra copies of the zun, no modern objects, no dramatic lighting or smoke."
+    },
+    "purpose": "Opening image of the vessel in its own world and period. Artistic reconstruction: the golden-brown polished colour, the timber hall and the altar setting are imagined, not known fact.",
+    "est_usd": 0.15
+  },
+  {
+    "id": "sheet_new",
+    "kind": "character_sheet",
+    "endpoint": "fal-ai/nano-banana-pro/edit",
+    "input": {
+      "image_urls": [
+        "<visitor_photo>"
+      ],
+      "prompt": "From this photo, create a clean object reference sheet of the same square bronze zun as newly cast, polished golden-brown bronze with crisp relief, on a plain light grey background with even soft light. Show five views arranged in a neat grid: a straight front view of one face, a full side view, a corner-on three-quarter view with one ram head facing the viewer, a top-down view of the flared square mouth, and a low view looking up at a ram head with its spiralling curled horns. In every view keep identical proportions: wide flared square mouth with tall hooked ridged flanges, narrower neck, shoulder with four ram foreparts at the corners, fine scale and spiral patterns over the ram bodies, high square flanged foot. Avoid: No text, labels, numbers, captions, titles, arrows, watermarks, people, hands, glass cases, plinths, shadows of other objects, green corrosion."
+    },
+    "purpose": "Design consistency reference for the newly cast form; never sent to the video model. Golden-brown colour is artistic reconstruction.",
+    "est_usd": 0.15
+  },
+  {
+    "id": "sheet_new_side",
+    "kind": "character_sheet",
+    "endpoint": "fal-ai/nano-banana-pro/edit",
+    "input": {
+      "image_urls": [
+        "<visitor_photo>"
+      ],
+      "prompt": "From this photo, show only a single full side view of the same square bronze zun as newly cast, standing upright and centred on a plain light grey background, even soft light, whole vessel in frame with margin. Polished golden-brown bronze with crisp relief: wide flared square mouth with tall hooked ridged flanges along the edges, narrower neck, shoulder with two ram foreparts seen in profile at the left and right corners, their horns spiralling forward and down, a third ram head facing out from the centre corner, fine scale and spiral patterns on the ram bodies, high square flanged foot below. Avoid: No text, labels, captions, titles, watermarks, people, hands, glass cases, plinths, other vessels, second copies of the zun, green corrosion, dramatic shadows."
+    },
+    "purpose": "Identity reference for shots of the newly cast vessel. Golden-brown colour is artistic reconstruction.",
+    "est_usd": 0.15
+  },
+  {
+    "id": "zun_now",
+    "kind": "subject_view",
+    "endpoint": "fal-ai/nano-banana-pro/edit",
+    "input": {
+      "image_urls": [
+        "<visitor_photo>"
+      ],
+      "prompt": "From this photo, show the same square bronze zun exactly as it is now, from the same corner-on angle with one ram head facing the camera, alone and centred on a plain light grey background, even neutral light, no glare or reflections. Dark grey-green bronze with lighter grey highlights on raised edges: wide flared square mouth with tall hooked ridged flanges, narrower neck, four ram foreparts at the shoulder corners with large horns spiralling forward and down, fine scale and spiral patterns over the ram bodies, high square flanged foot. Whole vessel in frame with margin. Avoid: No text, labels, captions, watermarks, people, reflections of visitors, glass case, plinth, museum ceiling lights, other objects, second copies of the zun."
+    },
+    "purpose": "Identity reference for the exhibit as it is now.",
+    "est_usd": 0.15
+  },
+  {
+    "id": "detail_ram_head",
+    "kind": "detail",
+    "endpoint": "fal-ai/nano-banana-pro/edit",
+    "input": {
+      "image_urls": [
+        "<visitor_photo>"
+      ],
+      "prompt": "From this photo, show a close-up of the front ram head of the same square bronze zun, filling the frame, on a plain dark-neutral background, even soft light. Dark grey-green bronze: long narrow ram face with small eyes, large ridged horns curling in spirals around each side of the head, fine scale and spiral patterns on the neck and chest below, part of the flared flanged neck visible above. Avoid: No text, labels, watermarks, people, reflections, glass, plinth, other objects, glare."
+    },
+    "purpose": "Detail for a close shot on the ram head and its curled horns.",
+    "est_usd": 0.15
+  },
+  {
+    "id": "zun_in_ground",
+    "kind": "subject_view",
+    "endpoint": "fal-ai/nano-banana-pro/edit",
+    "input": {
+      "image_urls": [
+        "<visitor_photo>"
+      ],
+      "prompt": "From this photo, show the same square bronze zun at the same corner-on angle and framing as the clean exhibit view, partly emerging from reddish-brown hillside earth: the lower foot buried, clumps of soil caked in the patterns and horns, dark grey-green bronze showing through dirt, the flared square mouth with tall hooked flanges and the four ram heads with spiralling horns clearly recognisable. Even overcast daylight, plain soil around it. Avoid: No text, labels, watermarks, people, hands, tools, glass, plinth, other objects, second copies of the zun, dramatic lighting."
+    },
+    "purpose": "State reference for the 1938 unearthing on a Hunan hillside. Artistic reconstruction of how it lay in the ground.",
+    "est_usd": 0.15
+  },
+  {
+    "id": "zun_shattered",
+    "kind": "subject_view",
+    "endpoint": "fal-ai/nano-banana-pro/edit",
+    "input": {
+      "image_urls": [
+        "<visitor_photo>"
+      ],
+      "prompt": "From this photo, show the same square bronze zun at the same corner-on angle and framing as the clean exhibit view, but broken: the dark grey-green bronze vessel cracked and split into large jagged fragments lying close together on a plain light grey ground, pieces of the flared flanged mouth, ram heads with spiralling horns and scale-patterned body sections still recognisable, the overall square layout of the vessel still readable. Even neutral light. Avoid: No text, labels, watermarks, people, fire, smoke, explosions, glass, plinth, other objects, dramatic lighting."
+    },
+    "purpose": "State reference for the destruction by bomb attacks during the war. Artistic: how it broke and the fragment layout are not documented.",
+    "est_usd": 0.15
+  },
+  {
+    "id": "zun_in_place",
+    "kind": "environment",
+    "endpoint": "fal-ai/nano-banana-pro/edit",
+    "input": {
+      "image_urls": [
+        "<visitor_photo>"
+      ],
+      "prompt": "From this photo, keep the same angle and framing: the same dark grey-green square bronze zun with its flared flanged mouth and four ram heads with spiralling horns, standing on its white plinth in the dim warm gallery with small spotlights dotting the dark ceiling. Remove the glare, the reflections of visitors in the glass and the label card; the background stays softly lit and calm. Avoid: No readable text, label cards, signs, watermarks, visible people or reflected people, phones, glare, second copies of the zun."
+    },
+    "purpose": "Reference for the final shot of the exhibit in its hall.",
+    "est_usd": 0.15
+  }
+]
