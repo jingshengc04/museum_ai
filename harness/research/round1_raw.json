@@ -1,0 +1,1358 @@
+{
+ "seedance": {
+  "official": {
+   "seedance_models": [
+    {
+     "id": "bytedance/seedance-2.0/text-to-video",
+     "kind": "text-to-video (standard)",
+     "url": "https://fal.ai/models/bytedance/seedance-2.0/text-to-video/llms.txt"
+    },
+    {
+     "id": "bytedance/seedance-2.0/image-to-video",
+     "kind": "image-to-video (start frame image_url + optional end frame end_image_url)",
+     "url": "https://fal.ai/models/bytedance/seedance-2.0/image-to-video/llms.txt"
+    },
+    {
+     "id": "bytedance/seedance-2.0/reference-to-video",
+     "kind": "reference-to-video (up to 9 images, 3 videos, 3 audio clips; best fit for exhibit reference views)",
+     "url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt"
+    },
+    {
+     "id": "bytedance/seedance-2.0/fast/text-to-video",
+     "kind": "text-to-video (fast tier, 480p/720p max)",
+     "url": "https://fal.ai/docs/model-api-reference/video-generation-api/bytedance-seedance-2.0-text-to-video.md"
+    },
+    {
+     "id": "bytedance/seedance-2.0/fast/image-to-video",
+     "kind": "image-to-video (fast tier, 480p/720p)",
+     "url": "https://fal.ai/models/bytedance/seedance-2.0/fast/image-to-video/llms.txt"
+    },
+    {
+     "id": "bytedance/seedance-2.0/fast/reference-to-video",
+     "kind": "reference-to-video (fast tier, 480p/720p)",
+     "url": "https://fal.ai/models/bytedance/seedance-2.0/fast/reference-to-video/llms.txt"
+    },
+    {
+     "id": "bytedance/seedance-2.0/mini/reference-to-video",
+     "kind": "reference-to-video (mini tier, cheapest, 480p/720p)",
+     "url": "https://fal.ai/models/bytedance/seedance-2.0/mini/reference-to-video/llms.txt"
+    },
+    {
+     "id": "bytedance/seedance-2.0/us/text-to-video, bytedance/seedance-2.0/us/image-to-video, bytedance/seedance-2.0/us/reference-to-video",
+     "kind": "US-hosted variants, priced separately",
+     "url": "https://fal.ai/models/fal-ai/bytedance/seedance"
+    },
+    {
+     "id": "bytedance/seedance-2.0/enterprise/v2/reference-to-video",
+     "kind": "enterprise reference-to-video (seen in search results only, schema not checked)",
+     "url": "https://fal.ai/models/bytedance/seedance-2.0/enterprise/v2/reference-to-video/api"
+    }
+   ],
+   "params": [
+    {
+     "model_id": "all Seedance 2.0 endpoints",
+     "name": "prompt",
+     "values": "string, required",
+     "notes": "Put spoken lines in double quotes to get lip-synced speech. In reference-to-video, refer to inputs as @Image1..@Image9, @Video1..3, @Audio1..3, numbered within each type. One fal doc/search summary wrote [Image1]; the reference-to-video API doc and the llms.txt pages use @Image1.",
+     "source_url": "https://fal.ai/docs/model-api-reference/video-generation-api/bytedance-seedance-2.0-reference-to-video.md"
+    },
+    {
+     "model_id": "bytedance/seedance-2.0/{text,image,reference}-to-video (standard)",
+     "name": "resolution",
+     "values": "\"480p\" | \"720p\" (default) | \"1080p\" | \"4k\" per the llms.txt schemas",
+     "notes": "Sources disagree. The fal API doc pages (.md) list only 480p/720p, and the ByteDance tech report says native output is 480p and 720p, so 1080p/4k may be upscaled. Fast and mini tiers: 480p/720p only.",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt"
+    },
+    {
+     "model_id": "bytedance/seedance-2.0/fast/*, bytedance/seedance-2.0/mini/reference-to-video",
+     "name": "resolution",
+     "values": "\"480p\" | \"720p\" (default)",
+     "notes": "",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/fast/reference-to-video/llms.txt"
+    },
+    {
+     "model_id": "all Seedance 2.0 endpoints",
+     "name": "duration",
+     "values": "\"auto\" (default) or \"4\" to \"15\" as strings, whole seconds",
+     "notes": "Max 15 s per generation, so a 30 s film needs 2 or more clips stitched together. The ByteDance tech report also gives 4-15 s.",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/text-to-video/llms.txt"
+    },
+    {
+     "model_id": "all Seedance 2.0 endpoints",
+     "name": "aspect_ratio",
+     "values": "\"auto\" (default) | \"21:9\" | \"16:9\" | \"4:3\" | \"1:1\" | \"3:4\" | \"9:16\"",
+     "notes": "In image-to-video, auto follows the input image. 720p sizes: 16:9 is 1280x720, 9:16 is 720x1280, 1:1 is 960x960. 480p sizes: 16:9 is 864x496, 9:16 is 496x864.",
+     "source_url": "https://fal.ai/docs/model-api-reference/video-generation-api/bytedance-seedance-2.0-text-to-video.md"
+    },
+    {
+     "model_id": "all Seedance 2.0 endpoints",
+     "name": "generate_audio",
+     "values": "boolean, default true",
+     "notes": "Generates synchronized sound effects, ambient sound and lip-synced speech in the same pass as the video. The cost is the same with or without audio.",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt"
+    },
+    {
+     "model_id": "all Seedance 2.0 endpoints",
+     "name": "seed",
+     "values": "integer",
+     "notes": "Sources conflict. The fal API doc pages (.md) list seed as an optional input ('results may still vary slightly'). The llms.txt schemas show seed only in the output. Every endpoint returns the seed it used.",
+     "source_url": "https://fal.ai/docs/model-api-reference/video-generation-api/bytedance-seedance-2.0-reference-to-video.md"
+    },
+    {
+     "model_id": "bytedance/seedance-2.0/reference-to-video (also fast, mini)",
+     "name": "image_urls",
+     "values": "list, up to 9 images. JPEG/PNG/WebP/BMP/TIFF/GIF/HEIC/HEIF, max 30 MB each",
+     "notes": "Files across all types (images, videos, audio) may not exceed 12 in total. The ByteDance report confirms the 9 image / 3 video / 3 audio limits.",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt"
+    },
+    {
+     "model_id": "bytedance/seedance-2.0/reference-to-video (also fast, mini)",
+     "name": "video_urls",
+     "values": "list, up to 3 videos. MP4/MOV, 2-15 s combined, under 50 MB total, each about 640x640 to 834x1112",
+     "notes": "Any video reference switches pricing to the lower video-reference token rate. That rate covers input plus output video tokens.",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt"
+    },
+    {
+     "model_id": "bytedance/seedance-2.0/reference-to-video (also fast, mini)",
+     "name": "audio_urls",
+     "values": "list, up to 3 files. MP3/WAV, 15 s or less combined, max 15 MB each",
+     "notes": "Needs at least one image or video reference alongside. This is the documented way to supply a pre-recorded narration or voice track (@Audio1).",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt"
+    },
+    {
+     "model_id": "bytedance/seedance-2.0/image-to-video, bytedance/seedance-2.0/fast/image-to-video",
+     "name": "image_url / end_image_url",
+     "values": "image_url (required, first frame). end_image_url (optional, last frame; the video transitions to it). Same formats, 30 MB max",
+     "notes": "First and last frame are supported only in image-to-video, not in reference-to-video.",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/image-to-video/llms.txt"
+    },
+    {
+     "model_id": "all Seedance 2.0 endpoints",
+     "name": "bitrate_mode / codec / end_user_id",
+     "values": "bitrate_mode: \"standard\" (default) | \"high\". codec: \"auto\" (default) | \"H264\" | \"H265\". end_user_id: string",
+     "notes": "The mini tier lists codec but not bitrate_mode. The text-to-video doc says end_user_id is required for B2B access.",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/image-to-video/llms.txt"
+    },
+    {
+     "model_id": "all Seedance 2.0 endpoints",
+     "name": "output",
+     "values": "{video: File{url, content_type, file_name, file_size}, seed: int}",
+     "notes": "",
+     "source_url": "https://fal.ai/docs/model-api-reference/video-generation-api/bytedance-seedance-2.0-text-to-video.md"
+    }
+   ],
+   "audio": {
+    "generates_audio": "Yes. With generate_audio=true (the default), audio and video come out of a single joint pass: sound effects, ambient sound, background music and lip-synced speech. Price is the same either way. ByteDance's tech report describes binaural/dual-channel audio with multi-track output of 'background audio, ambient sound effects, and character narration'.",
+    "speech_or_narration": "A given line can be spoken. fal's guide says to put spoken lines in double quotes, e.g. The bronze helmet says: \"I was buried with a king.\" Speaker names and tone go in the prose around the quote; there is no formal speaker-label syntax. On-screen speech is lip-synced. For voice-over, describe a narrator and quote the narration; fal's guide also suggests asking for a timed subtitle. ByteDance's report scores an 'Off-Screen Voice' category, so off-screen narration is supported, but it scored lower (about 2.9-3.1/5) than English on-screen speech (about 4.2/5). Known weaknesses: 'Long monologues drift out of sync' (fal guide), so keep each line short and split speech across shots. Lip-sync errors with multiple speakers and audio distortion remain open problems (ByteDance report). Exact control: reference-to-video accepts audio_urls (up to 15 s total), so a pre-recorded or TTS narration can be passed as @Audio1. No official source says Seedance will reproduce a supplied audio track word for word. fal documents no timecode syntax.",
+    "language_notes": "No official fal page lists the supported speech languages. ByteDance's tech report (arXiv 2604.14148) tests English (its best category, about 4.2/5), Chinese including dialects (Sichuan, Northeastern, Cantonese), Chinese multi-person dialogue, opera, singing/rap and 'minority languages'. English narration is therefore well supported. An 8-language list (EN, ZH, JA, KO, ES, FR, DE, PT) appears only on third-party sites and is not confirmed.",
+    "source_urls": [
+     "https://fal.ai/docs/model-api-reference/video-generation-api/bytedance-seedance-2.0-text-to-video.md",
+     "https://fal.ai/learn/tools/seedance-2-0-prompting-guide",
+     "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt",
+     "https://arxiv.org/pdf/2604.14148",
+     "https://fal.ai/models/fal-ai/bytedance/seedance"
+    ]
+   },
+   "prompt_findings": [
+    {
+     "finding": "Put spoken dialogue in double quotes to get voiced, lip-synced speech.",
+     "example": "A Roman marble bust in a dim gallery, camera slowly pushes in. The bust says, calm and proud: \"I watched an empire rise.\"",
+     "source_url": "https://fal.ai/learn/tools/seedance-2-0-prompting-guide",
+     "confidence": "official"
+    },
+    {
+     "finding": "Keep each spoken line short. Long monologues drift out of sync, so split narration into short lines and let cuts carry it.",
+     "example": "Shot 1 line: \"I was carved in 120 AD.\" Cut to detail. Shot 2 line: \"My nose was lost in a fall.\"",
+     "source_url": "https://fal.ai/learn/tools/seedance-2-0-prompting-guide",
+     "confidence": "official"
+    },
+    {
+     "finding": "Voice-over: describe a narrator, quote the narration, and optionally ask for a subtitle timed to the voice.",
+     "example": "Narrator voice, warm and slow: \"...\". Subtitle the line along the bottom, timed to the voice.",
+     "source_url": "https://fal.ai/learn/tools/seedance-2-0-prompting-guide",
+     "confidence": "official"
+    },
+    {
+     "finding": "Multi-shot inside one generation: write cuts with phrases like 'cut to' or 'then the camera moves to'. About 3 quick cuts per clip is within range, and the model keeps the subject consistent across shots.",
+     "example": "Wide shot of the helmet on its plinth; cut to an extreme close-up of the engraved rim; then the camera orbits to the side profile.",
+     "source_url": "https://fal.ai/learn/tools/seedance-2-0-prompting-guide",
+     "confidence": "official"
+    },
+    {
+     "finding": "State the sounds you want. Write 'no music' explicitly, otherwise a score often appears. A prompt that says nothing about sound often returns noisy audio.",
+     "example": "Sound: quiet gallery room tone, distant footsteps, no music.",
+     "source_url": "https://fal.ai/learn/tools/seedance-2-0-prompting-guide",
+     "confidence": "official"
+    },
+    {
+     "finding": "Reference media are addressed in the prompt by position: @Image1..@Image9, @Video1..3, @Audio1..3.",
+     "example": "The vase from @Image1 (front) and @Image2 (side), detail as in @Image3, rotates slowly on a black plinth.",
+     "source_url": "https://fal.ai/docs/model-api-reference/video-generation-api/bytedance-seedance-2.0-reference-to-video.md",
+     "confidence": "official"
+    },
+    {
+     "finding": "Mood words like 'beautiful' or 'cinematic' give generic results. Write a concrete shot brief: subject, action, location, camera, sound.",
+     "example": "Subject + action + setting + camera move + sound, instead of 'a cinematic beautiful shot'.",
+     "source_url": "https://fal.ai/learn/tools/seedance-2-0-prompting-guide",
+     "confidence": "official"
+    },
+    {
+     "finding": "Off-screen voice works but scores lower than on-screen English speech. Multi-speaker lip-sync and audio distortion are known weaknesses.",
+     "example": "For a first-person exhibit narrator, prefer a single voice. Since an artefact has no lips, describe the line as a voice-over or as 'the statue speaks'.",
+     "source_url": "https://arxiv.org/pdf/2604.14148",
+     "confidence": "official"
+    },
+    {
+     "finding": "For lip-synced dialogue from a reference, third-party guides suggest @Image1 for appearance and @Audio1 for the voice track. Not confirmed by fal.",
+     "example": "The figure in @Image1 speaks the line from @Audio1.",
+     "source_url": "https://lumalabs.ai/learning-center/articles/how-to-prompt-seedance-2.0",
+     "confidence": "community"
+    },
+    {
+     "finding": "Third-party tips for better lip-sync: slightly slower delivery, medium close-up, locked-off camera.",
+     "example": "Medium close-up, static camera, the bust speaks slowly: \"...\"",
+     "source_url": "https://www.cutout.pro/learn/blog-seedance-2-0-audio-guide/",
+     "confidence": "community"
+    }
+   ],
+   "pricing": [
+    {
+     "model_id": "bytedance/seedance-2.0/text-to-video and image-to-video (standard)",
+     "price": "$0.3034/s at 720p and $0.682/s at 1080p, audio included. Token rate: $0.014 per 1K tokens for 480p, 720p and 1080p, and $0.008 per 1K for 4k. Tokens = H*W*duration*24/1024. Derived 480p 16:9 is about $0.14/s (inferred). A 15 s clip at 720p is about $4.55.",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/text-to-video/llms.txt"
+    },
+    {
+     "model_id": "bytedance/seedance-2.0/reference-to-video (standard)",
+     "price": "$0.014 per 1K video tokens for 480p, 720p and 1080p, or $0.0086016 per 1K when video references are used (covers input plus output tokens; image references alone do not trigger it). 4k is about $0.008 per 1K, or $0.0048 with video references. At 720p this is about $0.30/s with images only (inferred from the formula) and $0.1814/s with video inputs (search snippet of the fal page). A 10 s 720p clip is about $3.02.",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt"
+    },
+    {
+     "model_id": "bytedance/seedance-2.0/fast/reference-to-video, fast/image-to-video, fast/text-to-video",
+     "price": "$0.2419/s at 720p. Token rate $0.0112 per 1K. Video inputs multiply the price by 0.6 ($0.14515/s at 720p). Derived 480p is about $0.11/s (inferred).",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/fast/reference-to-video/llms.txt"
+    },
+    {
+     "model_id": "bytedance/seedance-2.0/mini/reference-to-video",
+     "price": "$0.007 per 1K tokens at 480p and 720p, or $0.0042 per 1K with video references. Derived 720p is about $0.151/s and 480p about $0.07/s (inferred).",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/mini/reference-to-video/llms.txt"
+    },
+    {
+     "model_id": "bytedance/seedance-2.0/us/*",
+     "price": "Priced separately, with rates on each US endpoint page. A search snippet quoted about $0.222/s at 720p with video inputs (not verified).",
+     "source_url": "https://fal.ai/models/fal-ai/bytedance/seedance"
+    }
+   ],
+   "image_models_for_reference_views": [
+    {
+     "id": "fal-ai/nano-banana-pro/edit",
+     "why": "Google's top edit model on fal, good for cleaning a messy visitor photo (glare, crowd, glass reflections) into a clean product-style view of the same object and for 'as it looked new or alive' restorations. Supports multiple input images, up to 14 references in context, and an optional web search for grounding. This is a recommendation from fal's descriptions, not a benchmark.",
+     "inputs": "prompt (required), image_urls[], num_images 1-4, aspect_ratio (auto, 21:9 ... 1:1 ... 9:16, 4:1, 8:1, etc.), resolution 1K/2K/4K, output_format png/jpeg/webp, seed, safety_tolerance 1-6, system_prompt, enable_web_search, thinking_level high",
+     "price": "$0.15 per image. 4K is 2x. Web search adds $0.015.",
+     "source_url": "https://fal.ai/models/fal-ai/nano-banana-pro/edit/llms.txt"
+    },
+    {
+     "id": "fal-ai/nano-banana-2/edit",
+     "why": "Cheaper Nano Banana tier with the same Gemini-style editing interface. Can also be grounded with Google Image Search (enable_image_search), which helps with 'how it originally looked'.",
+     "inputs": "prompt, image_urls[] (14-reference limit), num_images 1-4, aspect_ratio, resolution 0.5K/1K/2K/4K, seed, thinking_level minimal/high, enable_web_search, enable_image_search, output_format, safety_tolerance",
+     "price": "$0.08 per image. 0.5K is 0.75x, 2K is 1.5x, 4K is 2x. Web search adds $0.015 and high thinking adds $0.002.",
+     "source_url": "https://fal.ai/models/fal-ai/nano-banana-2/edit/llms.txt"
+    },
+    {
+     "id": "fal-ai/qwen-image-edit-2511-multiple-angles",
+     "why": "Built for novel camera angles of the same object: explicit horizontal rotation, vertical angle and zoom. Suited to producing side, back, top and close-up views from a single front photo.",
+     "inputs": "image_urls[] (required), horizontal_angle 0-360 (default 0), vertical_angle -30 to 90 (default 0), zoom 0-10 (default 5), additional_prompt, lora_scale 0-4, image_size, guidance_scale 1-20 (4.5), num_inference_steps 1-50 (28), negative_prompt, seed, num_images 1-4, output_format",
+     "price": "$0.035 per megapixel",
+     "source_url": "https://fal.ai/models/fal-ai/qwen-image-edit-2511-multiple-angles/llms.txt"
+    },
+    {
+     "id": "fal-ai/flux-2-pro/edit",
+     "why": "Multi-reference editing that keeps identity consistent, and cheap per image. A good alternative for cleanup and style-consistent sets.",
+     "inputs": "prompt (required), image_urls[] (required; maximum count not stated), image_size (default auto), seed, safety_tolerance 1-5, output_format jpeg/png",
+     "price": "$0.03 for the first output megapixel plus $0.015 for each extra input or output megapixel (1024x1024 is $0.03, 1920x1080 is $0.045)",
+     "source_url": "https://fal.ai/models/fal-ai/flux-2-pro/edit/llms.txt"
+    },
+    {
+     "id": "fal-ai/bytedance/seedream/v4.5/edit",
+     "why": "ByteDance's own image model, the same family as Seedance. Supports up to 10 inputs and multi-image outputs per run (max_images), so one call can return a consistent set of views.",
+     "inputs": "image_urls[] (up to 10, required), prompt, image_size (default 2048x2048, roughly 1920-4096 per side), num_images 1-6, max_images 1-6 (inputs plus outputs 15 or fewer), seed",
+     "price": "$0.04 per image",
+     "source_url": "https://fal.ai/models/fal-ai/bytedance/seedream/v4.5/edit/llms.txt"
+    }
+   ],
+   "open_questions": [
+    "Standard-tier resolution: the llms.txt schemas list 480p/720p/1080p/4k, but the fal API doc .md pages list only 480p/720p, and ByteDance says native output is 480p/720p. Is 1080p/4k native or upscaled, and is it accepted by every standard endpoint? Test this with a real call.",
+    "seed: is it a valid input? The API docs (.md) say yes; the llms.txt schemas show it only in the output. Check the fal playground or send a request with seed.",
+    "Supported speech languages: no official fal or ByteDance page lists them. English is confirmed strong only through ByteDance's benchmark categories. The 8-language list is third-party.",
+    "Narration fidelity: does Seedance speak a quoted English line word for word, including proper nouns and dates (e.g. '120 AD', place names)? Not documented, so test it. Also unknown: whether it will lay a supplied @Audio1 narration track over the clip unchanged, or only use it as a voice/style reference.",
+    "Voice consistency across two 15 s clips (for a 30 s film): no documented voice or speaker ID control. The narrator's voice may change between generations. Possible fixes: reuse the same @Audio1 voice sample, or generate with audio off and add separate TTS.",
+    "No official timecode syntax for placing lines at given seconds. How many words fit cleanly in 15 s is also untested.",
+    "Reference-to-video per-second price at 720p with images only: about $0.30/s is my inference from the token formula; fal does not state it directly. The $0.1814/s with video inputs and $3.02 per 10 s figures come from search snippets of fal pages.",
+    "Restrictions on real-person or face references and on content moderation for reference images: not covered on the fal pages fetched.",
+    "The difference between the mini and fast tiers in quality is not described by fal.",
+    "Image models: none of the sources benchmark multi-view consistency for one object. Picking between Nano Banana Pro, Qwen multiple-angles and Seedream 4.5 needs a quick side-by-side test on a real exhibit photo. A newer Seedream 5.0 may exist on fal (seen in a fal learn article, not verified)."
+   ]
+  },
+  "practice": {
+   "seedance_models": [
+    {
+     "id": "bytedance/seedance-2.0/reference-to-video",
+     "kind": "reference-to-video (omni reference, edit, extend): up to 9 images + 3 videos + 3 audio (12 files max), duration auto or 4-15 s, 480p/720p/1080p/4k, generate_audio default true",
+     "url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt"
+    },
+    {
+     "id": "bytedance/seedance-2.0/fast/reference-to-video",
+     "kind": "reference-to-video, fast tier (720p max, cheaper)",
+     "url": "https://fal.ai/models/bytedance/seedance-2.0/fast/reference-to-video"
+    },
+    {
+     "id": "bytedance/seedance-2.0/text-to-video",
+     "kind": "text-to-video (480p/720p, 4-15 s or auto, optional seed)",
+     "url": "https://fal.ai/docs/model-api-reference/video-generation-api/bytedance-seedance-2.0-text-to-video.md"
+    },
+    {
+     "id": "bytedance/seedance-2.0/image-to-video",
+     "kind": "image-to-video: image_url = start frame, optional end_image_url = end frame",
+     "url": "https://fal.ai/docs/model-api-reference/video-generation-api/bytedance-seedance-2.0-text-to-video.md"
+    },
+    {
+     "id": "bytedance/seedance-2.0/us/reference-to-video",
+     "kind": "US-hosted reference-to-video variant",
+     "url": "https://fal.ai/models/bytedance/seedance-2.0/us/reference-to-video/llms.txt"
+    },
+    {
+     "id": "bytedance/seedance-2.0/mini/reference-to-video",
+     "kind": "Mini (cheaper) reference-to-video; same prompt grammar per Runway guide",
+     "url": "https://fal.ai/models/bytedance/seedance-2.0/mini/reference-to-video/llms.txt"
+    },
+    {
+     "id": "bytedance/seedance-2.5/reference-to-video (also /text-to-video, /image-to-video)",
+     "kind": "Seedance 2.5: native 4-30 s in ONE pass, 480p/720p, up to 30 images/10 videos/10 audio; same @Image1 grammar as 2.0. Would remove the need to stitch two 15 s clips for the 30 s film",
+     "url": "https://fal.ai/learn/devs/seedance-2-5-vs-seedance-2-0"
+    }
+   ],
+   "params": [
+    {
+     "model_id": "bytedance/seedance-2.0/reference-to-video",
+     "name": "prompt",
+     "values": "string, required",
+     "notes": "References are named in-prompt by upload order: @Image1..@Image9, @Video1..@Video3, @Audio1..@Audio3",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt"
+    },
+    {
+     "model_id": "bytedance/seedance-2.0/reference-to-video",
+     "name": "image_urls",
+     "values": "list, up to 9; max 30 MB each; jpeg/png/webp/bmp/tiff/gif/heic",
+     "notes": "Order matters: the 1st URL is @Image1",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt"
+    },
+    {
+     "model_id": "bytedance/seedance-2.0/reference-to-video",
+     "name": "video_urls",
+     "values": "list, up to 3; combined 2-15 s; <50 MB total; mp4/mov; roughly 480p-720p",
+     "notes": "Can be used to pass clip 1 as @Video1 so clip 2 extends it. Using video refs lowers the per-token rate",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt"
+    },
+    {
+     "model_id": "bytedance/seedance-2.0/reference-to-video",
+     "name": "audio_urls",
+     "values": "list, up to 3; combined max 15 s; mp3/wav; max 15 MB each",
+     "notes": "Requires at least one image or video reference. This is the slot for a narrator voice-timbre reference (@Audio1)",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt"
+    },
+    {
+     "model_id": "bytedance/seedance-2.0/reference-to-video",
+     "name": "duration",
+     "values": "\"auto\" (default) or \"4\"..\"15\" (string)",
+     "notes": "Use \"15\" for each half of a 30 s film",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt"
+    },
+    {
+     "model_id": "bytedance/seedance-2.0/reference-to-video",
+     "name": "resolution",
+     "values": "480p, 720p (default), 1080p, 4k",
+     "notes": "fal's own how-to page says otherwise in places; check before relying on 1080p",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt"
+    },
+    {
+     "model_id": "bytedance/seedance-2.0/reference-to-video",
+     "name": "aspect_ratio",
+     "values": "auto (default), 21:9, 16:9, 4:3, 1:1, 3:4, 9:16",
+     "notes": "Official guide: landscape gives far fewer unwanted subtitles than portrait",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt"
+    },
+    {
+     "model_id": "bytedance/seedance-2.0/reference-to-video",
+     "name": "generate_audio",
+     "values": "boolean, default true",
+     "notes": "Adds SFX, ambience and lip-synced speech; costs the same either way",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt"
+    },
+    {
+     "model_id": "bytedance/seedance-2.0/reference-to-video",
+     "name": "seed",
+     "values": "not an input on r2v (output only); text-to-video accepts an integer seed",
+     "notes": "Seeds will not lock continuity between two r2v calls",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt"
+    },
+    {
+     "model_id": "bytedance/seedance-2.0/reference-to-video",
+     "name": "bitrate_mode / codec / end_user_id",
+     "values": "standard|high; auto|H264|H265; string",
+     "notes": "Optional",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt"
+    },
+    {
+     "model_id": "bytedance/seedance-2.0/image-to-video",
+     "name": "image_url / end_image_url",
+     "values": "start frame (required) / end frame (optional)",
+     "notes": "Last-frame chaining: pass clip 1's final frame as image_url of clip 2. Community calls this weaker than passing the full clip as a video reference",
+     "source_url": "https://fal.ai/docs/model-api-reference/video-generation-api/bytedance-seedance-2.0-text-to-video.md"
+    }
+   ],
+   "audio": {
+    "generates_audio": "Yes. Seedance 2.0 generates audio jointly with the video in one pass: dialogue/narration with lip-sync, SFX, ambience and music. generate_audio defaults to true on fal at no extra cost. If audio is left unspecified, the model tends to add its own BGM, so ask for silence or 'no music' explicitly.",
+    "speech_or_narration": "It can speak a given line. OFFICIAL (BytePlus ModelArk Seedance 2.0 prompt guide): dialogue goes in curly braces {}, e.g. 'One of them smiles and asks {How did the exam go?}'. A less common language must be named ('says in Japanese {...}'). The same guide's own examples also use double quotes: 'The woman speaks first with a playful tone: \"...\"'. fal and Replicate docs say to use double quotes. For VOICE-OVER (off-screen narrator) the official example uses: 'Voiceover: A deep, serene male voice says: '<line>'', optionally followed by '> Text Integration: Render the narration as subtitles at the bottom-center... synchronized with audio timing.' Voice timbre can be locked with an audio reference: 'Use the low, thick, warm ... male voice of @Audio 1 to say ...'. Describing the voice in detail (age, pitch, texture, pace) improves the match. Speaker attribution is done in prose (who says it, in what tone) placed right before the line. For our first-person exhibit narration: either 'Voiceover: <voice description> says: {line}' (off-screen narrator, no lip-sync needed, safest for an inanimate object), or attach the line to the object as speaker. The second is risky: the model may invent a mouth or face. That risk is inferred, not documented.",
+    "language_notes": "Official: dialogue language must be consistent within a prompt. Do not mix Chinese and English except for proper nouns. Official: polyphonic or rare characters get mispronounced, so replace them with common homophones. By analogy, unusual proper nouns in English (artist names, Latin/Greek terms) may be mispronounced and are worth respelling phonetically (inferred). Community (heyuan110): write the prompt in the same language as any on-screen text, because mixing languages raises the garble rate. English narration is supported; 2.5 marketing claims 10+ languages for dialogue.",
+    "source_urls": [
+     "https://docs.byteplus.com/en/docs/modelark/seedance-2-0-prompt-guide",
+     "https://fal.ai/docs/model-api-reference/video-generation-api/bytedance-seedance-2.0-text-to-video.md",
+     "https://replicate.com/bytedance/seedance-2.0",
+     "https://fal.ai/learn/tools/seedance-2-0-prompting-guide",
+     "https://www.heyuan110.com/posts/ai/2026-07-11-seedance-2-prompt-guide/",
+     "https://seedance2.so/blog/seedance-2-consistent-voice"
+    ]
+   },
+   "prompt_findings": [
+    {
+     "finding": "Multi-shot in one generation: use 'Shot 1: / Shot 2: / Shot 3:' blocks in event order. Do NOT impose per-shot durations. The official guide says the model's support for precise timing (e.g. 0-3 s) is unstable, and forcing durations can cause abnormal results. Let the model pace the cuts.",
+     "example": "Shot 1: Side shot of a street alley; the man slowly starts running... Shot 2: The man knocks over a fruit stand; the camera shakes quickly and gives a close-up... Shot 3: ...the camera slowly pulls back and freezes on the empty street.",
+     "source_url": "https://docs.byteplus.com/en/docs/modelark/seedance-2-0-prompt-guide",
+     "confidence": "official"
+    },
+    {
+     "finding": "Per-shot content order (official): (1) camera move or transition ('slowly push in from a wide shot', 'fixed camera position', 'cut to...'), (2) subject action/expression, (3) position/space, (4) audio for that shot (SFX, voices, BGM). Transitions between shots are written as 'Cut to a close-up of...', 'The camera cuts back to...', 'Then the camera pans right and cuts to the frame and composition shown in Image 4'.",
+     "example": "Shot 2: Girl @Image 1 pushes the door open... The camera cuts to an indoor medium shot... One of them smiles and asks {How did the exam go? Did you pass?}.",
+     "source_url": "https://docs.byteplus.com/en/docs/modelark/seedance-2-0-prompt-guide",
+     "confidence": "official"
+    },
+    {
+     "finding": "Conflicting community practice: Atlabs and Luma recommend timecode headers like [00:00-00:05], which Atlabs says act as hard cuts. heyuan110 recommends 'Seconds 1-5:' timelines for clips over 8 s. These conflict with the official warning that precise timing is unstable. Recommendation for the script agent: emit 'Shot N:' labels and keep target seconds in our own schema, not in the prompt (or at most a soft hint).",
+     "example": "[00:00-00:05] wide shot ... [00:05-00:10] close-up ...",
+     "source_url": "https://www.atlabs.ai/blog/the-ultimate-seedance-2.0-prompting-guide-47-prompts-2026",
+     "confidence": "community"
+    },
+    {
+     "finding": "Official special-character table: {} = dialogue, () = music, <> = sound effect, [] = subtitles/on-screen text. Use the same language for all dialogue.",
+     "example": "{Hello, world} / (fast-paced rock music is playing in the background) / < dog barking can be heard in the distance > / [Chapter One: Departure]",
+     "source_url": "https://docs.byteplus.com/en/docs/modelark/seedance-2-0-prompt-guide",
+     "confidence": "official"
+    },
+    {
+     "finding": "Voice-over pattern from the official appendix: 'Voiceover: <voice description> says: '<line>''. Optionally ask for synced subtitles with '> Text Integration: Render the narration as subtitles at the bottom-center...'. If you do NOT want subtitles, add 'Keep it subtitle-free; avoid generating any text or subtitles'. The model adds subtitles unprompted, especially in portrait.",
+     "example": "I2V: A time-lapse of a mountain landscape ... Voiceover: A deep, serene male voice says: '<line>'",
+     "source_url": "https://docs.byteplus.com/en/docs/modelark/seedance-2-0-prompt-guide",
+     "confidence": "official"
+    },
+    {
+     "finding": "Keep spoken lines short and split long speech across shots (one sentence per cut). Long monologues drift out of lip-sync. Heavy dialogue in action-heavy shots degrades both motion and speech. For 15 s, community practice suggests roughly 2-4 short sentences (about 30-40 English words at narration pace; the word count is inferred from typical speech rate of ~2.5 words/s).",
+     "example": "Shot 1 ... Voiceover says: {I was carved from a single block of marble.} Shot 2 ... {For two thousand years I have watched you.}",
+     "source_url": "https://fal.ai/learn/tools/seedance-2-0-prompting-guide",
+     "confidence": "community"
+    },
+    {
+     "finding": "Narration end-of-clip artefact (official FAQ): when a video contains narration, abrupt clicks or cut-off noise often appear at the end. Fix by regenerating or applying an audio fade-out in post. Implication: end each 15 s clip's narration ~1 s before the end and fade audio when stitching.",
+     "example": "Apply volume envelope fade to 0 over the last frames.",
+     "source_url": "https://docs.byteplus.com/en/docs/modelark/seedance-2-0-prompt-guide",
+     "confidence": "official"
+    },
+    {
+     "finding": "Reference images: refer by number and bind subject to asset every time it is mentioned ('<Subject>@Image 1'), or define a label once ('Define the bronze helmet in Image 1 as the helmet') and reuse exactly that label. Put the most important asset first. Asset IDs cannot replace <Image N>. Assign each reference an explicit role (e.g. '@Image 3 as scene reference').",
+     "example": "Use the woman in red from @Image 1 as the female lead, use the cliff and bamboo forest environment in @Image 3 as the scene reference, refer to the overall camera movement in @Video 1, and synchronize the background sound effects with @Audio 1.",
+     "source_url": "https://docs.byteplus.com/en/docs/modelark/seedance-2-0-prompt-guide",
+     "confidence": "official"
+    },
+    {
+     "finding": "Reference syntax variants seen in docs: fal and the official guide use @Image1 / @Image 1. Replicate and fal T2V docs show [Image1]. Atlabs uses @[image1]. The official text also uses plain 'Image 1'. Safest for fal: '@Image1' matching upload order.",
+     "example": "The character from [Image1] performs the dance from [Video1].",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt",
+     "confidence": "official"
+    },
+    {
+     "finding": "Multi-view references: for PRODUCTS/objects the official guide supports 'multi-perspective subject reference' (e.g. three images of the same camera, rotated 360 degrees). For CHARACTERS it warns that multi-view or three-view sheets get read as different subjects and cause duplicates ('twins'). For a museum exhibit, front/side/detail views are fine, but bind them explicitly to ONE subject: 'Define the vase in Image 1, Image 2 and Image 3 as the vase'. Also add an anti-duplicate constraint.",
+     "example": "Use the cameras featured in Image 1, Image 2 and Image 3 ... slowly rotates 360° ... clearly displaying the front, sides and back of each camera.",
+     "source_url": "https://docs.byteplus.com/en/docs/modelark/seedance-2-0-prompt-guide",
+     "confidence": "official"
+    },
+    {
+     "finding": "Anti-duplicate constraint (official), useful when several views of one exhibit are supplied: append a global line forbidding identical copies of the subject in one frame.",
+     "example": "Throughout the video, ... Do not generate duplicate avatars or a twin effect. Keep only a single corresponding [object] in the same frame.",
+     "source_url": "https://docs.byteplus.com/en/docs/modelark/seedance-2-0-prompt-guide",
+     "confidence": "official"
+    },
+    {
+     "finding": "Recommended asset count: 4-5 total (1-2 subject images + 1 scene image + 1 camera video + 1 audio). Do not max out the 9/3/3 limits, because priority confusion causes style conflicts and subject blur.",
+     "example": "@Image1 front view, @Image2 detail, @Image3 gallery scene, @Audio1 narrator timbre",
+     "source_url": "https://docs.byteplus.com/en/docs/modelark/seedance-2-0-prompt-guide",
+     "confidence": "official"
+    },
+    {
+     "finding": "Advanced prompt formula (official): precise subject + action details + scene/environment + lighting & colour tone + camera movement + visual style + image quality + constraints. Lock who/what first, then where/atmosphere, then how to shoot, then style/quality/constraints.",
+     "example": "...The entire video should have a high-definition cinematic documentary style, with warm tones and soft lighting.",
+     "source_url": "https://docs.byteplus.com/en/docs/modelark/seedance-2-0-prompt-guide",
+     "confidence": "official"
+    },
+    {
+     "finding": "Prompt length: there is no official recommended length (third-party report: ByteDance said 'no'). Official FAQ: do not paste the whole script as the prompt; redundant copy confuses the model. Community advice ranges from 60-100 words (single shot; heyuan110 says adherence drops with length and the first 2-3 instructions are reliably followed) to 200-500 words for multi-shot timecoded prompts (Atlabs). Volcengine cap reportedly about 1000 English words. Practical target for a 3-4-shot 15 s clip: ~120-250 words, essentials front-loaded (inferred).",
+     "example": "Keep the subject binding and the narration lines in the first half of the prompt.",
+     "source_url": "https://www.heyuan110.com/posts/ai/2026-07-11-seedance-2-prompt-guide/",
+     "confidence": "community"
+    },
+    {
+     "finding": "Camera vocabulary: standard terms work well (medium shot, close-up, wide shot, slow push-in, smooth lateral tracking, fixed shot). Use ONLY ONE camera movement per shot. Stacking push/pull/pan increases instability. Community-tested additions: dolly, pan, tilt, crane, orbit/arc, rack focus, locked-off, macro, low front angle, long lens, drone overhead, 'one continuous take, no cuts'. For static objects, slow push-in, slow orbit, macro detail pass and rack focus suit (inferred).",
+     "example": "Shot 1: Fixed camera, wide shot of the gallery. Shot 2: Slow push-in to a macro close-up of the inscription.",
+     "source_url": "https://docs.byteplus.com/en/docs/modelark/seedance-2-0-prompt-guide",
+     "confidence": "official"
+    },
+    {
+     "finding": "Motion: prefer slow, gentle, continuous small movements. Avoid high-burst actions (sprints, jumps, rolls). Specify the body part, range, speed and force. Express emotion through concrete physical details, not abstract words. For an object narrator: light, dust motes, camera motion and slow environmental change, rather than making the object move (inferred).",
+     "example": "slowly raise a hand, slightly lower the head; 'letting out a long breath, tense shoulders completely relaxing' instead of 'relief'",
+     "source_url": "https://docs.byteplus.com/en/docs/modelark/seedance-2-0-prompt-guide",
+     "confidence": "official"
+    },
+    {
+     "finding": "Constraint words to always append (official): 'keep it subtitle-free / avoid generating any text or subtitles' (unless subtitles are wanted), 'do not generate a logo', 'do not generate a watermark', plus an explicit style word to prevent style drift. Avoid vague quality words ('epic', '8k', 'masterpiece'); fal says they render nothing useful.",
+     "example": "Keep it subtitle-free. Do not generate watermarks. Do not generate logos. Photorealistic museum documentary style.",
+     "source_url": "https://docs.byteplus.com/en/docs/modelark/seedance-2-0-prompt-guide",
+     "confidence": "official"
+    },
+    {
+     "finding": "Text artefacts: on-screen text formula is [Text content] + [Timing] + [Position] + [Entrance style], [Colour/font]. Use common characters, no special symbols. Unrequested subtitles cannot be fully prevented: use negative constraints, text-free reference images, and landscape aspect ratio. Exact logos and wordmarks should come from an image reference or post-production. For museum labels or dates on screen, overlay in post rather than generating them (inferred).",
+     "example": "Display subtitles at the bottom-center with the text. The subtitles must be perfectly synchronized with the audio rhythm and pacing.",
+     "source_url": "https://docs.byteplus.com/en/docs/modelark/seedance-2-0-prompt-guide",
+     "confidence": "official"
+    },
+    {
+     "finding": "Audio must be specified or the model adds BGM. Name diegetic sounds (footsteps, room tone, distant murmur) and state 'no music' if wanted. fal treats the audio part as a 'sound brief'.",
+     "example": "Audio: quiet gallery room tone, distant footsteps on marble, (soft solo cello under the narration), no other music.",
+     "source_url": "https://fal.ai/learn/tools/seedance-2-0-prompting-guide",
+     "confidence": "community"
+    },
+    {
+     "finding": "Failure modes, official FAQ: face/ID drift (use a clean headshot and put it first), unexpected subtitles, platform logo/watermark, style drift to live-action, jump cuts at extension joins, duplicated subjects from multi-view refs, quality degradation over repeated extensions (colour blotches), special effects not matching text (use a reference video), more than 4 reference people unstable, narration end-of-clip noise, mispronunciation, voice reference mismatch.",
+     "example": "see FAQ sections",
+     "source_url": "https://docs.byteplus.com/en/docs/modelark/seedance-2-0-prompt-guide",
+     "confidence": "official"
+    },
+    {
+     "finding": "Failure modes, community: instruction overflow (later instructions ignored), naked references bleeding lighting/framing (assign roles), stacked camera moves causing jitter, scene cramming (too many locations in a short clip causes smeared morphing), maxed references making subjects look cardboard, long monologues losing lip-sync.",
+     "example": "Match the number of locations to duration: 1 location per 15 s clip is safest.",
+     "source_url": "https://www.heyuan110.com/posts/ai/2026-07-11-seedance-2-prompt-guide/",
+     "confidence": "community"
+    },
+    {
+     "finding": "Voice consistency across two generations: pass the same voice sample as @Audio1 in both calls and describe the voice identically in text (official tip: detailed voice-characteristic description greatly improves matching; keep the lines' tone close to the reference). Community: the result is recognisably similar, not identical. For exact voice, record or TTS the narration externally and use Seedance for visuals (fal's own 2.5 test used Seed Audio 1.0 for VO). Practical option: take clip 1's narration audio (or a TTS sample) as @Audio1 for clip 2.",
+     "example": "Use the low, thick, warm, and finely grainy middle-aged male voice of @Audio 1 to say {...}",
+     "source_url": "https://docs.byteplus.com/en/docs/modelark/seedance-2-0-prompt-guide",
+     "confidence": "official"
+    },
+    {
+     "finding": "Same-narrator caveat: community reports voice consistency via @Audio is approximate. For exact replication they recommend external voice recording plus Seedance visuals only.",
+     "example": "generate_audio=true for SFX/ambience, VO mixed in post",
+     "source_url": "https://seedance2.so/blog/seedance-2-consistent-voice",
+     "confidence": "community"
+    },
+    {
+     "finding": "Visual continuity across two 15 s clips, official options: (a) video extension, giving clip 1 as Video 1 and prompting 'Extend Video 1 backward/forward...' or 'Generate the content after Video 1: ...' (the model extracts transition frames; do NOT write 'reference Video 1' or it becomes a reference task). (b) Segmented stitching: generate independent clips and cut on a scene change. The official advice is to end clip 1 on a transition cut and start clip 2 on a new scene, which hides joins. Extension joins can jump or roll back; fix by trimming 6 frames from the end of the earlier clip and 1 frame from the start of the next. Repeated extension degrades quality.",
+     "example": "Generate the content after Video 1: the camera slowly orbits to the back of the vase while the narrator continues {...}",
+     "source_url": "https://docs.byteplus.com/en/docs/modelark/seedance-2-0-prompt-guide",
+     "confidence": "official"
+    },
+    {
+     "finding": "fal constraint for extension: video_urls combined length is 2-15 s and resolution about 480p-720p. A full 15 s clip 1 at 1080p cannot be passed as-is: downscale it to 720p and possibly trim to its last few seconds (inferred from limits).",
+     "example": "Pass the last 5 s of clip 1 at 720p as @Video1.",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt",
+     "confidence": "inferred"
+    },
+    {
+     "finding": "Continuity via restated anchors: reuse identical reference images in the same order in both calls. Use the same subject label, style line, lighting line and constraint block verbatim. Start the second prompt with 'Continue from the previous stage' and restate fixed facts, using a [Maintain Consistency] block. Community also reports last-frame-only chaining (I2V image_url) as weaker than passing the full prior clip.",
+     "example": "[Maintain Consistency] same bronze helmet @Image1, same dim gallery with warm spotlight, same slow documentary pacing.",
+     "source_url": "https://kylon.io/blog/seedance-2-5-prompt-guide-2026",
+     "confidence": "community"
+    },
+    {
+     "finding": "Image-first prompts: do not re-describe what the reference image already shows. Spend prompt words on motion, camera and sound. Use text for semantics and spatial decisions, references for identity.",
+     "example": "Instead of describing the vase's pattern, write 'the vase from @Image1'.",
+     "source_url": "https://www.atlabs.ai/blog/the-ultimate-seedance-2.0-prompting-guide-47-prompts-2026",
+     "confidence": "community"
+    },
+    {
+     "finding": "Iterate cheaply: test at ~5 s or 480p to lock the look, then render full length. Change one variable per retry.",
+     "example": "duration \"5\", resolution \"480p\" for drafts",
+     "source_url": "https://replicate.com/bytedance/seedance-2.0",
+     "confidence": "community"
+    },
+    {
+     "finding": "Seedance 2.5 on fal does 4-30 s natively in one call, with the same @Image grammar. A 30 s film could be a single generation, avoiding stitching and voice drift, at the cost of 720p max and a higher per-second price.",
+     "example": "bytedance/seedance-2.5/reference-to-video with duration \"30\"",
+     "source_url": "https://fal.ai/learn/devs/seedance-2-5-vs-seedance-2-0",
+     "confidence": "official"
+    }
+   ],
+   "pricing": [
+    {
+     "model_id": "bytedance/seedance-2.0/reference-to-video",
+     "price": "$0.014 per 1,000 video tokens (480p-1080p) without video refs; ~$0.0086 with video refs; tokens = H x W x seconds x 24 / 1024. About $0.3034/s at 720p (~$4.55 per 15 s clip); ~$0.682/s at 1080p. Audio included at no extra cost",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt"
+    },
+    {
+     "model_id": "bytedance/seedance-2.0/fast/reference-to-video",
+     "price": "~$0.2419/s at 720p (~$3.63 per 15 s)",
+     "source_url": "https://fal.ai/learn/devs/seedance-2-5-vs-seedance-2-0"
+    },
+    {
+     "model_id": "bytedance/seedance-2.5/reference-to-video",
+     "price": "$0.0214 per 1,000 tokens; ~$0.473/s at 720p (~$14.2 per 30 s)",
+     "source_url": "https://fal.ai/learn/devs/seedance-2-5-vs-seedance-2-0"
+    },
+    {
+     "model_id": "fal-ai/nano-banana-pro/edit",
+     "price": "$0.15 per image (4K = 2x)",
+     "source_url": "https://fal.ai/models/fal-ai/nano-banana-pro/edit/llms.txt"
+    },
+    {
+     "model_id": "fal-ai/bytedance/seedream/v4.5/edit",
+     "price": "$0.04 per image",
+     "source_url": "https://fal.ai/models/fal-ai/bytedance/seedream/v4.5/edit/llms.txt"
+    },
+    {
+     "model_id": "fal-ai/qwen-image-edit-2511-multiple-angles",
+     "price": "$0.035 per megapixel",
+     "source_url": "https://fal.ai/models/fal-ai/qwen-image-edit-2511-multiple-angles/llms.txt"
+    }
+   ],
+   "image_models_for_reference_views": [
+    {
+     "id": "fal-ai/qwen-image-edit-2511-multiple-angles",
+     "why": "Purpose-built camera-angle LoRA: renders the same object from a numeric viewpoint (horizontal_angle 0-360 with 90 = right side and 180 = back, vertical_angle -30..90, zoom 0-10). Deterministic front/side/back/top/detail views from ONE visitor photo. Community uses it for multi-angle product shots",
+     "inputs": "image_urls (one image), horizontal_angle, vertical_angle, zoom, additional_prompt, lora_scale, seed, num_images 1-4",
+     "price": "$0.035/MP",
+     "source_url": "https://fal.ai/models/fal-ai/qwen-image-edit-2511-multiple-angles/llms.txt"
+    },
+    {
+     "id": "fal-ai/nano-banana-pro/edit",
+     "why": "Gemini 3 Pro Image: strong identity preservation and instruction-following for 'same object, side view, plain background' edits. Up to 14 input images, so it can combine the visitor photo with museum images for a cleaner reference; 1K/2K/4K output",
+     "inputs": "prompt, image_urls (<=14), aspect_ratio, resolution, num_images, seed",
+     "price": "$0.15/image",
+     "source_url": "https://fal.ai/models/fal-ai/nano-banana-pro/edit/llms.txt"
+    },
+    {
+     "id": "fal-ai/bytedance/seedream/v4.5/edit",
+     "why": "Same vendor family as Seedance (the official Seedance guide was itself made with Seedance/Seedream and recommends Seedream editing to remove text from reference images). Cheap, up to 10 inputs, and can output up to 6 related images per run (max_images) for a coherent view set",
+     "inputs": "prompt, image_urls (<=10), image_size (default 2048^2), max_images 1-6, num_images, seed",
+     "price": "$0.04/image",
+     "source_url": "https://fal.ai/models/fal-ai/bytedance/seedream/v4.5/edit/llms.txt"
+    }
+   ],
+   "open_questions": [
+    "Exhibit as speaker: should narration be an off-screen 'Voiceover:' (official pattern, no lip-sync) or attached to the object? Attaching it risks the model animating a face or mouth on the exhibit. This is untested and needs a quick A/B.",
+    "Do we stay on Seedance 2.0 (2 x 15 s, stitch, voice drift risk) or use Seedance 2.5 on fal (single 30 s pass, 720p max, ~$0.47/s)? This changes the s3/s4 script structure.",
+    "Narration audio: let Seedance voice it (native, approximate voice match across two clips via @Audio1) or generate VO separately (TTS) and mix in post with generate_audio for SFX/ambience only? With the latter, the prompt should say 'no speech' to avoid double voices.",
+    "Delimiters: the official guide documents {} for dialogue, () for music, <> for SFX, [] for subtitles, but its own examples also use double quotes and the fal docs use quotes. Do we standardise on {} or quotes? Needs a test render.",
+    "Should prompts include target seconds per shot? Official says precise timing is unstable; community (Atlabs/Luma) uses [00:00-00:05] headers. Proposed: Shot N labels only, with seconds kept in our schema for checks.",
+    "Multi-view refs for objects: the official guide supports multi-perspective product references but warns multi-view character sheets cause duplicates. Need to verify that 3 views of one exhibit do not produce 'twin' exhibits, and use the anti-duplicate constraint.",
+    "Clip 1 to clip 2 extension on fal: video_urls must be <=15 s combined and about 720p max. Confirm whether passing a trimmed tail of clip 1 as @Video1 gives a smooth join, or whether a hard cut on a scene change (official recommendation) is enough.",
+    "Museum objects with real faces (portraits, busts): the official FAQ notes celebrity-resemblance blocking on face drift. Check moderation behaviour for famous artworks.",
+    "Pricing figures differ across fal pages (1080p availability, per-second rates). Verify on the live model page before the demo budget is fixed."
+   ]
+  },
+  "verified": {
+   "claims": [
+    {
+     "claim": "Model id bytedance/seedance-2.0/reference-to-video exists and is the best fit for exhibit reference views.",
+     "status": "confirmed",
+     "evidence": "llms.txt gives this endpoint id. It takes image_urls (up to 9), video_urls (up to 3) and audio_urls (up to 3).",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt"
+    },
+    {
+     "claim": "Max duration per Seedance 2.0 generation is 15 s; duration is \"auto\" or \"4\"..\"15\" as strings.",
+     "status": "confirmed",
+     "evidence": "The r2v, t2v, i2v, fast and mini schemas all list auto or 4-15 whole seconds. The ByteDance paper also says 4 to 15 seconds.",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt"
+    },
+    {
+     "claim": "r2v reference limits: 9 images (30 MB each), 3 videos (2-15 s combined, <50 MB, ~480p-720p), 3 audio (MP3/WAV, <=15 s combined, 15 MB each, needs an image or video), 12 files total.",
+     "status": "confirmed",
+     "evidence": "llms.txt states every one of these limits. The arXiv abstract confirms 3 videos, 9 images and 3 audio clips.",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt"
+    },
+    {
+     "claim": "In r2v prompts, references are named @Image1..@Image9, @Video1..3, @Audio1..3 in upload order.",
+     "status": "confirmed",
+     "evidence": "The r2v llms.txt and the r2v API doc .md both say to refer to files as @Image1, @Image2 and so on. The t2v .md shows [Image1], but text-to-video takes no images, so that does not apply to r2v.",
+     "source_url": "https://fal.ai/docs/model-api-reference/video-generation-api/bytedance-seedance-2.0-reference-to-video.md"
+    },
+    {
+     "claim": "Standard tier supports 1080p and 4k.",
+     "status": "contradicted",
+     "evidence": "The llms.txt schemas list 480p/720p/1080p/4k. The r2v and t2v API .md pages list only 480p/720p. The ByteDance paper says native output is 480p and 720p. The sources disagree, so 1080p may be upscaled or rejected.",
+     "source_url": "https://fal.ai/docs/model-api-reference/video-generation-api/bytedance-seedance-2.0-reference-to-video.md"
+    },
+    {
+     "claim": "Fast and mini tiers are 480p/720p only.",
+     "status": "confirmed",
+     "evidence": "Both the fast and mini r2v llms.txt pages list 480p and 720p, with 720p as the default.",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/fast/reference-to-video/llms.txt"
+    },
+    {
+     "claim": "seed is an input on Seedance 2.0 endpoints.",
+     "status": "contradicted",
+     "evidence": "The r2v, t2v, i2v and fast llms.txt schemas show seed in the output only. The .md API pages list it as an optional input. Seedance 2.5 r2v does accept seed. On 2.0, assume seed cannot be relied on.",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt"
+    },
+    {
+     "claim": "generate_audio defaults to true and costs the same with or without audio.",
+     "status": "confirmed",
+     "evidence": "The r2v page says the cost is the same whether or not audio is generated, and the default is true.",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt"
+    },
+    {
+     "claim": "Aspect ratios are auto/21:9/16:9/4:3/1:1/3:4/9:16. 720p 16:9 is 1280x720 and 480p 16:9 is 864x496.",
+     "status": "confirmed",
+     "evidence": "The t2v .md table gives these pixel sizes. All schemas list the same aspect ratios.",
+     "source_url": "https://fal.ai/docs/model-api-reference/video-generation-api/bytedance-seedance-2.0-text-to-video.md"
+    },
+    {
+     "claim": "image-to-video takes image_url (first frame) and optional end_image_url (last frame).",
+     "status": "confirmed",
+     "evidence": "The i2v llms.txt says the video transitions from the start image to the end image.",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/image-to-video/llms.txt"
+    },
+    {
+     "claim": "Standard t2v/i2v price is $0.3034/s at 720p and $0.682/s at 1080p, from a token rate of $0.014/1K and tokens = H*W*dur*24/1024.",
+     "status": "confirmed",
+     "evidence": "The t2v and i2v pages quote these figures and the formula word for word.",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/text-to-video/llms.txt"
+    },
+    {
+     "claim": "r2v standard price is $0.014/1K tokens, or $0.0086016/1K with video references. Image references alone do not lower the rate. About $0.30/s at 720p.",
+     "status": "confirmed",
+     "evidence": "The token rates are stated on the page. The page gives no per-second figure. By the formula, 1280x720x15x24/1024 = 324,000 tokens, which is about $4.54 per 15 s clip ($0.302/s). The ~$0.30/s figure is derived, not quoted.",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/reference-to-video/llms.txt"
+    },
+    {
+     "claim": "Fast r2v costs $0.2419/s at 720p ($0.0112/1K), and video inputs multiply the price by 0.6.",
+     "status": "confirmed",
+     "evidence": "The page states $0.2419/second, $0.0112 per 1000 tokens, x0.6 with video inputs, and $0.14515/s. Input video duration counts toward tokens.",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/fast/reference-to-video/llms.txt"
+    },
+    {
+     "claim": "Mini r2v costs $0.007/1K tokens at 480p and 720p, or $0.0042 with video references.",
+     "status": "confirmed",
+     "evidence": "The page states both rates. By the formula, a 15 s 720p clip is about $2.27.",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.0/mini/reference-to-video/llms.txt"
+    },
+    {
+     "claim": "Seedance 2.5 r2v on fal does 4-30 s in one pass, at 480p/720p only, for ~$0.473/s at 720p (~$14.2 per 30 s).",
+     "status": "contradicted",
+     "evidence": "Partly confirmed. The 2.5 llms.txt confirms 4-30 s, $0.0214/1K and ~$0.4730/s at 720p, which makes 30 s $13.87, not $14.2. It also lists 1080p (~$1.164/s) and allows 30 images, 10 videos and 10 audio clips. The learn article says 480p/720p only, so the two fal pages disagree on 1080p.",
+     "source_url": "https://fal.ai/models/bytedance/seedance-2.5/reference-to-video/llms.txt"
+    },
+    {
+     "claim": "fal's own 2.5 test used a Seed Audio 1.0 voice track passed in as @Audio1 for voice-over.",
+     "status": "confirmed",
+     "evidence": "The learn article says Test 8's voice track was made with Seed Audio 1.0 and passed as the @Audio1 reference.",
+     "source_url": "https://fal.ai/learn/devs/seedance-2-5-vs-seedance-2-0"
+    },
+    {
+     "claim": "Spoken lines go in double quotes and are voiced and lip-synced. Keep lines short, because long monologues drift out of sync.",
+     "status": "confirmed",
+     "evidence": "The fal guide says quoted lines are voiced and timed to the cut, and that long speeches drift and should be split across cuts.",
+     "source_url": "https://fal.ai/learn/tools/seedance-2-0-prompting-guide"
+    },
+    {
+     "claim": "For voice-over, describe a narrator and ask for a bottom-edge subtitle that matches the narration.",
+     "status": "confirmed",
+     "evidence": "The fal guide describes this pattern.",
+     "source_url": "https://fal.ai/learn/tools/seedance-2-0-prompting-guide"
+    },
+    {
+     "claim": "Multi-shot clips are written with 'cut to'. About 3 quick cuts per clip is within range.",
+     "status": "confirmed",
+     "evidence": "The fal guide calls three quick cuts 'well within range'. Its examples use three cuts or fewer.",
+     "source_url": "https://fal.ai/learn/tools/seedance-2-0-prompting-guide"
+    },
+    {
+     "claim": "State the sounds you want and write 'no music', or a score may appear.",
+     "status": "confirmed",
+     "evidence": "The fal guide tells you to treat the prompt as a sound brief and to say 'no music' when you mean it.",
+     "source_url": "https://fal.ai/learn/tools/seedance-2-0-prompting-guide"
+    },
+    {
+     "claim": "Mood words ('cinematic', 'beautiful', '8k') give generic results.",
+     "status": "confirmed",
+     "evidence": "The fal guide says these words give the model nothing concrete and suggests specific motion, camera, lighting and sound instead.",
+     "source_url": "https://fal.ai/learn/tools/seedance-2-0-prompting-guide"
+    },
+    {
+     "claim": "Official BytePlus guide: dialogue goes in {} and the special characters are {} () <> [].",
+     "status": "unverifiable",
+     "evidence": "The BytePlus page renders client-side and returned only navigation. Search found no other source for curly braces. fal and heyuan110 both use double quotes.",
+     "source_url": "https://docs.byteplus.com/en/docs/modelark/seedance-2-0-prompt-guide"
+    },
+    {
+     "claim": "Official BytePlus guide: use 'Shot N:' blocks and do not set per-shot durations, because precise timing is unstable.",
+     "status": "unverifiable",
+     "evidence": "The BytePlus page did not render. heyuan110 says the reverse: that the official guide recommends per-second timelines for clips over 8 s. Neither claim is settled.",
+     "source_url": "https://www.heyuan110.com/posts/ai/2026-07-11-seedance-2-prompt-guide/"
+    },
+    {
+     "claim": "Official: 'Voiceover: <voice> says:' pattern, a 'Keep it subtitle-free' constraint, no logo or watermark.",
+     "status": "unverifiable",
+     "evidence": "The BytePlus page did not render. heyuan110 confirms secondhand that the official guide describes bottom-frame subtitles matching the voiceover.",
+     "source_url": "https://docs.byteplus.com/en/docs/modelark/seedance-2-0-prompt-guide"
+    },
+    {
+     "claim": "Official: multi-view product references are fine, but multi-view character sheets cause twins. Add an anti-duplicate line. Use 4-5 assets in total.",
+     "status": "unverifiable",
+     "evidence": "The BytePlus page did not render, and no fal page covers this.",
+     "source_url": "https://docs.byteplus.com/en/docs/modelark/seedance-2-0-prompt-guide"
+    },
+    {
+     "claim": "Official: narration often produces clicks or cut-off noise at the clip end, so fade out in post. Extension joins: trim 6 frames.",
+     "status": "unverifiable",
+     "evidence": "The BytePlus page did not render.",
+     "source_url": "https://docs.byteplus.com/en/docs/modelark/seedance-2-0-prompt-guide"
+    },
+    {
+     "claim": "Prompt length: ~60-100 words, and the first 2-3 instructions are the ones reliably followed.",
+     "status": "confirmed",
+     "evidence": "heyuan110 says this, but as the author's community convention and observation, not an official spec. It also reports that ByteDance answered 'no' when asked about a recommended length.",
+     "source_url": "https://www.heyuan110.com/posts/ai/2026-07-11-seedance-2-prompt-guide/"
+    },
+    {
+     "claim": "ByteDance report: English on-screen speech scores ~4.2/5 and off-screen voice ~2.9-3.1/5.",
+     "status": "unverifiable",
+     "evidence": "The arXiv abstract page confirms the model does joint audio-video generation but does not show these per-category scores. The full PDF was not checked.",
+     "source_url": "https://arxiv.org/abs/2604.14148"
+    },
+    {
+     "claim": "fal-ai/qwen-image-edit-2511-multiple-angles makes numeric novel views (horizontal 0-360 with 90 = right and 180 = back, vertical -30..90, zoom 0-10) for $0.035/MP.",
+     "status": "confirmed",
+     "evidence": "The page states these ranges and the meaning of each angle, and the price is $0.035 per megapixel.",
+     "source_url": "https://fal.ai/models/fal-ai/qwen-image-edit-2511-multiple-angles/llms.txt"
+    },
+    {
+     "claim": "fal-ai/nano-banana-pro/edit costs $0.15/image (4K costs 2x, web search +$0.015), with a 14-reference limit, 1K/2K/4K output and a seed input.",
+     "status": "confirmed",
+     "evidence": "The page states these figures.",
+     "source_url": "https://fal.ai/models/fal-ai/nano-banana-pro/edit/llms.txt"
+    },
+    {
+     "claim": "fal-ai/nano-banana-2/edit costs $0.08/image, offers 0.5K-4K and has enable_image_search.",
+     "status": "confirmed",
+     "evidence": "The page states these, with multipliers of 0.75x (0.5K), 1.5x (2K) and 2x (4K).",
+     "source_url": "https://fal.ai/models/fal-ai/nano-banana-2/edit/llms.txt"
+    },
+    {
+     "claim": "fal-ai/bytedance/seedream/v4.5/edit costs $0.04/image, takes up to 10 inputs, and max_images 1-6 returns several outputs per run.",
+     "status": "confirmed",
+     "evidence": "The page confirms these. Inputs plus outputs must be 15 or fewer, and the default output is 2048x2048.",
+     "source_url": "https://fal.ai/models/fal-ai/bytedance/seedream/v4.5/edit/llms.txt"
+    }
+   ],
+   "recommended_setup": "Video: use bytedance/seedance-2.0/reference-to-video (standard tier) with resolution \"720p\", aspect_ratio \"16:9\" (1280x720) and generate_audio true. Pass duration \"15\" for a 15 s film. A 30 s film is two separate 15 s calls, cut on a scene change, with the same image_urls in the same order. Do not send seed: the 2.0 llms.txt schemas leave it out, so it may be rejected or ignored. Do not request 1080p or 4k: the sources conflict, and native output is 480p/720p. Cost is about $4.54 per 15 s clip (324k tokens x $0.014/1K), or about $9.07 for a 30 s film. For drafts, use bytedance/seedance-2.0/mini/reference-to-video at 480p and duration \"5\" (about $0.35). The fast tier at 720p costs about $3.63 per 15 s and is a fallback. If one continuous voice across 30 s matters more than cost, bytedance/seedance-2.5/reference-to-video with duration \"30\" at 720p does it in one pass for about $13.87, and accepts seed. Make the clip count configurable in s3/s4 rather than hard-coded. Reference images, 3 per exhibit: (1) a clean front view from fal-ai/nano-banana-pro/edit ($0.15), which removes glare, glass and crowd from the visitor photo against a plain neutral background with no text or labels; (2) a side view from fal-ai/qwen-image-edit-2511-multiple-angles on that clean front (horizontal_angle 90 or 45, about $0.035 at 1MP); (3) a detail view, either from qwen with zoom 8-10 or from nano-banana-pro with a crop/detail prompt. The fallback for the whole set is fal-ai/bytedance/seedream/v4.5/edit with max_images 3 ($0.04 each). Image references alone do not trigger the cheaper video-reference rate, so 3 images cost nothing extra. Per-film budget is about $4.8 for 15 s and $9.3 for 30 s, plus drafts.",
+   "implications_for_script": [
+    "Segments: the hard limit is 15 s per generation. A 15 s film is 1 segment with duration \"15\". A 30 s film is 2 segments of \"15\" each, unless the 2.5 endpoint is chosen. Each segment's prompt must stand alone: repeat the subject binding, style line, sound line and constraint block word for word in both, because there is no seed or voice continuity on 2.0.",
+    "Shots: 2-3 shots per 15 s segment (fal: 3 quick cuts is 'well within range'). Write them as 'Shot 1: ... Cut to ...' in event order. Keep target seconds per shot in our schema for checks.py. Leave timecodes out of the prompt, or at most add one soft hint: the official guidance on timing could not be verified, and the community sources contradict each other.",
+    "One location per segment (the exhibit in its gallery or on a plinth). One camera move per shot (slow push-in, slow orbit, macro detail pass, locked-off). Do not make the object itself move. Motion comes from camera, light and dust.",
+    "Narration: first person, written as an off-screen voice-over. Example: 'Voiceover, a calm warm [age/gender] voice, the exhibit speaking: \"I was cast in bronze in ...\"'. Use double quotes, not {}, because fal documents quotes and the braces claim is unverified. Never write that the object speaks on screen, which risks the model inventing a mouth.",
+    "Narration length: 1 short sentence per shot, about 2-4 sentences and ≤35 words per 15 s segment. Finish the last line about 1 s before the segment ends so a fade-out can be applied. Long monologues drift out of sync (fal).",
+    "Narration facts: respell hard proper nouns and dates phonetically in the prompt line (e.g. 'one hundred twenty A D'), and keep the original spelling plus its pack source in the schema. Whether dates and names come out word for word is untested.",
+    "Voice: use the same voice description, identical text, in every segment. Optional: add a short TTS or recorded narrator sample as @Audio1 (≤15 s) and say 'in the voice of @Audio1'. Treat matching as approximate. If voice drift is unacceptable, the fallback is to switch Seedance narration off ('no speech, no voice') and mix TTS in post. The schema should carry a narration_mode field (native | external_tts).",
+    "Sound: every segment gets an explicit sound brief, e.g. 'Sound: quiet gallery room tone, soft footsteps, no music' or a single named music cue. Never leave sound unspecified.",
+    "Constraints block at the end of each prompt: no subtitles or on-screen text unless wanted, no logos, no watermark, a single [exhibit] in frame with no duplicates. These are cheap even though the official wording is unverified. Put museum labels and dates as post-production overlays, not generated text. Use 16:9 to reduce stray subtitles.",
+    "Prompt length: about 100-200 words per segment. Front-load the subject binding and the narration lines, because later instructions get dropped (community). Do not paste the whole script or re-describe what the reference images already show.",
+    "Reference binding: image_urls order is front, side, detail, so @Image1 = front, @Image2 = side, @Image3 = detail. Bind once: 'The [exhibit] shown in @Image1 (front), @Image2 (side) and @Image3 (detail) is one single object.' Then reuse exactly that label. Give each image a role. Use 3-4 references at most, never the maximum.",
+    "Reference-image prompts for the image stage: plain neutral or dark museum backdrop, even soft light, the object only, no text, labels, glass, people or watermark. Front from nano-banana-pro/edit cleanup of the visitor photo. Side from qwen multiple-angles (horizontal_angle 90 or 45, vertical_angle 0, zoom 5). Detail from qwen at zoom 8-10, or a nano-banana crop prompt naming the feature the narration mentions. Each view must show a feature that a shot actually uses.",
+    "Schema/checks: duration is a string in {\"4\"..\"15\"}, resolution is in {480p, 720p}, references are ≤9 images and ≤12 files, audio is ≤15 s total and requires an image. Check that every @ImageN in a prompt exists in image_urls, that the segment sum equals the film length, that the narration word count is ≤ ~2.3 words/s of segment duration, and that every narration line has a pack source id."
+   ],
+   "still_open": [
+    "BytePlus official prompt guide could not be read (client-rendered page). These are unconfirmed: {} dialogue syntax, the 'Shot N' and no-timing rule, the Voiceover template, the subtitle-free wording, the anti-twin line, the 4-5 asset count, end-of-clip narration noise and extension trimming. It is worth opening in a real browser once.",
+    "Whether 2.0 r2v accepts or rejects a seed input (the .md page says yes, llms.txt says no). Test one call.",
+    "1080p on standard 2.0, and on 2.5 (2.5 llms.txt lists 1080p, the learn article says no). We should stay at 720p regardless.",
+    "Off-screen voice quality scores and the language list from the arXiv paper. Only the abstract was checked.",
+    "Whether a quoted English line with dates and proper nouns is spoken word for word. Whether @Audio1 is reproduced or used only as a timbre reference.",
+    "Whether 3 views of one object cause duplicate exhibits in frame. Run an A/B with and without the anti-duplicate line.",
+    "Mini vs standard quality difference for the final render. fal does not describe it.",
+    "Which image model keeps multi-view consistency best on a real exhibit photo. Not benchmarked anywhere.",
+    "Content moderation on busts and portraits of real or famous people as references."
+   ]
+  }
+ },
+ "critiques": [
+  {
+   "lens": "screenwriter",
+   "issues": [
+    {
+     "target": "agent.py",
+     "severity": "high",
+     "problem": "The S3 revision never sees the script it is meant to revise, so every revision is a full rewrite from scratch. Fixing one note brings in new regressions, and the edits can't be 'surgical'.",
+     "evidence": "05_s3_script/request.json contains only material + concept + review_feedback (8,997 chars, no <previous_script>). 05_s3_script/thinking.md: \"I'm rebuilding the full script from scratch since the original isn't available\". The results: the asset set was rebuilt (hall_wide/ribs_underside became skeleton_full/skeleton_underside), the stranded_sandbar asset was dropped, and segment 2 shot 2 (a beached whale on wet sand) now uses living_whale, an underwater reference. The concept's best line, \"And I wasn't finished growing\", which review 1 never asked to change, became the clunkier \"And I was a girl, not finished growing\". Review 1 said a girl line was needed only \"if 'female' must survive\", and the rewrite took that as an order.",
+     "proposed_change": "In s3_script(), when feedback is present, pass the previous script: add a `previous: schemas.Script | None` parameter. In run.py pass `previous=script` on attempts > 0. Build the content as `user += f\"\\n\\n<previous_script>\\n{previous.model_dump_json(indent=2)}\\n</previous_script>\\n\\n<review_feedback>\\nEdit the previous script to fix these problems. Change only what a note requires; keep every other line, shot, asset id and timing exactly as it is.\\n{feedback}\\n</review_feedback>\"`. In prompts/s3_script.md replace the last paragraph with: \"If a previous script and review feedback are attached, you are editing, not rewriting. Start from the previous script. Change only the lines, shots, assets and timings a note points at, plus whatever must change to stay consistent (subtitles, ref_assets). Where a note offers an optional alternative ('if X must survive…'), keep the original unless you are sure the alternative is better.\""
+    },
+    {
+     "target": "agent.py / run.py / prompts/s4_review.md",
+     "severity": "high",
+     "problem": "The reviewer has no memory and never sees the concept, so it reverses itself between rounds and can't judge whether the script stayed true to the chosen idea. A 'pass' with open issues also ships those issues unfixed.",
+     "evidence": "Review 1 (04_s4_review) told the writer to insert \"Four and a half tonnes, just in bone\" at 6.4s, right after the turn. Review 2 (06_s4_review) gave its first issue as: \"The turn ... is followed by another size statistic ... That pulls the film back to scale and blunts the surprise.\" It was the reviewer's own fix. Review 2 passed with four open issues (tonnage line, two-motion underwater shot, ending not pointing at the jaw), and run.py breaks the loop on pass, so script.json ships all of them. s4_review() gets material + script only, with no concept.",
+     "proposed_change": "agent.py s4_review(): add `<concept>` and, on attempts > 0, `<previous_review>` (that review's issues) to the user content. prompts/s4_review.md, add: \"You also get the chosen concept. Judge whether the script delivers that concept's single idea and ending; drifting from it is a focus problem. If a previous review is attached, do not reverse your own earlier fixes unless the result proved worse, and say so explicitly if you do.\" schemas.Issue: add `blocking: bool`. Change the verdict rule to \"pass only if truth is 5, no score is below 4, and no issue is blocking\". run.py: on a pass that still has non-blocking issues, run one final S3 polish edit with those issues, and run checks only (no new review), so cheap fixes such as dropping a tilt actually get applied."
+    },
+    {
+     "target": "prompts/s3_script.md",
+     "severity": "high",
+     "problem": "Narration mostly says what the picture already shows. Nothing in the prompt asks for counterpoint between image and sound, so the words and pictures are redundant almost all the way through. That is the main reason the film reads as a slideshow, not a film, and it will repeat on every exhibit.",
+     "evidence": "Final script: \"Twenty-five metres of me\" plays over a tilt showing the length. \"Four and a half tonnes, just in bone\" plays over bones. \"Morning, on a sandbar in Wexford Harbour\" plays over a morning sandbar. \"Look up\" plays over an upward crane past upturned faces. The one place the words could have reframed the picture (\"I wasn't finished growing\" over the vast bones) is the strongest moment in the film. The prompt's narration paragraph covers only word count, facts and 'spoken' style.",
+     "proposed_change": "Add a paragraph to s3_script.md after Narration: \"Picture and words must not say the same thing. The image already shows what is there; the line should add what the camera cannot show: what it means, what came before, what is missing, what the narrator feels. The best moments put a line against an image that changes how it is seen (talk about the sea over the bones, about youth over sheer size). Narrating a sandbar over a shot of a sandbar wastes both. For every line, ask: if I muted this, would the viewer lose something? If I cut the picture, would the line still need it? Both answers should be yes.\" Add to s4_review.md a criterion \"counterpoint: do the lines add to the images rather than caption them?\""
+    },
+    {
+     "target": "prompts/s3_script.md and prompts/s2_concept.md",
+     "severity": "high",
+     "problem": "The single idea erodes as the script develops, and the ending turns into a mission statement, the exact ending METHOD.md lists as bad ('空洞的“让我们保护地球”'). The concept's idea is 'she wasn't finished growing' (and so died young), but the final film drops youth after second 6 and ends on a sustainability slogan. It is never said that she never got to grow, so the turn never lands.",
+     "evidence": "The final narration has eight beats in 30 s: size, girl, tonnage, blue, date, place, look up, name/slogan. That uses six fact ids against the concept's five, and adds skeleton_weight, which the concept left out. The last line is \"They named me Hope — for a future you can still shape.\" Neither S4 round questioned the slogan; review 1 actually pushed toward it to match the source wording. The S2 ending had at least tied back to the idea (\"This is what a young one looks like\"), but review 1 cut that line.",
+     "proposed_change": "s3_script.md, add: \"The concept is the brief. Every line must serve its single idea; a fact the concept did not list needs a reason, and a second number almost never has one. The ending completes that idea. It does not open a new one, and it is not a moral, a mission or an appeal to the viewer's values. If the exhibit has an official meaning or motto, use it only when it turns the film's idea, said concretely in the narrator's own words, never as a quoted slogan. Give the last line the most weight in the film, and follow it with at least 1.5 s of picture and sound with no voice.\" s2_concept.md, add to the per-concept fields: \"the_line: the one sentence a visitor would repeat to a friend afterwards; the ending must land it or pay it off.\" Add `the_line: str` to schemas.Concept. s4_review.md, under ending: \"Score 2 or less if the last line is a slogan, a moral or a call to action rather than the film's own idea completed.\""
+    },
+    {
+     "target": "schemas.py / prompts/s3_script.md",
+     "severity": "high",
+     "problem": "No voice is defined. Seedance generates the audio for each of the two segments separately, so unless both prompts give the same explicit voice description, the narrator's voice will change at 15 s. The prompt's 'a little personality' doesn't give the writer a point of view to write from, so the first-person narrator has no attitude.",
+     "evidence": "schemas.Script has no voice or persona field. s3_script.md only says \"Lines should sound spoken ... a little personality\". The S2 hook said \"Her voice, quiet and almost amused\", but that never reaches any field the renderer can use, and the final script carries no voice direction at all.",
+     "proposed_change": "schemas.py: add to Script `voice: str = Field(description=\"One fixed description of the narrator's voice, repeated verbatim in every segment's generation: apparent age, gender if any, timbre, accent, pace, emotional temperature, e.g. 'a young woman's voice, low and unhurried, faintly amused, soft Irish lilt, close-mic'.\")` and `narrator_attitude: str` (how the exhibit feels about the person in front of it). s3_script.md, add: \"Voice. Cast the narrator first: one voice description that fits what the exhibit is and how it feels about the visitor (curious, wry, tender, proud, tired). Each segment is generated separately, so this exact description will be repeated in both; make it specific enough to produce the same voice twice. Write every line in that voice.\""
+    },
+    {
+     "target": "prompts/s2_concept.md",
+     "severity": "high",
+     "problem": "The S2 prompt is tuned to a once-living, monumental exhibit and gives no help for the other kinds a museum is full of: paintings, tools, coins, manuscripts, machines, sacred objects, human remains, thin packs. The three concepts all come from facts (a size reveal, a price, a predecessor), and none come from the visitor, from sound, or from the act of looking. Untested on a second exhibit, the prompts will probably collapse into 'number, then date, then meaning' everywhere.",
+     "evidence": "s2_concept.md: \"what it was like when it was alive or in use\". s3_script.md's only example is \"the skeleton's tail sweeps down\". The knowledge/ folder holds only hope/, though METHOD.md §6.5 requires a thin exhibit too. All three concepts open on a stated fact.",
+     "proposed_change": "Replace the third paragraph of s2_concept.md with: \"Write three concepts that differ in their engine, not just their fact. Pick three of these engines: (a) a reveal that flips what the visitor first assumes; (b) one decisive moment told from inside it; (c) the visitor's own view, then back through time; (d) one hard contrast cut between then and now; (e) the exhibit addressing the person in front of it about what they are doing right now; (f) a detail most people walk past. Inanimate objects can still speak about the hands that made them, the people who used them, the places they have been and the people who have looked at them; motion comes from the camera, light, hands, materials and remembered context, not from the object coming alive. For human remains or sacred objects, prefer restraint and dignity over spectacle. For a 15-second film, use one beat: a hook, one reveal, and a closing image that lands it.\" Also add a field `visitor_question: str` (the one question this film answers for someone standing in front of it), and add a knowledge pack for a thin, inanimate exhibit before tuning further."
+    },
+    {
+     "target": "prompts/s2_concept.md",
+     "severity": "medium",
+     "problem": "S2 doesn't know the production constraints, so it can propose concepts that can't be made.",
+     "evidence": "Concept 1's hook: \"Black screen, then a handwritten-style figure '£250' fades in\". That is on-screen text, banned by S3 and checks.py. Concept 2 depends on a 'ghostly outline of Dippy' dissolving, an effect-heavy shot that is risky for the video model.",
+     "proposed_change": "Add to s2_concept.md: \"Production limits: the film is made as one or two separate 15-second video generations with sound, guided by a few reference images of the exhibit. Nothing can be written on screen: no numbers, dates, captions or labels; a number has to be heard, not read. Prefer images a camera could film: real places, light, materials, hands, the hall itself. Avoid concepts that depend on visual effects (ghosts, morphs, x-rays) or on showing a specific historical person's face.\""
+    },
+    {
+     "target": "prompts/s3_script.md and checks.py",
+     "severity": "medium",
+     "problem": "Dates and numbers are written for the eye, not the ear, and the pacing check misses lines that are too dense or that run into the final seconds. The word counter treats '1891' as one word, though it takes four to say ('eighteen ninety-one'), and only the segment total is checked.",
+     "evidence": "\"Twenty-fifth of March, 1891.\" reads like a catalogue entry, not speech, and it opens the stranding, the film's emotional low point. The final line, \"They named me Hope — for a future you can still shape.\", is 11 words starting at 11.0 s in a 15 s segment, with subtitles running to 29.4 of 30. That leaves no silent tail, against METHOD.md's rule to keep the last 1–2 s for picture. checks.word_budget only checks the segment total (25 of 32), so this passed.",
+     "proposed_change": "s3_script.md, add: \"Write narration as it is spoken: numbers and dates in words ('eighteen ninety-one', 'two hundred and fifty pounds'), and prefer the human version of a date ('One March morning, in eighteen ninety-one') to a calendar entry. Subtitles may use numerals.\" checks.py: (1) count spoken words by expanding digits (4-digit years count 3–4 words, other numbers about 1 word per digit group). (2) For each line, window = next line's t_start, or the segment end minus 1.5 s for the last line; flag if words/window > 2.8. (3) Flag the final segment if its last line starts later than duration − 1.5 − words/2.5. (4) Check each subtitle's t_start equals the matching narration t_start plus the segment offset, within 0.3 s."
+    },
+    {
+     "target": "prompts/s3_script.md / schemas.py",
+     "severity": "medium",
+     "problem": "One generation carries reference images of different subjects (skeleton views plus a living whale), and refs are attached per segment, not per shot. The model is likely to blend them (a fleshed skeleton, a bony whale), and the segment 2 beach shot uses an underwater reference.",
+     "evidence": "Segment 1 ref_assets are [skeleton_full, skeleton_underside, living_whale] across hall and underwater shots. Segment 2 is [living_whale, skeleton_full, jaw_closeup] across beach and hall shots. Each segment also jumps between two worlds mid-generation.",
+     "proposed_change": "schemas.ShotSpec: add `ref_assets: list[str]`. In checks.py, make each segment's ref_assets the union of its shots' refs. s3_script.md, add: \"Each shot names the references it depicts; never attach a reference to a shot that does not show that thing. Keep the exhibit as it is now and any reconstruction of its past (alive, new, in use) visually separate. Where the structure allows, put the big jump between worlds at the cut between segments, not inside one generation, and give every reference image a distinct background so the model cannot merge them.\""
+    },
+    {
+     "target": "prompts/s3_script.md",
+     "severity": "medium",
+     "problem": "The cut between the two generations isn't designed as a sound event. Each generation makes its own music and ambience, so at 15 s the music will restart or change key, and that seam will be heard.",
+     "evidence": "Segment 1 music: \"Sparse, slow piano ... growing fuller\". Segment 2: \"A single low cello line over the harbour\". These are two unrelated music beds with nothing planned at the joint. The picture handoff (water surface light to grey sky) is good, but the sound has no matching handoff.",
+     "proposed_change": "Add to the Sound paragraph of s3_script.md: \"In a two-segment film the two halves are generated separately, so plan the joint: end segment 1 on a sound that can stop cleanly (a held note dying out, a hard natural sound, or a beat of near silence) and open segment 2 on a fresh sound, so the music never has to continue across the cut. Describe one music style and instrumentation for the whole film and repeat it in both segments.\""
+    },
+    {
+     "target": "prompts/s3_script.md / prompts/s4_review.md / checks.py",
+     "severity": "medium",
+     "problem": "fact_ids are used loosely, and the line between 'fact', 'visible now' and 'feeling' is not defined. Lines get tagged with facts that don't support them, or rest on material the pack marks UNSOURCED, and the reviewer still gives truth 5.",
+     "evidence": "\"Out there, I was blue, not bone.\" is tagged [juvenile_female], which says nothing about colour (the colour is in the pack's 'Appearance (for visuals, not narration)' note). \"Look up. I'm still diving.\" rests on the pose, and the pack says \"posed in a diving lunge ... do not state as fact\". Review 2: \"every narration claim traces to the facts\", truth 5.",
+     "proposed_change": "s3_script.md, replace the fact sentence with: \"Every line is one of three kinds. (1) A fact: it states something about the exhibit's past, numbers, names, places or dates, and lists only the fact ids that actually say it. (2) Visible now: present tense, describing only what the visitor can see in front of them; no fact id, and it must not imply anything about why or when. (3) Feeling or address: the narrator's voice, no claims. A line that mixes kinds must be backed for every claim it makes.\" s4_review.md truth: \"Check each fact_id actually supports its line; a mismatched id counts as unsupported.\" checks.py: flag any line containing a digit, a number word, a month name or a capitalised place name that has empty fact_ids."
+    },
+    {
+     "target": "prompts/s4_review.md",
+     "severity": "medium",
+     "problem": "The rubric has no anchors, so scores bunch at 4. The pass bar ('nothing below 4') lets a competent but flat script through, and some craft dimensions (spoken quality, counterpoint, fidelity to the concept, sound) are never scored.",
+     "evidence": "Both reviews score almost everything 4. Review 2 passes a script with a slogan ending and a deflating stat after the turn, both of which it identified itself. There is no criterion for how lines sound aloud or for sound design.",
+     "proposed_change": "Add anchors to s4_review.md: \"5 = you would ship it unchanged in a paid brand film; 4 = one small fix; 3 = works but forgettable or has a clear flaw; 2 = the main idea fails here.\" Add criteria: \"spoken: read every line aloud at a calm pace; does it sound like a voice, not a caption? Time each line and report any that overruns its window\"; \"counterpoint: do the lines add to the images rather than describe them?\"; \"concept_fidelity: does it deliver the concept's single idea and its line?\". Add: \"Before scoring, name the single best line and the single weakest line in the script, and judge the ending against whether the best idea is the last thing heard.\""
+    },
+    {
+     "target": "prompts/s1_digest.md",
+     "severity": "low",
+     "problem": "The emotional core and story material add embellishments not in the pack ('died alone'), and these feed into S2 and S3 as if they were material.",
+     "evidence": "S1 emotional_core: \"A young whale who died alone on an Irish sandbar\". The pack says nothing about her being alone or about her death. S2's thinking spotted the risk (\"careful not to claim things like her being alone\"), and the living_whale asset is still prompted as \"swimming alone\".",
+     "proposed_change": "Add to the Emotional core and Story material paragraphs of s1_digest.md: \"Use only what the facts state. Do not add circumstances (alone, in pain, unwanted, forgotten) that the pack does not give, even as interpretation; the screenwriter will treat everything you write as material.\""
+    },
+    {
+     "target": "METHOD.md",
+     "severity": "low",
+     "problem": "Tuning is being done on a single exhibit, so prompt changes can overfit to Hope. The method requires a thin exhibit, but the test set doesn't have one yet.",
+     "evidence": "knowledge/ contains only hope/. METHOD.md §6 principle 5 asks for \"至少一个内容丰富的（Hope）、一个内容少的\".",
+     "proposed_change": "Before the next prompt round, add at least two packs: one thin exhibit (expected 15 s) and one inanimate or art object (painting, tool or coin). In METHOD.md §6 add: 'A prompt change is kept only if it improves or holds on all test exhibits; read the Hope script last, so it does not become the template.'"
+    }
+   ],
+   "best_things_to_keep": [
+    "The chosen concept 'Not Even Grown' has the right shape for 30 s: one idea, one turn, which takes the visitor's first feeling (awe at the size) and inverts it. S2's choice reasoning was good too: it rejected the Dippy concept because it 'spends its time on an absent object rather than the one overhead'. Keep the requirement for 3 different concepts plus a visitor-centred choice reason.",
+    "The line \"And I wasn't finished growing\" is the best writing in the run: short, spoken, and it reframes the image. Use it as the standard for what a line should do, rather than as text for other exhibits to copy.",
+    "Pacing is restrained: 54 words in 30 s (1.8 wps), with air at the head of each segment. Keep the word budgets in METHOD.md §3 and checks.word_budget.",
+    "The picture handoff between segments (segment 1 ends on brightening surface light, segment 2 opens descending through grey sky) follows the S3 rule 'end segment 1 on an image segment 2 can pick up from'. Keep that rule.",
+    "Sound cues tied to specific actions (cable creak as the camera rises, tide hissing over sand, a single footstep stopping as the visitor looks up) show that the Sound paragraph works. Keep the ambience / sfx / music split.",
+    "The S4 house style of 'exactly where + concrete rewrite' produced usable notes, e.g. conveying youth 'through scale and solitude rather than a label', and splitting a two-motion shot into one motion. Keep the ban on vague notes.",
+    "Reference images are listed per need, each with a purpose and 'no text or signage', and the no-text rule applies everywhere in S3 and checks.py.",
+    "S1 excluded the UNSOURCED pose and the appearance notes from the fact list, and the reviewer refused to let 'still diving' grow into a claim. Keep the strict sourced/unsourced boundary.",
+    "The stage split with full archives (request, thinking, output, meta) and hash caching is what made these failures diagnosable, for example the missing previous script in the revision. Keep it."
+   ]
+  },
+  {
+   "lens": "museum_educator",
+   "issues": [
+    {
+     "target": "agent.py",
+     "severity": "high",
+     "problem": "The S3 revision never sees the script it is revising. s3_script() sends only material, concept and feedback, so attempt 1 rewrites from scratch. It cannot 'keep what already works', and it reintroduces problems nobody asked for. The revision added a two-motion underwater shot ('glides... and rises toward pale grey surface light', camera 'drift, then gentle tilt up') and a new, wrongly tagged line ('Out there, I was blue, not bone.' [juvenile_female]). Neither was in the feedback.",
+     "evidence": "05_s3_script/thinking.md: 'I'm rebuilding the full script from scratch since the original isn't available'. 05_s3_script/request.json contains only <material>, <concept> and <review_feedback>. The feedback points at lines by timestamp ('Update the subtitle at 6.4–8.3s') in a script S3 cannot see.",
+     "proposed_change": "Pass the previous script into s3_script and include it in the user content when feedback is present: `user += f\"\\n\\n<previous_script>\\n{prev.model_dump_json(indent=2)}\\n</previous_script>\"` placed before <review_feedback>. In run.py, pass `prev=script` on attempts after the first. Change the s3 prompt's last line (see the s3_script.md issue)."
+    },
+    {
+     "target": "prompts/s3_script.md",
+     "severity": "high",
+     "problem": "The rule about what narration may say without a fact id is too loose ('feelings and framing... need no source'). Lines that make world claims, or come from the appearance notes, get through either untagged or with the wrong fact id. 'Out there, I was blue, not bone' is a claim about her living colour, taken from the 'Appearance (for visuals, not narration)' section, and it is tagged juvenile_female, which does not support it. 'Look up. I'm still diving' rests on a pose the pack marks UNSOURCED ('posed in a diving lunge') and puts in visuals-only notes.",
+     "evidence": "05_s3_script/thinking.md: 'going with a line about the living whale's blue colour instead. I'll tag it to the juvenile-female fact'. The pack: '## Pose (UNSOURCED)... posed in a diving lunge' and '## Appearance (for visuals, not narration)... suspended mid-dive'. Final narration at 10.6s and 22.6s.",
+     "proposed_change": "Replace the narration fact sentence with: \"Each narration line is one of three kinds. (1) A fact: it states something about the exhibit's history, size, origin, people or meaning. It must be supported by the facts whose ids you list, and every id you list must actually say what the line says; never tag a line with a fact that is merely related. (2) What the visitor can see right now in the room, said as an observation ('look up', 'my jaw is above you'). Do not use it to describe how the exhibit was posed, prepared or chosen. (3) Feeling or voice ('I wasn't ready', 'imagine'). Anything about how the exhibit looked or behaved when alive or in use, how it died, or why people made decisions about it is a fact and needs an id. If no fact covers it, cut the line. Appearance notes and visual motifs are for pictures only; never put them into words.\" Also add a `kind: Literal['fact','visible','voice']` field to schemas.Line so the claim type is explicit and can be checked."
+    },
+    {
+     "target": "prompts/s4_review.md",
+     "severity": "high",
+     "problem": "The truth score is a single impression, not an audit, so the reviewer missed a wrong fact-id attribution and accepted paraphrase drift. Review 2 gave truth 5 while 'I was blue' was tagged with juvenile_female. It also accepted 'for a future you can still shape', which drops 'sustainable' and with it the conservation meaning of the name. The reviewer also writes new lines itself ('Look up. I'm still diving.'), and nobody checks those against the same standard.",
+     "evidence": "06_s4_review/thinking.md: 'the blue whale and the date and place all look accurate' and 'accepting the paraphrase, even though \"sustainable\" was dropped'. 04_s4_review/output.json introduced 'Look up. I'm still diving.'",
+     "proposed_change": "Add before the scores: \"First, audit the truth line by line. For each narration line, write the claim it makes, the kind (fact / visible / voice), and the fact id that supports it, quoting the words of that fact. Score truth 1 if a fact line has no supporting id, cites an id that does not say what the line says, adds a qualifier the fact does not have (alone, died, first, only, renamed, still), uses appearance notes or UNSOURCED material as speech, or paraphrases a quoted fact so its meaning changes (dropping 'sustainable' from the name's meaning counts). Any line you propose as a fix must pass the same audit; prefer wording taken from the fact itself.\" Add `truth_audit: list[LineAudit]` (line, claim, kind, fact_id, supporting_words, ok) to schemas.Review."
+    },
+    {
+     "target": "run.py",
+     "severity": "high",
+     "problem": "When the verdict is 'pass', the loop stops and the last review's issues are never applied. The shipped script still has the problems the final reviewer named: the tonnage line after the turn deflates the reveal, and shot 3 has two motions plus a tilt. The reviews also contradict each other. Review 1 asked for 'Four and a half tonnes, just in bone' over the ribs, and review 2 says that very line blunts the turn. With no memory between rounds, the loop can go back and forth.",
+     "evidence": "report.md 'S4 Review (last round)': verdict pass, but issues 1 and 2 describe unfixed defects that are still in the S3 Script table (6.4s tonnage line; shot 9.5–15.0 'rises toward pale grey surface light', camera 'Slow drift alongside, then gentle tilt up').",
+     "proposed_change": "Split review issues into `must_fix` and `polish` (schema change in schemas.Review). In run.py, if the verdict is pass but polish issues exist and an attempt remains, run one more S3 with prev_script plus the polish list, then a final S4. Also pass the previous rounds' issues into s4_review as <previous_review>, and add to s4_review.md: \"If a previous round asked for a change, do not ask to reverse it unless it caused a new problem; if so, say so explicitly.\" In the report, list any issues left unapplied under 'Known issues not fixed'."
+    },
+    {
+     "target": "prompts/s1_digest.md",
+     "severity": "medium",
+     "problem": "The ban on invention covers only the fact list, so invented inferences get into emotional_core and story_material and then flow on into S2 and S3. The emotional core says she 'died alone' and was 'renamed Hope'; the pack states neither a death, a solitude nor an earlier name. Story material adds 'a species alive today' (outside knowledge) and 'decades in a side hall' ('side' is not in the pack). The S2 logline then carries 'cut short', and the S3 visuals show a dead whale 'lying motionless'.",
+     "evidence": "01_s1_digest/output.json emotional_core: 'A young whale who died alone on an Irish sandbar in 1891... renamed Hope'. Story material: 'an extinct dinosaur giving way to a species alive today'; 'hung for decades in a side hall'. 02_s2_concept/thinking.md: 'being careful not to claim things like her being alone', yet the claim was already in S1's output.",
+     "proposed_change": "Add after the Facts paragraph: \"The same rule applies to everything else you write: story material, motifs and the emotional core may combine and contrast the facts, but must not add events, causes, qualities or words the pack does not contain. Do not say an animal died, suffered, was alone, was the first or last, or was renamed unless a fact says so. Mark any interpretation as yours: 'this suggests…', not 'she…'. Leave out general knowledge about the species even if true.\""
+    },
+    {
+     "target": "schemas.py",
+     "severity": "medium",
+     "problem": "The script has no voice specification, and Seedance generates the audio for each 15-second segment separately. Nothing fixes the narrator's voice (age, gender, accent, timbre, pace), so segment 1 and segment 2 can come out as different speakers, which breaks the 'exhibit speaks in the first person' idea. METHOD also lists audience_note in the Script, but schemas.Script has no such field.",
+     "evidence": "schemas.Script has exhibit_id, title, logline, duration_s, assets, segments and subtitles, with no voice field. Audio has only ambience/sfx/music. The concept describes 'Her voice, quiet and almost amused', but that never reaches the script. METHOD.md section 4 lists audience_note.",
+     "proposed_change": "Add `voice: str = Field(description='One description of the narrator voice used identically in every segment: apparent age, gender, accent, timbre, pace, emotional colour.')` and `audience_note: str` to Script. In s3_script.md under Narration, add: \"Describe the exhibit's voice once in `voice`, in one specific sentence (e.g. 'a calm young woman's voice, soft British accent, unhurried, warm with a little dry humour'); the same voice speaks in every segment.\""
+    },
+    {
+     "target": "checks.py",
+     "severity": "medium",
+     "problem": "The hard checks cannot see wrong attributions or pacing at line level. A line containing a number, date or place name can have no fact id. Numbers in a line are never matched against the cited fact. The word count treats '1891' as one word although it is spoken as three. There is no check that the final line leaves the closing 1–2 seconds clear. The final line ('They named me Hope — for a future you can still shape.', 11 words at 26.0s in a segment ending at 30.0s) has no silent tail, and the subtitle runs to 29.4s.",
+     "evidence": "checks.script only checks that cited ids exist and that segment totals stay within budget. Final narration at 26.0s; METHOD.md section 3: 'the last 1–2 seconds are best left to picture and sound'.",
+     "proposed_change": "Add: (1) `spoken_words()`, which expands four-digit years to 3 words and other digit groups to 1 word per digit group plus 1, and is used in the budget. (2) For each line, estimated end = t_start + spoken_words/2.5. Flag it if it runs past the next line's t_start, or past seg.duration_s - 1.0 for the last line of the last segment. (3) Any line containing digits, a number word (one…thousand, hundred, tonnes, metres), a month name, or a capitalised proper noun not in the exhibit name must cite at least one fact id. (4) Any digit sequence in a line must appear in the text of one of its cited facts (normalising '25.2'→'25'). (5) Flag narration containing words that appear only in the pack's UNSOURCED or Appearance sections (pass those sections' text to the check)."
+    },
+    {
+     "target": "prompts/s3_script.md",
+     "severity": "medium",
+     "problem": "The narration leaves a visitor's real questions unanswered and is unclear in places. 'Morning, on a sandbar in Wexford Harbour' never says Ireland, so many London visitors will not know where Wexford is or that she came from another country. The film jumps from 1891 to 'They named me Hope', so a viewer may think she was named in 1891. 'Twenty-fifth of March, 1891.' is a bare date line that reads like a label. The final line is abstract ('a future you can still shape': shape what?).",
+     "evidence": "report.md narration at 16.0s, 19.4s and 26.0s. The pack fact stranding_place includes 'Ireland'. name_meaning has no date, but the jump invites a wrong reading.",
+     "proposed_change": "Add under Narration: \"Write for a visitor who knows nothing about the place or the period: name the country or city when a place is unfamiliar, and attach a date to an event in the same line rather than giving the date alone. When the film jumps in time, make the jump audible ('a century later', only if facts support it; otherwise a plain 'Now'). Avoid abstract endings: the last line should name something concrete the visitor can see or do.\" Example rewrite within the facts: 'One March morning in 1891, I stranded on a sandbar in Wexford, Ireland.' [stranding_date, stranding_place] and 'Now look up. They named me Hope — a symbol of your power to shape a sustainable future.' [name_meaning]. Check the word budget, or trim the earlier tonnage line."
+    },
+    {
+     "target": "prompts/s3_script.md",
+     "severity": "medium",
+     "problem": "The closing image does not match what the visitor can actually see. The final shot is a close-up of the jaw with 'patches of red, blue and amber' stained-glass light moving over the bone, which is an invented lighting effect; the pack only says the hall has stained glass. The 'look up' cue comes mid-film (22.6s) instead of on the last beat, and the last shot cuts away from the view the visitor has. The reference image prompts also guess the bone colour ('ivory-brown' in attempt 0, 'pale ivory-cream' in attempt 1) with no photo to go on.",
+     "evidence": "Final segment 2 shots 22.5–26.0 (full reveal) and 26.0–30.0 (jaw close-up with coloured light). Assets skeleton_full and jaw_closeup in 03 and 05 output.json. S4#1 noted: 'the narration never points the visitor to it'.",
+     "proposed_change": "Add under Shots: \"The final shot must show the exhibit from a viewpoint the visitor can actually take in the room, ideally the angle of their own photo, so they can match screen to object when they look up. Put any 'look' cue on that final shot. Do not invent lighting effects, colours or details of the real exhibit that are not in the photo notes or appearance notes. Without a photo, say 'match the visitor's photo' in reference prompts instead of guessing colours.\""
+    },
+    {
+     "target": "prompts/s2_concept.md",
+     "severity": "medium",
+     "problem": "The concepts break rules that later stages enforce, so S2 can choose a concept that cannot be made truthfully. Concept 1 puts on-screen text in the hook ('a handwritten-style figure \"£250\" fades in'). Concept 2 works out a new number ('For thirty-eight years'; 1979 to January 2017 is about 37 years) and invents an intent ('a deliberate statement rather than a redecoration'; 'He showed you what was lost. I'm here to show you what you can still keep'), none of which is in the pack.",
+     "evidence": "02_s2_concept/output.json concepts[1].hook and concepts[2].hook/ending/why_visitor_cares.",
+     "proposed_change": "Add to the concept requirements: \"Every line you quote for a hook or ending must already obey the script rules: no text, numbers or captions in the picture; no figures you calculate yourself (durations, ages, totals); and no claims about why people made decisions unless a fact states it. Quoted lines are the most likely to survive into the final film, so write them as if they were final.\""
+    },
+    {
+     "target": "prompts/s4_review.md",
+     "severity": "medium",
+     "problem": "The reviewer judges visitor_view and ending without seeing the concept, the photo notes or the pack's UNSOURCED and appearance sections. It cannot tell whether the script drifted from the chosen concept, whether the closing image matches the visitor's actual view, or whether a phrase leaked from visuals-only notes. visitor_view is scored on general impressions rather than a concrete list of questions.",
+     "evidence": "agent.s4_review sends only <material>, <script> and the check problems. 04 and 06 request.json contain no concept and no photo notes.",
+     "proposed_change": "In agent.s4_review, also send <concept> and the photo notes. Change the visitor_view criterion to: \"visitor_view: list the two or three questions a person standing in front of this object most likely has (for example: is it real? how big was it alive? how did it get here? why this name?), say which ones the film answers, and score whether it answers the one the photo suggests they have. A film that answers none of them scores at most 2.\""
+    },
+    {
+     "target": "METHOD.md",
+     "severity": "low",
+     "problem": "The method has no written policy on what counts as a claim, so each stage makes up its own. S1 treats appearance as visuals only, S3 treats 'feelings and framing' as free, and S4 treats 'what you can see' as exempt. The method also does not say how visuals that imply facts should be handled. The stranded whale 'lying motionless' on the sandbar shows a death the pack never states, and the 'Mammal Hall years' and harbour landscape are reconstructions.",
+     "evidence": "S1 output excludes the pose but keeps 'hung mid-dive' as a motif. S4#1 rules 'I'm still diving' acceptable. S3 segment 2 shot 2 shows 'the slender young blue whale lying motionless'. S3#1 thinking: 'a phrasing that avoids stating a death outright', which holds for the words but not for the picture.",
+     "proposed_change": "Add a short section, 'Narration and picture claim policy': narration lines are fact, visible or voice (the definitions in the s3 change). Pictures may reconstruct settings plainly implied by the facts (a harbour sandbar, a living whale), but must not show events the facts do not state, such as a death, injuries, people present or ceremonies. Appearance notes and UNSOURCED notes never become speech. Also note under section 6 that runs without --photo do not test S0 or the photo-led opening, and that the test set should include at least one photo run per exhibit."
+    },
+    {
+     "target": "prompts/s3_script.md",
+     "severity": "low",
+     "problem": "Small tone and accuracy slips. 'I was a girl' makes a whale sound like a child, which reads oddly and can confuse younger viewers; 'young female' is the fact. 'Twenty-five metres of me' rounds down where attempt 0's 'Over twenty-five metres' was exact. The revision made the line less precise because the earlier wording was lost.",
+     "evidence": "Final narration at 1.2s and 3.4s. 03_s3_script/thinking.md: 'using \"Over twenty-five metres of me\" since it's more accurate'.",
+     "proposed_change": "Add: \"When you round a number, round in the direction that stays true ('over twenty-five metres' for 25.2). Keep the narrator recognisably the exhibit: personality is welcome, but do not turn an animal or object into a human child or adult.\""
+    }
+   ],
+   "best_things_to_keep": [
+    "S1 correctly excluded the UNSOURCED '221 bones' and 'diving lunge' material, and the visuals-only appearance notes, from the fact list. The marking convention in the knowledge pack (UNSOURCED, 'for visuals, not narration') works and should stay.",
+    "The chosen concept 'Not Even Grown' is strong museum interpretation: it starts from the visitor's first reaction (awe at the size) and turns it with one sourced surprise (she was a juvenile). It is one idea with one turn, and the name Hope arrives as a payoff rather than a slogan.",
+    "S2's choice reasoning is genuinely from the visitor's side and explicitly prefers focus over coverage (it rejected the colder £250 concept and the absent-object Dippy concept).",
+    "No 'Hello, I am…' opening. The first-person voice is restrained and spoken-sounding, with short sentences and concrete words.",
+    "Reviewer 1 caught the triple repetition of 'young' and the 'For your future' drift from the sourced meaning, and gave concrete replacement lines and subtitle splits. Keep the 'rewrite, not vague note' requirement in s4_review.md.",
+    "S3's attempt-1 thinking deliberately avoided stating a death outright. That caution about inference belongs in the prompts for every stage.",
+    "Segment continuity is good: segment 1 ends on the brightening sea surface and segment 2 opens on grey sky, a clean handover between the two generations.",
+    "Consistent naming of the subject ('Hope, the pale ivory-cream blue whale skeleton') across shots and asset prompts, every asset prompt says 'no text or signage', and only the reference images the shots need are listed.",
+    "Hard checks for source URLs found in the pack, unknown fact ids, segment length at most 15s, continuous timecodes, word budget, subtitle match and English only. Keep them all and extend them rather than replace them.",
+    "The full per-stage archive (request, thinking, output, meta) and the caching. They made this diagnosis possible: the rewrite-from-scratch problem was visible only in the thinking file."
+   ]
+  },
+  {
+   "lens": "video_feasibility",
+   "issues": [
+    {
+     "target": "agent.py",
+     "severity": "high",
+     "problem": "The S3 revision call never gets the script it is supposed to revise. It only gets the review feedback, so every revision rewrites the script from scratch. Fixes get applied unevenly, and things that were working get lost without anyone noticing.",
+     "evidence": "05_s3_script/thinking.md says 'I'm rebuilding the full script from scratch since the original isn't available'. The 05 request.json user content ends at <concept> followed by <review_feedback>, with no <previous_script>. The first draft's `stranded_sandbar` asset (03 output.json) was dropped in the rewrite. The final segment 2 shot 2, a whale lying on wet sand, now uses only the `living_whale` reference, which shows the whale swimming underwater. That is a reference-to-prompt conflict, and it was created by the regeneration, not asked for by the review.",
+     "proposed_change": "In s3_script(), add a `previous: schemas.Script | None` parameter. When feedback is present, add `<previous_script>\\n{previous.model_dump_json(indent=2)}\\n</previous_script>` before <review_feedback>. Change the feedback preamble to: 'Revise the previous script. Change only what each point below requires and copy everything else unchanged: shots, assets, timings, audio.' In run.py, pass `previous=script` on attempts 1 and later."
+    },
+    {
+     "target": "METHOD.md",
+     "severity": "high",
+     "problem": "How narration audio is produced is still an open question (§7), but it decides whether the script can be rendered at all. With generate_audio=true, Seedance makes the voice separately for each 15 s generation. In a 30 s film the narrator's voice, pace and loudness will change at the 15 s cut. Seedance also tends to lip-sync speech onto any face in frame, and the final segment 2 shot 3 is 'the camera rises past upturned visitors' faces'. Music generated per segment will not carry across the cut either. The per-line t_start values at 0.1 s precision are fiction if Seedance does the speaking, because the fal endpoint has no timecode or narration syntax.",
+     "evidence": "The fal Seedance 2.0 reference-to-video schema has generate_audio (default true: 'sound effects, ambient sound, and lip-synced speech'), duration 4–15 s, no seed input, and no timecode or voiceover fields. The script has two segments with separate music cues ('Sparse, slow piano…' vs 'A single low cello line…'), narration in both segments, and visitors' faces in segment 2 shot 3.",
+     "proposed_change": "Decide it now and write it into §5/§7: 'Narration is a single TTS track for the whole film (one voice, generated once, e.g. ElevenLabs), laid over the video in post together with one music track and burned-in subtitles. Seedance is called with generate_audio=true for ambience and SFX only, and every Seedance prompt ends with \"No speech, no voices, no singing, no music.\" Narration timing is taken from the TTS output, not from Seedance.' If the team insists on Seedance's own voice, add: 'No human faces or mouths in frame in any segment with narration, and the same voice description is pasted verbatim into both segment prompts. Expect drift at the cut.'"
+    },
+    {
+     "target": "schemas.py",
+     "severity": "high",
+     "problem": "The Script schema does not hold what a Seedance call actually needs. Missing: aspect ratio (the film is watched on a phone), which reference image each shot uses (fal uses @Image1..@Image9 tags in the prompt), a single canonical subject description, where each asset comes from (visitor photo, museum photo, or pure text-to-image), and the narration voice. Because of this the model drifts between attempts and nothing can check it.",
+     "evidence": "Bone colour is 'ivory-brown' in the 03 attempt and 'pale ivory-cream' in the 05 attempt. Every asset prompt says 'based on the visitor's photo' although this run had no photo ('What the visitor's photo shows: no photo notes'). The shots assume landscape compositions ('visitors small against the 25.2-metre span', 'Wide eye-level side view') with no aspect ratio stated anywhere. Segment-level ref_assets mixes skeleton and living-whale references in one generation with no per-shot binding.",
+     "proposed_change": "Add these fields. Script: `aspect_ratio: Literal['9:16','16:9']` (description 'Phone playback: default 9:16; compose every shot for it'); `subject_lock: str` (description 'One canonical description of the exhibit, 15-30 words, pasted verbatim into every shot that shows it'); `voice: str` (timbre, age, accent, pace). Asset: `source: Literal['visitor_photo','museum_photo','text_only']` and `role: Literal['subject','environment','living_form']`. ShotSpec: `refs: list[str]` (asset ids visible in this shot, at most 2) and `setting: str` (location name, e.g. 'Hintze Hall', 'Wexford sandbar', 'open sea'). Segment: `end_frame: str` (the last image, for the cut into the next segment)."
+    },
+    {
+     "target": "checks.py",
+     "severity": "high",
+     "problem": "The word-budget check is per segment only and counts numerals as one word. Lines can overrun the next line or the end of the segment and still pass, and the 'last 1–2 s for picture' rule in METHOD is never enforced.",
+     "evidence": "Final segment 2, line 4 starts at 11.0 s with 'They named me Hope — for a future you can still shape.' That is 11 words, about 4.4 s at 2.5 w/s, so it ends at about 15.4 s in a 15.0 s segment. Its subtitles squeeze it into 26.0–29.4. Segment 1, line 2 starts at 3.4 s with 8 words (about 3.2 s), so it ends at about 6.6 s and overlaps line 3 at 6.4 s. 'Twenty-fifth of March, 1891.' counts as 4 words but is spoken as about 7 ('eighteen ninety-one'). The hard checks said 'All passed'.",
+     "proposed_change": "Add `spoken_words(text)`, which expands each 4-digit year to 3 words, other numbers to their spoken length, and '£250' to 4. For each line, compute est_end = t_start + spoken_words/2.5. Flag the line if est_end > next line's t_start - 0.2, or if est_end > seg.duration_s - 1.0 on the last segment ('leave the last second for picture'). Use spoken_words in word_budget too. Also flag the first line if t_start < 0.8 in segment 1."
+    },
+    {
+     "target": "checks.py",
+     "severity": "medium",
+     "problem": "Nothing in code checks the renderability rules the prompt asks for. Two camera moves in one shot, too many settings in one 15 s generation, faces in shots that have narration, very short shots, and unused or over-referenced assets all pass silently.",
+     "evidence": "Final segment 1 shot 3 camera is 'Slow drift alongside, then gentle tilt up'. The second review flagged it, but the loop stopped on pass. Segment 2 packs 4 shots across 3 settings (aerial harbour, sand close-up, hall crane, jaw close-up) in 15 s, with the shortest shot 3.5 s. Segment 2 shot 3 contains 'visitors' faces'.",
+     "proposed_change": "Add these checks. (1) MULTI = re.compile(r'\\b(then|and then|before|followed by|as it|while)\\b', re.I) on shot.camera, plus a count of motion verbs in shot.action: flag 'shot N has more than one camera move or action'. (2) shot length < 2.5 s → flag. (3) more than 2 distinct shot.setting values per segment → flag 'too many locations for one generation'. (4) re.search(r'\\b(face|faces|mouth|lips|speaking|talking)\\b') in visual/action while narration exists → flag 'face in frame will attract lip-synced narration'. (5) every asset used by at least one segment; every shot.refs is a subset of seg.ref_assets; len(seg.ref_assets) <= 4. (6) duration must be a whole second between 4 and 15 (fal enum)."
+    },
+    {
+     "target": "prompts/s3_script.md",
+     "severity": "high",
+     "problem": "The S3 prompt gives no Seedance-specific craft guidance. It does not say how reference images work, what to avoid (faces, repeating fine structures, multi-move cameras, many locations), how to compose for a phone, or how to keep the subject identical across shots. The script that comes out is a nice storyboard with several shots that are likely to morph.",
+     "evidence": "Segment 1 shot 2 is a forward dolly under 'rows of ribs… slide past overhead one after another'. Fast-moving repeated thin structures shimmer, merge or change in count in current video models. Segment 1 shot 1 asks for an 'endless chain of vertebrae', which invites the model to make the skeleton longer. Segment 1 holds both the skeleton and living_whale references, and with no per-shot binding the model can blend them (a skeleton swimming, or a whale with visible ribs).",
+     "proposed_change": "Add a section: 'Writing for Seedance. Each segment becomes one prompt with up to 4 reference images, tagged @Image1… in the order of ref_assets. In each shot, name which image it uses (\"the skeleton from @Image1\") and never show two reference subjects in the same shot. Keep a segment to at most two settings and at most one jump between them; 3 shots per 15 s is the sweet spot, and each shot runs at least 3 s. One camera move per shot from this list: static, slow push-in, slow pull-back, tilt up/down, crane up/down, slow orbit, tracking alongside. Never chain moves with \"then\". Avoid what these models get wrong: human faces close-up (and any face while narration plays), hands, fast motion across fine repeating structures (ribs, railings), the subject changing scale or length, objects transforming into other objects, any text. Prefer slow, heavy motion: light moving across a still object, water moving around a still body, the camera moving past a still subject. Paste subject_lock verbatim wherever the exhibit appears, and do not add other adjectives to it. Compose for the stated aspect ratio: in 9:16, show long objects by tilting along them, not in a single wide frame. End each segment on a simple, mostly static image the next segment can cut from.'"
+    },
+    {
+     "target": "prompts/s3_script.md",
+     "severity": "medium",
+     "problem": "The asset (reference image) instructions produce references with scene composition and lighting baked in. With references, the model copies lighting and framing, so mood belongs in the video prompt. The prompt also tells the writer to build every asset from the visitor's photo even when there isn't one.",
+     "evidence": "`living_whale` prompt: 'noticeably small in the frame', so the subject is tiny in its own reference. `jaw_closeup` has stained-glass 'patches of red, blue and amber light' baked into the bone. `skeleton_full` includes visitors and the hall. All four start with 'Clean reference image based on the visitor's photo' in a run with no photo.",
+     "proposed_change": "Replace the Reference images paragraph with: 'Reference images. List the references the shots need, at most 4 per segment. Subject references show the exhibit alone, filling the frame, sharp, under even neutral light on a plain background, from one stated view (front, side, three-quarter from below, detail). No mood lighting, no people, no scale tricks. Put lighting, scale and composition in the shot, not in the reference. If one setting appears in several shots, it may get its own environment reference (the empty hall, the empty sandbar). A living or historical form of the exhibit gets its own subject reference, consistent with subject_lock. Set source to visitor_photo only when a photo was provided. Otherwise use museum_photo if the pack has one, or text_only, and write the prompt accordingly.'"
+    },
+    {
+     "target": "prompts/s4_review.md",
+     "severity": "high",
+     "problem": "The reviewer scores visual_feasibility with generic judgement and no video-model checklist. It can pass a script while still listing fixes, and it never checks whether the previous round's fixes were applied. The result is that known renderability defects reach the final script.",
+     "evidence": "06_s4_review returned verdict 'pass' with 4 issues, including 'segment 1 shot 3 asks for two motions… risks an unstable or morphing whale'. run.py breaks on pass, so the fix was never applied, and the final script still has 'Slow drift alongside, then gentle tilt up'. The reviewer also accepted living_whale (underwater) as the reference for the stranded-on-sand shot ('consistent enough', 06 thinking.md). CHANGELOG lists the pass-with-fixes problem as known.",
+     "proposed_change": "Add this to the visual_feasibility criterion: 'Check each shot against these questions. Is there exactly one camera move and one action? Does the shot's reference image actually show the subject in the state the shot needs (swimming vs stranded vs skeleton)? Are there two reference subjects in one shot? Are there faces, hands, fast motion over repeating structures, scale change or transformation? Are there more than two settings in the segment? Does each segment end on an image the next can cut from? Is there anything that needs a voice to come from a visible person? Any one of these caps visual_feasibility at 3.' Replace the verdict rule with: 'Mark each issue blocking or minor. Verdict is pass only if truth is 5, no score is below 4, and there are no blocking issues. A renderability defect is always blocking. If you list a fix you expect to be applied, the verdict is revise.' Add an `severity: Literal['blocking','minor']` field to Issue in schemas.py."
+    },
+    {
+     "target": "run.py",
+     "severity": "medium",
+     "problem": "The report shows the structured script but never the actual Seedance request. Nobody (human or reviewer) can judge whether the prompt is renderable, how the @Image tags line up, or how long it is. METHOD says the agent's output and the Seedance template are kept separate, but the harness has no template, so that separation can't be tested.",
+     "evidence": "report.md has shot tables and asset prompts but no rendered prompt or fal payload. METHOD §4 says the template is rendered later, and §7 says Seedance prompt syntax is unknown.",
+     "proposed_change": "Add a render_seedance(script, seg_index) function that returns {prompt, image_urls order, duration, aspect_ratio, generate_audio}. Format: '@Image1 is <asset view>. @Image2 is …\\n[Shot 1, 0–5 s] <framing>, <camera>. <action>. <visual>.\\nCut to [Shot 2, 5–9.5 s] …\\nSound: <ambience>; <sfx>. No speech, no voices, no music. No text or lettering anywhere in frame.' Print one fenced block per segment under '## Seedance requests' in report.md, and pass the rendered prompts to S4 inside <seedance_prompts> so it reviews what will actually be sent."
+    },
+    {
+     "target": "prompts/s3_script.md",
+     "severity": "medium",
+     "problem": "Fact ids are attached to lines that don't state the fact, and visual-only notes from the pack slip into narration. Code can't catch this, and neither the S3 nor the S4 prompt makes it a rule.",
+     "evidence": "'Out there, I was blue, not bone.' is tagged [juvenile_female]. 'Look up. I'm still diving.' rests on the pack's 'Pose (UNSOURCED)' / 'Appearance (for visuals, not narration)', and the reviewer waved it through. S1 emotional_core says 'died alone' and 'renamed', neither of which is in the pack, and 'lone' then shows up in S3 visuals.",
+     "proposed_change": "Add this to the S3 narration paragraph: 'Tag a line with a fact id only if the line states that fact. A line that states no fact has empty fact_ids; do not attach a nearby fact to make it look sourced. Appearance and pose notes are for pictures only: never state them in narration.' Add this to s4_review truth: 'Check each fact_id against its line: a tag on a line that does not state that fact is an issue. Narration that states anything taken from appearance or UNSOURCED notes scores truth 1.'"
+    },
+    {
+     "target": "prompts/s2_concept.md",
+     "severity": "medium",
+     "problem": "S2 hooks and endings are written with no renderability limits, so concepts that can't be rendered reach S3. Only luck kept them out of the final.",
+     "evidence": "Concept 1 hook: 'a handwritten-style figure \"£250\" fades in' (on-screen text). Concept 2: 'a ghostly outline of Dippy… dissolves' and 'the whale descends into the space' (transformations and big moves of a 25 m subject).",
+     "proposed_change": "Add: 'Every hook and ending must be a picture a video model can make in one shot: a real place or object, one slow motion, no text or numbers on screen, no morphing or dissolving of one object into another, no close-up human faces. Numbers and names are spoken, never shown.'"
+    },
+    {
+     "target": "prompts/s3_script.md",
+     "severity": "medium",
+     "problem": "How the two 15 s segments join is left vague ('end segment 1 on an image segment 2 can pick up from'). The fal reference-to-video endpoint has no first- or last-frame input, so a continuous camera move across the cut will not line up.",
+     "evidence": "In the final script, segment 1 ends on 'the brightening surface' and segment 2 opens on an aerial 'from pale grey sky'. This works by luck as a brightness match cut; it was never designed that way, and no field records it.",
+     "proposed_change": "Replace the sentence with: 'The two segments are joined by a hard cut in the edit, never by a continuous camera move. Design the cut: end segment 1 on a near-static image (a bright surface, a dark silhouette, a still close-up) and open segment 2 on an image with matching brightness or shape. Write both in end_frame. Segment 2 reuses at least one of segment 1's subject references so the exhibit looks the same on both sides of the cut.' Optionally, extract segment 1's last frame and pass it to segment 2 as an extra @Image."
+    },
+    {
+     "target": "prompts/s3_script.md",
+     "severity": "low",
+     "problem": "The narration rules don't make the writer spell out numbers the way they will be spoken, or keep punctuation that TTS and subtitles handle consistently. Word counts and pacing come out wrong for dates and money.",
+     "evidence": "'Twenty-fifth of March, 1891.' and '25.2 metres' rounded to 'Twenty-five metres'. The em dash in 'They named me Hope — for…' is split across two subtitle lines.",
+     "proposed_change": "Add: 'Write numbers as they are spoken (\"eighteen ninety-one\", \"two hundred and fifty pounds\") so pace and word counts are honest. Round only in a way the fact still supports (\"over twenty-five metres\" for 25.2). Use full stops and commas, not dashes.' Subtitles can show numerals."
+    },
+    {
+     "target": "checks.py",
+     "severity": "low",
+     "problem": "The word budget in code is looser than the one in METHOD and the prompt, so the hard check passes scripts the method would reject.",
+     "evidence": "word_budget(15) = int(13 × 2.5) = 32. METHOD §3 says 15 s ≤ 30 (22–28 recommended), and the S3 prompt says 'roughly 30'.",
+     "proposed_change": "Set word_budget to min(int((duration_s - 2) * 2.5), 30 if duration_s <= 15 else 60) per segment, and count words with the spoken_words expansion above."
+    }
+   ],
+   "best_things_to_keep": [
+    "Pipeline stages S0–S4 with archived request, thinking and output files and hash caching. This run's forensics (finding the dropped asset and the from-scratch rewrite) were only possible because of it.",
+    "Separating the agent's judgement (a structured Script) from the Seedance prompt wording (a template). Keep it, and add the renderer so the template exists and can be tested.",
+    "One segment = one ≤15 s generation, and a 30 s film = exactly two segments, enforced by checks.",
+    "A canonical subject phrase repeated in every shot ('Hope, the pale ivory-cream blue whale skeleton…'). Make it a schema field (subject_lock) rather than relying on habit.",
+    "'No text or signage' in every asset prompt, and the TEXT_ON_SCREEN check.",
+    "Most shots are already single, slow, heavy motions that suit Seedance: an upward tilt from the hall floor, tide water washing round a still flank, coloured light sliding over still bone. Keep this 'still subject, moving light/water/camera' pattern as the house style.",
+    "One world-jump per segment (hall to sea, harbour to hall), and the brightness match at the segment cut (bright water surface to grey sky).",
+    "The S1 rule that keeps UNSOURCED and appearance notes out of the fact list, and the fact-id-per-line structure.",
+    "S4's concrete fixes (rewritten lines, replacement shot descriptions). The first review's fixes were specific and mostly good; the failures were in the loop plumbing, not in how the reviewer writes.",
+    "The narration density in the final script (54 words / 30 s overall) and the short spoken sentences. The line-level timing just needs checking.",
+    "The S2 three-concept structure and the choice reasoning from the visitor's point of view. 'Not Even Grown' is a strong, single-turn idea that can be shot."
+   ]
+  },
+  {
+   "lens": "harness_engineer",
+   "issues": [
+    {
+     "target": "agent.py",
+     "severity": "high",
+     "problem": "The revise pass never shows the writer its own draft. s3_script() sends only material, concept and feedback, so S3 attempt 1 writes a whole new script from the review notes. The notes point at lines by timestamp ('segment 1 narration line 3 (6.4s, ...)') that the writer cannot see. That makes the revise loop non-local: things that already worked can change silently, and 'fixed' means 'rewritten'.",
+     "evidence": "05_s3_script/thinking.md opens: 'I'm rebuilding the full script from scratch since the original isn't available'. agent.py s3_script() builds user content with no previous script. Between 03 and 05, every shot's action and visual text was rewritten, not only the lines the review named.",
+     "proposed_change": "Add `previous: schemas.Script | None = None` to agent.s3_script and pass `script` from the previous attempt in run.py. When it is set, append `<previous_script>\\n{previous.model_dump_json(indent=2)}\\n</previous_script>` before <review_feedback>. Replace the last paragraph of prompts/s3_script.md with: \"If a previous script and review feedback are attached, edit the previous script; do not rewrite it. Change only the lines, shots, assets and subtitles the feedback names, plus whatever those changes force (timings, subtitles). Copy everything else exactly. If you decide not to apply a point, because it would add a fact outside the concept or break a rule above, leave that part unchanged and explain why in revision_notes.\" Add `revision_notes: list[str]` to schemas.Script (empty on the first attempt)."
+    },
+    {
+     "target": "run.py",
+     "severity": "high",
+     "problem": "The loop trusts the model's own verdict field. A 'pass' that still lists fixes ends the loop with those fixes unapplied. The schema also asks for scores and verdict BEFORE issues, so the reviewer commits to a verdict before it writes its criticism. Round 2 then landed exactly on the pass threshold (all 4s, truth 5) while it listed 4 issues, one of them a feasibility risk ('risks an unstable or morphing whale').",
+     "evidence": "06_s4_review/thinking.md: 'I'm settling on a verdict of pass with minor issues, rating the hook, focus, visuals and ending each a 4'. In report.md, the final S4 has verdict pass plus 4 issues, and the final script still has the two-motion underwater shot the reviewer flagged. run.py line 65: `if review.verdict == \"pass\" and not problems: break`.",
+     "proposed_change": "schemas.py: give Issue `severity: Literal[\"blocking\", \"polish\"]` and reorder Review to `issues`, `scores`, `summary`. Drop `verdict` from what the model writes. run.py: compute `blocking = [i for i in review.issues if i.severity == \"blocking\"]` and `passed = not problems and not blocking and review.scores.truth == 5 and min(review.scores.model_dump().values()) >= 4`. Stop only when `passed and not review.issues`. If only polish issues remain and attempts are left, send them as feedback once more. s4_review.md: replace the Verdict paragraph with \"List every problem first. Mark it blocking if it breaks a fact rule, an automatic check, or is likely to make the video model fail (morphing, two actions, on-screen text, a line that cannot fit its time); otherwise polish. Then score. Scores must agree with the issues: any blocking issue in a dimension caps that dimension at 3.\" Apply the same order fix to ConceptSet: put choice_reason before chosen."
+    },
+    {
+     "target": "run.py",
+     "severity": "high",
+     "problem": "The loop ships the LAST attempt, not the best one. Nothing marks a script that is still failing after MAX_REVISIONS, although METHOD.md section 2 S4 says to flag it for a human. The report says 'All passed on the final script' even when reviewer issues are still open.",
+     "evidence": "run.py lines 57-70 write `script` from whichever iteration ran last. render() prints 'All passed on the final script.' under Hard checks, while the S4 section of this run lists 4 unapplied fixes.",
+     "proposed_change": "Keep a list of (script, review, problems) per attempt and pick `best = min(attempts, key=lambda a: (len(a.problems), len(blocking(a.review)), -a.review.scores.truth, -min(scores)))`. Write a top-line `status` into report.md and script.json: PASS, PASS_WITH_OPEN_POLISH (n open), or NEEDS_HUMAN (blocking or check problems left after the last attempt), and say which attempt was chosen."
+    },
+    {
+     "target": "prompts/s4_review.md",
+     "severity": "high",
+     "problem": "Truth is judged only against the S1 material sheet, never the pack, so the reviewer cannot see what the pack marks as UNSOURCED or 'for visuals, not narration'. The final script states appearance and pose content as narration and gets truth 5. One line is also mis-cited: it lists a fact id that does not say what the line says.",
+     "evidence": "'Look up. I'm still diving.' (no fact ids) comes from the pack's 'Pose (UNSOURCED) ... diving lunge' and 'Appearance (for visuals, not narration) ... suspended mid-dive'. 'Out there, I was blue, not bone.' cites juvenile_female, but the colour comes from the Appearance section. 06 thinking: 'The \"still diving\" line is a pose from the visual motif rather than a factual claim'. The reviewer wrote this line itself in 04.",
+     "proposed_change": "agent.s4_review: also pass `<knowledge_pack>{agent.pack(exhibit_id)}</knowledge_pack>`. Add to schemas.Review a field written first: `claims: list[Claim]` where Claim = {line: str, claim: str, fact_id: str, supported: bool}. Add to the s4 prompt, before the scores: \"First, audit truth line by line. For every narration line, write each claim it makes about the exhibit or its history (including its colour, pose, size, age, sex, and what happened to it) and the one fact id that states it. A line that describes the exhibit's look or pose is still a claim. Visual motifs and anything the pack marks UNSOURCED or 'for visuals, not narration' are never support. If the cited fact does not itself say the claim, mark it unsupported, even when it is true. Any unsupported claim is a blocking issue and truth is 1.\" Add the same sentence about appearance and pose to the Narration paragraph of s3_script.md."
+    },
+    {
+     "target": "prompts/s4_review.md",
+     "severity": "high",
+     "problem": "Self-grading and reviewer oscillation. The same model writes the replacement lines, then grades them. Its edits pull material from a rejected concept, and in the next round it criticises its own insertion. The S2 decision ('uses few facts') gets undone by the reviewer.",
+     "evidence": "In 04 the reviewer proposes 'Four and a half tonnes, just in bone.' (skeleton_weight, which is in concept 1, not in the chosen concept 0) and 'Look up. I'm still diving.' In 06 the same reviewer says the tonnage line 'pulls the film back to scale and blunts the surprise' and accepts its own diving line. Concept 0 fact_ids: length, juvenile_female, stranding_place, stranding_date, name_meaning.",
+     "proposed_change": "(1) Pass the chosen concept and the previous round's review to S4 from round 2 on. Add to the prompt: \"Fixes must stay inside the chosen concept: use only its fact_ids unless a line is unsupported and needs a different fact. On round 2 and later, you get your previous review. Check each earlier issue (resolved / not resolved). Do not reverse a change you asked for unless it caused a new, named problem. Judge lines you suggested exactly as strictly as the writer's.\" (2) agent.py: let S4 use a different model through `HARNESS_REVIEW_MODEL` (for example claude-sonnet-5-5), and record it in meta. (3) checks.py: warn (as a check problem passed to S4) when the script cites a fact id that is not in concept.fact_ids."
+    },
+    {
+     "target": "checks.py",
+     "severity": "high",
+     "problem": "No per-line timing check. The budget is checked per segment only, so a line can run past the end of its segment, and in a 15 s Seedance generation it would be cut off or rushed. The final line also breaks the rule that the last ~1 s is for picture and sound.",
+     "evidence": "Final segment 2, line at 11.0 s: 'They named me Hope — for a future you can still shape.' is 11 words. At 2.5 w/s that is 4.4 s, so it ends at 15.4 s in a 15.0 s segment. Segment 1 line 2 (8 words at 3.4 s) runs to 6.6 s, past the next line at 6.4 s. All hard checks passed.",
+     "proposed_change": "In checks.script(), per segment: sort narration by t_start; for each line set `end = line.t_start + spoken_words(line.text) / WORDS_PER_SECOND`; flag if `end > next.t_start` (\"line overlaps the next\") or `end > seg.duration_s - 1.0` (\"line runs into the last second / past segment end\"); flag the first line if t_start < 0.8."
+    },
+    {
+     "target": "checks.py",
+     "severity": "medium",
+     "problem": "On-screen text is checked only in S3 shot fields, and only by a narrow regex. Concept hooks and endings are never checked, although a chosen concept carries straight into the script. The regex misses phrasings like 'figure \"£250\" fades in'.",
+     "evidence": "S2 concept 1 hook: 'Black screen, then a handwritten-style figure \"£250\" fades in over the shadow of her ribs.' checks.concepts() has no text test. TEXT_ON_SCREEN does not match 'fades in', 'handwritten', 'figure' or a quoted number. CHANGELOG v0 lists this too.",
+     "proposed_change": "Broaden the regex: `TEXT_ON_SCREEN = re.compile(r\"\\b(caption|title card|text|lettering|written|handwritten|typed|inscription|words?|numbers?|figures?|date|label|sign|logo|subtitle|on[- ]screen|fades? in|appears? on|superimposed)\\b|[£$€]\\s?\\d|\\\"[^\\\"]*\\d[^\\\"]*\\\"\", re.I)`. Run it in checks.concepts() on hook and ending, and in checks.script() on visual, action and asset prompts minus any 'no text' phrase. For a clean signal, split Concept.hook in schemas.py into `hook_visual` (what is seen) and `hook_line` (what is heard), and run the text check on `hook_visual` only. Add to s2_concept.md: \"The picture never contains text, numbers, dates, captions or titles; anything the visitor must read has to be spoken instead.\""
+    },
+    {
+     "target": "checks.py",
+     "severity": "medium",
+     "problem": "No code check ties the numbers in narration to the facts it cites. Mis-citations and derived numbers (arithmetic on two facts, which is not in the pack) get through. S1 fact texts are not checked against the pack either (only the source URL is).",
+     "evidence": "Concept 2 hook: 'For thirty-eight years', computed from 1979 to 2017 and not stated in the pack. The Sequoia pack invites the same thing (1,300 years, 1893, 70% to 40%). checks.material() only verifies that `fact.source in pack_text`.",
+     "proposed_change": "Add `numbers(text)`, which extracts digit groups and spelled numbers (one to ninety-nine, hundred, thousand, ordinals like 'twenty-fifth', with normalised 25.2 → 25 allowed as rounding). In checks.script(), flag any number in a line that appears in none of its cited facts' text, and any line with a number or capitalised place name but empty fact_ids. Run the same on concept hook_line and ending. In checks.material(), flag a fact whose numbers do not appear in pack_text."
+    },
+    {
+     "target": "agent.py",
+     "severity": "medium",
+     "problem": "Failures leave no trace. request.json is written before the call, but an exception (refusal, max_tokens, validation, network) writes nothing else, and run.py writes no report, so a crashed run looks like an empty folder. request_id is always null, so a bad call cannot be traced.",
+     "evidence": "runs/1114-170208-hope-v0/03_s3_script has only request.json: no output, meta, error or report. Every meta.json in the v0 run has \"request_id\": null.",
+     "proposed_change": "In call(), wrap the live call in try/except. On error, write out_dir/'error.json' with {type, message, traceback, stop_reason, raw_text if any}, then re-raise. In _live_call, keep the raw text and write it to raw.txt before model_validate_json, so a schema failure can be inspected. Get the id with `stream.request_id` (or `response._request_id` from the non-stream client) and log it. In run.py, wrap run_one in try/finally so report.md is always written, with whatever stages completed and the error."
+    },
+    {
+     "target": "run.py",
+     "severity": "medium",
+     "problem": "The archive cannot answer 'what did the loop change and why' without opening JSON by hand. Check results and the exact feedback string are not saved in the stage folders, and report.md shows only the last review and final script. The first draft, the round-1 scores and the line-by-line changes are lost.",
+     "evidence": "report.md has 'S4 Review (last round)' only. Round-1 truth 4 and focus 3 appear nowhere in the report. Check results exist only in the in-memory log and stdout.",
+     "proposed_change": "Write checks.json (the problems list) into each S3 folder and feedback.md into the next S3 folder. In render(), add an 'Attempts' table: attempt, check problems, scores, number of blocking/polish issues, words. Then add a narration diff per attempt: old line → new line, tagged with the issue `where` that caused it. Add a header line with the status and the chosen attempt."
+    },
+    {
+     "target": "agent.py",
+     "severity": "medium",
+     "problem": "Prompt versions cannot be compared fairly. The cache holds exactly one sample per input, so any A/B is n=1 on a stochastic model. --fresh overwrites that sample. Runs carry no prompt version or hash, so 'v0' is only a hand label. --variant is applied only to s2 and s3, and a variant for s1 or s4 is silently ignored.",
+     "evidence": "agent.call() keys the cache on request+schema with no sample index. run.py passes variants.get(\"s2\") and variants.get(\"s3\") only. The run dir name depends on --label.",
+     "proposed_change": "Add a `sample: int = 0` argument that goes into the cache key and the folder name (e.g. 03_s3_script.s1). Add `--samples N` to run.py so it runs stages from the varied stage onward N times. Store a 8-char sha of each prompt file in meta.json and in the report header. Pass `variant` through for s1 and s4 as well, and raise an error if a --variant names a stage that does not take one. Add to METHOD.md section 6: \"To compare prompt versions of stage X: reuse the cached outputs of every earlier stage, run X and later stages with N=3 samples per exhibit for each version, and keep the S4 prompt and model fixed while comparing writer prompts. A human picks the better script in a blind side-by-side (variant names hidden). S4 scores are a tie-breaker only. Never compare S4 scores across different S4 prompts.\""
+    },
+    {
+     "target": "METHOD.md",
+     "severity": "medium",
+     "problem": "There is no defined regression set and no machine-checkable expectation per exhibit, so nothing guards against a prompt fix that breaks another case. Only Hope has been run, with no photo, so S0 has never been tested. The reviewer itself has never been tested.",
+     "evidence": "Only runs for hope exist. knowledge/ now has sequoia (UNSOURCED felling year and diameter, 'a timeline of history runs beside it') and sophie (conflicting bone count, UNSOURCED completeness %), which are good traps, but no expectations are recorded.",
+     "proposed_change": "Add knowledge/<id>/expect.json, for example {\"duration_s\": 30, \"forbidden\": [\"221\", \"lunge\", \"thirty-eight\", \"38\"]} for hope and {\"forbidden\": [\"1891\", \"diameter\", \"metres across\"]} for sequoia. Have checks.py fail any narration that contains a forbidden string or a duration other than the expected one. Regression set (about 8 cases, run with `run.py all`): hope (rich, 30 s), sequoia (number and arithmetic traps, plus on-screen-text temptation from the timeline), sophie (conflicting facts), one deliberately thin pack (2 facts, expected 15 s), and photo cases: a hope close-up (jaw), a wide crowded shot, a photo of an exhibit not in the list (expect exhibit_id \"\"), and a lookalike decoy. Separately, keep 5 or 6 hand-made 'seeded-defect' scripts (an unsourced date, an appearance-as-fact line, a quoted number on screen, an 11-word last line, two actions in one shot, a mis-cited fact id). Run S4 on them after every S4 prompt change and record how many defects it catches."
+    },
+    {
+     "target": "checks.py",
+     "severity": "low",
+     "problem": "word_count counts a numeral as one word, so dates and figures are under-counted against the spoken budget. The subtitle check compares only total word counts, not each line's text or timing.",
+     "evidence": "'Twenty-fifth of March, 1891.' is counted as 4 words but spoken as about 7 ('eighteen ninety-one'). The subtitle check is `abs(word_count(spoken) - word_count(subs)) > 3` over the whole film.",
+     "proposed_change": "spoken_words(): count a 4-digit year as 3 words, any other digit group as 2, and '£'/'%' as 1 extra word; use it for the budget and the per-line timing. Subtitles: concatenate normalised subtitle text and compare it with normalised narration text for exact equality. For each narration line, require a subtitle starting within 0.3 s of segment_offset + line.t_start, and require no subtitle to end past the film's duration_s."
+    },
+    {
+     "target": "prompts/s3_script.md",
+     "severity": "low",
+     "problem": "One 15 s generation is asked to jump between 3 or 4 locations, which a single Seedance call renders poorly. Reference assets are reused for scenes they do not show. Asset prompts say 'based on the visitor's photo' when no photo exists.",
+     "evidence": "Final segment 2: harbour aerial → sand → hall → jaw (4 locations in 15 s). The living_whale (underwater) asset is the reference for the stranded flank on sand. Every asset prompt starts 'Clean reference image based on the visitor's photo' in a run with 'no photo notes'.",
+     "proposed_change": "Add to the Structure paragraph: \"Within one segment, use at most two locations, and cut between them at most once.\" Add to Reference images: \"A segment uses a reference only if the reference shows the subject in a similar setting. If no photo notes are given, write each prompt from the material's appearance description, not 'from the visitor's photo'.\""
+    },
+    {
+     "target": "prompts/s1_digest.md",
+     "severity": "low",
+     "problem": "S1's free-text fields add details that are in no fact. They flow into S2 and S3 as material, while the hard check only covers the facts list.",
+     "evidence": "S1 emotional_core: 'A young whale who died alone on an Irish sandbar...'. 'Alone' and 'died' are not in the pack, and S2's thinking had to guard against 'her being alone'.",
+     "proposed_change": "Add after Emotional core: \"Story material, visual motifs and the emotional core may only restate or combine the facts and the pack's appearance notes. Do not add circumstances (alone, suffering, death, motives) the pack does not state.\""
+    }
+   ],
+   "best_things_to_keep": [
+    "Each stage writes its own folder with request.json (full system prompt and user content, images redacted), thinking.md, output.json and meta.json (usage, cost, seconds, stop_reason, cached). That is exactly what made the 'rebuilding from scratch' and reviewer-oscillation problems visible.",
+    "The content-hash cache over {model, effort, prompt_file, system, user, schema}. Changing one prompt automatically invalidates that stage and everything downstream, while upstream stages stay frozen, which is the right base for fair A/B runs. Keep it and add a sample index.",
+    "Strict structured outputs built from pydantic (_strict_schema closes every object). Stage boundaries are typed, and the hard checks run on real fields, not on parsed prose.",
+    "Hard checks live in code (checks.py) and are fed both to the reviewer ('Automatic checks found') and to the writer as '[check]' feedback, so the loop cannot ignore a code-detected problem.",
+    "The knowledge-pack convention: a source per section, UNSOURCED sections, and 'Appearance (for visuals, not narration)'. Also checks.material() verifying each fact's source URL appears in the pack. The new sequoia and sophie packs already contain good traps.",
+    "Duration is decided in S1 and enforced in code (script duration must match the sheet; 1 or 2 segments; each segment at most 15 s; shot timecodes continuous).",
+    "S4's demand for concrete fixes with an exact location. Its round-1 notes were specific and actionable (the 'For your future' paraphrase drift, the triple 'young' repetition).",
+    "S2's three-concept-then-choose step with a written choice_reason, and S0's rule that a wrong match is worse than no match.",
+    "Prompts as separate files with a --variant mechanism, and CHANGELOG.md recording what a human saw on reading the output, not only scores.",
+    "report.md puts everything on the absolute film timeline (shot table, narration with fact ids, subtitles, assets), so a human can read the script quickly, which METHOD.md rightly treats as the main judgement."
+   ]
+  }
+ ],
+ "packs": {
+  "built": "{\n \"files\": [\n  \"/Users/liangkaicheng.1/Documents/Imperial AI Hackathon 2026/museum_ai/harness/knowledge/sequoia/meta.json\",\n  \"/Users/liangkaicheng.1/Documents/Imperial AI Hackathon 2026/museum_ai/harness/knowledge/sequoia/pack.md\",\n  \"/Users/liangkaicheng.1/Documents/Imperial AI Hackathon 2026/museum_ai/harness/knowledge/sophie/meta.json\",\n  \"/Users/liangkaicheng.1/Documents/Imperial AI Hackathon 2026/museum_ai/harness/knowledge/sophie/pack.md\"\n ],\n \"thin\": {\n  \"id\": \"sequoia\",\n  \"name\": \"The giant sequoia slice (Hintze Hall, upper balcony)\",\n  \"why\": \"One striking object with one headline fact: a cross-section of a tree that was 1,300 years old and 101 m tall. The rings make a strong visual. There is a bit of support material (conservation, deforestation figures) but no real arc, so it suits a 15 s film. All facts come from a single NHM page.\",\n  \"facts\": [\n   {\"fact\": \"1,300 years old and 101 m tall when felled, in California\", \"source\": \"https://www.nhm.ac.uk/discover/giant-sequoia-slice.html\"},\n   {\"fact\": \"Rings form under the bark as the tree grows; counting them estimates age; conservation revealed its many rings\", \"source\": \"https://www.nhm.ac.uk/discover/giant-sequoia-slice.html\"},\n   {\"fact\": \"At the museum since 1893; on display for more than a century in the botany collections; now on Hintze Hall's upper balcony\", \"source\": \"https://www.nhm.ac.uk/discover/giant-sequoia-slice.html\"},\n   {\"fact\": \"About an inch of dust over cloudy old varnish; 3 conservators spent 12 weeks cleaning it and coating it in reversible resin\", \"source\": \"https://www.nhm.ac.uk/discover/giant-sequoia-slice.html\"},\n   {\"fact\": \"When it was felled, nearly 70% of the world's land was forest; about 100 years later, below 40%; about 15 billion trees are cut down each year\", \"source\": \"https://www.nhm.ac.uk/discover/giant-sequoia-slice.html\"}\n  ],\n  \"unsourced_or_conflicting\": [\"Felling year: the page says 1893 in the text and 1891 in a photo caption; the pack says not to state a year\", \"Diameter: not given on the page\"]\n },\n \"medium_rich\": {\n  \"id\": \"sophie\",\n  \"name\": \"Sophie the Stegosaurus (Earth Hall)\",\n  \"why\": \"Has a real arc: lived 150 million years ago in Jurassic Wyoming, found in 2003 on a hilltop while a quarry was being expanded, dug out in three weeks, brought to London by 70 donors and named after a donor's daughter, first complete dinosaur put on display at the NHM in nearly 100 years, and scanned to estimate her weight in life. Plenty of first-person material for a 30 s film. Sources are the official NHM press release, a discover page and a news story.\",\n  \"facts\": [\n   {\"fact\": \"Stegosaurus stenops, about 150 million years old, Jurassic, lived in what is now Wyoming; one of the most complete Stegosaurus skeletons ever found\", \"source\": \"https://www.nhm.ac.uk/discover/stegosaurus-brought-to-life.html\"},\n   {\"fact\": \"Found in spring 2003 at Red Canyon Ranch, Wyoming, by Bob Simon, near the top of a hill while expanding his quarry; excavation took three weeks\", \"source\": \"https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html\"},\n   {\"fact\": \"Virtually complete (only the left arm and tail base missing); 560 cm long, 290 cm tall, about the size of a 4x4, over 300 bones; her 19 plates and 4 tail spikes are the most complete set ever found\", \"source\": \"https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html\"},\n   {\"fact\": \"3D, separated skull bones make it one of the most scientifically valuable dinosaur skulls\", \"source\": \"https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html\"},\n   {\"fact\": \"Arrived December 2013, funded by 70 donors with Jeremy Herrmann making it possible; named after his daughter Sophie; on display from 4 Dec 2014; first complete dinosaur put on display at the NHM in nearly 100 years; only Stegosaurus in a public collection outside the USA; sex unknown\", \"source\": \"https://www.nhm.ac.uk/press-office/press-releases/world_s-most-complete-stegosaurus-goes-on-show.html\"},\n   {\"fact\": \"Digital model of all 360 bones; a young adult whose limbs were still growing; estimated at about 1,600 kg in life, roughly a small rhino\", \"source\": \"https://www.nhm.ac.uk/discover/news/2015/march/weight-of-the-worlds-most-complete-stegosaurus-revealed.html\"},\n   {\"fact\": \"Walked on all fours with short front legs and long back legs; could not run and walked at a few mph; bite like a cow or sheep; ate ferns, cycads and other tough plants; teeth about the size of a little fingernail\", \"source\": \"https://www.nhm.ac.uk/discover/stegosaurus-brought-to-life.html\"},\n   {\"fact\": \"Plates large but thin and fragile, probably for display or controlling body temperature rather than defence; the hip space stored food substances, not a second brain\", \"source\": \"https://www.nhm.ac.uk/discover/stegosaurus-brought-to-life.html\"}\n  ],\n  \"unsourced_or_conflicting\": [\"Bone count: the press release says over 300 and the 2015 news story says 360; the pack advises 'over 300'\", \"Completeness percentage (80-90%) appears only in press coverage, not on any NHM page read; marked UNSOURCED\"],\n  \"notes\": \"In a search snippet, a later NHM page quotes a much wider mass range of 1.5 to 6 tonnes. I did not read that page, so it is not in the pack.\"\n }\n}",
+  "verified": "I checked every sourced statement against its page. I downloaded each page's full text with curl and compared numbers, dates and names word for word. Both pack.md files are fixed in place. Both meta.json files are valid JSON, have the same 5 keys as hope (id, name, museum, location, looks_like), and their id matches the folder name.\n\n**sequoia** (/Users/liangkaicheng.1/Documents/Imperial AI Hackathon 2026/museum_ai/harness/knowledge/sequoia/pack.md): 8 statements, all from one source page.\n- **Confirmed (6):** 1,300 years old and 101 m tall, felled in California; how rings form and that counting them gives age; conservation revealed the rings; at the museum since 1893 and on display for more than a century in the botany collections; now on the upper balcony of Hintze Hall, in the eaves; dust an inch thick over cloudy old varnish and wax.\n- **Corrected (2):**\n  - The page says three conservators spent 12 weeks to \"clean and conserve\" the slice, and that the stable, reversible conservation-grade resin went on afterwards. The pack said \"cleaning and coating\", so I reworded it to match.\n  - Forests: the page says \"After 100 years\" (the pack had \"about 100 years\") and gives 15 billion trees a year for that later period. The pack had stated it as a present-day yearly figure.\n- **Moved to UNSOURCED:** none. The existing UNSOURCED notes are correct: the text says 1893 and a photo caption says 1891, so no felling year is stated, and the page gives no diameter.\n- **Test case:** good thin case. It has one headline fact, a strong ring visual and only one source, which suits a 15 s film. Be aware that the deforestation figures could pull the narration off topic.\n\n**sophie** (/Users/liangkaicheng.1/Documents/Imperial AI Hackathon 2026/museum_ai/harness/knowledge/sophie/pack.md): about 20 statements from 3 source pages.\n- **Confirmed (15):**\n  - Jurassic, about 150 million years ago, Wyoming; most Stegosaurus skeletons found are incomplete.\n  - Found spring 2003 at Red Canyon Ranch by Bob Simon while expanding his quarry; excavation took three weeks.\n  - Virtually complete, with only the left arm and base of the tail missing; 560 cm long, 290 cm tall, about a 4x4; over 300 bones; 19 back plates and 4 tail spikes, the most complete set ever found.\n  - Skull bones are 3D and separate.\n  - Named after Sophie Herrmann; on display from 4 Dec 2014; first complete dinosaur put on display at the museum in nearly 100 years; sex unknown.\n  - Weight: a model of all 360 bones; she was a young adult; two methods agreed on about 1,600 kg, roughly a small rhino.\n  - How she lived: all fours, could not run, a few mph; bite like a cow or sheep; ferns and cycads; teeth the size of a little fingernail.\n  - Plates thin and fragile, for display or temperature control rather than defence; the hip space stored food, not a second brain.\n- **Corrected (5):**\n  - \"Stegosaurus stenops\" does not appear on the stegosaurus-brought-to-life page. I moved it under the press release source, which does name the species. I also added \"on display in the Earth Hall\", which the same discover page states.\n  - \"Near the top of a hill\": the page says \"at the top of a hill\".\n  - \"Funded by 70 donors\" is an inference. The page only says the museum's director thanked 70 generous donors, with particular thanks to Jeremy Herrmann, for making the acquisition possible, so the pack now says that.\n  - \"Only Stegosaurus in a public collection outside the USA\" is now marked as true when the 2014 press release came out, and not to be stated as a present-day fact.\n  - Plate blood vessels softened to what the page says: they \"seem to have been filled with lots of blood vessels\".\n- **Moved to UNSOURCED:** none new. The existing notes are correct: the bone count conflicts (over 300 vs 360, and the pack advises \"over 300\"), and the 80–90% completeness figure has no NHM source.\n- **Test case:** good rich case. It has a clear arc (Jurassic life, the hilltop find, 70 donors and the name, display, weighing) and three independent sources, which is plenty for a 30 s first-person film.\n\nI did not touch the hope pack or any harness code."
+ }
+}

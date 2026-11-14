@@ -1,0 +1,41 @@
+{
+  "run": "1114-200829-photo-e2e",
+  "resolution": "480p",
+  "started": "2026-11-14 20:15:55",
+  "images": [
+    {
+      "id": "zun_now",
+      "url": "https://v3b.fal.media/files/b/0ab279c0/KPaaRjCcyMJyzr-JISUF2_mRUwUz9s.png",
+      "seconds": 22.5,
+      "prompt": "From this photo, show the same square bronze zun exactly as it is now, from the same corner-on angle with one ram head facing the camera, alone and centred on a plain light grey background, even neutral light, no glare or reflections. Dark grey-green bronze with lighter grey highlights on raised edges: wide flared square mouth with tall hooked ridged flanges, narrower neck, four ram foreparts at the shoulder corners with large horns spiralling forward and down, fine scale and spiral patterns over the ram bodies, high square flanged foot. Whole vessel in frame with margin. Avoid: No text, labels, captions, watermarks, people, reflections of visitors, glass case, plinth, museum ceiling lights, other objects, second copies of the zun."
+    },
+    {
+      "id": "detail_ram_head",
+      "url": "https://v3b.fal.media/files/b/0ab279c0/D-fIFpTcWYyVxmXcrCV_Z_ejWG1Edw.png",
+      "seconds": 23.6,
+      "prompt": "From this photo, show a close-up of the front ram head of the same square bronze zun, filling the frame, on a plain dark-neutral background, even soft light. Dark grey-green bronze: long narrow ram face with small eyes, large ridged horns curling in spirals around each side of the head, fine scale and spiral patterns on the neck and chest below, part of the flared flanged neck visible above. Avoid: No text, labels, watermarks, people, reflections, glass, plinth, other objects, glare."
+    },
+    {
+      "id": "zun_in_place",
+      "url": "https://v3b.fal.media/files/b/0ab279c0/clFn5yjmyh-K7H_tXoK1-_QxAFcE50.png",
+      "seconds": 20.9,
+      "prompt": "From this photo, keep the same angle and framing: the same dark grey-green square bronze zun with its flared flanged mouth and four ram heads with spiralling horns, standing on its white plinth in the dim warm gallery with small spotlights dotting the dark ceiling. Remove the glare, the reflections of visitors in the glass and the label card; the background stays softly lit and calm. Avoid: No readable text, label cards, signs, watermarks, visible people or reflected people, phones, glare, second copies of the zun."
+    }
+  ],
+  "segments": [
+    {
+      "index": 1,
+      "url": "https://v3b.fal.media/files/b/0ab279f0/s-79Xf4GP7iF8MenEvtGh_video.mp4",
+      "seed": 1138719960,
+      "path": "/Users/liangkaicheng.1/Documents/Imperial AI Hackathon 2026/museum_ai/harness/runs/1114-200829-photo-e2e/media/segments/seg_1.mp4",
+      "missing_refs": [],
+      "seconds": 470.3,
+      "prompt": "References: @Image1 is the Four-Ram Square Zun (copy its shape, pose and colour exactly; ignore its background); @Image2 is @Image1 on its white plinth in the gallery, visitor's corner-on view (setting reference only: architecture, light and space); @Image3 is a close-up of front ram head and curled horns, part of the Four-Ram Square Zun (@Image1).\nStyle: photorealistic documentary footage, natural light. Setting: Dim warm museum gallery, glass case, spotlights in dark ceiling.\nShot 1 (@Image3): extreme close-up through case glass, corner-on, slow push-in; A visitor's faint reflection raises a phone beside the horns; warm amber spotlight from above, dark blurred gallery behind. Cut to shot 2 (@Image1): close-up, corner-on, slightly below eye level, slow tilt up; A thin band of spotlight glides up the bronze edges; deep shadow between flanges. Cut to shot 3 (@Image2): medium wide, corner-on, visitor eye level, slow pull-back settling to stillness; Ceiling spotlights glow softly brighter above the white plinth; front ram facing lens, rams in profile either side.\nVoiceover, an unseen narrator, a man in his sixties, low grainy baritone, neutral English, slow, quietly amused: \"You photographed my rams as if untouched.\" \"In nineteen thirty-eight, a Hunan hillside gave me up.\" \"Look up. During the war, bombs destroyed me.\"\nSound: Hushed gallery room tone; one soft shutter click before the voice. Music: Sparse slow struck bronze bells, long metallic decay, fading to silence by the end.\nKeep it subtitle-free: no subtitles, captions, letters, numbers, logos or watermark anywhere. Only one Four-Ram Square Zun in any frame."
+    }
+  ],
+  "est_usd": 2.55,
+  "film": "/Users/liangkaicheng.1/Documents/Imperial AI Hackathon 2026/museum_ai/harness/runs/1114-200829-photo-e2e/media/film.mp4",
+  "film_seconds": 15.09,
+  "frame": "864x496",
+  "wall_seconds": 497.9
+}

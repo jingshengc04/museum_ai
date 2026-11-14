@@ -1,0 +1,14 @@
+{
+ "forbidden": [
+  "360",
+  "three hundred and sixty",
+  "per cent complete",
+  "percent complete",
+  "80%",
+  "90%",
+  "only stegosaurus",
+  "she was female",
+  "he was male"
+ ],
+ "why": "length free since v1.4 (15 s default, 30 s only if the second half adds a turn fact); bone count conflicts (use 'over 300'); completeness % unsourced; 'only outside USA' was true in 2014 only; sex unknown"
+}

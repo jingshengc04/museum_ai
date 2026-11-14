@@ -1,0 +1,8 @@
+[
+  {"id": "alive_underwater", "file": "alive_underwater.webp", "kind": "restoration", "style": "realistic", "has_text_labels": false,
+   "description": "Hope as she looked alive: a slender blue whale gliding just below the surface, deep blue-grey mottled skin, pale ribbed throat, sunlight rays through the water."},
+  {"id": "sheet_realistic", "file": "sheet_realistic.webp", "kind": "character_sheet", "style": "realistic", "has_text_labels": true,
+   "description": "Realistic character sheet: front view, full side view, and four expressions (calm, curious, delighted, thoughtful) shown through eyes, head angle and a slightly open mouth. Carries text labels (HOPE, FRONT, SIDE, CALM...), so it must be cropped into text-free views before use as a video reference."},
+  {"id": "sheet_stylized", "file": "sheet_anime.webp", "kind": "character_sheet", "style": "stylized", "has_text_labels": true,
+   "description": "Lightly anime-styled character sheet: simplified mottling, clearer outline, livelier eyes; same views and four expressions. Carries text labels, so it must be cropped into text-free views before use as a video reference."}
+]

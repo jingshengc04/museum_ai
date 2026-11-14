@@ -1,0 +1,98 @@
+"""Turn one script segment into the fal Seedance 2.0 reference-to-video request.
+
+The agent decides *what* to show and say (schemas.Script); this file decides *how it is written for Seedance*,
+so a change of prompt style never needs the agent re-tuned. Written from research/round1 (verified against
+fal docs on 2026-11-14):
+  - endpoint bytedance/seedance-2.0/reference-to-video, duration "4".."15" (string), 720p, generate_audio on
+  - reference images are named @Image1..@Image9 in upload order; bind each once, then reuse the same name
+  - shots in event order joined with "Cut to"; precise per-shot timings are unreliable, so only a soft hint
+  - spoken words go in double quotes; describe the narrator once, identically in every segment
+  - state the sound you want, and "no music" if none, or a score appears
+  - constraint block last: no subtitles/text/logos/watermark, no duplicate subjects
+  - keep each request short (community: ~100-200 words; the first instructions are followed most reliably)
+Unverified (see research/round1_raw.json "still_open"): exact timing syntax, voice consistency across calls.
+
+v1.1 (after review of run 1114-172400-hope-v1): references that depict different things (the skeleton and
+the living whale) are bound separately and kept apart, instead of being declared "one single subject".
+"""
+from __future__ import annotations
+
+import os
+
+import schemas
+
+ENDPOINT = os.environ.get("SEEDANCE_ENDPOINT", "bytedance/seedance-2.0/reference-to-video")
+RESOLUTION = os.environ.get("SEEDANCE_RESOLUTION", "720p")
+ASPECT = os.environ.get("SEEDANCE_ASPECT", "16:9")
+USD_PER_SECOND = {"480p": 0.13, "720p": 0.30}  # standard tier, from verified token pricing
+MAX_PROMPT_WORDS = 250
+
+
+def _s(text: str) -> str:
+    """Field text without trailing punctuation, so joining never produces '..'."""
+    return text.strip().rstrip(".;, ")
+
+
+def render(script: schemas.Script, index: int) -> dict:
+    seg = script.segments[index]
+    assets = {a.id: a for a in script.assets}
+    tag = {aid: f"@Image{n}" for n, aid in enumerate(seg.ref_assets, 1)}
+    kinds = {assets[a].depicts for a in seg.ref_assets if a in assets}
+    lock = {"exhibit_now": script.subject_lock, "detail": script.subject_lock, "living_form": script.living_form_lock}
+
+    parts = []
+    if seg.ref_assets:
+        binds, described = [], {}
+        for a in seg.ref_assets:
+            asset = assets.get(a)
+            if not asset:
+                binds.append(f"{tag[a]} is {a}")
+            elif asset.depicts == "environment":
+                binds.append(f"{tag[a]} is {_s(asset.view)}")
+            elif asset.depicts == "detail":
+                first = described.get("exhibit_now")
+                binds.append(f"{tag[a]} is a close detail ({_s(asset.view)}) of {'the same subject as ' + first if first else _s(script.subject_lock)}")
+            elif asset.depicts in described:  # second view of a subject already described: don't repeat the lock
+                binds.append(f"{tag[a]} is another view ({_s(asset.view)}) of the same subject as {described[asset.depicts]}")
+            else:
+                described[asset.depicts] = tag[a]
+                binds.append(f"{tag[a]} is {_s(lock.get(asset.depicts) or asset.view)}")
+        parts.append("References: " + "; ".join(binds) + ".")
+        if len(kinds - {"environment", "detail"}) > 1:
+            parts.append("These are different states of the subject: never show them in the same shot, "
+                         "hard cut between them, no morphing or transformation.")
+    else:
+        parts.append(f"Subject: {_s(script.subject_lock)}.")
+    look = "photorealistic, natural cinematic light" if script.style == "realistic" else "lightly stylized animation, clean shapes, soft light"
+    parts.append(f"Style: {look}. Setting: {_s(seg.setting)}.")
+
+    shots = []
+    for n, s in enumerate(seg.shots, 1):
+        refs = ", ".join(tag[r] for r in s.refs if r in tag)
+        lead = "Shot 1" if n == 1 else f"Cut to shot {n}"
+        shots.append(f"{lead}{(' (' + refs + ')') if refs else ''}: {_s(s.framing)}, {_s(s.camera)}. {_s(s.action)}. {_s(s.visual)}.")
+    parts.append(" ".join(shots))
+
+    lines = " ".join(f'"{l.text.strip()}"' for l in seg.narration)
+    if lines:
+        who = "Voiceover, unseen narrator" if script.narrator_presence == "voiceover" else "The subject speaks on screen"
+        parts.append(f"{who}, {_s(script.voice)}: {lines}")
+    a = seg.audio
+    music = _s(a.music) if a.music and a.music.lower().strip(". ") not in ("none", "no music") else "no music"
+    sfx = "; ".join(_s(x) for x in a.sfx)
+    parts.append(f"Sound: {_s(a.ambience)}; {sfx}; {music}.")
+    parts.append("No subtitles, no on-screen text or lettering, no logos, no watermark, no duplicate copies of the subject.")
+
+    prompt = "\n".join(parts)
+    duration = max(4, min(15, round(seg.duration_s)))
+    return {
+        "endpoint": ENDPOINT,
+        "image_urls": [f"<{a}>" for a in seg.ref_assets],
+        "duration": str(duration),
+        "resolution": RESOLUTION,
+        "aspect_ratio": ASPECT,
+        "generate_audio": True,
+        "prompt": prompt,
+        "prompt_words": len(prompt.split()),
+        "est_usd": round(duration * USD_PER_SECOND.get(RESOLUTION, 0.30), 2),
+    }
