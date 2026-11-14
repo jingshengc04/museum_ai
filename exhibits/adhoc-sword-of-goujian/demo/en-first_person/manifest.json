@@ -1,0 +1,408 @@
+{
+  "title": "Not a Copy",
+  "exhibit": {
+    "id": "adhoc-sword-of-goujian",
+    "name": "Sword of Goujian",
+    "museum": "Likely Hubei Provincial Museum",
+    "location": "Wuhan",
+    "character": ""
+  },
+  "language": "en",
+  "style": "first_person",
+  "storyboard_origin": "agent",
+  "video": "final.mp4",
+  "captions_vtt": "captions.vtt",
+  "duration": 15.116,
+  "word_joiner": " ",
+  "shots": [
+    {
+      "id": 1,
+      "start": 0.0,
+      "end": 15.116,
+      "narration": "This bright, you'd take me for a copy. I'm not. King Goujian of Yue used me. Dug from a tomb in nineteen sixty-five. Two thousand five hundred years, still sharp.",
+      "fact_ids": [
+        "age_2500",
+        "excavated_1965",
+        "permanent_collection",
+        "still_sharp",
+        "three_sections",
+        "used_by_goujian"
+      ],
+      "thumb": "thumbs/shot_01.jpg",
+      "prompt": "References: @Image1 is the sword in its dark display case on clear stands (setting reference only: architecture, light and space); @Image2 is the Sword of Goujian (copy its shape, pose and colour exactly; ignore its background); @Image3 is a close-up of mid-blade lattice, part of the Sword of Goujian (@Image2).\nStyle: photorealistic documentary footage, natural light. Setting: Dark display case, sword on clear stands over glowing white base.\nShot 1 (@Image1, @Image2): medium side-on, eye level, slow drift left to right; A thin line of light slides along the edge toward the point; warm glow on the white base, black case. Cut to shot 2 (@Image3): extreme close-up of mid-blade, slow push-in; A soft highlight sweeps across the lattice; shallow focus, darkness at frame edges. Cut to shot 3 (@Image1, @Image2): medium-wide side-on, eye level, static; A faint reflection clears from the glass; whole sword centred above the glowing base, guard left, point right.\nVoiceover, an unseen narrator, a man in his forties, low warm baritone with a faint metallic edge, neutral international English accent, slow measured pace, dry and quietly proud: \"This bright, you'd take me for a copy.\" \"I'm not. King Goujian of Yue used me.\" \"Dug from a tomb in nineteen sixty-five.\" \"Two thousand five hundred years, still sharp.\"\nSound: Hushed gallery hum; faint metallic shimmer on the edge; soft bronze ring under the close-up. Music: Sparse plucked guqin and one bronze chime bell, slow free tempo, long ringing decay, opens on one guqin pluck; one bronze bell on the last line decays to silence before the end.\nKeep it subtitle-free: no subtitles, captions, letters, numbers, logos or watermark anywhere. Only one Sword of Goujian in any frame.",
+      "refs": [
+        "dc7d109e0032a775e06c21da",
+        "18c4fec8779a81547891f2ec",
+        "85d78ffe2d0ce5d5cedd488d"
+      ],
+      "video_source": "generate",
+      "voice_source": "model",
+      "fit": {
+        "how": "native",
+        "speed": 1.0,
+        "freeze": 0.0
+      }
+    }
+  ],
+  "captions": [
+    {
+      "start": 1.0,
+      "end": 4.2,
+      "text": "This bright, you'd take me for a copy.",
+      "words": [
+        {
+          "w": "This",
+          "t0": 1.0,
+          "t1": 4.2
+        },
+        {
+          "w": "bright,",
+          "t0": 1.0,
+          "t1": 4.2
+        },
+        {
+          "w": "you'd",
+          "t0": 1.0,
+          "t1": 4.2
+        },
+        {
+          "w": "take",
+          "t0": 1.0,
+          "t1": 4.2
+        },
+        {
+          "w": "me",
+          "t0": 1.0,
+          "t1": 4.2
+        },
+        {
+          "w": "for",
+          "t0": 1.0,
+          "t1": 4.2
+        },
+        {
+          "w": "a",
+          "t0": 1.0,
+          "t1": 4.2
+        },
+        {
+          "w": "copy.",
+          "t0": 1.0,
+          "t1": 4.2
+        }
+      ]
+    },
+    {
+      "start": 4.5,
+      "end": 7.7,
+      "text": "I'm not. King Goujian of Yue used me.",
+      "words": [
+        {
+          "w": "I'm",
+          "t0": 4.5,
+          "t1": 7.7
+        },
+        {
+          "w": "not.",
+          "t0": 4.5,
+          "t1": 7.7
+        },
+        {
+          "w": "King",
+          "t0": 4.5,
+          "t1": 7.7
+        },
+        {
+          "w": "Goujian",
+          "t0": 4.5,
+          "t1": 7.7
+        },
+        {
+          "w": "of",
+          "t0": 4.5,
+          "t1": 7.7
+        },
+        {
+          "w": "Yue",
+          "t0": 4.5,
+          "t1": 7.7
+        },
+        {
+          "w": "used",
+          "t0": 4.5,
+          "t1": 7.7
+        },
+        {
+          "w": "me.",
+          "t0": 4.5,
+          "t1": 7.7
+        }
+      ]
+    },
+    {
+      "start": 8.0,
+      "end": 10.8,
+      "text": "Dug from a tomb in nineteen sixty-five.",
+      "words": [
+        {
+          "w": "Dug",
+          "t0": 8.0,
+          "t1": 10.8
+        },
+        {
+          "w": "from",
+          "t0": 8.0,
+          "t1": 10.8
+        },
+        {
+          "w": "a",
+          "t0": 8.0,
+          "t1": 10.8
+        },
+        {
+          "w": "tomb",
+          "t0": 8.0,
+          "t1": 10.8
+        },
+        {
+          "w": "in",
+          "t0": 8.0,
+          "t1": 10.8
+        },
+        {
+          "w": "nineteen",
+          "t0": 8.0,
+          "t1": 10.8
+        },
+        {
+          "w": "sixty-five.",
+          "t0": 8.0,
+          "t1": 10.8
+        }
+      ]
+    },
+    {
+      "start": 11.0,
+      "end": 13.8,
+      "text": "Two thousand five hundred years, still sharp.",
+      "words": [
+        {
+          "w": "Two",
+          "t0": 11.0,
+          "t1": 13.8
+        },
+        {
+          "w": "thousand",
+          "t0": 11.0,
+          "t1": 13.8
+        },
+        {
+          "w": "five",
+          "t0": 11.0,
+          "t1": 13.8
+        },
+        {
+          "w": "hundred",
+          "t0": 11.0,
+          "t1": 13.8
+        },
+        {
+          "w": "years,",
+          "t0": 11.0,
+          "t1": 13.8
+        },
+        {
+          "w": "still",
+          "t0": 11.0,
+          "t1": 13.8
+        },
+        {
+          "w": "sharp.",
+          "t0": 11.0,
+          "t1": 13.8
+        }
+      ]
+    }
+  ],
+  "facts": [
+    {
+      "id": "exhibition_location",
+      "text": "The Sword of Goujian Special Exhibition is on the second floor of the South Hall and covers 600 m².",
+      "source": "https://m-www.hbww.org.cn/p/7387.html",
+      "used": false
+    },
+    {
+      "id": "national_treasure",
+      "text": "The sword is a national-treasure-level relic.",
+      "source": "https://m-www.hbww.org.cn/p/7387.html",
+      "used": false
+    },
+    {
+      "id": "four_treasures",
+      "text": "The sword is one of the Hubei Provincial Museum's four most treasured pieces.",
+      "source": "https://m-www.hbww.org.cn/p/7387.html",
+      "used": false
+    },
+    {
+      "id": "three_sections",
+      "text": "The exhibition is built around the sword and has three sections: 'Annals of the Yue State', 'Astonishing Discovery' and 'King of Swords'.",
+      "source": "https://m-www.hbww.org.cn/p/7387.html",
+      "used": true
+    },
+    {
+      "id": "marriage_alliance_story",
+      "text": "The museum's display uses Yue history to tell the story of the marriage alliance between King Zhao of Chu and King Goujian of Yue.",
+      "source": "https://m-www.hbww.org.cn/p/7387.html",
+      "used": false
+    },
+    {
+      "id": "mystery_imperishability",
+      "text": "The museum presents the sword's technical achievements through 'the mystery of its imperishability'.",
+      "source": "https://m-www.hbww.org.cn/p/7387.html",
+      "used": false
+    },
+    {
+      "id": "tin_bronze_period",
+      "text": "The sword is a tin-bronze sword from the end of the Spring and Autumn period.",
+      "source": "https://zh.wikipedia.org/zh-hans/%E8%B6%8A%E7%8E%8B%E5%8B%BE%E8%B7%B5%E5%89%91",
+      "used": false
+    },
+    {
+      "id": "used_by_goujian",
+      "text": "The sword was used by King Goujian of Yue.",
+      "source": "https://zh.wikipedia.org/zh-hans/%E8%B6%8A%E7%8E%8B%E5%8B%BE%E8%B7%B5%E5%89%91",
+      "used": true
+    },
+    {
+      "id": "excavated_1965",
+      "text": "The sword was excavated in December 1965 from Chu Tomb No. 1 at Wangshan, Jiangling County, Hubei.",
+      "source": "https://zh.wikipedia.org/zh-hans/%E8%B6%8A%E7%8E%8B%E5%8B%BE%E8%B7%B5%E5%89%91",
+      "used": true
+    },
+    {
+      "id": "held_since_1999",
+      "text": "The sword has been held by the Hubei Provincial Museum since after National Day 1999.",
+      "source": "https://zh.wikipedia.org/zh-hans/%E8%B6%8A%E7%8E%8B%E5%8B%BE%E8%B7%B5%E5%89%91",
+      "used": false
+    },
+    {
+      "id": "forbidden_abroad",
+      "text": "The sword is on the third list of relics forbidden to be exhibited abroad, issued in 2013.",
+      "source": "https://zh.wikipedia.org/zh-hans/%E8%B6%8A%E7%8E%8B%E5%8B%BE%E8%B7%B5%E5%89%91",
+      "used": false
+    },
+    {
+      "id": "size_rounded",
+      "text": "China Daily gives the sword as 56 centimeters long and 5 centimeters wide.",
+      "source": "https://govt.chinadaily.com.cn/s/202501/26/WS6795f9db498eec7e1f72e504/sword-of-ancient-king-hailed-as-worlds-top.html",
+      "used": false
+    },
+    {
+      "id": "permanent_collection",
+      "text": "The sword is in the Hubei Provincial Museum's permanent collection.",
+      "source": "https://govt.chinadaily.com.cn/s/202501/26/WS6795f9db498eec7e1f72e504/sword-of-ancient-king-hailed-as-worlds-top.html",
+      "used": true
+    },
+    {
+      "id": "age_2500",
+      "text": "The sword dates back 2,500 years.",
+      "source": "https://govt.chinadaily.com.cn/s/202501/26/WS6795f9db498eec7e1f72e504/sword-of-ancient-king-hailed-as-worlds-top.html",
+      "used": true
+    },
+    {
+      "id": "shining_rust_free",
+      "text": "China Daily describes it as a 'shining and rust-free bronze sword'.",
+      "source": "https://govt.chinadaily.com.cn/s/202501/26/WS6795f9db498eec7e1f72e504/sword-of-ancient-king-hailed-as-worlds-top.html",
+      "used": false
+    },
+    {
+      "id": "annex_claim",
+      "text": "China Daily says the hegemon Goujian used this sword to annex his rivals' territory after twenty years of humiliation.",
+      "source": "https://govt.chinadaily.com.cn/s/202501/26/WS6795f9db498eec7e1f72e504/sword-of-ancient-king-hailed-as-worlds-top.html",
+      "used": false
+    },
+    {
+      "id": "goujian_reign",
+      "text": "Goujian reigned 496-465 BC.",
+      "source": "https://govt.chinadaily.com.cn/s/202501/26/WS6795f9db498eec7e1f72e504/sword-of-ancient-king-hailed-as-worlds-top.html",
+      "used": false
+    },
+    {
+      "id": "length_precise",
+      "text": "The sword is 55.6 cm long, including an 8.4 cm hilt.",
+      "source": "https://en.wikipedia.org/wiki/Sword_of_Goujian",
+      "used": false
+    },
+    {
+      "id": "blade_width",
+      "text": "The blade is 4.6 cm wide at its base.",
+      "source": "https://en.wikipedia.org/wiki/Sword_of_Goujian",
+      "used": false
+    },
+    {
+      "id": "weight",
+      "text": "The sword weighs 875 grams.",
+      "source": "https://en.wikipedia.org/wiki/Sword_of_Goujian",
+      "used": false
+    },
+    {
+      "id": "still_sharp",
+      "text": "The sword still has a sharp blade and shows no tarnish.",
+      "source": "https://en.wikipedia.org/wiki/Sword_of_Goujian",
+      "used": true
+    },
+    {
+      "id": "preservation_speculation",
+      "text": "It has been speculated that the sword's chemical composition, together with the almost air-tight scabbard, likely explains its preservation.",
+      "source": "https://en.wikipedia.org/wiki/Sword_of_Goujian",
+      "used": false
+    },
+    {
+      "id": "edge_tin",
+      "text": "The sword's edges contain more tin, which makes them harder and better at holding a sharp edge.",
+      "source": "https://en.wikipedia.org/wiki/Sword_of_Goujian",
+      "used": false
+    },
+    {
+      "id": "sulfur_patterns",
+      "text": "Sulfur reduces the chance of tarnish in the sword's patterns.",
+      "source": "https://en.wikipedia.org/wiki/Sword_of_Goujian",
+      "used": false
+    },
+    {
+      "id": "crack_1994",
+      "text": "Wikipedia says that in 1994, while the sword was on loan to Singapore, a worker accidentally bumped it against the case and left a 7-millimetre crack.",
+      "source": "https://en.wikipedia.org/wiki/Sword_of_Goujian",
+      "used": false
+    },
+    {
+      "id": "name_lost",
+      "text": "Wikipedia says the sword likely also had its own name, as other swords of Goujian's did, but that name has been lost.",
+      "source": "https://en.wikipedia.org/wiki/Sword_of_Goujian",
+      "used": false
+    },
+    {
+      "id": "millions_visitors",
+      "text": "The Sword of Goujian Special Exhibition draws millions of Chinese and foreign visitors every year.",
+      "source": "https://www.mct.gov.cn/wlbphone/wlbydd/xxfb/qglb/hb_9777/202505/t20250506_959795.html",
+      "used": false
+    }
+  ],
+  "modes": {
+    "llm": true,
+    "voice": false,
+    "video": true
+  },
+  "fingerprint": "008aa5d0f227c5e5d44b0657",
+  "ambient_source": "model",
+  "video_model": "bytedance/seedance-2.0/fast/reference-to-video",
+  "fal_cost_usd": 4.08,
+  "seconds_to_make": 832.4,
+  "agent": {
+    "run": "1114-224848-photo",
+    "status": "NEEDS_HUMAN",
+    "claude_cost_usd": 1.96,
+    "voice": "A man in his forties, low warm baritone with a faint metallic edge, neutral international English accent, slow measured pace, dry and quietly proud.",
+    "music": "Sparse plucked guqin and one bronze chime bell, slow free tempo, long ringing decay."
+  }
+}

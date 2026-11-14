@@ -64,8 +64,9 @@ class Review(BaseModel):
 
 
 class Identification(BaseModel):
-    exhibit_id: str = Field(description="Id of the matching exhibit, or an empty string if none match.")
-    reason: str
+    seen: str = Field(description="What the photo shows: the object, which part of it, the angle, the room.")
+    reason: str = Field(description="Why it is, or is not, one of the listed exhibits.")
+    exhibit_id: str = Field(description="Id of the matching exhibit, or an empty string if none match or you are unsure.")
 
 
 # ---------- helpers ----------
@@ -309,8 +310,11 @@ def identify(photo: Path | None, candidates: list[Exhibit], emit: Emit) -> Exhib
     listing = [{"id": e.id, "name": e.name, "where": e.data.get("location", ""), "looks_like": e.data.get("hints", "")} for e in candidates]
     result = _ask(
         Identification,
-        "You match a museum visitor's photo to one of the exhibits in a list. "
-        "Answer with the id of the exhibit shown, or an empty string when none of them is in the photo.",
+        "You match a museum visitor's photo to one of the exhibits in a list. Visitors photograph from any angle "
+        "and distance: the photo may show only part of the object, be dim or blurred, or have people, glass and "
+        "labels in it. It matches only if it shows that same physical object, not merely a similar kind of thing "
+        "(another whale skeleton, another bronze vessel). Use the place as evidence too. Answer with the id of the "
+        "exhibit shown, or an empty string when none of them is in the photo or you are not sure.",
         [
             {"type": "image", "source": {"type": "base64", "media_type": media, "data": base64.standard_b64encode(photo.read_bytes()).decode()}},
             {"type": "text", "text": f"Exhibits:\n{json.dumps(listing, ensure_ascii=False, indent=2)}"},

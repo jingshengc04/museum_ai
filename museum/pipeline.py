@@ -235,10 +235,13 @@ def _agent_exhibit(run: script_agent.AgentRun) -> Exhibit:
     try:
         return exhibits.load(exhibit_id)
     except FileNotFoundError:
+        # Learned from the photo: kept as a new exhibit with the facts the agent found, so a later photo of the
+        # same object is recognised and gets this film from the library.
         seen = run.identity()
         museum, _, location = (seen.get("museum") or "").partition(",")
         data = {"name": seen.get("short_name") or run.final.get("title", exhibit_id), "museum": museum.strip(),
-                "location": location.strip(), "facts": []}
+                "location": location.strip(), "hints": seen.get("recognized_as", ""),
+                "facts": [{k: f[k] for k in ("id", "text", "source")} for f in run.facts], "learned": True}
         return Exhibit(id=exhibit_id, dir=config.EXHIBITS_DIR / exhibit_id, data=data)
 
 
@@ -387,8 +390,11 @@ def make_film(job_dir: Path, language: str, style: str, emit: Emit, photo: Path 
     emit("step", step="story", status="start")
     agent_run = None
     if config.use_agent():
-        agent_run = script_agent.run(emit, exhibit_id=exhibit.id if exhibit else None, photo=photo)
-        exhibit = exhibit or _agent_exhibit(agent_run)
+        # The agent only takes an exhibit id it has a knowledge pack for; otherwise it works from the photo.
+        agent_run = script_agent.run(emit, exhibit_id=exhibit.id if exhibit and exhibit.pack else None, photo=photo)
+        if exhibit is None or agent_run.final.get("exhibit_id") not in (exhibit.id, None):
+            exhibit = _agent_exhibit(agent_run)  # the agent may recognise the photo differently from us
+            emit("exhibit", exhibit=exhibit.public())
         board = _board_from_agent(agent_run)
         emit("thought", text=f"Script ready: \"{board.title}\", {len(board.shots)} scene(s), {agent_run.status}.")
         if not agent_run.passed:  # first version: no human review, the film is made and kept either way
@@ -454,6 +460,9 @@ def make_film(job_dir: Path, language: str, style: str, emit: Emit, photo: Path 
     emit("step", step="edit", status="done")
     (job_dir / "events.json").write_text(json.dumps(recorded, ensure_ascii=False))
     # Every finished film is reused for other visitors; the agent's review status stays in the manifest.
+    if save and exhibit.data.get("learned") and not (exhibit.dir / "exhibit.json").exists():
+        exhibit.dir.mkdir(parents=True, exist_ok=True)
+        (exhibit.dir / "exhibit.json").write_text(json.dumps(exhibit.data, ensure_ascii=False, indent=2) + "\n")
     if save:
         try:
             promote(job_dir)

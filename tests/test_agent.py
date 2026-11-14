@@ -12,12 +12,13 @@ EXAMPLE = config.HARNESS_DIR / "examples" / "four_ram_zun_e2e"
 pytestmark = pytest.mark.skipif(not EXAMPLE.exists(), reason="harness/ is not checked out")
 
 
-def agent_output(tmp_path, status="NEEDS_HUMAN"):
+def agent_output(tmp_path, status="NEEDS_HUMAN", exhibit_id=None):
     """A finished agent run built from the harness's own end-to-end example."""
     run = tmp_path / "1114-000000-hope"
     run.mkdir(parents=True)
     final = json.loads((EXAMPLE / "final.json").read_text())
     final["status"] = status
+    final["exhibit_id"] = exhibit_id or final["exhibit_id"]
     (run / "final.json").write_text(json.dumps(final))
     shutil.copyfile(EXAMPLE / "script.json", run / "script.json")
     (run / "02_s1_digest").mkdir()
@@ -102,12 +103,13 @@ def test_agent_film_mock(tiny_exhibit, tmp_path, agent_on, monkeypatch):
     assert manifest["shots"][0]["prompt"] == run.final["video_requests"][0]["prompt"], "the agent's prompt is used as written"
     assert manifest["facts"] == [{"id": "unearthed_1938_ningxiang", "text": "Unearthed in 1938 in Ningxiang, Hunan.",
                                   "source": "https://example.org/zun", "used": True}]
-    saved = json.loads((tiny_exhibit / "demo" / "en-first_person" / "manifest.json").read_text())
+    learned = config.EXHIBITS_DIR / "adhoc-four-ram-square-zun"
+    saved = json.loads((learned / "demo" / "en-first_person" / "manifest.json").read_text())
     assert saved["agent"]["status"] == "NEEDS_HUMAN", "kept for other visitors, with its review status recorded"
 
 
 def test_passing_agent_film_is_reused_without_running_the_agent_again(tiny_exhibit, tmp_path, agent_on, monkeypatch):
-    run = script_agent.load(agent_output(tmp_path, status="PASS"))
+    run = script_agent.load(agent_output(tmp_path, status="PASS", exhibit_id="hope"))
     monkeypatch.setattr(script_agent, "run", lambda emit, **kw: run)
     out = config.OUTPUT_DIR / tmp_path.name
     first, _ = pipeline.make_film(out / "a", "en", "first_person", lambda *a, **k: None, exhibit_id="hope")
@@ -138,3 +140,39 @@ def test_agent_only_exhibits_are_recognisable_but_not_offered(tiny_exhibit):
     assert ids[0] == "hope" and "sophie" in ids
     sophie = exhibits.load("sophie")
     assert sophie.data["from_pack"] and sophie.pack and sophie.demo_dir("en", "first_person").parts[-3] == "sophie"
+
+
+def test_object_learned_from_a_photo_is_kept_and_found_again(tiny_exhibit, tmp_path, agent_on, monkeypatch):
+    from museum import storyboard
+
+    out = agent_output(tmp_path)
+    (out / "00_s0_identify").mkdir()
+    (out / "00_s0_identify" / "output.json").write_text(json.dumps(
+        {"short_name": "Four-Ram Square Zun", "museum": "National Museum of China, Beijing", "recognized_as": "a square bronze zun with four rams"}))
+    run = script_agent.load(out)
+    calls = []
+    monkeypatch.setattr(script_agent, "run", lambda emit, **kw: calls.append(kw) or run)
+
+    def unknown(photo, candidates, emit):
+        raise LookupError("not one of ours")
+    monkeypatch.setattr(storyboard, "identify", unknown)
+    photo = tiny_exhibit / "photo.jpg"
+    first, _ = pipeline.make_film(config.OUTPUT_DIR / tmp_path.name / "a", "en", "first_person", lambda *a, **k: None, photo=photo)
+    assert calls == [{"exhibit_id": None, "photo": photo}]
+
+    learned = exhibits.load("adhoc-four-ram-square-zun")
+    assert learned.data["learned"] and learned.name == "Four-Ram Square Zun" and learned.facts[0]["source"] == "https://example.org/zun"
+    assert learned.demos(), "its film is in the library"
+
+    # A later visitor's photo is recognised as the learned exhibit: the saved film plays, the agent does not run.
+    monkeypatch.setattr(storyboard, "identify", lambda photo, candidates, emit: next(e for e in candidates if e.id == learned.id))
+    again, folder = pipeline.make_film(config.OUTPUT_DIR / tmp_path.name / "b", "en", "first_person", lambda *a, **k: None, photo=photo)
+    assert folder == learned.demo_dir("en", "first_person") and again == first and len(calls) == 1
+
+
+def test_the_agent_may_correct_our_recognition(tiny_exhibit, tmp_path, agent_on, monkeypatch):
+    run = script_agent.load(agent_output(tmp_path))  # the agent settles on the zun although we passed hope
+    monkeypatch.setattr(script_agent, "run", lambda emit, **kw: run)
+    manifest, _ = pipeline.make_film(config.OUTPUT_DIR / tmp_path.name / "a", "en", "first_person", lambda *a, **k: None, exhibit_id="hope")
+    assert manifest["exhibit"]["id"] == "adhoc-four-ram-square-zun"
+    assert not (tiny_exhibit / "demo" / "en-first_person").exists(), "the zun's film is not filed under Hope"

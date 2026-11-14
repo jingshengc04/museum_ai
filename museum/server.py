@@ -70,8 +70,9 @@ def state() -> dict:
         "modes": config.modes(),
         "languages": config.LANGUAGES,
         "styles": config.STYLES,
-        # Exhibits the agent knows only from its packs are recognised from photos, but are not offered as samples.
-        "exhibits": [e.public() for e in found if not e.data.get("from_pack")],
+        # Exhibits known only from the agent's packs, or learned from visitors' photos, are recognised from photos
+        # but are not offered as samples.
+        "exhibits": [e.public() for e in found if not (e.data.get("from_pack") or e.data.get("learned"))],
         "video": {
             "model": config.VIDEO_MODEL,
             "resolution": config.VIDEO_RESOLUTION,
