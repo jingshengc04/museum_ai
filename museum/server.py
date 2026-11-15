@@ -15,6 +15,9 @@ from fastapi.staticfiles import StaticFiles
 from . import config, exhibits, outline, pipeline, video
 
 MAX_PHOTO_BYTES = 15 * 1024 * 1024
+# How far a job has got when each step starts, and what it says meanwhile (the page shows the same).
+STEP_PROGRESS = {"identify": (8, "Reading the artifact"), "story": (18, "Searching the archives"), "voice": (30, "Recovering its voice"),
+                 "video": (36, "Restoring the moment"), "edit": (92, "Cutting the film")}
 PHOTO_TYPES = {"image/jpeg": ".jpg", "image/png": ".png", "image/webp": ".webp"}
 
 app = FastAPI(title="Museum AI")
@@ -31,9 +34,35 @@ class Job:
         self.language, self.style, self.exhibit_id, self.fresh = language, style, exhibit_id, fresh
         self.events: list[dict] = []
         self.finished = False
+        self.started = time.time()
+        self.photo_url: str | None = None
+        self.summary = {"state": "running", "percent": 0, "text": "Starting", "name": "", "title": "", "photo": None,
+                        "manifest": None, "error": None, "fallback": None}
+        self._shots = self._drawn = 0
 
     def emit(self, kind: str, **data) -> None:
         self.events.append({"type": kind, **data})
+        s = self.summary
+        if kind == "step" and data.get("status") == "start" and data.get("step") in STEP_PROGRESS:
+            percent, s["text"] = STEP_PROGRESS[data["step"]]
+            s["percent"] = max(s["percent"], percent)
+        elif kind == "progress":
+            s["percent"], s["text"] = max(s["percent"], data["percent"]), data["text"]
+        elif kind == "exhibit":
+            s["name"] = data["exhibit"]["name"]
+            s["photo"] = self.photo_url or data["exhibit"].get("photo")
+        elif kind == "storyboard":
+            s["title"], self._shots = data["title"], len(data["shots"])
+        elif kind == "shot" and data.get("stage") == "video" and data.get("status") == "done" and self._shots:
+            self._drawn += 1
+            s["percent"] = max(s["percent"], 36 + round(56 * self._drawn / self._shots))
+        elif kind == "done":
+            s.update(state="done", percent=100, text="Ready", manifest=data["manifest"])
+        elif kind == "error":
+            s.update(state="error", text="Could not be made", error=data["message"], fallback=data.get("fallback"))
+
+    def status(self) -> dict:
+        return {"id": self.id, "started": self.started, **self.summary}
 
     def _fallback(self) -> str | None:
         """A saved film to show if this job fails: same language and style if there is one."""
@@ -151,9 +180,19 @@ async def create_job(
         job.dir.mkdir(parents=True, exist_ok=True)
         saved = job.dir / f"photo{PHOTO_TYPES[photo.content_type]}"
         saved.write_bytes(blob)
+        job.photo_url = job.summary["photo"] = config.url_for(saved)
     JOBS[job.id] = job
     threading.Thread(target=job.run, args=(saved,), daemon=True).start()
     return {"job_id": job.id}
+
+
+@app.get("/api/jobs/{job_id}")
+def job_status(job_id: str) -> dict:
+    """Where a job has got: for the list of this visitor's films, while it runs in the background."""
+    job = JOBS.get(job_id)
+    if job is None:
+        raise HTTPException(404, "No such job.")
+    return job.status()
 
 
 @app.get("/api/jobs/{job_id}/events")

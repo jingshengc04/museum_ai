@@ -28,7 +28,7 @@
   .backdrop::after { content: ""; position: absolute; inset: 0;
     background: radial-gradient(ellipse at 50% 40%, #0b0f140d, #0b0f1466 90%), linear-gradient(180deg, #0b0f1440, transparent 30%, #0b0f1459); }
   /* Frosted glass: the hall shows through, blurred, behind every panel and control. */
-  .glass, .small, .secondary, .circle {
+  .glass, .small, .secondary, .circle, .toast {
     background: linear-gradient(135deg, rgba(255,255,255,.16), rgba(255,255,255,.05)), rgba(24,28,34,.34);
     -webkit-backdrop-filter: blur(5px) saturate(150%); backdrop-filter: blur(5px) saturate(150%);
     border: 1px solid rgba(255,255,255,.24);
@@ -63,15 +63,48 @@
   .heading { font: 400 clamp(52px, 6.2vw, 100px)/.97 var(--serif); letter-spacing: -.055em; margin: 22px 0; }
   .heading em { font-weight: 400; color: var(--gold); }
   .sub { color: #e2ddd3; font-size: 16px; line-height: 1.7; max-width: 360px; margin: 0; }
-  .primary { display: flex; align-items: center; gap: 11px; background: var(--cream); color: #24211e; border: 0; border-radius: 100px; padding: 17px 25px;
-    font-size: 15px; font-weight: 600; margin-top: 32px; box-shadow: 0 15px 55px #d9ba8a22; transition: transform .25s, box-shadow .25s; }
+  .primary { display: flex; align-items: center; justify-content: center; gap: 11px; background: var(--cream); color: #24211e; border: 0; border-radius: 100px;
+    padding: 17px 25px; font-size: 15px; font-weight: 600; box-shadow: 0 15px 55px #d9ba8a22; transition: transform .25s, box-shadow .25s, filter .25s; }
+  .primary.alt { background: rgba(255,255,255,.12); color: var(--cream); box-shadow: inset 0 0 0 1px rgba(255,255,255,.4); }
+  .primary.alt:hover { filter: brightness(1.2); box-shadow: inset 0 0 0 1px rgba(255,255,255,.6); }
+  .primary.alt.on { background: #e0c284; color: #203e36; box-shadow: none; }
+  .photo-buttons { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 32px; max-width: 380px; }
+  .photo-buttons .primary { padding: 16px 14px; white-space: nowrap; font-size: 14px; }
   .primary:hover { transform: translateY(-4px); box-shadow: 0 20px 70px #d9ba8a55; }
   .primary .icon:last-child { margin-left: 4px; }
   .hint { margin: 14px 0 0 4px; font-size: 13px; color: #e2ddd3; }
   .hint kbd { font: 500 11px var(--sans); padding: 2px 7px; margin-left: 4px; border-radius: 6px; border: 1px solid rgba(255,255,255,.3);
     background: rgba(255,255,255,.1); color: var(--cream); }
-  .demo-link { margin: 18px 0 0 4px; border: 0; color: #e6dccb; background: none; font-size: 11px; letter-spacing: .08em; border-bottom: 1px solid #c8bba755; padding: 0 0 4px; }
-  .demo-link:hover { color: var(--cream); }
+  /* "Or try ..." sits in the bottom-left corner of the first screen. */
+  .try-link { position: fixed; left: clamp(22px, 5vw, 90px); bottom: 24px; z-index: 5; border: 0; color: #e6dccb; background: none; font-size: 12px;
+    letter-spacing: .06em; border-bottom: 1px solid #c8bba788; padding: 0 0 4px; text-shadow: 0 1px 10px #000c; }
+  .try-link:hover { color: var(--cream); }
+  body:not([data-view="scan"]) .try-link { display: none; }
+  .gallery .cam { position: absolute; inset: 9% 9% 12%; width: 82%; height: 79%; object-fit: cover; border-radius: 14px; z-index: 4; background: #0d1216; }
+  .count { min-width: 18px; padding: 1px 6px; border-radius: 99px; background: #e0c284; color: #203e36; font-size: 10px; letter-spacing: 0; text-align: center; }
+
+  /* your films: this visitor's films, finished and still being made */
+  .films-page { width: min(1120px, 100%); }
+  .films-head { width: fit-content; max-width: 100%; padding: 22px 30px 24px; border-radius: 28px; margin-bottom: 22px; }
+  .films-head h2 { font: 400 clamp(32px, 4vw, 52px)/1.1 var(--serif); margin: 0 0 6px; letter-spacing: -.02em; }
+  .films-head p { margin: 0; color: #e2ddd3; }
+  .film-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 18px; }
+  .film-card { text-align: left; padding: 0; border-radius: 24px; overflow: hidden; color: var(--cream); animation: enter .5s cubic-bezier(.2, .7, .2, 1) both;
+    transition: transform .3s cubic-bezier(.3, 1.4, .5, 1), filter .3s; }
+  .film-card:hover { transform: translateY(-3px); filter: brightness(1.08); }
+  .film-card .cover { aspect-ratio: 16/10; background: #1a1d21 center/cover no-repeat; position: relative; }
+  .film-card .badge-state { position: absolute; left: 12px; top: 12px; font-size: 10px; letter-spacing: .12em; text-transform: uppercase; padding: 6px 10px;
+    border-radius: 99px; background: rgba(22,27,33,.7); backdrop-filter: blur(6px); }
+  .film-card .badge-state.running { color: #f3dbb5; } .film-card .badge-state.error { color: #f0b9a0; }
+  .film-card .words { padding: 14px 18px 18px; }
+  .film-card h3 { margin: 0 0 4px; font: 400 22px/1.15 var(--serif); }
+  .film-card p { margin: 0; font-size: 12px; color: #d8d2c8; }
+  .film-card .mini { height: 3px; border-radius: 3px; background: #ffffff2b; margin-top: 10px; overflow: hidden; }
+  .film-card .mini div { height: 100%; background: var(--gold); transition: width .6s ease; }
+  .films-empty { padding: 36px; border-radius: 28px; text-align: center; color: #e2ddd3; }
+  .toast { position: fixed; right: 24px; bottom: 24px; z-index: 40; display: flex; align-items: center; gap: 14px; padding: 12px 12px 12px 18px;
+    border-radius: 99px; font-size: 13px; color: var(--cream); animation: enter .5s cubic-bezier(.2, .7, .2, 1) both; }
+  .toast button { padding: 9px 14px; font-size: 12px; }
 
   .gallery { height: min(65vh, 610px); min-height: 420px; border-radius: 34px; position: relative; overflow: hidden; perspective: 950px; }
   .gallery::before { content: ""; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 38%, #e8c79c3d, transparent 46%); }
@@ -189,7 +222,8 @@
     .heading { font-size: clamp(58px, 12vw, 88px); margin: 10px 0; }
     .sub { margin: auto; }
     .primary { margin: 18px auto 0; }
-    .demo-link { margin-left: 0; } .hint { margin-left: 0; }
+    .hint { margin-left: 0; } .photo-buttons { margin: 18px auto 0; }
+    .try-link { position: static; display: block; margin: 16px auto 0; }
     .gallery { height: 45vh; min-height: 310px; }
     .player { aspect-ratio: 4/5; }
     .overlay { padding: 18px; }
@@ -217,8 +251,9 @@
   <div class="grain"></div>
   <header>
     <button class="logo" id="home" aria-label="Museum Alive home">Museum <span>Alive.</span></button>
-    <button class="small" id="start-over">
-      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 5v6h6"/><path d="M5.5 15a8 8 0 1 0 .6-7.8L4 11"/></svg> Start over
+    <button class="small" id="films-link">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m10 9 5 3-5 3Z"/></svg> Your films
+      <span class="count" id="films-count" hidden></span>
     </button>
   </header>
 
@@ -228,13 +263,19 @@
       <div class="intro glass panel">
         <h1 class="heading">Make history <em>alive.</em></h1>
         <p class="sub">Add a photo of a museum object and watch its story.</p>
-        <button class="primary" id="scan">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v4h16v-4"/></svg>
-          Upload a photo
-        </button>
+        <div class="photo-buttons">
+          <button class="primary" id="scan">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v4h16v-4"/></svg>
+            Upload photo
+          </button>
+          <button class="primary alt" id="take">
+            <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l1.6-2.2h6.8L17 8h3v11H4z"/><circle cx="12" cy="13.2" r="3.4"/></svg>
+            <span id="take-label">Take photo</span>
+          </button>
+        </div>
         <p class="hint">or drop or paste a photo <kbd id="paste-key">⌘V</kbd></p>
-        <button class="demo-link" id="demo"></button>
-        <input id="pick" type="file" accept="image/jpeg,image/png,image/webp" capture="environment">
+        <input id="pick" type="file" accept="image/*">
+        <input id="pick-camera" type="file" accept="image/*" capture="environment">
       </div>
       <div class="gallery glass" id="gallery">
         <span class="corner tl"></span><span class="corner tr"></span><span class="corner bl"></span><span class="corner br"></span>
@@ -243,6 +284,7 @@
         <div class="artifact" id="artifact">
           <div class="frame" id="frame"><img id="photo" alt="The artifact"><div class="dim"></div><div class="outline" id="outline"></div></div>
         </div>
+        <video class="cam" id="cam" playsinline muted hidden></video>
         <div class="scanwash"></div>
         <div class="scanbeam"></div>
         <div class="selector" id="selector"></div>
@@ -264,6 +306,20 @@
       <p class="status" id="status">READING THE ARTIFACT</p>
       <div class="keywords" id="keywords"></div>
       <div class="result-actions" id="problem-actions" hidden></div>
+      <div class="result-actions" id="keep-actions" hidden>
+        <button class="secondary" id="keep-running">Keep this running</button>
+        <button class="secondary" id="another">Take a photo of another</button>
+      </div>
+    </section>
+
+    <!-- your films -->
+    <section class="screen films-page" id="v-films" hidden>
+      <div class="films-head glass">
+        <h2>Your films</h2>
+        <p>Films you have made or watched here. Films still being made keep going while you look around.</p>
+      </div>
+      <div class="film-grid" id="film-grid"></div>
+      <div class="films-empty glass" id="films-empty" hidden>Nothing yet. Add a photo of a museum object to make your first film.</div>
     </section>
 
     <!-- 3. result -->
@@ -293,6 +349,8 @@
       <div class="facts glass" id="facts" hidden></div>
     </section>
   </main>
+  <button class="try-link" id="demo"></button>
+  <div class="toast" id="toast" hidden></div>
 </div>
 
 <script>
@@ -307,10 +365,14 @@ const SAMPLE = "/assets/sample.jpg";  // shown for an exhibit that has no photo.
 // What the visitor reads while each pipeline step runs, and how far the bar has got when it starts.
 const STEPS = { identify: [8, "Reading the artifact"], story: [18, "Searching the archives"], voice: [30, "Recovering its voice"],
                 video: [36, "Restoring the moment"], edit: [92, "Cutting the film"] };
-const S = { app: null, exhibit: 0, photo: null, image: null, outline: null, source: null, film: null, busy: false, run: 0 };
+const S = { app: null, exhibit: 0, photo: null, image: null, outline: null, source: null, film: null, busy: false, run: 0,
+            stream: null, jobId: null, films: [] };
 
 function show(view) {
-  for (const v of ["scan", "loading", "result"]) $("v-" + v).hidden = v !== view;
+  for (const v of ["scan", "loading", "result", "films"]) $("v-" + v).hidden = v !== view;
+  document.body.dataset.view = view;
+  if (view !== "scan") stopCamera();
+  if (view !== "loading") S.jobId = null;
   if (view !== "result") $("video").pause();
   window.scrollTo({ top: 0 });
   requestAnimationFrame(fitFrames);
@@ -355,7 +417,7 @@ function renderScan() {
   $("selector").replaceChildren(...exhibits.map((ex, i) => {
     const dot = el("button", { className: "dot" + (i === S.exhibit ? " on" : "") });
     dot.setAttribute("aria-label", `Show ${ex.name}`);
-    dot.onclick = () => { S.exhibit = i; S.photo = null; renderScan(); };
+    dot.onclick = () => { stopCamera(); S.exhibit = i; S.photo = null; renderScan(); };
     return dot;
   }));
   setImage((current && current.photo) || SAMPLE);
@@ -401,7 +463,11 @@ async function begin(blob, exhibitId) {
   gallery.classList.add("is-scanning");
   $("gallery-text").textContent = "READING THE ARTIFACT";
   const outline = findOutline(blob);
-  const job = startJob(exhibitId);
+  const picture = S.image;
+  const job = startJob(exhibitId).then((started) => {
+    if (started.job_id) remember(started.job_id, picture);
+    return started;
+  });
 
   // Give the outline a moment to arrive so the first pass can already uncover it.
   let line = await Promise.race([outline, wait(1500).then(() => null)]);
@@ -452,12 +518,51 @@ async function usePhoto(file) {
   begin(file, null);
 }
 
-$("scan").onclick = () => $("pick").click();
-$("pick").onchange = (event) => {
+$("scan").onclick = () => { stopCamera(); $("pick").click(); };
+$("pick").onchange = $("pick-camera").onchange = (event) => {
   const file = event.target.files[0];
   event.target.value = "";
   usePhoto(file);
 };
+
+// Take photo: phones open their own camera; computers show a live view in the gallery, and the button becomes Capture.
+const PHONE = matchMedia("(pointer: coarse)").matches;
+async function takePhoto() {
+  if (S.stream) return capture();
+  if (PHONE || !navigator.mediaDevices) return $("pick-camera").click();
+  try {
+    S.stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: "environment", width: { ideal: 1920 } }, audio: false });
+  } catch {
+    return $("pick-camera").click();  // no camera or no permission: choose a file instead
+  }
+  if ($("v-scan").hidden) return stopCamera();  // the visitor moved on while permission was pending
+  const cam = $("cam");
+  cam.srcObject = S.stream;
+  cam.hidden = false;
+  cam.play().catch(() => {});
+  $("take").classList.add("on");
+  $("take-label").textContent = "Capture";
+  $("gallery-text").textContent = "POINT AT THE OBJECT";
+}
+
+function stopCamera() {
+  if (S.stream) S.stream.getTracks().forEach((track) => track.stop());
+  S.stream = null;
+  $("cam").hidden = true;
+  $("cam").srcObject = null;
+  $("take").classList.remove("on");
+  $("take-label").textContent = "Take photo";
+}
+
+function capture() {
+  const cam = $("cam");
+  if (!cam.videoWidth) return;
+  const canvas = el("canvas", { width: cam.videoWidth, height: cam.videoHeight });
+  canvas.getContext("2d").drawImage(cam, 0, 0);
+  stopCamera();
+  canvas.toBlob((blob) => usePhoto(new File([blob], "capture.jpg", { type: "image/jpeg" })), "image/jpeg", 0.92);
+}
+$("take").onclick = takePhoto;
 document.addEventListener("paste", (event) => {
   const item = [...(event.clipboardData?.items || [])].find((i) => i.kind === "file" && i.type.startsWith("image/"));
   if (!item) return;
@@ -471,7 +576,10 @@ $("demo").onclick = async () => {
   S.photo = null;
   begin(await (await fetch(S.image)).blob(), exhibit.id);
 };
-$("home").onclick = $("start-over").onclick = $("again").onclick = reset;
+$("home").onclick = $("again").onclick = reset;
+$("films-link").onclick = () => showFilms();
+$("keep-running").onclick = () => showFilms();
+$("another").onclick = reset;
 // Drop a photo anywhere on the first screen.
 let dragDepth = 0;
 const dragging = (event) => !$("v-scan").hidden && [...(event.dataTransfer?.types || [])].includes("Files");
@@ -511,6 +619,7 @@ function progress(percent, text) {
 }
 
 function showLoading() {
+  $("keep-actions").hidden = true;
   $("status").className = "status";
   $("loadlabel").hidden = false;
   $("problem-actions").hidden = true;
@@ -524,6 +633,8 @@ function showLoading() {
 function listen(job, run) {
   if (run !== S.run) return;
   if (job.error) return fail(job.error, null);
+  S.jobId = job.job_id;
+  $("keep-actions").hidden = false;
   // EventSource reconnects by replaying from the start, so count what we have handled.
   let handled = 0, seen = 0, shots = 0, drawn = 0;
   S.source = new EventSource(`/api/jobs/${job.job_id}/events`);
@@ -550,10 +661,14 @@ function listen(job, run) {
       progress(STEPS.video[0] + (STEPS.edit[0] - STEPS.video[0]) * (++drawn / shots));  // the bar creeps as each shot is drawn
     } else if (ev.type === "done") {
       S.source.close();
+      $("keep-actions").hidden = true;
+      updateFilm(job.job_id, { state: "done", percent: 100, manifest: ev.manifest }, true);
       progress(100, "History is ready");
       setTimeout(() => { if (run === S.run) loadFilm(ev.manifest); }, 550);
     } else if (ev.type === "error") {
       S.source.close();
+      $("keep-actions").hidden = true;
+      updateFilm(job.job_id, { state: "error", error: ev.message, fallback: ev.fallback }, true);
       fail(ev.message, ev.fallback);
     }
   };
@@ -563,10 +678,123 @@ function fail(message, fallback) {
   $("loadlabel").hidden = true;
   $("status").className = "status problem";
   $("status").textContent = message;
-  const actions = [el("button", { className: "secondary", textContent: "Start over", onclick: reset })];
+  const actions = [el("button", { className: "secondary", textContent: "Back", onclick: reset })];
   if (fallback) actions.push(el("button", { className: "secondary", textContent: "Play the saved film instead", onclick: () => loadFilm(fallback) }));
   $("problem-actions").replaceChildren(...actions);
   $("problem-actions").hidden = false;
+}
+
+// ---------- your films: made or watched in this browser session, finished or still being made ----------
+const FILMS_KEY = "museum-alive-films";
+try { S.films = JSON.parse(sessionStorage.getItem(FILMS_KEY)) || []; } catch { S.films = []; }
+
+function saveFilms() {
+  try { sessionStorage.setItem(FILMS_KEY, JSON.stringify(S.films)); } catch { /* private mode: the list lives for this page only */ }
+  const running = S.films.filter((f) => f.state === "running").length;
+  $("films-count").hidden = !running;
+  $("films-count").textContent = running;
+  if (!$("v-films").hidden) renderFilms(false);
+}
+
+function remember(id, photo) {
+  S.films = S.films.filter((f) => f.id !== id);
+  S.films.unshift({ id, started: Date.now() / 1000, state: "running", percent: 0, text: "Starting", name: "", title: "",
+                    photo: photo && !photo.startsWith("blob:") ? photo : null, manifest: null });
+  saveFilms();
+  poll();
+}
+
+// `watched`: the visitor saw it finish, so no "ready" note is needed.
+function updateFilm(id, data, watched = false) {
+  const film = S.films.find((f) => f.id === id);
+  if (!film) return;
+  const before = film.state;
+  Object.assign(film, Object.fromEntries(Object.entries(data).filter(([, v]) => v !== null && v !== undefined && v !== "")));
+  saveFilms();
+  if (before === "running" && film.state === "done" && !watched && S.jobId !== id) ready(film);
+}
+
+let pollTimer = null;
+async function poll() {
+  clearTimeout(pollTimer);
+  for (const film of S.films.filter((f) => f.state === "running")) {
+    try {
+      const response = await fetch(`/api/jobs/${film.id}`, { cache: "no-store" });
+      if (response.status === 404) {
+        updateFilm(film.id, { state: "error", error: "The server restarted before this film was finished." });
+        continue;
+      }
+      const job = await response.json();
+      updateFilm(film.id, { state: job.state, percent: job.percent, text: job.text, name: job.name, title: job.title, photo: job.photo,
+                            manifest: job.manifest, error: job.error, fallback: job.fallback });
+    } catch { /* offline for a moment: try again next round */ }
+  }
+  if (S.films.some((f) => f.state === "running")) pollTimer = setTimeout(poll, 2500);
+}
+
+function ago(seconds) {
+  const passed = Date.now() / 1000 - seconds;
+  for (const [size, name] of [[3600, "hour"], [60, "minute"]]) {
+    const count = Math.floor(passed / size);
+    if (count >= 1) return `${count} ${name}${count > 1 ? "s" : ""} ago`;
+  }
+  return "just now";
+}
+
+function renderFilms(fresh) {
+  $("films-empty").hidden = S.films.length > 0;
+  $("film-grid").replaceChildren(...S.films.map((film, i) => {
+    const cover = el("div", { className: "cover" });
+    if (film.photo) cover.style.backgroundImage = `url("${film.photo}")`;
+    const label = { running: `Making · ${film.percent}%`, done: "Ready", error: "Not made" }[film.state] || film.state;
+    cover.append(el("span", { className: `badge-state ${film.state}`, textContent: label }));
+    const line = film.state === "running" ? film.text : film.state === "error" ? film.error || "" : [film.name, ago(film.started)].filter(Boolean).join(" · ");
+    const words = el("div", { className: "words" }, el("h3", { textContent: film.title || film.name || "A new film" }), el("p", { textContent: line }));
+    if (film.state === "running") {
+      const bar = el("div");
+      bar.style.width = `${film.percent}%`;
+      words.append(el("div", { className: "mini" }, bar));
+    }
+    const card = el("button", { className: "film-card glass" }, cover, words);
+    if (!fresh) card.style.animation = "none";
+    else card.style.animationDelay = `${i * 50}ms`;
+    card.onclick = () => openFilm(film);
+    return card;
+  }));
+}
+
+function showFilms() {
+  S.run++;  // the waiting screen, if open, stops listening; its job carries on and is followed from this list
+  if (S.source) S.source.close();
+  S.busy = false;
+  $("gallery").classList.remove("is-scanning", "sweep");
+  renderFilms(true);
+  show("films");
+  poll();
+}
+
+function openFilm(film) {
+  if (film.state === "done" && film.manifest) return loadFilm(film.manifest);
+  if (film.state === "error") return film.fallback ? loadFilm(film.fallback) : null;
+  // Still being made: back to its waiting screen, which picks up the job's progress from the start.
+  const run = ++S.run;
+  if (S.source) S.source.close();
+  $("photo-2").src = film.photo || SAMPLE;
+  setOutline(null);
+  showLoading();
+  listen({ job_id: film.id }, run);
+}
+
+function ready(film) {
+  const box = $("toast");
+  const watch = el("button", { className: "secondary", textContent: "Watch" });
+  watch.onclick = () => { box.hidden = true; openFilm(film); };
+  const later = el("button", { className: "secondary", textContent: "Later" });
+  later.onclick = () => { box.hidden = true; };
+  box.replaceChildren(el("span", { textContent: `Your film of ${film.name || "the exhibit"} is ready.` }), watch, later);
+  box.hidden = false;
+  clearTimeout(S.toastTimer);
+  S.toastTimer = setTimeout(() => { box.hidden = true; }, 15000);
 }
 
 // ---------- 3. result ----------
@@ -659,6 +887,8 @@ function playIntro() {
 Promise.all([fetch("/api/state").then((r) => r.json()), playIntro()]).then(([app]) => {
   S.app = app;
   reset();
+  saveFilms();
+  poll();  // films still being made when the page was reloaded
   requestAnimationFrame(tick);
 });
 </script>
