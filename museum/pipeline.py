@@ -176,6 +176,8 @@ def _shoot(job_dir: Path, exhibit: Exhibit, plans: list, language: str, emit: Em
         emit("thought", text=f"Filming scene {p.shot.id}: {p.shot.action}")
         emit("shot", id=p.shot.id, stage="video", status="start", source=p.source)
         raw = video.render(p, exhibit, job_dir / "raw" / f"shot_{p.shot.id:02d}.mp4", language)
+        if p.note:
+            emit("thought", text=p.note, level="warn")
         clip = job_dir / "fit" / f"shot_{p.shot.id:02d}.mp4"
         clip.parent.mkdir(exist_ok=True)
         length = edit.conform(raw, clip)
@@ -252,8 +254,10 @@ def _board_from_agent(run: script_agent.AgentRun) -> storyboard.Storyboard:
         for n, request in enumerate(run.final.get("video_requests", []), start=1):
             seconds = int(request["duration"])
             said = [s["text"] for s in run.final.get("subtitles", []) if start <= s["t_start"] < start + seconds]
+            cited = {f for line in run.final.get("lines", []) if start <= line["t_start"] < start + seconds
+                     for f in line.get("fact_ids", [])}  # lean.py: the facts each line cites
             shots.append(storyboard.Shot(id=n, narration=" ".join(said), action=run.final.get("title", ""), camera="",
-                                         location="", mood="", seconds=seconds))
+                                         location="", mood="", fact_ids=sorted(cited), seconds=seconds))
             start += seconds
         return storyboard.Storyboard(title=run.final.get("title", ""), shots=shots, origin="agent")
     shots = []
@@ -271,6 +275,10 @@ def _board_from_agent(run: script_agent.AgentRun) -> storyboard.Storyboard:
             seconds=round(segment.get("duration_s") or config.VIDEO_MAX_SECONDS),
         ))
     return storyboard.Storyboard(title=run.final.get("title") or run.script.get("title", ""), shots=shots, origin="agent")
+
+
+# Agent picture kinds the video model accepts even for statues of people: the object small in its hall, and scenery.
+SAFE_KINDS = {"in_place", "world_plate"}
 
 
 def _agent_film(job_dir: Path, exhibit: Exhibit, run: script_agent.AgentRun, board, emit: Emit,
@@ -315,34 +323,44 @@ def _agent_film(job_dir: Path, exhibit: Exhibit, run: script_agent.AgentRun, boa
             return video.reference_image(prompt_of(job), photo_for(job)) if make else video.cached_image(prompt_of(job), photo_for(job))
         return None
 
+    def model_of(request: dict) -> tuple[str | None, str | None]:
+        """The endpoint and resolution the agent asked for, when it is one we know the price of (lean: Seedance 2.5)."""
+        if request.get("endpoint") in config.MODEL_PRICE_PER_SECOND_USD:
+            return request["endpoint"], request.get("resolution") or config.AGENT_VIDEO_RESOLUTION
+        return None, None
+
     planned_cost = image_cost
     for request in requests:
         refs = [resolve(tag, make=False) for tag in request.get("image_urls", [])]
         if not live:
             continue
         if all(refs):
-            probe = video.plan_request(board.shots[0], exhibit, request["prompt"], refs, int(request["duration"]))
+            probe = video.plan_request(board.shots[0], exhibit, request["prompt"], refs, int(request["duration"]), *model_of(request))
             if probe.source == "cache":
                 continue
-        planned_cost += config.clip_price_usd(int(request["duration"]))
+        planned_cost += config.clip_price_usd(int(request["duration"]), *model_of(request))
     if config.over_budget(planned_cost):
         raise RuntimeError(f"This film would spend about ${planned_cost:.2f} on fal, above MAX_FAL_USD=${config.MAX_FAL_USD:.2f}. "
                            f"Check with the team, then raise MAX_FAL_USD to go ahead.")
 
     plans = []
     for shot, request in zip(board.shots, requests):
-        refs = []
+        refs, safe = [], []
         for tag in request.get("image_urls", []):
             path = resolve(tag, make=live)
             if path:
                 refs.append(path)
+                if jobs.get(tag.strip("<>").partition(":")[2], {}).get("kind") in SAFE_KINDS:
+                    safe.append(path)
             elif live:
                 emit("thought", text=f"Reference {tag} is missing; scene {shot.id} goes ahead without it.", level="warn")
-        plans.append(video.plan_request(shot, exhibit, request["prompt"], refs, int(request["duration"])))
+        plan = video.plan_request(shot, exhibit, request["prompt"], refs, int(request["duration"]), *model_of(request))
+        plan.safe_refs = safe
+        plans.append(plan)
     paid = [p for p in plans if p.source == "generate"]
     cost = round(image_cost + video.estimate_usd(plans), 2)
     if paid:
-        emit("thought", text=f"Rendering {len(paid)} scene(s) with sound on fal, {sum(p.seconds for p in paid)} s at {config.VIDEO_RESOLUTION}.")
+        emit("thought", text=f"Rendering {len(paid)} scene(s) with sound on fal, {sum(p.seconds for p in paid)} s at {paid[0].resolution or config.VIDEO_RESOLUTION}.")
     elif not live:
         emit("thought", text="Video is in mock mode: drawing animatic cards with a stand-in voice instead of spending fal credits.")
 
@@ -421,9 +439,13 @@ def make_film(job_dir: Path, language: str, style: str, emit: Emit, photo: Path 
         board = _board_from_agent(agent_run)
     elif config.use_agent():
         # The agent only takes an exhibit id it has a knowledge pack for; otherwise it works from the photo.
-        agent_run = script_agent.run(emit, exhibit_id=exhibit.id if exhibit and exhibit.pack else None, photo=photo)
-        if exhibit is None or agent_run.final.get("exhibit_id") not in (exhibit.id, None):
-            exhibit = _agent_exhibit(agent_run)  # the agent may recognise the photo differently from us
+        agent_run = script_agent.run(emit, exhibit_id=exhibit.id if exhibit and exhibit.pack else None,
+                                     photo=photo or (exhibit.photo if exhibit else None))
+        # The staged agent may recognise the photo differently from us. lean.py always names its own adhoc id,
+        # so with it an exhibit we already recognised keeps its id (and its place in the library).
+        lean = config.AGENT_PIPELINE == "lean"
+        if exhibit is None or (not lean and agent_run.final.get("exhibit_id") not in (exhibit.id, None)):
+            exhibit = _agent_exhibit(agent_run)
             emit("exhibit", exhibit=exhibit.public())
         board = _board_from_agent(agent_run)
         emit("thought", text=f"Script ready: \"{board.title}\", {len(board.shots)} scene(s), {agent_run.status}.")

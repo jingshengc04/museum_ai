@@ -58,6 +58,7 @@ def fake_harness(tmp_path, monkeypatch):
     home.mkdir()
     (home / "run.py").write_text(FAKE_RUN)
     monkeypatch.setattr(config, "HARNESS_DIR", home)
+    monkeypatch.setattr(config, "AGENT_PIPELINE", "staged")
     monkeypatch.setenv("FAKE_OUT", str(agent_output(tmp_path / "out")))
     return home
 
@@ -79,11 +80,75 @@ def test_bridge_reports_why_the_agent_failed(fake_harness, monkeypatch):
         script_agent.run(lambda *a, **k: None, exhibit_id="hope")
 
 
+# lean.py names its folder runs/<stamp>-lean-<label> and prints no run name first.
+FAKE_LEAN = textwrap.dedent('''
+    import argparse, json, shutil, time
+    from pathlib import Path
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--photo"); ap.add_argument("--label"); ap.add_argument("--resolution")
+    args = ap.parse_args()
+    run = Path("runs") / f"1115-000000-lean-{args.label}"
+    run.mkdir(parents=True)
+    with (run / "events.jsonl").open("w") as fh:
+        for e in [{"type": "stage_start", "stage": "s0_identify"}, {"type": "fetch", "stage": "s0b_research", "text": "https://example.org/zun"},
+                  {"type": "stage_start", "stage": "lean_write"}]:
+            fh.write(json.dumps(e) + "\\n"); fh.flush(); time.sleep(0.15)
+    final = json.loads(Path(LEAN).joinpath("final.json").read_text())
+    final["video_requests"][0]["resolution"] = args.resolution
+    (run / "final.json").write_text(json.dumps(final))
+''')
+LEAN = config.HARNESS_DIR / "examples" / "four_ram_zun_lean"
+
+
+def lean_harness(fake_harness, monkeypatch):
+    (fake_harness / "lean.py").write_text(f"LEAN = {str(LEAN)!r}\n" + FAKE_LEAN)
+    monkeypatch.setattr(config, "AGENT_PIPELINE", "lean")
+
+
+@pytest.mark.skipif(not LEAN.exists(), reason="no lean example")
+def test_bridge_runs_the_lean_pipeline(fake_harness, monkeypatch, tmp_path):
+    lean_harness(fake_harness, monkeypatch)
+    seen = []
+    with pytest.raises(ValueError, match="needs a photo"):
+        script_agent.run(lambda *a, **k: None, exhibit_id="hope")
+    run = script_agent.run(lambda kind, **data: seen.append((kind, data)), photo=tmp_path / "p.jpg")
+    assert run.dir.name.startswith("1115-000000-lean-web") and run.passed
+    assert run.final["video_requests"][0]["resolution"] == config.AGENT_VIDEO_RESOLUTION
+    assert ("progress", {"percent": 30, "text": "Writing the script"}) in seen
+    assert ("thought", {"text": "Reading https://example.org/zun"}) in seen
+    # no digest in a lean run: the facts are the ones its lines cite, each with its URL
+    assert run.facts and all(f["source"].startswith("http") for f in run.facts)
+    assert {f for line in run.final["lines"] for f in line["fact_ids"]} == {f["id"] for f in run.facts}
+
+
+@pytest.mark.skipif(not LEAN.exists(), reason="no lean example")
+def test_lean_film_is_one_30_s_take_on_seedance_25(fake_harness, tiny_exhibit, tmp_path, monkeypatch):
+    lean_harness(fake_harness, monkeypatch)
+    monkeypatch.setattr(config, "use_agent", lambda: True)
+    run = script_agent.run(lambda *a, **k: None, photo=tiny_exhibit / "photo.jpg")
+    monkeypatch.setattr(script_agent, "run", lambda emit, **kw: run)
+    planned = []
+    plan_request = video.plan_request
+    monkeypatch.setattr(video, "plan_request", lambda *a: planned.append(plan_request(*a)) or planned[-1])
+    job = config.OUTPUT_DIR / tmp_path.name / "job"
+    manifest, _ = pipeline.make_film(job, "en", "first_person", lambda *a, **k: None, exhibit_id="hope", save=False)
+
+    p = planned[-1]
+    assert (p.model, p.resolution, p.seconds) == (config.SEEDANCE_25, "480p", 30), "the agent's endpoint, not cut to 15 s"
+    assert video.request_arguments(p, ["u"])["resolution"] == "480p"
+    assert config.clip_price_usd(p.seconds, p.model, p.resolution) == pytest.approx(6.62, abs=0.01)
+    assert edit.duration(job / "final.mp4") == pytest.approx(30, abs=0.3)
+    assert len(manifest["captions"]) == len(run.final["subtitles"])
+    assert any(f["used"] for f in manifest["facts"]), "the lines' citations reach the sources panel"
+    assert manifest["exhibit"]["id"] == "hope", "lean's own adhoc id does not replace an exhibit we recognised"
+
+
 # ---------- the agent path through the pipeline ----------
 
 @pytest.fixture
 def agent_on(monkeypatch):
     monkeypatch.setattr(config, "use_agent", lambda: True)
+    monkeypatch.setattr(config, "AGENT_PIPELINE", "staged")  # these runs come from the staged example
     monkeypatch.setattr(config, "REPLAY_SECONDS", 0.2)
 
 
@@ -94,7 +159,7 @@ def test_agent_film_mock(tiny_exhibit, tmp_path, agent_on, monkeypatch):
     job = config.OUTPUT_DIR / tmp_path.name / "job"
     manifest, folder = pipeline.make_film(job, "en", "first_person", lambda *a, **k: None, exhibit_id="hope")
 
-    assert calls == [{"exhibit_id": "hope", "photo": None}]
+    assert calls == [{"exhibit_id": "hope", "photo": tiny_exhibit / "photo.jpg"}], "no visitor photo: the exhibit's own"
     assert folder == job and manifest["storyboard_origin"] == "agent"
     assert manifest["agent"]["status"] == "NEEDS_HUMAN"
     assert edit.has_audio(job / "final.mp4") and edit.duration(job / "final.mp4") == pytest.approx(15, abs=0.2)

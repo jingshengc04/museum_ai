@@ -99,11 +99,21 @@ def over_budget(cost: float) -> bool:
     return MAX_FAL_USD > 0 and cost > MAX_FAL_USD
 
 
-def clip_price_usd(seconds: float) -> float:
-    """Estimated fal price of one generated clip at the configured resolution."""
+# Other video endpoints the script agent may ask for: per-second fal price and longest clip.
+# The lean agent films one continuous take of up to 30 s on Seedance 2.5 (prices from harness/lean.py).
+SEEDANCE_25 = "bytedance/seedance-2.5/reference-to-video"
+MODEL_PRICE_PER_SECOND_USD = {SEEDANCE_25: {"480p": 0.2205, "720p": 0.473, "1080p": 1.164}}
+MODEL_MAX_SECONDS = {SEEDANCE_25: 30}
+
+
+def clip_price_usd(seconds: float, model: str | None = None, resolution: str | None = None) -> float:
+    """Estimated fal price of one generated clip (the configured model and resolution unless named)."""
+    model, resolution = model or VIDEO_MODEL, resolution or VIDEO_RESOLUTION
+    if model in MODEL_PRICE_PER_SECOND_USD:
+        return MODEL_PRICE_PER_SECOND_USD[model][resolution] * seconds
     if NATIVE_AUDIO:
-        return VIDEO_PRICE_PER_SECOND_USD[VIDEO_RESOLUTION] * seconds
-    return VIDEO_PRICE_PER_CLIP_USD[VIDEO_RESOLUTION]
+        return VIDEO_PRICE_PER_SECOND_USD[resolution] * seconds
+    return VIDEO_PRICE_PER_CLIP_USD[resolution]
 
 # --- edit ---
 FPS = 24
@@ -131,6 +141,9 @@ def frame_size() -> tuple[int, int]:
 # --- script agent (harness/, maintained separately; we only call it) ---
 HARNESS_DIR = Path(_env("HARNESS_DIR", str(ROOT / "harness")))
 SCRIPT_AGENT = _env("SCRIPT_AGENT", "harness")  # "harness" or "builtin" (storyboard.py)
+# Which harness pipeline: "lean" (lean.py: see, search, write in one call; about 2 min) or "staged" (run.py; about 12 min).
+AGENT_PIPELINE = _env("AGENT_PIPELINE", "lean")
+AGENT_VIDEO_RESOLUTION = _env("AGENT_VIDEO_RESOLUTION", "480p")  # lean films: one 30 s take is about $6.60 at 480p
 HARNESS_TIMEOUT = int(_env("HARNESS_TIMEOUT", "1500"))
 IMAGE_MODEL = _env("IMAGE_MODEL", "fal-ai/nano-banana-pro/edit")
 IMAGE_PRICE_USD = 0.15  # per reference image, nano-banana-pro/edit
@@ -138,7 +151,8 @@ IMAGE_PRICE_USD = 0.15  # per reference image, nano-banana-pro/edit
 
 def use_agent() -> bool:
     """Write the script with the harness agent (needs LIVE=llm); otherwise with storyboard.py or a hand-written file."""
-    return SCRIPT_AGENT == "harness" and is_live("llm") and (HARNESS_DIR / "run.py").exists()
+    script = "lean.py" if AGENT_PIPELINE == "lean" else "run.py"
+    return SCRIPT_AGENT == "harness" and is_live("llm") and (HARNESS_DIR / script).exists()
 
 
 # A film already in the library is shown through the same making-of steps, replayed in this many seconds.

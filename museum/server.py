@@ -20,6 +20,19 @@ STEP_PROGRESS = {"identify": (8, "Reading the artifact"), "story": (18, "Searchi
                  "video": (36, "Restoring the moment"), "edit": (92, "Cutting the film")}
 PHOTO_TYPES = {"image/jpeg": ".jpg", "image/png": ".png", "image/webp": ".webp"}
 
+
+def plain(error: Exception) -> str:
+    """What the visitor reads when a film cannot be made. Our own errors are written for people; services' are not."""
+    text = str(error)
+    if video.refused(error):
+        return "The video service would not film this object: its safety check treats it like a real person. Try another object."
+    if isinstance(error, TimeoutError) or "timed out" in text.lower():
+        return "Making this film took too long, so it was stopped. Please try again."
+    if text.startswith(("[{", "{")) or len(text) > 300:  # raw replies from fal or other services
+        return "Something went wrong while making this film. Please try again in a moment."
+    return text
+
+
 app = FastAPI(title="Museum AI")
 config.OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
 app.mount("/output", StaticFiles(directory=config.OUTPUT_DIR), name="output")
@@ -78,7 +91,8 @@ class Job:
                                            exhibit_id=self.exhibit_id, fresh=self.fresh)
             self.emit("done", manifest=config.url_for(folder / "manifest.json"))
         except Exception as error:  # any failure must reach the visitor as a message, never a hang
-            self.emit("error", message=str(error), fallback=self._fallback())
+            print(f"job {self.id} failed: {error!r}", flush=True)
+            self.emit("error", message=plain(error), fallback=self._fallback())
         finally:
             self.finished = True
 

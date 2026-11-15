@@ -13,11 +13,13 @@ Every stage the agent runs is cached by the agent itself, so the same photo and 
 from __future__ import annotations
 
 import json
+import os
 import re
 import subprocess
 import sys
 import threading
 import time
+import uuid
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Callable
@@ -35,6 +37,7 @@ STAGES = {
     "s2_concept": (29, "Finding the story"),
     "s3_script": (31, "Writing the script"),
     "s4_review": (34, "Checking every line against the sources"),
+    "lean_write": (30, "Writing the script"),  # lean.py writes story, lines and direction in one call
 }
 
 
@@ -86,6 +89,16 @@ def load(run_dir: Path) -> AgentRun:
     digests = sorted(run_dir.glob("*_s1_digest/output.json"))
     if digests:  # the last digest is the one that passed the agent's own checks
         facts = [f for f in json.loads(digests[-1].read_text()).get("facts", []) if f.get("source")]
+    elif final.get("lines"):  # lean.py has no digest: each line carries the facts it cites, with their URLs
+        ids: dict[tuple[str, str], str] = {}
+        for line in final["lines"]:
+            line["fact_ids"] = []
+            for cited in line.get("sources", []):
+                key = (cited["fact"], cited["url"])
+                if key not in ids:
+                    ids[key] = f"f{len(ids) + 1}"
+                    facts.append({"id": ids[key], "text": cited["fact"], "source": cited["url"], "about": "exhibit"})
+                line["fact_ids"].append(ids[key])
     cost = 0.0
     for meta in run_dir.glob("*/meta.json"):
         data = json.loads(meta.read_text())
@@ -103,7 +116,7 @@ def _relay(event: dict, emit: Emit, seen_keywords: set[str]) -> None:
         emit("thought", text=f"{text}…")
     elif kind == "search" and event.get("text"):
         emit("thought", text=f"Searching: {event['text']}")
-    elif kind == "source" and event.get("text"):
+    elif kind in ("source", "fetch") and event.get("text"):
         emit("thought", text=f"Reading {event['text']}")
     elif kind == "keywords_batch":
         words = [k["text"] for k in event.get("keywords", []) if k.get("text") and k["text"] not in seen_keywords]
@@ -115,17 +128,30 @@ def _relay(event: dict, emit: Emit, seen_keywords: set[str]) -> None:
 
 
 def run(emit: Emit, exhibit_id: str | None = None, photo: Path | None = None) -> AgentRun:
-    """Run the agent on a photo and/or a prepared exhibit, relaying its progress. Blocks until it is done."""
-    command = [sys.executable, "run.py"]
-    if exhibit_id:
-        command.append(exhibit_id)
-    if photo:
-        command += ["--photo", str(Path(photo).resolve())]
-    if not exhibit_id and not photo:
-        raise ValueError("the script agent needs a photo or an exhibit id")
+    """Run the agent on a photo and/or a prepared exhibit, relaying its progress. Blocks until it is done.
 
+    lean.py works from the photo alone (it ignores prepared packs); run.py also takes a prepared exhibit id.
+    """
+    label = ""
+    if config.AGENT_PIPELINE == "lean":
+        if not photo:
+            raise ValueError("the lean script agent needs a photo")
+        # lean.py prints no run name up front; its folder is runs/<stamp>-lean-<label>, so a unique label finds it.
+        label = "web" + uuid.uuid4().hex[:8]
+        command = [sys.executable, "lean.py", "--photo", str(Path(photo).resolve()), "--label", label,
+                   "--resolution", config.AGENT_VIDEO_RESOLUTION]
+    else:
+        command = [sys.executable, "run.py"]
+        if exhibit_id:
+            command.append(exhibit_id)
+        if photo:
+            command += ["--photo", str(Path(photo).resolve())]
+        if not exhibit_id and not photo:
+            raise ValueError("the script agent needs a photo or an exhibit id")
+
+    # Unbuffered: into a pipe Python holds back its output, and the run name comes from its first line.
     process = subprocess.Popen(command, cwd=config.HARNESS_DIR, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-                               text=True, bufsize=1)
+                               text=True, bufsize=1, env={**os.environ, "PYTHONUNBUFFERED": "1"})
     output: list[str] = []
     run_name: list[str] = []
 
@@ -139,12 +165,17 @@ def run(emit: Emit, exhibit_id: str | None = None, photo: Path | None = None) ->
     reader = threading.Thread(target=read_output, daemon=True)
     reader.start()
 
+    def run_dir() -> Path | None:
+        if label:
+            return next((config.HARNESS_DIR / "runs").glob(f"*-lean-{label}"), None)
+        return config.HARNESS_DIR / "runs" / run_name[0] if run_name else None
+
     started, position, seen = time.time(), 0, set()
     events_file = None
     while True:
         finished = process.poll() is not None
-        if run_name and events_file is None:
-            events_file = config.HARNESS_DIR / "runs" / run_name[0] / "events.jsonl"
+        if events_file is None and run_dir():
+            events_file = run_dir() / "events.jsonl"
         if events_file and events_file.exists():
             with events_file.open() as fh:
                 fh.seek(position)
@@ -162,11 +193,11 @@ def run(emit: Emit, exhibit_id: str | None = None, photo: Path | None = None) ->
         time.sleep(0.3)
     reader.join(timeout=5)
 
-    if not run_name:
+    folder = run_dir()
+    if not folder:
         raise RuntimeError("The script agent did not start: " + " / ".join(output[-5:]))
-    run_dir = config.HARNESS_DIR / "runs" / run_name[0]
-    if not (run_dir / "final.json").exists():
-        report = run_dir / "report.md"
+    if not (folder / "final.json").exists():
+        report = folder / "report.md"
         reason = ""
         if report.exists():
             text = report.read_text()
@@ -175,4 +206,4 @@ def run(emit: Emit, exhibit_id: str | None = None, photo: Path | None = None) ->
                 reason = next((line for line in lines if line and not line.startswith("```")), "")
         reason = reason or next((line.strip() for line in reversed(output) if "ERROR" in line), "") or " / ".join(output[-3:])
         raise RuntimeError(f"The script agent could not write a script: {reason}")
-    return load(run_dir)
+    return load(folder)

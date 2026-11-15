@@ -1,0 +1,169 @@
+{
+  "name": "Aztec double-headed serpent",
+  "museum": "",
+  "location": "",
+  "hints": "The Aztec double-headed serpent: a carved wooden figure covered in turquoise mosaic, with red spiny-oyster shell around the snouts and white conch-shell teeth. It is a 15th-16th century Mixtec-Aztec ceremonial ornament, held in the British Museum's Mexico gallery.",
+  "facts": [
+    {
+      "id": "what_it_is",
+      "text": "The object is a pectoral in the form of a double-headed serpent, made of cedro wood (Cedrela odorata) and covered with a mosaic of turquoise and red thorny oyster shell (Spondylus princeps).",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634"
+    },
+    {
+      "id": "single_piece",
+      "text": "It is carved from a single piece of Spanish cedarwood.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634"
+    },
+    {
+      "id": "front_mosaic",
+      "text": "The front and both heads are covered with turquoise mosaic.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634"
+    },
+    {
+      "id": "back_gilded",
+      "text": "The hollowed-out back of the body was originally gilded.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634"
+    },
+    {
+      "id": "back_now_plain",
+      "text": "The back, once gilded, is now plain.",
+      "source": "https://en.wikipedia.org/wiki/Double-headed_serpent"
+    },
+    {
+      "id": "back_lighter",
+      "text": "The back was hollowed out, possibly to make the sculpture lighter.",
+      "source": "https://en.wikipedia.org/wiki/Double-headed_serpent"
+    },
+    {
+      "id": "heads_both_sides",
+      "text": "Only the heads are decorated on both sides.",
+      "source": "https://en.wikipedia.org/wiki/Double-headed_serpent"
+    },
+    {
+      "id": "teeth_conch",
+      "text": "The teeth in the two open mouths are made from conch shell (Strombus).",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634"
+    },
+    {
+      "id": "two_resins",
+      "text": "Two resins were used as adhesive: pine resin and Bursera resin (copal).",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634"
+    },
+    {
+      "id": "red_hematite",
+      "text": "In the mouths the resin is coloured red with hematite.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634"
+    },
+    {
+      "id": "tiles_graded",
+      "text": "The worked tiles were carefully selected and graded by size and colour, then laid in to recreate the subtle patterning of the snake's scales.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634"
+    },
+    {
+      "id": "stone_tools",
+      "text": "The turquoise was cut and ground using stone tools.",
+      "source": "https://en.wikipedia.org/wiki/Double-headed_serpent"
+    },
+    {
+      "id": "eyes_maybe",
+      "text": "The heads may originally have had inlaid eyes of pyrite or obsidian.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634"
+    },
+    {
+      "id": "tongues_maybe",
+      "text": "Flickering tongues might have been attached to the holes in the centre of the lower jaws.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634"
+    },
+    {
+      "id": "beeswax",
+      "text": "Beeswax adhesive survives around the eye sockets.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634"
+    },
+    {
+      "id": "date",
+      "text": "The museum gives the production date as 1400-1521.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634"
+    },
+    {
+      "id": "size",
+      "text": "It measures 20.30 centimetres high, 43.30 centimetres wide and 5.90 centimetres deep.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634"
+    },
+    {
+      "id": "worn_chest",
+      "text": "The two holes at the top indicate that it may have been worn on the chest as a pectoral.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634"
+    },
+    {
+      "id": "huitzilopochtli",
+      "text": "This maquizcoatl might have been an insignia worn or held by an effigy of Huitzilopochtli or by one of his impersonators.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634"
+    },
+    {
+      "id": "sky_band",
+      "text": "The double-headed serpent may represent a 'sky-band', symbolizing the celestial realm.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634"
+    },
+    {
+      "id": "authority",
+      "text": "It was an emblem of authority.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634"
+    },
+    {
+      "id": "left_mexico_unknown",
+      "text": "It is not known how the sculpture left Mexico.",
+      "source": "https://en.wikipedia.org/wiki/Double-headed_serpent"
+    },
+    {
+      "id": "cortes_possible",
+      "text": "It is considered possible that it was among the goods obtained by the conquistador Hernán Cortés.",
+      "source": "https://en.wikipedia.org/wiki/Double-headed_serpent"
+    },
+    {
+      "id": "purchased_1894",
+      "text": "The museum registered the serpent as purchased in September 1894.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634"
+    },
+    {
+      "id": "on_display",
+      "text": "It is on display in Room 27 (Mexico), Display Case 6, at the British Museum.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634"
+    },
+    {
+      "id": "turquoise_valued",
+      "text": "Turquoise was highly valued in Mesoamerica.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634"
+    },
+    {
+      "id": "turquoise_mines",
+      "text": "Aztec trading emissaries (pochteca) obtained turquoise from mines in what is now the southwest United States, far beyond the limits of the Aztec empire.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634"
+    },
+    {
+      "id": "coatl",
+      "text": "The Nahuatl term 'coatl' can be translated as both serpent and twin.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634"
+    },
+    {
+      "id": "bad_omens",
+      "text": "Double-headed serpents (maquizcoatl) were considered to be the bearers of bad omens and were associated with elite figures.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634"
+    },
+    {
+      "id": "arm_belief",
+      "text": "The Mexica believed that anyone finding a double-headed serpent in their path should place it on their arm; if the serpent could not be moved it meant that death was approaching.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634"
+    },
+    {
+      "id": "quetzalcoatl",
+      "text": "The intense blue-green hues of turquoise evoke associations with Quetzalcoatl ('feathered serpent'), one of the most powerful Aztec deities and culture heroes.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634"
+    },
+    {
+      "id": "nine_mosaics",
+      "text": "The sculpture is one of nine Mexican turquoise mosaics in the British Museum.",
+      "source": "https://en.wikipedia.org/wiki/Double-headed_serpent"
+    }
+  ],
+  "learned": true
+}

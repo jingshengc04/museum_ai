@@ -123,6 +123,30 @@ def test_seedance_request_and_price(monkeypatch, tiny_exhibit):
         video.check_budget([p, p])
 
 
+def test_refused_references_are_dropped_step_by_step(monkeypatch, tmp_path):
+    """Seedance refuses close-ups of statues as 'real people': retry with the safe references, then none."""
+    import sys
+    import types
+
+    sent = []
+
+    def subscribe(model, arguments, client_timeout):
+        sent.append(arguments.get("image_urls", []))
+        if len(sent) < 3:
+            raise RuntimeError("[{'type': 'content_policy_violation', 'msg': 'likenesses of real people'}]")
+        return {"video": {"url": "https://example.org/v.mp4"}}
+
+    monkeypatch.setitem(sys.modules, "fal_client", types.SimpleNamespace(subscribe=subscribe))
+    monkeypatch.setattr(video, "_upload", lambda path: path.name)
+    monkeypatch.setattr("httpx.stream", lambda *a, **k: pytest.fail("stop before downloading"))
+    shot = storyboard.Shot(id=1, narration="n", action="a", camera="c", location="l", mood="m")
+    p = video.ShotPlan(shot, 15, "prompt", [tmp_path / "face.png", tmp_path / "hall.png"], "generate", safe_refs=[tmp_path / "hall.png"])
+    with pytest.raises(pytest.fail.Exception):
+        video._fal_render(p, exhibits.load("hope"), tmp_path / "out.mp4")
+    assert sent == [["face.png", "hall.png"], ["hall.png"], []]
+    assert "script alone" in p.note
+
+
 # ---------- the whole thing, mock ----------
 
 def test_mock_film_uses_drop_in_material(tiny_exhibit, tmp_path):

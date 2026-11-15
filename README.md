@@ -34,27 +34,42 @@ A service is live only if it is in `LIVE` **and** its key is set.
 ### Script: the agent in `harness/`
 
 With `LIVE=llm` the script comes from the script agent in `harness/` (maintained separately, see
-`harness/METHOD.md`; nothing in `harness/` is edited by this code, so its branch merges cleanly). The bridge is
-`museum/script_agent.py`: it runs `harness/run.py` as its own process, reads its progress from
-`runs/<run>/events.jsonl`, and takes its hand-off `final.json`. Then this pipeline:
+`harness/README.md`; nothing in `harness/` is edited by this code, so its branch merges cleanly). The bridge is
+`museum/script_agent.py`: it runs the agent as its own process, reads its progress from
+`runs/<run>/events.jsonl`, and takes its hand-off `final.json`. Which agent pipeline runs is `AGENT_PIPELINE`:
+
+- `lean` (default): `harness/lean.py`, the one the harness README recommends. See, search, then one writing call;
+  about 2 minutes. Its film is **one 30 s take on Seedance 2.5** (`bytedance/seedance-2.5/reference-to-video`),
+  filmed at `AGENT_VIDEO_RESOLUTION` (480p by default, about $6.60; 720p about $14.20). Its facts are the ones its
+  lines cite (`final.json` `lines[].sources`). It works from a photo only: a prepared exhibit uses its own `photo.jpg`.
+- `staged`: `harness/run.py`, research, drafts and review; about 12 minutes. Two 15 s scenes on our `VIDEO_MODEL`.
+
+Then this pipeline:
 
 1. makes the agent's reference images from the visitor's photo (`IMAGE_MODEL`, about $0.15 each, cached by their inputs),
-2. sends the agent's Seedance prompts, word for word, to our `VIDEO_MODEL` at our resolution (cached by their inputs),
+2. sends the agent's Seedance prompts, word for word, to fal (cached by their inputs): the endpoint and resolution
+   the agent asked for when we know its price (Seedance 2.5), otherwise our `VIDEO_MODEL` at our resolution,
 3. joins the scenes with a short cut, and places the agent's timed subtitles on the film,
 4. shows the facts the agent worked from, each with its source, under the film.
 
+If Seedance refuses a scene's reference pictures (`content_policy_violation`: it treats close-ups of statues of people
+as real people), the scene is sent again with only the wide and scenery pictures (`in_place`, `world_plate`), then with
+the prompt alone. Refused requests are not billed. A film that still fails shows the visitor a plain sentence; the
+service's own message goes to the server log.
+
 While the agent works, the waiting screen shows its stages and the keywords it picks out of its sources.
 
-- **Time**: the agent takes about 7 minutes to write a film (research, drafts, review); Seedance about 8 minutes
-  per scene. A new exhibit takes about 15 minutes, so a live demo should play films already in the library.
-- **Cost**: about $1.20 of Claude per new script, plus pictures and video. If `MAX_FAL_USD` is set, the check
-  before generation counts pictures and video (not the Claude part, which is spent by then).
+- **Time**: lean writes a film in about 2 minutes, staged in about 12; Seedance then takes several minutes.
+  A live demo should play films already in the library.
+- **Cost**: about $0.90 (lean) or $1.20-2.60 (staged) of Claude per new script, plus pictures and video. If
+  `MAX_FAL_USD` is set, the check before generation counts pictures and video (not the Claude part, spent by then).
 - **Review**: there is no human review in this first version. A script that does not pass the agent's own review
   (`NEEDS_HUMAN`, about two runs in three so far) is filmed and saved to the library like any other; its status is
   kept in the film's `manifest.json` under `agent.status`, so such films can be found and re-made later.
 - **Exhibits**: an exhibit with a pack in `harness/knowledge/` but no folder in `exhibits/` is still recognised from
-  photos; its films are kept in `exhibits/<id>/demo/`. An object with no pack at all is researched from scratch,
-  and its film is not kept in the library.
+  photos; its films are kept in `exhibits/<id>/demo/`. An object with no pack at all is researched from scratch;
+  it is kept as a new exhibit (`exhibits/adhoc-<name>/`, with the photo and the sourced facts) and its film goes
+  into the library, so a later photo of it plays that film.
 - Turn the agent off with `SCRIPT_AGENT=builtin` to use `storyboard.py` instead. Without `LIVE=llm` the
   hand-written storyboards are used, as before.
 

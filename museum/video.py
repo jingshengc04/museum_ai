@@ -36,6 +36,10 @@ class ShotPlan:
     source: str  # override | cache | generate | mock
     cache_key: str = ""
     override: Path | None = None
+    safe_refs: list[Path] | None = None  # refs to retry with if the model refuses `refs` (e.g. close-ups of human figures)
+    note: str = ""  # what happened while rendering that the visitor should hear about
+    model: str = ""  # video endpoint, when not config.VIDEO_MODEL (the script agent may ask for another)
+    resolution: str = ""  # likewise for config.VIDEO_RESOLUTION
 
 
 def request_seconds(clip_length: float) -> int:
@@ -75,18 +79,20 @@ def plan(shot: Shot, exhibit: Exhibit, clip_length: float, photo: Path | None = 
     return ShotPlan(shot, seconds, prompt, refs, "cache" if hit else "generate", cache_key=cache_key)
 
 
-def plan_request(shot: Shot, exhibit: Exhibit, prompt: str, refs: list[Path], seconds: int) -> ShotPlan:
+def plan_request(shot: Shot, exhibit: Exhibit, prompt: str, refs: list[Path], seconds: int,
+                 model: str | None = None, resolution: str | None = None) -> ShotPlan:
     """A clip whose prompt and reference images were prepared elsewhere (the script agent), in @Image order."""
-    seconds = min(config.VIDEO_MAX_SECONDS, max(config.VIDEO_MIN_SECONDS, int(seconds)))
+    model, resolution = model or config.VIDEO_MODEL, resolution or config.VIDEO_RESOLUTION
+    longest = config.MODEL_MAX_SECONDS.get(model, config.VIDEO_MAX_SECONDS)
+    seconds = min(longest, max(config.VIDEO_MIN_SECONDS, int(seconds)))
     override = exhibit.override(shot.id, ".mp4")
     if override:
-        return ShotPlan(shot, seconds, prompt, refs, "override", override=override)
+        return ShotPlan(shot, seconds, prompt, refs, "override", override=override, model=model, resolution=resolution)
     if not config.is_live("video"):
-        return ShotPlan(shot, seconds, prompt, refs, "mock")
-    cache_key = cache.key("video-v2", config.VIDEO_MODEL, prompt, [cache.file_hash(r) for r in refs], seconds,
-                          config.VIDEO_RESOLUTION, config.VIDEO_ASPECT)
+        return ShotPlan(shot, seconds, prompt, refs, "mock", model=model, resolution=resolution)
+    cache_key = cache.key("video-v2", model, prompt, [cache.file_hash(r) for r in refs], seconds, resolution, config.VIDEO_ASPECT)
     hit = cache.path("video", cache_key, ".mp4").exists()
-    return ShotPlan(shot, seconds, prompt, refs, "cache" if hit else "generate", cache_key=cache_key)
+    return ShotPlan(shot, seconds, prompt, refs, "cache" if hit else "generate", cache_key=cache_key, model=model, resolution=resolution)
 
 
 # ---------- reference images made from the visitor's photo (script agent) ----------
@@ -121,7 +127,7 @@ def reference_image(prompt: str, photo: Path | None) -> Path:
 
 
 def estimate_usd(plans: list[ShotPlan]) -> float:
-    return round(sum(config.clip_price_usd(p.seconds) for p in plans if p.source == "generate"), 2)
+    return round(sum(config.clip_price_usd(p.seconds, p.model, p.resolution) for p in plans if p.source == "generate"), 2)
 
 
 def worst_case_usd(shots: int) -> float:
@@ -148,11 +154,11 @@ def check_budget(plans: list[ShotPlan]) -> float:
 
 def request_arguments(p: ShotPlan, image_urls: list[str]) -> dict:
     """The request body for the configured model family."""
-    if config.NATIVE_AUDIO:  # Seedance 2.0 reference-to-video
+    if "seedance" in (p.model or config.VIDEO_MODEL):  # Seedance 2.0 / 2.5 reference-to-video
         arguments = {
             "prompt": p.prompt,
             "duration": str(p.seconds),
-            "resolution": config.VIDEO_RESOLUTION,
+            "resolution": p.resolution or config.VIDEO_RESOLUTION,
             "aspect_ratio": config.VIDEO_ASPECT,
             "generate_audio": True,
         }
@@ -190,14 +196,34 @@ def _upload(path: Path) -> str:
         return known[digest]
 
 
+def refused(error: Exception) -> bool:
+    """The model's moderation turned the request down (refused requests are not billed)."""
+    return "content_policy_violation" in str(error)
+
+
 def _fal_render(p: ShotPlan, exhibit: Exhibit, tmp: Path) -> None:
     import fal_client
     import httpx
 
-    arguments = request_arguments(p, [_upload(r) for r in p.refs][: config.VIDEO_MAX_REFS])
-    if not config.NATIVE_AUDIO and exhibit.data.get("seed") is not None:
-        arguments["seed"] = exhibit.data["seed"]
-    result = fal_client.subscribe(config.VIDEO_MODEL, arguments=arguments, client_timeout=1200)
+    # Seedance refuses references that look like real people, and marble statues count. Retry with the safe
+    # references (wide views, scenery), then with the prompt alone.
+    model = p.model or config.VIDEO_MODEL
+    attempts = [p.refs]
+    if "seedance" in model:
+        attempts += [refs for refs in (p.safe_refs, []) if refs is not None and refs != p.refs]
+    for number, refs in enumerate(attempts):
+        arguments = request_arguments(p, [_upload(r) for r in refs][: config.VIDEO_MAX_REFS])
+        if "seedance" not in model and exhibit.data.get("seed") is not None:
+            arguments["seed"] = exhibit.data["seed"]
+        try:
+            result = fal_client.subscribe(model, arguments=arguments, client_timeout=1200)
+            break
+        except Exception as error:
+            if not refused(error) or number == len(attempts) - 1:
+                raise
+            following = attempts[number + 1]
+            p.note = (f"The video model would not use some reference pictures for scene {p.shot.id}; "
+                      + (f"filming it from {len(following)} wider view(s) instead." if following else "filming it from the script alone."))
     with httpx.stream("GET", result["video"]["url"], timeout=300, follow_redirects=True) as response:
         response.raise_for_status()
         with tmp.open("wb") as fh:

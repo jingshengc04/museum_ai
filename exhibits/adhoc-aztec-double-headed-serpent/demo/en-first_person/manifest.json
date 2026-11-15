@@ -1,0 +1,533 @@
+{
+  "title": "Flash, Flip, Knock",
+  "exhibit": {
+    "id": "adhoc-aztec-double-headed-serpent",
+    "name": "Aztec double-headed serpent",
+    "museum": "",
+    "location": "",
+    "character": ""
+  },
+  "language": "en",
+  "style": "first_person",
+  "storyboard_origin": "agent",
+  "video": "final.mp4",
+  "captions_vtt": "captions.vtt",
+  "duration": 30.1,
+  "word_joiner": " ",
+  "shots": [
+    {
+      "id": 1,
+      "start": 0.0,
+      "end": 15.116,
+      "narration": "Whoa! I'm a serpent with two heads. I'm carved from one piece of cedarwood. Maybe I was worn on the chest.",
+      "fact_ids": [
+        "single_piece",
+        "what_it_is",
+        "worn_chest"
+      ],
+      "thumb": "thumbs/shot_01.jpg",
+      "prompt": "References: @Image1 = the turquoise double-headed serpent, identity anchor: shape, decoration and colours exactly as shown; ignore its background; @Image2 = the double-headed serpent, the character: same design, colours and markings in every shot; ignore its background; @Image3 = close-up of the living serpent's plain cedar back, seen only at 7-11s when it flips belly-up, part of the turquoise double-headed serpent.\nOnly the double-headed serpent comes alive. The turquoise double-headed serpent ends whole and unchanged.\nStylized 3D animated feature, glinting turquoise mosaic, soft rim light on deep black.\nOne continuous take, no cuts. 0-3s [the turquoise double-headed serpent from @Image1]: wide front-on, locked off, slow push-in from 2s. A white flash pops; both sockets fill with round blinking eyes; the two heads jerk round to stare at the lens. 3-7s [the turquoise double-headed serpent from @Image1, the double-headed serpent from @Image2]: medium-wide, slow push-in. It peels off the black, sags, wriggles free, both heads shaking off dust, grinning; rigid tiled body -> tiles ripple fast head to head, body loosening over four seconds -> the living serpent. 7-11s [the double-headed serpent from @Image2, the the living serpent's plain cedar back, seen only at 7-11s when it flips belly-up from @Image3]: medium wide, fast tilt up, then hold. It whips over fast in mid-air like a flipped pancake, showing its plain hollow cedar back; one head slams down on the wood, TOCK, the body shuddering, tiles rattling. 11-15s [the double-headed serpent from @Image2]: widening to full body, slow pull-back, then hold. It flips back face-front, drops hard into its photo pose; both heads tilt up, eyes darting to the two small top holes; it freezes, blinking. End on a near-still image: living serpent front-on in its photo pose, heads tilted up, eyes open.\nVoiceover, a bright, quick adult voice, gender-neutral, warm mid-range timbre, light British accent, brisk pace that slows into calm pride: \"Whoa! I'm a serpent with two heads.\" \"I'm carved from one piece of cedarwood.\" \"Maybe I was worn on the chest.\"\nSound: gallery hush; flash pop; tiles clicking free; hollow wooden TOCK; thump into pose. No music.\nClean picture: no subtitles, captions, lettering, logos or watermark. No people in frame. Never two copies of the turquoise double-headed serpent or of the double-headed serpent in one frame.",
+      "refs": [
+        "4082e3c9659f1b92be149917",
+        "abc0b3c8b83dc8159189cd75"
+      ],
+      "video_source": "generate",
+      "voice_source": "model",
+      "fit": {
+        "how": "native",
+        "speed": 1.0,
+        "freeze": 0.0
+      }
+    },
+    {
+      "id": 2,
+      "start": 14.996,
+      "end": 30.1,
+      "narration": "I might have been worn by Huitzilopochtli's effigy. I was an emblem of authority. Now I'm on display in Room twenty-seven.",
+      "fact_ids": [
+        "authority",
+        "huitzilopochtli",
+        "on_display"
+      ],
+      "thumb": "thumbs/shot_02.jpg",
+      "prompt": "References: @Image1 = the turquoise double-headed serpent, identity anchor: shape, decoration and colours exactly as shown; ignore its background; @Image2 = the double-headed serpent, the character: same design, colours and markings in every shot; ignore its background; @Image3 = imagined empty firelit stone hall, world plate without the serpent (setting only).\nOnly the double-headed serpent comes alive. The turquoise double-headed serpent ends whole and unchanged.\nStylized 3D animated feature, glinting turquoise mosaic, soft rim light on deep black.\nOne continuous take, no cuts. 0-3s [the double-headed serpent from @Image2]: wide front-on against black, locked off. One eye on each head blinks; both heads swing slowly down to the lens. 3-7s [the double-headed serpent from @Image2, the setting from @Image3]: medium, slow pull-back to wide. The serpent rises, both chins lifting; black void -> firelight cracks open behind it, spreading over four seconds -> the empty stone hall with pillars and copal smoke. 7-10s [the double-headed serpent from @Image2, the setting from @Image3]: wide across the hall, fast low track, then hold. The serpent surges across the hall, whips round a pillar, bursts through smoke and snaps rigid, hanging chest-high, the brazier flame leaping. 10-15s [the double-headed serpent from @Image2, the turquoise double-headed serpent from @Image1]: wide front-on, fast push-in, then locked off at the photo angle. It darts in and coils hard into its S-curves; firelight gutters to black; one light ripple runs head to head and fades; living serpent -> eyes sink into empty sockets, body stiffens over four seconds -> the still pectoral.\nVoiceover, a bright, quick adult voice, gender-neutral, warm mid-range timbre, light British accent, brisk pace that slows into calm pride: \"I might have been worn by Huitzilopochtli's effigy.\" \"I was an emblem of authority.\" \"Now I'm on display in Room twenty-seven.\"\nSound: brazier crackle; whoosh through smoke; flame flaring; glassy shimmer. No music.\nClean picture: no subtitles, captions, lettering, logos or watermark. No people in frame. Never two copies of the turquoise double-headed serpent or of the double-headed serpent in one frame.",
+      "refs": [
+        "4082e3c9659f1b92be149917",
+        "abc0b3c8b83dc8159189cd75",
+        "daef8d03dcaae3dd75c814b7"
+      ],
+      "video_source": "generate",
+      "voice_source": "model",
+      "fit": {
+        "how": "native",
+        "speed": 1.0,
+        "freeze": 0.0
+      }
+    }
+  ],
+  "captions": [
+    {
+      "start": 0.9,
+      "end": 3.2,
+      "text": "Whoa! I'm a serpent with two heads.",
+      "words": [
+        {
+          "w": "Whoa!",
+          "t0": 0.9,
+          "t1": 3.2
+        },
+        {
+          "w": "I'm",
+          "t0": 0.9,
+          "t1": 3.2
+        },
+        {
+          "w": "a",
+          "t0": 0.9,
+          "t1": 3.2
+        },
+        {
+          "w": "serpent",
+          "t0": 0.9,
+          "t1": 3.2
+        },
+        {
+          "w": "with",
+          "t0": 0.9,
+          "t1": 3.2
+        },
+        {
+          "w": "two",
+          "t0": 0.9,
+          "t1": 3.2
+        },
+        {
+          "w": "heads.",
+          "t0": 0.9,
+          "t1": 3.2
+        }
+      ]
+    },
+    {
+      "start": 4.0,
+      "end": 6.4,
+      "text": "I'm carved from one piece of cedarwood.",
+      "words": [
+        {
+          "w": "I'm",
+          "t0": 4.0,
+          "t1": 6.4
+        },
+        {
+          "w": "carved",
+          "t0": 4.0,
+          "t1": 6.4
+        },
+        {
+          "w": "from",
+          "t0": 4.0,
+          "t1": 6.4
+        },
+        {
+          "w": "one",
+          "t0": 4.0,
+          "t1": 6.4
+        },
+        {
+          "w": "piece",
+          "t0": 4.0,
+          "t1": 6.4
+        },
+        {
+          "w": "of",
+          "t0": 4.0,
+          "t1": 6.4
+        },
+        {
+          "w": "cedarwood.",
+          "t0": 4.0,
+          "t1": 6.4
+        }
+      ]
+    },
+    {
+      "start": 11.0,
+      "end": 13.8,
+      "text": "Maybe I was worn on the chest.",
+      "words": [
+        {
+          "w": "Maybe",
+          "t0": 11.0,
+          "t1": 13.8
+        },
+        {
+          "w": "I",
+          "t0": 11.0,
+          "t1": 13.8
+        },
+        {
+          "w": "was",
+          "t0": 11.0,
+          "t1": 13.8
+        },
+        {
+          "w": "worn",
+          "t0": 11.0,
+          "t1": 13.8
+        },
+        {
+          "w": "on",
+          "t0": 11.0,
+          "t1": 13.8
+        },
+        {
+          "w": "the",
+          "t0": 11.0,
+          "t1": 13.8
+        },
+        {
+          "w": "chest.",
+          "t0": 11.0,
+          "t1": 13.8
+        }
+      ]
+    },
+    {
+      "start": 15.796,
+      "end": 18.596,
+      "text": "I might have been worn by Huitzilopochtli's effigy.",
+      "words": [
+        {
+          "w": "I",
+          "t0": 15.796,
+          "t1": 18.596
+        },
+        {
+          "w": "might",
+          "t0": 15.796,
+          "t1": 18.596
+        },
+        {
+          "w": "have",
+          "t0": 15.796,
+          "t1": 18.596
+        },
+        {
+          "w": "been",
+          "t0": 15.796,
+          "t1": 18.596
+        },
+        {
+          "w": "worn",
+          "t0": 15.796,
+          "t1": 18.596
+        },
+        {
+          "w": "by",
+          "t0": 15.796,
+          "t1": 18.596
+        },
+        {
+          "w": "Huitzilopochtli's",
+          "t0": 15.796,
+          "t1": 18.596
+        },
+        {
+          "w": "effigy.",
+          "t0": 15.796,
+          "t1": 18.596
+        }
+      ]
+    },
+    {
+      "start": 19.296,
+      "end": 21.696,
+      "text": "I was an emblem of authority.",
+      "words": [
+        {
+          "w": "I",
+          "t0": 19.296,
+          "t1": 21.696
+        },
+        {
+          "w": "was",
+          "t0": 19.296,
+          "t1": 21.696
+        },
+        {
+          "w": "an",
+          "t0": 19.296,
+          "t1": 21.696
+        },
+        {
+          "w": "emblem",
+          "t0": 19.296,
+          "t1": 21.696
+        },
+        {
+          "w": "of",
+          "t0": 19.296,
+          "t1": 21.696
+        },
+        {
+          "w": "authority.",
+          "t0": 19.296,
+          "t1": 21.696
+        }
+      ]
+    },
+    {
+      "start": 25.296,
+      "end": 28.496,
+      "text": "Now I'm on display in Room 27.",
+      "words": [
+        {
+          "w": "Now",
+          "t0": 25.296,
+          "t1": 28.496
+        },
+        {
+          "w": "I'm",
+          "t0": 25.296,
+          "t1": 28.496
+        },
+        {
+          "w": "on",
+          "t0": 25.296,
+          "t1": 28.496
+        },
+        {
+          "w": "display",
+          "t0": 25.296,
+          "t1": 28.496
+        },
+        {
+          "w": "in",
+          "t0": 25.296,
+          "t1": 28.496
+        },
+        {
+          "w": "Room",
+          "t0": 25.296,
+          "t1": 28.496
+        },
+        {
+          "w": "27.",
+          "t0": 25.296,
+          "t1": 28.496
+        }
+      ]
+    }
+  ],
+  "facts": [
+    {
+      "id": "what_it_is",
+      "text": "The object is a pectoral in the form of a double-headed serpent, made of cedro wood (Cedrela odorata) and covered with a mosaic of turquoise and red thorny oyster shell (Spondylus princeps).",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634",
+      "used": true
+    },
+    {
+      "id": "single_piece",
+      "text": "It is carved from a single piece of Spanish cedarwood.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634",
+      "used": true
+    },
+    {
+      "id": "front_mosaic",
+      "text": "The front and both heads are covered with turquoise mosaic.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634",
+      "used": false
+    },
+    {
+      "id": "back_gilded",
+      "text": "The hollowed-out back of the body was originally gilded.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634",
+      "used": false
+    },
+    {
+      "id": "back_now_plain",
+      "text": "The back, once gilded, is now plain.",
+      "source": "https://en.wikipedia.org/wiki/Double-headed_serpent",
+      "used": false
+    },
+    {
+      "id": "back_lighter",
+      "text": "The back was hollowed out, possibly to make the sculpture lighter.",
+      "source": "https://en.wikipedia.org/wiki/Double-headed_serpent",
+      "used": false
+    },
+    {
+      "id": "heads_both_sides",
+      "text": "Only the heads are decorated on both sides.",
+      "source": "https://en.wikipedia.org/wiki/Double-headed_serpent",
+      "used": false
+    },
+    {
+      "id": "teeth_conch",
+      "text": "The teeth in the two open mouths are made from conch shell (Strombus).",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634",
+      "used": false
+    },
+    {
+      "id": "two_resins",
+      "text": "Two resins were used as adhesive: pine resin and Bursera resin (copal).",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634",
+      "used": false
+    },
+    {
+      "id": "red_hematite",
+      "text": "In the mouths the resin is coloured red with hematite.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634",
+      "used": false
+    },
+    {
+      "id": "tiles_graded",
+      "text": "The worked tiles were carefully selected and graded by size and colour, then laid in to recreate the subtle patterning of the snake's scales.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634",
+      "used": false
+    },
+    {
+      "id": "stone_tools",
+      "text": "The turquoise was cut and ground using stone tools.",
+      "source": "https://en.wikipedia.org/wiki/Double-headed_serpent",
+      "used": false
+    },
+    {
+      "id": "eyes_maybe",
+      "text": "The heads may originally have had inlaid eyes of pyrite or obsidian.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634",
+      "used": false
+    },
+    {
+      "id": "tongues_maybe",
+      "text": "Flickering tongues might have been attached to the holes in the centre of the lower jaws.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634",
+      "used": false
+    },
+    {
+      "id": "beeswax",
+      "text": "Beeswax adhesive survives around the eye sockets.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634",
+      "used": false
+    },
+    {
+      "id": "date",
+      "text": "The museum gives the production date as 1400-1521.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634",
+      "used": false
+    },
+    {
+      "id": "size",
+      "text": "It measures 20.30 centimetres high, 43.30 centimetres wide and 5.90 centimetres deep.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634",
+      "used": false
+    },
+    {
+      "id": "worn_chest",
+      "text": "The two holes at the top indicate that it may have been worn on the chest as a pectoral.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634",
+      "used": true
+    },
+    {
+      "id": "huitzilopochtli",
+      "text": "This maquizcoatl might have been an insignia worn or held by an effigy of Huitzilopochtli or by one of his impersonators.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634",
+      "used": true
+    },
+    {
+      "id": "sky_band",
+      "text": "The double-headed serpent may represent a 'sky-band', symbolizing the celestial realm.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634",
+      "used": false
+    },
+    {
+      "id": "authority",
+      "text": "It was an emblem of authority.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634",
+      "used": true
+    },
+    {
+      "id": "left_mexico_unknown",
+      "text": "It is not known how the sculpture left Mexico.",
+      "source": "https://en.wikipedia.org/wiki/Double-headed_serpent",
+      "used": false
+    },
+    {
+      "id": "cortes_possible",
+      "text": "It is considered possible that it was among the goods obtained by the conquistador Hernán Cortés.",
+      "source": "https://en.wikipedia.org/wiki/Double-headed_serpent",
+      "used": false
+    },
+    {
+      "id": "purchased_1894",
+      "text": "The museum registered the serpent as purchased in September 1894.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634",
+      "used": false
+    },
+    {
+      "id": "on_display",
+      "text": "It is on display in Room 27 (Mexico), Display Case 6, at the British Museum.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634",
+      "used": true
+    },
+    {
+      "id": "turquoise_valued",
+      "text": "Turquoise was highly valued in Mesoamerica.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634",
+      "used": false
+    },
+    {
+      "id": "turquoise_mines",
+      "text": "Aztec trading emissaries (pochteca) obtained turquoise from mines in what is now the southwest United States, far beyond the limits of the Aztec empire.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634",
+      "used": false
+    },
+    {
+      "id": "coatl",
+      "text": "The Nahuatl term 'coatl' can be translated as both serpent and twin.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634",
+      "used": false
+    },
+    {
+      "id": "bad_omens",
+      "text": "Double-headed serpents (maquizcoatl) were considered to be the bearers of bad omens and were associated with elite figures.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634",
+      "used": false
+    },
+    {
+      "id": "arm_belief",
+      "text": "The Mexica believed that anyone finding a double-headed serpent in their path should place it on their arm; if the serpent could not be moved it meant that death was approaching.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634",
+      "used": false
+    },
+    {
+      "id": "quetzalcoatl",
+      "text": "The intense blue-green hues of turquoise evoke associations with Quetzalcoatl ('feathered serpent'), one of the most powerful Aztec deities and culture heroes.",
+      "source": "https://www.britishmuseum.org/collection/object/E_Am1894-634",
+      "used": false
+    },
+    {
+      "id": "nine_mosaics",
+      "text": "The sculpture is one of nine Mexican turquoise mosaics in the British Museum.",
+      "source": "https://en.wikipedia.org/wiki/Double-headed_serpent",
+      "used": false
+    }
+  ],
+  "modes": {
+    "llm": true,
+    "voice": false,
+    "video": true
+  },
+  "fingerprint": "04af30edd978d0dc75d4ab50",
+  "ambient_source": "model",
+  "video_model": "bytedance/seedance-2.0/fast/reference-to-video",
+  "fal_cost_usd": 7.71,
+  "seconds_to_make": 1364.8,
+  "agent": {
+    "run": "1115-101713-photo",
+    "status": "NEEDS_HUMAN",
+    "claude_cost_usd": 2.56,
+    "voice": "A bright, quick adult voice, gender-neutral, warm mid-range timbre, light British accent, brisk pace that slows into calm pride.",
+    "music": "no music"
+  }
+}
