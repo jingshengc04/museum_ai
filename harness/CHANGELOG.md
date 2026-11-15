@@ -291,3 +291,19 @@ lines, no speech over the act, three sounds, return shot shows the real object, 
   a bronze ram acts with its body).
 - Direction-word cap 240 → 300 (S3 budget 280): the Hope film followed a ~300-word request well; 240 only kept the
   review loop failing. Both runs still ended NEEDS_HUMAN on this check after three drafts (336–353 words).
+
+## v2.2: plain English, culture over trivia, one continuous take (2026-11-15)
+
+User feedback on the zun script: lines were odd and hard to follow ("Find the join; it's hard to see"), the story
+dwelt on trivia (400 silver dollars, a chip knocked off the rim) instead of culture, it had no ending, and in-clip cuts
+skipped the moment the ram broke free. Changes (v2.1 prompts archived in prompts/archive/v2.1):
+- S1: a "what matters" rule (identity, age, purpose, meaning, remarkable craft, big turns, where it is now; trivia
+  left out); default through-line shape who I am → what I was for → what happened → where I am now, which must end;
+  the controlling idea must be about significance, not a puzzle.
+- S2: plain self-introductions allowed; lines told in story order with an ending, in plain everyday English;
+  voiceover default.
+- S3: each 15 s segment is one continuous take (beats with transition "continuous", never cut away from a
+  transformation); lines rule rewritten for plain spoken English and importance; "collision" removed.
+- S4: voice_fit now scores naturalness, importance and an ending; a cut inside a segment counts as a render fault;
+  cap text 300.
+- seedance.py: a one-take segment is written "One continuous take, no cuts." with timed beats instead of "Shot n".

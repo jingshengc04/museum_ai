@@ -22,6 +22,7 @@ import agent  # loads .env (FAL_KEY)
 import images
 
 VIDEO_USD_PER_S = {"480p": 0.14, "720p": 0.30}
+VIDEO_USD_PER_S_25 = {"480p": 0.2205, "720p": 0.473, "1080p": 1.164}  # Seedance 2.5, fal model page
 FONT = next((f for f in ("/System/Library/Fonts/Supplemental/Arial Bold.ttf", "/System/Library/Fonts/Helvetica.ttc",
                          "/Library/Fonts/Arial.ttf") if Path(f).exists()), None)
 
@@ -162,7 +163,7 @@ def probe(path: Path) -> tuple[int, int, float]:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("run", type=Path)
-    ap.add_argument("--resolution", default="480p", choices=["480p", "720p"])
+    ap.add_argument("--resolution", default="480p", choices=["480p", "720p", "1080p"])
     ap.add_argument("--photo", type=Path, help="visitor photo, if final.json does not name one")
     args = ap.parse_args()
 
@@ -263,7 +264,7 @@ def main() -> None:
     with ThreadPoolExecutor(max_workers=2) as pool:
         segs = list(pool.map(make_segment, enumerate(reqs)))
     record["segments"] = segs
-    record["est_usd"] += sum(int(r["duration"]) * VIDEO_USD_PER_S[args.resolution] for r in reqs)
+    record["est_usd"] += sum(int(r["duration"]) * (VIDEO_USD_PER_S_25 if "2.5" in r["endpoint"] else VIDEO_USD_PER_S)[args.resolution] for r in reqs)
 
     # 4. join segments (hard cut) and burn English subtitles
     raw = media / "film_raw.mp4"

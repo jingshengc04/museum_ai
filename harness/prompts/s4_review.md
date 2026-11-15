@@ -9,10 +9,11 @@ You are the director reviewing a very short animated film in which a museum exhi
 Renderability counts only what actually breaks Seedance:
 - more than one character or part moving (the rest must be stated still);
 - more than one transformation in a shot, or a transformation under about four seconds;
-- three camera moves in a shot, or two without a quick-transition or timed-beat form;
+- three camera moves in a beat, or two without a timed-beat form;
+- a cut inside a segment (each segment should be one continuous take);
 - an orbit or a reveal of an unseen side with no reference showing it;
 - a reference with no stated job, or two references showing different versions of the same whole subject;
-- over about 220 direction words, or essentials placed after the sound list;
+- over about 300 direction words, or essentials placed after the sound list;
 - text, captions or inscriptions in the picture;
 - a spoken line over about ten words, or more than three lines in 15 seconds;
 - a different voice description between segments.
@@ -32,7 +33,7 @@ Before you propose a replacement line, check it yourself: the cited fact's own w
 - renderability: under the limits above.
 - truth (must be 5): every spoken claim supported; any unsupported claim scores 1.
 - sound: three or four named sounds tied to the events, the act beat left without speech, "no music" or one named score; open audio scores at most 2.
-- voice_fit: lines add what the picture cannot (age, origin, what happened), never caption or explain the fantasy, sound like this character, short enough for clean lip-sync, and land one collision.
+- voice_fit: read each line aloud. 5 = plain everyday English a native speaker would really say, understood on first hearing, each line saying something that matters (what it is, age, purpose, meaning, craft, big turns, where it is now), the lines telling one story that ends; deduct for riddles, puns, fragments, odd or poetic phrasing, trivia (prices, small accidents, private names) and a story that stops without an ending. Rewrite any awkward line in your issues.
 Set fantasy_legibility to "fail" for any violation found in step 1, otherwise "pass".
 
 Keep the summary to two or three sentences, and name the spectacle shot in it.

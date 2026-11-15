@@ -5,7 +5,7 @@ v2 (round 6, "make the exhibit act"): the old rules that kept the exhibit still 
 research/round6 (fal docs, ByteDance launch post and technical report, creator guides):
   - endpoint bytedance/seedance-2.0/reference-to-video, duration "4".."15", generate_audio on
   - each reference gets ONE stated job; @Image1..n follow upload order
-  - numbered shots with time ranges "Shot n (a-bs)" for multi-shot clips; transitions stated explicitly
+  - numbered shots with time ranges "Shot n (a-bs)" for multi-shot clips, or timed beats of "One continuous take, no cuts."
   - motion amplitude only comes from wording: speed/force verbs and physical consequences
   - one transformation per shot (start; change with mechanism and speed; end)
   - spoken words in double quotes; short lines; the same voice description in every segment
@@ -78,7 +78,7 @@ def render(script: schemas.Script, index: int) -> dict:
     if script.mode == "world_returns":
         parts["lock"] = f"{subject[:1].upper() + subject[1:]} stays perfectly still and ends whole; only its world moves."
     else:
-        still = f" {_s(script.still_parts)} stay still." if _s(script.still_parts) else ""
+        still = f" {_s(script.still_parts)[:1].upper() + _s(script.still_parts)[1:]} stay still." if _s(script.still_parts) else ""
         parts["lock"] = f"Only {hero} comes alive.{still} {subject[:1].upper() + subject[1:]} ends whole and unchanged."
 
     look = _s(script.look) or ("photoreal live-action fantasy, real museum gallery" if script.style == "realistic"
@@ -87,11 +87,14 @@ def render(script: schemas.Script, index: int) -> dict:
 
     shots = []
     last = len(seg.shots)
+    # A segment whose beats all continue one take is written as timed beats, never "Shot n" (which invites cuts).
+    one_take = all(_s(s.transition_in).lower().startswith("continu") for s in seg.shots[1:])
     for n, s in enumerate(seg.shots, 1):
         refs = ", ".join(f"{named.get(r, r)} from {tag[r]}" for r in s.refs if r in tag)
-        lead = f"Shot {n} ({s.t_start:g}-{s.t_end:g}s)"
+        lead = f"{s.t_start:g}-{s.t_end:g}s" if one_take else f"Shot {n} ({s.t_start:g}-{s.t_end:g}s)"
         trans = _s(s.transition_in)
-        opener = f"{trans[:1].upper() + trans[1:]}: " if n > 1 and trans and trans.lower() != "cut" else ""
+        opener = f"{trans[:1].upper() + trans[1:]}: " if (n > 1 and trans and trans.lower() != "cut"
+                                                          and not one_take) else ""
         body = f"{opener}{_s(s.framing)}, {_lc(s.camera)}. {_s(s.action)}"
         if _s(s.transformation):
             body += f"; {_lc(s.transformation)}"
@@ -101,7 +104,7 @@ def render(script: schemas.Script, index: int) -> dict:
         if n == last and index < len(script.segments) - 1 and seg.end_frame:
             text += f" End on a near-still image: {_lc(seg.end_frame)}."
         shots.append(text)
-    parts["shots"] = " ".join(shots)
+    parts["shots"] = ("One continuous take, no cuts. " if one_take and last > 1 else "") + " ".join(shots)
 
     lines = " ".join(f'"{l.text.strip()}"' for l in seg.narration)
     if lines:
