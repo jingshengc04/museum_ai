@@ -67,7 +67,10 @@
     font-size: 15px; font-weight: 600; margin-top: 32px; box-shadow: 0 15px 55px #d9ba8a22; transition: transform .25s, box-shadow .25s; }
   .primary:hover { transform: translateY(-4px); box-shadow: 0 20px 70px #d9ba8a55; }
   .primary .icon:last-child { margin-left: 4px; }
-  .demo-link { margin: 16px 0 0 18px; border: 0; color: #e6dccb; background: none; font-size: 11px; letter-spacing: .08em; border-bottom: 1px solid #c8bba755; padding: 0 0 4px; }
+  .hint { margin: 14px 0 0 4px; font-size: 13px; color: #e2ddd3; }
+  .hint kbd { font: 500 11px var(--sans); padding: 2px 7px; margin-left: 4px; border-radius: 6px; border: 1px solid rgba(255,255,255,.3);
+    background: rgba(255,255,255,.1); color: var(--cream); }
+  .demo-link { margin: 18px 0 0 4px; border: 0; color: #e6dccb; background: none; font-size: 11px; letter-spacing: .08em; border-bottom: 1px solid #c8bba755; padding: 0 0 4px; }
   .demo-link:hover { color: var(--cream); }
 
   .gallery { height: min(65vh, 610px); min-height: 420px; border-radius: 34px; position: relative; overflow: hidden; perspective: 950px; }
@@ -94,6 +97,11 @@
   .selector { position: absolute; right: 18px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 10px; z-index: 10; }
   .dot { height: 9px; width: 9px; border: 1px solid #f3dbb5; border-radius: 50%; background: transparent; padding: 0; }
   .dot.on { background: #f3dbb5; box-shadow: 0 0 14px #f3dbb5; }
+  .drop-cue { position: absolute; inset: 14px; z-index: 12; display: grid; place-items: center; border-radius: 24px;
+    border: 2px dashed #f3dbb5; background: rgba(22,27,33,.55); color: var(--cream); font-size: 18px; font-weight: 500;
+    opacity: 0; pointer-events: none; transition: opacity .2s ease; }
+  body.dropping .drop-cue { opacity: 1; }
+  @media (pointer: coarse) { .hint { display: none; } }  /* phones have no drag and drop or keyboard paste */
   .gallery-bottom { position: absolute; bottom: 34px; left: 0; right: 0; z-index: 10; text-align: center; font-size: 10px; letter-spacing: .28em; color: #e8d5b7; text-shadow: 0 1px 8px #000a; }
   .depth-grid { position: absolute; inset: 15% 12% 12%; background: linear-gradient(#cba56918 1px, transparent 1px), linear-gradient(90deg, #cba56918 1px, transparent 1px);
     background-size: 35px 35px; transform: rotateX(65deg) translateY(42%); transform-origin: center bottom; opacity: 0; z-index: 2; }
@@ -181,7 +189,7 @@
     .heading { font-size: clamp(58px, 12vw, 88px); margin: 10px 0; }
     .sub { margin: auto; }
     .primary { margin: 18px auto 0; }
-    .demo-link { margin-left: 0; }
+    .demo-link { margin-left: 0; } .hint { margin-left: 0; }
     .gallery { height: 45vh; min-height: 310px; }
     .player { aspect-ratio: 4/5; }
     .overlay { padding: 18px; }
@@ -218,14 +226,13 @@
     <!-- 1. scan -->
     <section class="screen scan-layout" id="v-scan" hidden>
       <div class="intro glass panel">
-        <p class="eyebrow">The past is closer than you think</p>
         <h1 class="heading">Make history <em>alive.</em></h1>
-        <p class="sub">One photo. A thousand stories.<br>Discover the voice behind any artifact.</p>
+        <p class="sub">Add a photo of a museum object and watch its story.</p>
         <button class="primary" id="scan">
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3H3v5M16 3h5v5M8 21H3v-5M16 21h5v-5"/><path d="M7 12h10M12 7v10"/></svg>
-          Scan an artifact
-          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19 19 5M8 5h11v11"/></svg>
+          <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v4h16v-4"/></svg>
+          Upload a photo
         </button>
+        <p class="hint">or drop or paste a photo <kbd id="paste-key">⌘V</kbd></p>
         <button class="demo-link" id="demo"></button>
         <input id="pick" type="file" accept="image/jpeg,image/png,image/webp" capture="environment">
       </div>
@@ -240,6 +247,7 @@
         <div class="scanbeam"></div>
         <div class="selector" id="selector"></div>
         <div class="gallery-bottom" id="gallery-text"></div>
+        <div class="drop-cue" id="drop-cue">Drop the photo here</div>
       </div>
     </section>
 
@@ -342,7 +350,7 @@ function renderScan() {
   const { exhibits } = S.app;
   const current = exhibits[S.exhibit];
   $("demo").hidden = !current;
-  if (current) $("demo").textContent = `or experience ${current.name}`;
+  if (current) $("demo").textContent = `Or try ${current.name}`;
   $("selector").hidden = exhibits.length < 2;
   $("selector").replaceChildren(...exhibits.map((ex, i) => {
     const dot = el("button", { className: "dot" + (i === S.exhibit ? " on" : "") });
@@ -351,7 +359,7 @@ function renderScan() {
     return dot;
   }));
   setImage((current && current.photo) || SAMPLE);
-  $("gallery-text").textContent = "";
+  $("gallery-text").textContent = current ? current.name.toUpperCase() : "";
 }
 
 function reset() {
@@ -422,24 +430,61 @@ async function begin(blob, exhibitId) {
   listen(await job, run);
 }
 
+// The server takes JPEG, PNG and WebP; anything else the browser can draw (HEIC on Safari, GIF, BMP) becomes a JPEG.
+async function asUpload(file) {
+  if (["image/jpeg", "image/png", "image/webp"].includes(file.type)) return file;
+  const bitmap = await createImageBitmap(file);
+  const canvas = el("canvas", { width: bitmap.width, height: bitmap.height });
+  canvas.getContext("2d").drawImage(bitmap, 0, 0);
+  const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/jpeg", 0.92));
+  return new File([blob], "photo.jpg", { type: "image/jpeg" });
+}
+
+async function usePhoto(file) {
+  if (!file || !file.type.startsWith("image/") || S.busy || $("v-scan").hidden) return;
+  try {
+    file = await asUpload(file);
+  } catch {
+    return;  // not an image this browser can read
+  }
+  S.photo = file;
+  setImage(URL.createObjectURL(file));
+  begin(file, null);
+}
+
 $("scan").onclick = () => $("pick").click();
 $("pick").onchange = (event) => {
   const file = event.target.files[0];
   event.target.value = "";
-  if (!file || !file.type.startsWith("image/")) return;
-  S.photo = file;
-  setImage(URL.createObjectURL(file));
-  begin(file, null);
+  usePhoto(file);
 };
+document.addEventListener("paste", (event) => {
+  const item = [...(event.clipboardData?.items || [])].find((i) => i.kind === "file" && i.type.startsWith("image/"));
+  if (!item) return;
+  event.preventDefault();
+  const blob = item.getAsFile();
+  usePhoto(new File([blob], blob.name || "pasted.png", { type: blob.type }));
+});
+if (!/Mac|iPhone|iPad/.test(navigator.platform)) $("paste-key").textContent = "Ctrl+V";
 $("demo").onclick = async () => {
   const exhibit = S.app.exhibits[S.exhibit];
   S.photo = null;
   begin(await (await fetch(S.image)).blob(), exhibit.id);
 };
 $("home").onclick = $("start-over").onclick = $("again").onclick = reset;
-const gallery = $("gallery");
-gallery.ondragover = (event) => event.preventDefault();
-gallery.ondrop = (event) => { event.preventDefault(); $("pick").files = event.dataTransfer.files; $("pick").onchange({ target: $("pick") }); };
+// Drop a photo anywhere on the first screen.
+let dragDepth = 0;
+const dragging = (event) => !$("v-scan").hidden && [...(event.dataTransfer?.types || [])].includes("Files");
+window.addEventListener("dragenter", (event) => { if (dragging(event)) { dragDepth++; document.body.classList.add("dropping"); } });
+window.addEventListener("dragleave", () => { if (--dragDepth <= 0) { dragDepth = 0; document.body.classList.remove("dropping"); } });
+window.addEventListener("dragover", (event) => { if (dragging(event)) event.preventDefault(); });
+window.addEventListener("drop", (event) => {
+  dragDepth = 0;
+  document.body.classList.remove("dropping");
+  if (!dragging(event)) return;
+  event.preventDefault();
+  usePhoto(event.dataTransfer.files[0]);
+});
 
 // ---------- 2. loading ----------
 async function startJob(exhibitId) {

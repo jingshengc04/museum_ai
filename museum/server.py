@@ -72,7 +72,7 @@ def state() -> dict:
         "styles": config.STYLES,
         # Offered on the first screen: exhibits with a film ready to play, and our own prepared ones. Any other
         # exhibit (agent packs, objects learned from photos) is still recognised from a photo.
-        "exhibits": [e.public() for e in found
+        "exhibits": [e.public() for e in sorted(found, key=lambda e: bool(e.data.get("learned")))  # prepared ones first
                      if pipeline.library_hit(e, "en", "first_person") or not (e.data.get("from_pack") or e.data.get("learned"))],
         "video": {
             "model": config.VIDEO_MODEL,
