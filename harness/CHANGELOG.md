@@ -307,3 +307,19 @@ skipped the moment the ram broke free. Changes (v2.1 prompts archived in prompts
 - S4: voice_fit now scores naturalness, importance and an ending; a cut inside a segment counts as a render fault;
   cap text 300.
 - seedance.py: a one-take segment is written "One continuous take, no cuts." with timed beats instead of "Shot n".
+
+## v3: lean single-pass pipeline (2026-11-15)
+
+User: the staged flow is too complex; one writing pass should be enough, as the hand-written ram demo showed.
+- `lean.py` + `prompts/lean_write.md`: see → search → one writing call (story, lines, timed beats of one continuous
+  take, character sentence, sounds). No digest, asset-planning, concept or review stages; code checks with one rewrite.
+  Two reference images from fixed templates in code; one Seedance 2.5 request (15 or 30 s). Keywords wired in as the
+  same background function; count no longer limited, important kinds first.
+- Same photo (Four-Ram Zun): staged pipeline 703 s, $2.91, NEEDS_HUMAN; lean about 2 min (see 9 s, search 77 s,
+  write 14-29 s), about $0.9, PASS. Lines of the same quality (plain English, all four story parts, an ending).
+- v2.3 prompt changes that made the content right in both pipelines: research must find purpose/culture and big
+  events (it now finds "used in sacrificial ceremonies" and the wartime damage and repair by itself); the
+  self-introduction story is the lead line; 30 s when three of four parts have facts; word cap 380 (staged).
+- `final.json` of the lean pipeline matches the pushed format field for field (plus `problems`, `lines`, `timing_s`).
+- Not verified: only the Four-Ram Zun was run; no video has been generated from a lean-written script yet.
+- `README.md` (start here), `PROMPTS.md` (prompt summaries), `explainer/` (harness explainer segment, v3 = 32 s).

@@ -1,0 +1,50 @@
+{
+ "title": {
+  "key": "f67369136eb61544",
+  "chars": 84,
+  "voice": "Matilda",
+  "model": "fal-ai/elevenlabs/tts/eleven-v3"
+ },
+ "see": {
+  "key": "830174d80249e544",
+  "chars": 148,
+  "voice": "Matilda",
+  "model": "fal-ai/elevenlabs/tts/eleven-v3"
+ },
+ "search": {
+  "key": "cf9fc10f0fdfab62",
+  "chars": 101,
+  "voice": "Matilda",
+  "model": "fal-ai/elevenlabs/tts/eleven-v3"
+ },
+ "understand": {
+  "key": "26021ada3f7c5726",
+  "chars": 152,
+  "voice": "Matilda",
+  "model": "fal-ai/elevenlabs/tts/eleven-v3"
+ },
+ "assets": {
+  "key": "f48d2ca5e3c003c7",
+  "chars": 115,
+  "voice": "Matilda",
+  "model": "fal-ai/elevenlabs/tts/eleven-v3"
+ },
+ "script": {
+  "key": "41df719082e7c7ba",
+  "chars": 120,
+  "voice": "Matilda",
+  "model": "fal-ai/elevenlabs/tts/eleven-v3"
+ },
+ "generate": {
+  "key": "c27dd35bef98089b",
+  "chars": 105,
+  "voice": "Matilda",
+  "model": "fal-ai/elevenlabs/tts/eleven-v3"
+ },
+ "closing": {
+  "key": "c805a124c5b8451a",
+  "chars": 47,
+  "voice": "Matilda",
+  "model": "fal-ai/elevenlabs/tts/eleven-v3"
+ }
+}

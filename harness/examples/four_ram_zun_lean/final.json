@@ -1,0 +1,370 @@
+{
+  "exhibit_id": "adhoc-four-ram-square-zun",
+  "status": "PASS",
+  "title": "The Ram Who Woke Up",
+  "duration_s": 30,
+  "photo": "photos/four_ram_zun.webp",
+  "keywords": [
+    {
+      "t_run": 0.01,
+      "stage": "kw_identify",
+      "type": "keywords_batch",
+      "label": "identify",
+      "keywords": [
+        {
+          "kind": "name",
+          "text": "Siyang Fangzun",
+          "basis": "photo"
+        },
+        {
+          "kind": "name",
+          "text": "Four-Ram Square Zun",
+          "basis": "photo"
+        },
+        {
+          "kind": "name",
+          "text": "四羊青铜方尊",
+          "basis": "photo"
+        },
+        {
+          "kind": "period",
+          "text": "late Shang dynasty",
+          "basis": "photo"
+        },
+        {
+          "kind": "material",
+          "text": "bronze",
+          "basis": "photo"
+        },
+        {
+          "kind": "theme",
+          "text": "ritual wine vessel",
+          "basis": "photo"
+        },
+        {
+          "kind": "place",
+          "text": "National Museum of China",
+          "basis": "photo"
+        },
+        {
+          "kind": "place",
+          "text": "Beijing",
+          "basis": "photo"
+        },
+        {
+          "kind": "visual",
+          "text": "four curly-horned rams",
+          "basis": "photo"
+        },
+        {
+          "kind": "visual",
+          "text": "flaring square mouth",
+          "basis": "photo"
+        },
+        {
+          "kind": "visual",
+          "text": "flanges",
+          "basis": "photo"
+        },
+        {
+          "kind": "visual",
+          "text": "spiralling horns",
+          "basis": "photo"
+        },
+        {
+          "kind": "visual",
+          "text": "scale and spiral patterns",
+          "basis": "photo"
+        }
+      ],
+      "flags": []
+    },
+    {
+      "t_run": 0.01,
+      "stage": "kw_research",
+      "type": "keywords_batch",
+      "label": "research",
+      "keywords": [
+        {
+          "kind": "name",
+          "text": "Four-Ram Square Zun",
+          "basis": "http://wenwuchina.com/a/203/201295.html"
+        },
+        {
+          "kind": "period",
+          "text": "Shang Dynasty",
+          "basis": "https://govt.chinadaily.com.cn/s/202206/06/WS629d9cd4498e6a12c122e1df/bronze-vessel-with-ram-head-sculptures-masterpiece-from-the-shang-dynasty.html"
+        },
+        {
+          "kind": "material",
+          "text": "bronze",
+          "basis": "http://wenwuchina.com/a/203/201295.html"
+        },
+        {
+          "kind": "measure",
+          "text": "58.3 cm high",
+          "basis": "http://wenwuchina.com/a/203/201295.html"
+        },
+        {
+          "kind": "measure",
+          "text": "nearly 34.5 kg",
+          "basis": "http://wenwuchina.com/a/203/201295.html"
+        },
+        {
+          "kind": "theme",
+          "text": "ritual vessel",
+          "basis": "http://wenwuchina.com/a/203/201295.html"
+        },
+        {
+          "kind": "theme",
+          "text": "sacrificial ceremonies",
+          "basis": "https://govt.chinadaily.com.cn/s/202206/06/WS629d9cd4498e6a12c122e1df/bronze-vessel-with-ram-head-sculptures-masterpiece-from-the-shang-dynasty.html"
+        },
+        {
+          "kind": "place",
+          "text": "National Museum of China",
+          "basis": "https://govt.chinadaily.com.cn/s/202110/15/WS61691ebd498e6a12c1206bb6/national-museum-of-china-beijing.html"
+        },
+        {
+          "kind": "measure",
+          "text": "largest square zun",
+          "basis": "http://wenwuchina.com/a/203/201295.html"
+        },
+        {
+          "kind": "place",
+          "text": "Ningxiang city, Hunan province",
+          "basis": "https://govt.chinadaily.com.cn/s/202206/06/WS629d9cd4498e6a12c122e1df/bronze-vessel-with-ram-head-sculptures-masterpiece-from-the-shang-dynasty.html"
+        },
+        {
+          "kind": "date",
+          "text": "April 1938",
+          "basis": "http://wenwuchina.com/a/203/201295.html"
+        },
+        {
+          "kind": "place",
+          "text": "Zhuan'erlun hill",
+          "basis": "http://wenwuchina.com/a/203/201295.html"
+        },
+        {
+          "kind": "person",
+          "text": "Jiang Jingshu",
+          "basis": "http://wenwuchina.com/a/203/201295.html"
+        },
+        {
+          "kind": "visual",
+          "text": "four ram heads",
+          "basis": "http://www.sanyamuseum.com/a/chenliexuanjiao/2022/1024/1435.html"
+        },
+        {
+          "kind": "visual",
+          "text": "curled horns",
+          "basis": "http://www.sanyamuseum.com/a/chenliexuanjiao/2022/1024/1435.html"
+        },
+        {
+          "kind": "visual",
+          "text": "four dragon heads",
+          "basis": "http://www.sanyamuseum.com/a/chenliexuanjiao/2022/1024/1435.html"
+        },
+        {
+          "kind": "visual",
+          "text": "shiny lacquer-black",
+          "basis": "http://www.sanyamuseum.com/a/chenliexuanjiao/2022/1024/1435.html"
+        },
+        {
+          "kind": "date",
+          "text": "found again in 1952",
+          "basis": "http://www.sanyamuseum.com/a/chenliexuanjiao/2022/1024/1435.html"
+        },
+        {
+          "kind": "date",
+          "text": "1959",
+          "basis": "http://www.sanyamuseum.com/a/chenliexuanjiao/2022/1024/1435.html"
+        },
+        {
+          "kind": "place",
+          "text": "Museum of Chinese History",
+          "basis": "http://www.sanyamuseum.com/a/chenliexuanjiao/2022/1024/1435.html"
+        }
+      ],
+      "flags": []
+    }
+  ],
+  "image_jobs": [
+    {
+      "id": "subject_now",
+      "kind": "subject_view",
+      "endpoint": "fal-ai/nano-banana-pro/edit",
+      "input": {
+        "image_urls": [
+          "<visitor_photo>"
+        ],
+        "prompt": "From this photo, show the Four-Ram Square Zun alone, whole, exactly as it is: same shape, decoration, material and colours, three-quarter front view, even neutral studio light, plain light-grey background, no glass case, no plinth label. No people anywhere in the image: the space is empty, every visitor and figure removed, including any reflection, shadow or silhouette of a person on glass, metal or polished surfaces. Avoid: text, labels, reflections, glare, a second copy of the object."
+      },
+      "purpose": "identity anchor: keeps the object's shape, decoration and colours the same in the video",
+      "est_usd": 0.15
+    },
+    {
+      "id": "hero_awake",
+      "kind": "living_form",
+      "endpoint": "fal-ai/nano-banana-pro/edit",
+      "input": {
+        "image_urls": [
+          "<visitor_photo>"
+        ],
+        "prompt": "From this photo, design the front ram facing the camera of the Four-Ram Square Zun as a character: A small stylized 3D bronze ram with the same dark silver-grey, lacquer-black patina, tightly curled spiral horns and scale-and-spiral pattern as the zun's rams, with big bright expressive eyes and a cheerful, curious face. One single full-body three-quarter view, even light, plain light-grey background. No people anywhere in the image: the space is empty, every visitor and figure removed, including any reflection, shadow or silhouette of a person on glass, metal or polished surfaces. Avoid: text, labels, expression sheets, several views, the rest of the object."
+      },
+      "purpose": "the character that comes alive: keeps its design the same in the video",
+      "est_usd": 0.15
+    }
+  ],
+  "existing_images_used": [],
+  "missing_images": [],
+  "video_requests": [
+    {
+      "endpoint": "bytedance/seedance-2.5/reference-to-video",
+      "image_urls": [
+        "<job:subject_now>",
+        "<job:hero_awake>"
+      ],
+      "duration": "30",
+      "resolution": "480p",
+      "aspect_ratio": "16:9",
+      "generate_audio": true,
+      "prompt": "References: @Image1 = the Four-Ram Square Zun, identity anchor: shape, decoration and colours exactly as shown; ignore its background. @Image2 = the front ram facing the camera as a character: same design and markings throughout; ignore its background.\nOnly the front ram facing the camera comes alive. The other three rams, the dragon heads and the vessel body stay still. The Four-Ram Square Zun ends whole and unchanged.\nLook: Stylized 3D animation inside a dim museum glass case on a white plinth, warm ceiling spotlights glinting off silvery-grey bronze against a dark background.\nOne continuous take, no cuts.\n0-3s: Holds head-on at eye level on the still zun under its looming square mouth, as in the photo; the front ram's eye blinks by the third second.\n3-9s: Pushes in as the front ram wiggles, cracks its neck free from the vessel with a bronze creak, shakes its spiral horns and grins at the camera.\n9-13s: Bursts the ram out of the zun in a big leap over the flared rim, landing hard on the white plinth, hooves skidding, proud and silent.\n13-17s: Tilts up as the ram trots fast around the base while amber light rises like wine inside the vessel, making the scale patterns glow gold.\n17-24s: Orbits the zun as it splits into floating bronze pieces, the ram ducking between them, then every piece snaps back together with a ringing clang.\n24-30s: Pulls back to the opening angle as the ram springs into its corner and freezes into bronze; the zun stands whole and still, one last wink glinting.\nVoiceover, the character's voice, no lip-sync: A warm, friendly young male voice with a light neutral accent, speaking at an easy, cheerful pace as a voiceover. Lines, exactly: at 1s: \"Hi! I'm one of the four rams on this bronze zun.\"; at 5.8s: \"I'm about three thousand years old, from China's Shang Dynasty.\"; at 13s: \"Long ago, I held wine for sacred ceremonies.\"; at 16.6s: \"I was dug up in Hunan in 1938.\"; at 20.2s: \"During the war, I was badly damaged, then repaired.\"; at 24.3s: \"Now I live at the National Museum of China.\".\nSound: soft bronze creak as the ram's neck pulls free; heavy metallic clank of hooves landing on the plinth; gentle liquid swell as amber light rises in the vessel; bright ringing clang as the floating pieces snap back together; tiny chime with the ram's final wink. No music.\nClean picture: no subtitles, captions, lettering, logos or watermark. No people in frame.",
+      "prompt_words": 417,
+      "direction_words": 362,
+      "prompt_parts": {},
+      "est_usd": 6.62
+    }
+  ],
+  "subtitles": [
+    {
+      "t_start": 1.0,
+      "t_end": 5.8,
+      "text": "Hi! I'm one of the four rams on this bronze zun."
+    },
+    {
+      "t_start": 5.8,
+      "t_end": 10.2,
+      "text": "I'm about three thousand years old, from China's Shang Dynasty."
+    },
+    {
+      "t_start": 13.0,
+      "t_end": 16.6,
+      "text": "Long ago, I held wine for sacred ceremonies."
+    },
+    {
+      "t_start": 16.6,
+      "t_end": 20.2,
+      "text": "I was dug up in Hunan in 1938."
+    },
+    {
+      "t_start": 20.2,
+      "t_end": 24.2,
+      "text": "During the war, I was badly damaged, then repaired."
+    },
+    {
+      "t_start": 24.3,
+      "t_end": 28.3,
+      "text": "Now I live at the National Museum of China."
+    }
+  ],
+  "voice": "A warm, friendly young male voice with a light neutral accent, speaking at an easy, cheerful pace as a voiceover.",
+  "music_style": "no music",
+  "est_usd": {
+    "images": 0.3,
+    "video": 6.62
+  },
+  "problems": [],
+  "lines": [
+    {
+      "t_start": 1.0,
+      "text": "Hi! I'm one of the four rams on this bronze zun.",
+      "sources": [
+        {
+          "fact": "The bronze zun (wine vessel) with four ram-head sculptures dates to the Shang Dynasty (c.16th century-11th century BC).",
+          "url": "https://govt.chinadaily.com.cn/s/202206/06/WS629d9cd4498e6a12c122e1df/bronze-vessel-with-ram-head-sculptures-masterpiece-from-the-shang-dynasty.html"
+        },
+        {
+          "fact": "Each of the four ram heads at the vessel's corners has a pair of curled horns, and there are four dragon heads between the ram heads. The whole surface is a shiny lacquer-black, in a clearly late Shang style.",
+          "url": "http://www.sanyamuseum.com/a/chenliexuanjiao/2022/1024/1435.html"
+        }
+      ]
+    },
+    {
+      "t_start": 5.8,
+      "text": "I'm about three thousand years old, from China's Shang Dynasty.",
+      "sources": [
+        {
+          "fact": "The bronze zun (wine vessel) with four ram-head sculptures dates to the Shang Dynasty (c.16th century-11th century BC).",
+          "url": "https://govt.chinadaily.com.cn/s/202206/06/WS629d9cd4498e6a12c122e1df/bronze-vessel-with-ram-head-sculptures-masterpiece-from-the-shang-dynasty.html"
+        },
+        {
+          "fact": "The four ram-head sculptures at the corners and the fine patterns are described as a testimony to the superb bronze-casting technology of 3,000 years ago.",
+          "url": "https://govt.chinadaily.com.cn/s/202206/06/WS629d9cd4498e6a12c122e1df/bronze-vessel-with-ram-head-sculptures-masterpiece-from-the-shang-dynasty.html"
+        }
+      ]
+    },
+    {
+      "t_start": 13.0,
+      "text": "Long ago, I held wine for sacred ceremonies.",
+      "sources": [
+        {
+          "fact": "The bronze zun (wine vessel) with four ram-head sculptures dates to the Shang Dynasty (c.16th century-11th century BC).",
+          "url": "https://govt.chinadaily.com.cn/s/202206/06/WS629d9cd4498e6a12c122e1df/bronze-vessel-with-ram-head-sculptures-masterpiece-from-the-shang-dynasty.html"
+        },
+        {
+          "fact": "The Four-Ram Square Zun is a bronze from the earlier part of the late Shang dynasty. It is a ritual vessel and an object used in sacrifices. It is the largest square zun among surviving Shang bronzes in China, 58.3 cm high and weighing nearly 34.5 kg.",
+          "url": "http://wenwuchina.com/a/203/201295.html"
+        },
+        {
+          "fact": "This zun was used in sacrificial ceremonies. It was unearthed in Ningxiang city, Hunan province in 1938 and was destroyed by bomb attacks during the war.",
+          "url": "https://govt.chinadaily.com.cn/s/202206/06/WS629d9cd4498e6a12c122e1df/bronze-vessel-with-ram-head-sculptures-masterpiece-from-the-shang-dynasty.html"
+        }
+      ]
+    },
+    {
+      "t_start": 16.6,
+      "text": "I was dug up in Hunan in 1938.",
+      "sources": [
+        {
+          "fact": "This zun was used in sacrificial ceremonies. It was unearthed in Ningxiang city, Hunan province in 1938 and was destroyed by bomb attacks during the war.",
+          "url": "https://govt.chinadaily.com.cn/s/202206/06/WS629d9cd4498e6a12c122e1df/bronze-vessel-with-ram-head-sculptures-masterpiece-from-the-shang-dynasty.html"
+        },
+        {
+          "fact": "According to research by Gao Zhixi, the Jiang brothers found the zun in 1938 and it disappeared during the war against Japan. It was found again in 1952, badly damaged, and was later restored. In 1959 it was transferred to the Museum of Chinese History.",
+          "url": "http://www.sanyamuseum.com/a/chenliexuanjiao/2022/1024/1435.html"
+        }
+      ]
+    },
+    {
+      "t_start": 20.2,
+      "text": "During the war, I was badly damaged, then repaired.",
+      "sources": [
+        {
+          "fact": "This zun was used in sacrificial ceremonies. It was unearthed in Ningxiang city, Hunan province in 1938 and was destroyed by bomb attacks during the war.",
+          "url": "https://govt.chinadaily.com.cn/s/202206/06/WS629d9cd4498e6a12c122e1df/bronze-vessel-with-ram-head-sculptures-masterpiece-from-the-shang-dynasty.html"
+        },
+        {
+          "fact": "According to research by Gao Zhixi, the Jiang brothers found the zun in 1938 and it disappeared during the war against Japan. It was found again in 1952, badly damaged, and was later restored. In 1959 it was transferred to the Museum of Chinese History.",
+          "url": "http://www.sanyamuseum.com/a/chenliexuanjiao/2022/1024/1435.html"
+        }
+      ]
+    },
+    {
+      "t_start": 24.3,
+      "text": "Now I live at the National Museum of China.",
+      "sources": [
+        {
+          "fact": "The square-sectioned zun with four rams' heads, from the late Shang Dynasty, is part of the permanent collection of the National Museum of China.",
+          "url": "https://govt.chinadaily.com.cn/s/202110/15/WS61691ebd498e6a12c1206bb6/national-museum-of-china-beijing.html"
+        }
+      ]
+    }
+  ],
+  "timing_s": {
+    "identify": 0.0,
+    "search": 0.0,
+    "write": 0.0
+  }
+}

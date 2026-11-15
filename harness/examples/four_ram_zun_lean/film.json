@@ -1,0 +1,99 @@
+{
+  "title": "The Ram Who Woke Up",
+  "duration_s": 30,
+  "subject_name": "the Four-Ram Square Zun",
+  "hero": "the front ram facing the camera",
+  "still_parts": "the other three rams, the dragon heads and the vessel body",
+  "character_design": "A small stylized 3D bronze ram with the same dark silver-grey, lacquer-black patina, tightly curled spiral horns and scale-and-spiral pattern as the zun's rams, with big bright expressive eyes and a cheerful, curious face.",
+  "look": "Stylized 3D animation inside a dim museum glass case on a white plinth, warm ceiling spotlights glinting off silvery-grey bronze against a dark background.",
+  "voice": "A warm, friendly young male voice with a light neutral accent, speaking at an easy, cheerful pace as a voiceover.",
+  "lines": [
+    {
+      "t_start": 1.0,
+      "text": "Hi! I'm one of the four rams on this bronze zun.",
+      "fact_ids": [
+        1,
+        3
+      ]
+    },
+    {
+      "t_start": 5.8,
+      "text": "I'm about three thousand years old, from China's Shang Dynasty.",
+      "fact_ids": [
+        1,
+        4
+      ]
+    },
+    {
+      "t_start": 13.0,
+      "text": "Long ago, I held wine for sacred ceremonies.",
+      "fact_ids": [
+        1,
+        2,
+        5
+      ]
+    },
+    {
+      "t_start": 16.6,
+      "text": "I was dug up in Hunan in 1938.",
+      "fact_ids": [
+        5,
+        10
+      ]
+    },
+    {
+      "t_start": 20.2,
+      "text": "During the war, I was badly damaged, then repaired.",
+      "fact_ids": [
+        5,
+        10
+      ]
+    },
+    {
+      "t_start": 24.3,
+      "text": "Now I live at the National Museum of China.",
+      "fact_ids": [
+        11
+      ]
+    }
+  ],
+  "beats": [
+    {
+      "t_start": 0.0,
+      "t_end": 3.0,
+      "action": "Holds head-on at eye level on the still zun under its looming square mouth, as in the photo; the front ram's eye blinks by the third second."
+    },
+    {
+      "t_start": 3.0,
+      "t_end": 9.0,
+      "action": "Pushes in as the front ram wiggles, cracks its neck free from the vessel with a bronze creak, shakes its spiral horns and grins at the camera."
+    },
+    {
+      "t_start": 9.0,
+      "t_end": 13.0,
+      "action": "Bursts the ram out of the zun in a big leap over the flared rim, landing hard on the white plinth, hooves skidding, proud and silent."
+    },
+    {
+      "t_start": 13.0,
+      "t_end": 17.0,
+      "action": "Tilts up as the ram trots fast around the base while amber light rises like wine inside the vessel, making the scale patterns glow gold."
+    },
+    {
+      "t_start": 17.0,
+      "t_end": 24.0,
+      "action": "Orbits the zun as it splits into floating bronze pieces, the ram ducking between them, then every piece snaps back together with a ringing clang."
+    },
+    {
+      "t_start": 24.0,
+      "t_end": 30.0,
+      "action": "Pulls back to the opening angle as the ram springs into its corner and freezes into bronze; the zun stands whole and still, one last wink glinting."
+    }
+  ],
+  "sounds": [
+    "soft bronze creak as the ram's neck pulls free",
+    "heavy metallic clank of hooves landing on the plinth",
+    "gentle liquid swell as amber light rises in the vessel",
+    "bright ringing clang as the floating pieces snap back together",
+    "tiny chime with the ram's final wink"
+  ]
+}

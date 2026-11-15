@@ -1,0 +1,485 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Harness Explainer</title>
+<style>
+  :root {
+    --ink: #1c1b1f; --muted: #6d6a73; --line: #dcd8cf; --paper: #f6f4ef; --card: #ffffff;
+    --bronze: #a8692e; --bronze-soft: #f3e6d6; --teal: #2b7a72; --teal-soft: #dcefeb; --grey: #b9b5ad;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: #fff; }
+  body { font-family: -apple-system, "SF Pro Display", "Helvetica Neue", "PingFang SC", sans-serif; color: var(--ink); }
+  #stage { position: absolute; inset: 0; overflow: hidden; background: #fff; }
+  .abs { position: absolute; }
+  .layer { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+
+  /* ---------- monitor scene ---------- */
+  #desk { background: radial-gradient(ellipse at 50% 40%, #eeece7 0%, #dedbd4 100%); }
+  #monitorWrap { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 50% 50%; }
+  #bezel { position: absolute; left: -64px; top: -64px; width: 2048px; height: 1208px; background: #18181b;
+           border-radius: 54px; box-shadow: 0 60px 120px rgba(0,0,0,.28); }
+  #bezel::after { content: ""; position: absolute; left: 50%; top: 22px; width: 14px; height: 14px; margin-left: -7px;
+           border-radius: 50%; background: #2c2c31; }
+  #stand { position: absolute; left: 760px; top: 1144px; width: 400px; height: 300px; }
+  #stand .neck { position: absolute; left: 120px; top: 0; width: 160px; height: 220px;
+           background: linear-gradient(90deg, #c9c6c0, #e9e7e2 50%, #c3c0ba); }
+  #stand .foot { position: absolute; left: 0; top: 210px; width: 400px; height: 34px; border-radius: 17px;
+           background: linear-gradient(#e6e4df, #c3c0ba); }
+  #screen { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; background: #fff; overflow: hidden; }
+  #site { position: absolute; inset: 0; }
+  .nav { position: absolute; left: 0; top: 0; width: 1920px; height: 96px; border-bottom: 1px solid #eee;
+         display: flex; align-items: center; padding: 0 72px; gap: 14px; font-weight: 650; font-size: 30px; }
+  .logo-dot { width: 26px; height: 26px; border-radius: 50%; background: var(--bronze); }
+  .nav .links { margin-left: auto; display: flex; gap: 48px; font-weight: 500; font-size: 22px; color: var(--muted); }
+  #sitePhoto { position: absolute; left: 260px; top: 170px; width: 470px; height: 826px; border-radius: 28px;
+               overflow: hidden; box-shadow: 0 24px 60px rgba(0,0,0,.14); }
+  #sitePhoto img { width: 100%; height: 100%; object-fit: cover; }
+  #siteScan { position: absolute; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, transparent, #f2b066, transparent);
+              box-shadow: 0 0 24px #f2b066; }
+  #siteRight { position: absolute; left: 840px; top: 260px; width: 860px; }
+  #siteRight h1 { font-size: 64px; font-weight: 700; letter-spacing: -1px; }
+  #siteRight p { font-size: 28px; color: var(--muted); margin-top: 16px; }
+  .bar { margin-top: 48px; width: 760px; height: 12px; border-radius: 6px; background: #efece6; overflow: hidden; }
+  .bar i { display: block; height: 100%; width: 0; background: var(--bronze); border-radius: 6px; }
+  #siteChips { margin-top: 48px; display: flex; flex-wrap: wrap; gap: 16px; width: 820px; }
+  .chip { padding: 14px 24px; border-radius: 999px; background: var(--bronze-soft); color: #6b3f15; font-size: 26px; font-weight: 600;
+          white-space: nowrap; }
+
+  /* ---------- harness scene ---------- */
+  #harness { background: var(--paper); }
+  #grid { position: absolute; inset: 0; opacity: .55;
+          background-image: linear-gradient(#e8e4dc 1px, transparent 1px), linear-gradient(90deg, #e8e4dc 1px, transparent 1px);
+          background-size: 60px 60px; }
+  #titleCard { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; display: flex; flex-direction: column;
+               align-items: center; justify-content: center; text-align: center; }
+  #titleCard .kicker { font-size: 28px; letter-spacing: 6px; text-transform: uppercase; color: var(--bronze); font-weight: 700; }
+  #titleCard h1 { font-size: 104px; font-weight: 750; letter-spacing: -2px; margin-top: 18px; }
+  #titleCard p { font-size: 34px; color: var(--muted); margin-top: 22px; }
+  #header { position: absolute; left: 96px; top: 52px; font-size: 22px; letter-spacing: 4px; text-transform: uppercase;
+            color: var(--bronze); font-weight: 700; }
+  #rail { position: absolute; left: 0; top: 120px; width: 1920px; height: 120px; }
+  #railLine { position: absolute; left: 190px; top: 30px; width: 1540px; height: 4px; background: var(--line); border-radius: 2px; }
+  #railFill { position: absolute; left: 190px; top: 30px; width: 0; height: 4px; background: var(--teal); border-radius: 2px; }
+  .node { position: absolute; top: 12px; width: 40px; height: 40px; margin-left: -20px; border-radius: 50%;
+          background: var(--paper); border: 4px solid var(--grey); display: flex; align-items: center; justify-content: center;
+          color: #fff; font-size: 20px; font-weight: 800; }
+  .nodeLabel { position: absolute; top: 66px; width: 220px; margin-left: -110px; text-align: center; font-size: 21px;
+               color: var(--muted); font-weight: 600; }
+  .panel { position: absolute; left: 0; top: 260px; width: 1920px; height: 780px; }
+  .left { position: absolute; left: 96px; top: 40px; width: 520px; }
+  .left .num { font-size: 26px; font-weight: 800; color: var(--bronze); letter-spacing: 2px; }
+  .left h2 { font-size: 66px; font-weight: 750; letter-spacing: -1.5px; margin-top: 8px; line-height: 1.05; }
+  .left p { font-size: 29px; line-height: 1.38; color: #46434b; margin-top: 22px; }
+  .badges { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 12px; }
+  .badge { padding: 9px 18px; border-radius: 10px; background: #fff; border: 1px solid var(--line); font-size: 21px; font-weight: 600;
+           color: #3b3940; font-family: "SF Mono", Menlo, monospace; }
+  .badge.time { background: var(--teal-soft); border-color: transparent; color: var(--teal); }
+  .vis { position: absolute; left: 700px; top: 0; width: 1140px; height: 780px; }
+  .card { position: absolute; background: var(--card); border-radius: 22px; box-shadow: 0 14px 40px rgba(40,30,10,.10);
+          border: 1px solid #ece8e0; }
+  .mono { font-family: "SF Mono", Menlo, monospace; }
+  .lbl { font-size: 19px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+  .tick { color: var(--teal); font-weight: 800; }
+  img.cover { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; display: block; }
+  img.contain { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .arrow { position: absolute; height: 4px; background: var(--grey); transform-origin: 0 50%; }
+  .arrow::after { content: ""; position: absolute; right: -4px; top: -9px; border-left: 18px solid var(--grey);
+                  border-top: 11px solid transparent; border-bottom: 11px solid transparent; }
+  #outro { position: absolute; inset: 0; }
+  #whiteout { position: absolute; inset: 0; background: #fff; pointer-events: none; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <!-- monitor scene -->
+  <div id="monitorLayer" class="layer">
+    <div id="desk" class="layer"></div>
+    <div id="monitorWrap">
+      <div id="stand"><div class="neck"></div><div class="foot"></div></div>
+      <div id="bezel"></div>
+      <div id="screen">
+        <div id="site">
+          <div class="nav"><div class="logo-dot"></div>Living Exhibit<div class="links"><span>Explore</span><span>Museums</span><span>About</span></div></div>
+          <div id="sitePhoto"><img src="assets/photo.jpg"><div id="siteScan"></div></div>
+          <div id="siteRight">
+            <h1 id="siteTitle">Reading your photo…</h1>
+            <p id="siteSub">Identifying the exhibit and checking sources</p>
+            <div class="bar"><i id="siteBar"></i></div>
+            <div id="siteChips"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- harness scene -->
+  <div id="harnessLayer" class="layer">
+    <div id="harness" class="layer"><div id="grid"></div></div>
+    <div id="titleCard">
+      <div class="kicker">Behind the screen</div>
+      <h1>How the agent makes the film</h1>
+      <p>The harness: prompts, tools, checks, and one photo</p>
+    </div>
+    <div id="header">The harness · one photo → one film</div>
+    <div id="rail"><div id="railLine"></div><div id="railFill"></div></div>
+    <div id="panels"></div>
+    <div id="outro"></div>
+  </div>
+  <div id="whiteout"></div>
+</div>
+
+<script>
+// ---------------- data (from the real Four-Ram Zun run) ----------------
+const KEYWORDS = ["Four-Ram Square Zun", "Late Shang dynasty", "Bronze · 34.5 kg", "Ritual wine vessel", "Largest square zun of the Shang"];
+const STEPS = [
+  { name: "See", title: "See", text: "Claude looks at the visitor's photo and names the object.", badges: ["Claude Opus · vision"], time: "9 s" },
+  { name: "Search", title: "Search", text: "Built-in web search and fetch. Every finding must quote its source word for word.", badges: ["web_search", "web_fetch"], time: "75 s" },
+  { name: "Keywords", title: "Keywords", text: "A separate fast request pulls short keywords for the progress screen, in parallel.", badges: ["side request"], time: "3 s" },
+  { name: "Understand", title: "Understand", text: "24 sourced facts. Keep what matters, drop trivia, shape a story that ends.", badges: ["Claude Opus · structured output"], time: "95 s" },
+  { name: "Plan images", title: "Plan images", text: "Reference images start rendering now, while the writing goes on.", badges: ["nano-banana-pro", "photo + prompt"], time: "24 s" },
+  { name: "Concept", title: "Concept", text: "Three ways to bring it alive. The most alive one wins.", badges: ["Claude Opus"], time: "48 s" },
+  { name: "Script ⇄ Review", title: "Script ⇄ Review", text: "A writer drafts. A separate reviewer audits every line and shot. Code enforces the hard rules.", badges: ["3 drafts", "truth 5/5"], time: "267 s" },
+  { name: "Generate", title: "Generate", text: "One request: the prompt and two reference images become 30 s of video with voice and sound.", badges: ["Seedance 2.5 · 720p"], time: "391 s" },
+];
+const T0 = 9.0, STEP = 4.4;           // step timeline
+const OUTRO = T0 + STEP * STEPS.length; // 44.2
+const DURATION = 48.0;
+
+// ---------------- helpers ----------------
+const $ = s => document.querySelector(s);
+const clamp = x => Math.max(0, Math.min(1, x));
+const io = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+const out = x => 1 - Math.pow(1 - x, 3);
+const back = x => { const c = 1.6; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const P = (t, a, b, f = io) => f(clamp((t - a) / (b - a)));
+function el(tag, cls, parent, html) { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; (parent || document.body).appendChild(e); return e; }
+function put(e, o) {
+  if (o.o != null) e.style.opacity = o.o;
+  const x = o.x || 0, y = o.y || 0, s = o.s == null ? 1 : o.s, r = o.r || 0;
+  e.style.transform = `translate(${x}px, ${y}px) scale(${s}) rotate(${r}deg)`;
+}
+function box(e, l, t, w, h) { e.style.left = l + "px"; e.style.top = t + "px"; if (w != null) e.style.width = w + "px"; if (h != null) e.style.height = h + "px"; return e; }
+const typed = (s, p) => s.slice(0, Math.round(s.length * clamp(p)));
+
+// ---------------- build: site chips ----------------
+const siteChips = KEYWORDS.map(k => el("div", "chip", $("#siteChips"), k));
+
+// ---------------- build: rail ----------------
+const RX0 = 190, RX1 = 1730;
+const nodes = STEPS.map((s, i) => {
+  const x = RX0 + (RX1 - RX0) * i / (STEPS.length - 1);
+  const n = el("div", "node", $("#rail")); n.style.left = x + "px";
+  const l = el("div", "nodeLabel", $("#rail"), s.name); l.style.left = x + "px";
+  return { n, l, x };
+});
+
+// ---------------- build: panels ----------------
+const panels = STEPS.map((s, i) => {
+  const p = el("div", "panel", $("#panels"));
+  const left = el("div", "left", p, `<div class="num">0${i + 1}</div><h2>${s.title}</h2><p>${s.text}</p>
+    <div class="badges">${s.badges.map(b => `<span class="badge">${b}</span>`).join("")}<span class="badge time">${s.time}</span></div>`);
+  const vis = el("div", "vis", p);
+  return { p, left, vis };
+});
+
+// 1. See
+const V1 = {};
+(() => {
+  const v = panels[0].vis;
+  V1.photo = box(el("div", "card", v, `<img class="cover" src="assets/photo.jpg">`), 40, 0, 400, 703);
+  V1.photo.style.overflow = "hidden";
+  V1.scan = box(el("div", "abs", V1.photo), 0, 0, 400, 5);
+  V1.scan.style.background = "linear-gradient(90deg, transparent, #f2b066, transparent)"; V1.scan.style.boxShadow = "0 0 30px #f2b066";
+  V1.corners = [];
+  [[30, -10], [410, -10], [30, 673], [410, 673]].forEach(([x, y], k) => {
+    const c = box(el("div", "abs", v), x, y, 40, 40);
+    c.style.border = "5px solid var(--bronze)";
+    c.style[k % 2 ? "borderLeft" : "borderRight"] = "none"; c.style[k > 1 ? "borderTop" : "borderBottom"] = "none";
+    V1.corners.push(c);
+  });
+  V1.out = box(el("div", "card", v), 520, 90, 600, 520);
+  V1.out.style.padding = "40px 44px";
+  V1.lines = [
+    ["recognized", "Four-Ram Square Zun"], ["period", "Late Shang dynasty"], ["what", "Bronze ritual wine vessel"],
+    ["museum", "National Museum of China, Beijing"], ["confidence", "high"],
+  ].map(([k, val]) => {
+    const r = el("div", "", V1.out, `<div class="lbl">${k}</div><div class="val" style="font-size:33px;font-weight:650;margin:6px 0 22px"></div>`);
+    return { r, v: r.querySelector(".val"), text: val };
+  });
+})();
+
+// 2. Search
+const V2 = {};
+(() => {
+  const v = panels[1].vis;
+  const qs = ["Four-Ram Square Zun National Museum of China", "四羊方尊 中国国家博物馆 高 重 出土 宁乡", "Siyang fangzun Ningxiang 1938 bronze casting rams"];
+  V2.q = qs.map((q, i) => {
+    const e = box(el("div", "card mono", v, `<span style="color:var(--bronze);font-weight:800">⌕</span>&nbsp; <span class="q"></span>`), 20, 10 + i * 92, 1080, 74);
+    e.style.padding = "20px 28px"; e.style.fontSize = "27px"; e.style.borderRadius = "40px";
+    return { e, s: e.querySelector(".q"), text: q };
+  });
+  const src = ["govt.chinadaily.com.cn", "zh.wikipedia.org", "chinanews.com.cn", "link.springer.com", "china.org.cn", "wikidata.org"];
+  V2.src = src.map((d, i) => {
+    const e = box(el("div", "card", v, `<div class="mono" style="font-size:20px;font-weight:700;white-space:nowrap">${d}</div>
+      <div style="font-size:21px;color:var(--muted);margin-top:10px">“…a quote that states the fact…”</div>
+      <div style="font-size:21px;margin-top:12px" class="tick">✓ quote verified</div>`),
+      20 + (i % 3) * 365, 320 + Math.floor(i / 3) * 170, 345, 150);
+    e.style.padding = "22px 26px"; return e;
+  });
+  V2.count = box(el("div", "abs", v), 20, 680, 1100, 60);
+  V2.count.style.fontSize = "30px"; V2.count.style.fontWeight = "700";
+})();
+
+// 3. Keywords
+const V3 = {};
+(() => {
+  const v = panels[2].vis;
+  V3.hub = box(el("div", "card", v, `<div class="lbl" style="text-align:center">progress screen</div>`), 360, 300, 380, 110);
+  V3.hub.style.padding = "40px 0"; V3.hub.style.borderRadius = "60px";
+  const pos = [[40, 60], [640, 40], [10, 560], [650, 580], [300, 640]];
+  V3.chips = KEYWORDS.map((k, i) => { const c = box(el("div", "chip abs", v, k), pos[i][0], pos[i][1]); c.style.fontSize = "34px"; c.style.padding = "20px 34px"; return c; });
+})();
+
+// 4. Understand
+const V4 = {};
+(() => {
+  const v = panels[3].vis;
+  const facts = [
+    ["Late Shang, 1300–1046 BC", 1], ["A ritual wine vessel", 1], ["Largest square zun of the Shang", 1], ["Now in the National Museum of China", 1],
+    ["Sold for 400 silver dollars", 0], ["A chip knocked off the rim", 0], ["Horns cast first, then joined", 1], ["Height 58.3 cm", 0],
+    ["Kept by a provincial bank", 0], ["Weighs about 34.5 kg", 0], ["Dealer bought it in May 1938", 0], ["Excavated in Ningxiang, 1938", 0],
+  ];
+  V4.cards = facts.map(([t, keep], i) => {
+    const e = box(el("div", "card", v, `<div style="font-size:24px;font-weight:600;line-height:1.25">${t}</div>`), 10 + (i % 4) * 280, 10 + Math.floor(i / 4) * 140, 260, 118);
+    e.style.padding = "20px 22px"; return { e, keep, i };
+  });
+  const spine = [["Who I am", "Late Shang bronze, 3,000+ years"], ["What I was for", "Wine for sacred ceremonies"],
+                 ["What happened", "Hit by bombs, then repaired"], ["Where I am now", "National Museum of China"]];
+  V4.spine = spine.map(([h, t], i) => {
+    const e = box(el("div", "card", v, `<div class="lbl" style="color:var(--bronze)">${h}</div><div style="font-size:26px;font-weight:650;margin-top:10px;line-height:1.25">${t}</div>`), 10 + i * 285, 500, 250, 160);
+    e.style.padding = "22px 24px"; e.style.borderTop = "6px solid var(--bronze)"; return e;
+  });
+  V4.arrows = [0, 1, 2].map(i => { const a = box(el("div", "arrow", v), 266 + i * 285, 578, 24); return a; });
+  V4.label = box(el("div", "abs lbl", v, "the story, with an ending"), 10, 455);
+})();
+
+// 5. Plan images
+const V5 = {};
+(() => {
+  const v = panels[4].vis;
+  V5.photo = box(el("div", "card", v, `<img class="cover" src="assets/photo.jpg">`), 20, 60, 330, 580); V5.photo.style.overflow = "hidden";
+  V5.photoLbl = box(el("div", "abs lbl", v, "visitor photo"), 20, 660);
+  V5.a1 = box(el("div", "arrow", v), 380, 250, 120);
+  V5.a2 = box(el("div", "arrow", v), 380, 450, 120);
+  V5.img1 = box(el("div", "card", v, `<img class="contain" src="assets/zun_now.png">`), 540, 20, 260, 456); V5.img1.style.overflow = "hidden"; V5.img1.style.background = "#eeeeee";
+  V5.img2 = box(el("div", "card", v, `<img class="contain" src="assets/ram_awake.png">`), 830, 150, 300, 168); V5.img2.style.overflow = "hidden"; V5.img2.style.background = "#eeeeee";
+  V5.l1 = box(el("div", "abs", v, `<div class="lbl" style="color:var(--bronze)">@Image1</div><div style="font-size:26px;font-weight:650">identity anchor</div>`), 540, 500);
+  V5.l2 = box(el("div", "abs", v, `<div class="lbl" style="color:var(--bronze)">@Image2</div><div style="font-size:26px;font-weight:650">the character</div>`), 830, 340);
+  V5.rule = box(el("div", "card", v, `<span class="tick">✓</span>&nbsp; No people in any reference image`), 540, 640, 590, 72);
+  V5.rule.style.padding = "20px 26px"; V5.rule.style.fontSize = "25px"; V5.rule.style.fontWeight = "600";
+})();
+
+// 6. Concept
+const V6 = {};
+(() => {
+  const v = panels[5].vis;
+  const cs = [["It notices you", "The visitor's flash wakes the front ram; it turns and looks back."],
+              ["Escape and return", "The ram jumps out, tells its story, and gets back in place."],
+              ["Material magic", "The bronze horns melt into glowing ribbons, then set again."]];
+  V6.cards = cs.map(([h, t], i) => {
+    const e = box(el("div", "card", v, `<div class="lbl">concept ${i + 1}</div><div style="font-size:38px;font-weight:750;margin-top:14px">${h}</div>
+      <div style="font-size:25px;color:#4a4750;margin-top:16px;line-height:1.35">${t}</div>`), 10 + i * 375, 90, 345, 420);
+    e.style.padding = "34px 30px"; return e;
+  });
+  V6.stamp = box(el("div", "abs", v, "chosen · most alive"), 420, 540);
+  V6.stamp.style.cssText += "padding:14px 26px;border-radius:12px;background:var(--bronze);color:#fff;font-size:26px;font-weight:750;letter-spacing:1px";
+})();
+
+// 7. Script ⇄ Review
+const V7 = {};
+(() => {
+  const v = panels[6].vis;
+  V7.script = box(el("div", "card", v, `<div class="lbl">script · draft <span id="draftN">1</span></div>`), 10, 0, 610, 720);
+  V7.script.style.padding = "32px 36px";
+  const lines = ["Hi! I'm one of the four rams on this zun.", "I'm over three thousand years old.", "People call us the biggest square zun of the Shang dynasty.",
+                 "Long ago, I held wine for sacred ceremonies.", "During the war, I was hit by bombs.", "I was repaired, and now I'm here."];
+  V7.lines = lines.map(l => el("div", "", V7.script, `<span style="color:var(--bronze);font-weight:800">“</span>${l}`));
+  V7.lines.forEach(e => { e.style.fontSize = "27px"; e.style.margin = "22px 0 0"; e.style.lineHeight = "1.3"; e.style.fontWeight = "560"; });
+  V7.review = box(el("div", "card", v, `<div class="lbl">reviewer + code checks</div>`), 660, 0, 470, 720);
+  V7.review.style.padding = "32px 36px";
+  const checks = ["Every line has a source", "Plain English", "Culture, not trivia", "One continuous take", "Under 300 words", "Exhibit ends whole"];
+  V7.checks = checks.map(c => { const e = el("div", "", V7.review, `<span class="tick">✓</span>&nbsp; ${c}`); e.style.fontSize = "28px"; e.style.margin = "30px 0 0"; e.style.fontWeight = "600"; return e; });
+  V7.loop = box(el("div", "abs mono", v, "⇄"), 612, 330); V7.loop.style.fontSize = "52px"; V7.loop.style.color = "var(--bronze)"; V7.loop.style.fontWeight = "800";
+})();
+
+// 8. Generate
+const V8 = {};
+(() => {
+  const v = panels[7].vis;
+  V8.prompt = box(el("div", "card mono", v, `<div class="lbl" style="font-family:inherit">seedance request</div><pre class="txt" style="white-space:pre-wrap;font-family:inherit;font-size:20px;line-height:1.5;margin-top:14px;color:#33313a"></pre>`), 10, 0, 690, 470);
+  V8.prompt.style.padding = "28px 32px"; V8.txt = V8.prompt.querySelector(".txt");
+  V8.text = "@Image1 = the Four-Ram Square Zun, identity anchor.\n@Image2 = the front ram as a character.\nOnly the front ram comes alive.\nOne continuous take, no cuts.\n0-3s: the ram's eye blinks open.\n3-9s: it bursts out of the vessel corner…\nVoiceover: \"Hi! I'm one of the four rams…\"\nNo music.";
+  V8.r1 = box(el("div", "card", v, `<img class="contain" src="assets/zun_now.png">`), 740, 10, 150, 263); V8.r1.style.overflow = "hidden"; V8.r1.style.background = "#eee";
+  V8.r2 = box(el("div", "card", v, `<img class="contain" src="assets/ram_awake.png">`), 920, 60, 210, 118); V8.r2.style.overflow = "hidden"; V8.r2.style.background = "#eee";
+  V8.film = [0, 1, 2, 3, 4, 5].map(i => {
+    const e = box(el("div", "card", v, `<div class="abs" style="left:0;top:0;height:100%;width:0;background:var(--bronze-soft)"></div>
+      <div class="abs" style="left:0;top:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:30px;color:var(--bronze)">${i === 0 ? "▶" : ""}</div>`), 10 + i * 190, 520, 176, 99);
+    e.style.overflow = "hidden"; e.style.borderRadius = "12px"; e.style.border = "2px dashed var(--grey)"; e.fill = e.firstChild; return e;
+  });
+  V8.filmLbl = box(el("div", "abs lbl", v, "30 s video · voice · sound · one continuous take"), 10, 645);
+})();
+
+// outro
+const O = {};
+O.card = box(el("div", "abs", $("#outro"), `<div style="font-size:28px;letter-spacing:6px;text-transform:uppercase;color:var(--bronze);font-weight:700">The harness</div>
+  <div style="font-size:92px;font-weight:750;letter-spacing:-2px;margin-top:18px">One photo → one film</div>
+  <div id="sumRow" style="display:flex;justify-content:center;gap:28px;margin-top:56px"></div>`), 0, 300, 1920);
+O.card.style.textAlign = "center";
+O.items = ["8 steps", "11 sources checked", "every line sourced", "about 15 minutes"].map(x => {
+  const e = el("div", "card", O.card.querySelector("#sumRow"), x); e.style.position = "relative"; e.style.padding = "22px 34px"; e.style.fontSize = "30px"; e.style.fontWeight = "700"; return e; });
+
+// ---------------- render(t) ----------------
+function render(t) {
+  // white open / close
+  const white = 1 - P(t, 0.1, 0.8);
+  $("#whiteout").style.opacity = clamp(white);
+
+  // --- monitor scene ---
+  const site = P(t, 0.6, 1.5, out);
+  $("#site").style.opacity = site;
+  $("#siteBar").style.width = (P(t, 1.2, 5.2, x => x) * 100) + "%";
+  $("#siteScan").style.top = (P(t, 1.0, 4.0, x => x) * 820) + "px";
+  siteChips.forEach((c, i) => { const p = P(t, 1.7 + i * 0.35, 2.1 + i * 0.35, back); put(c, { o: clamp(p * 2), s: 0.6 + 0.4 * p }); });
+  const zoom = P(t, 2.7, 4.8);
+  const scale = 1 - 0.44 * zoom;
+  const slide = P(t, 5.4, 6.7);
+  put($("#monitorWrap"), { s: scale, y: -40 * zoom, x: -2100 * slide });
+  $("#desk").style.opacity = 1;
+  $("#monitorLayer").style.display = t < 6.8 ? "block" : "none";
+
+  // --- harness scene slides in ---
+  put($("#harnessLayer"), { x: 1920 * (1 - slide) });
+  $("#harnessLayer").style.display = t > 5.3 ? "block" : "none";
+  const title = P(t, 6.5, 7.3, out) * (1 - P(t, 8.4, 9.0));
+  put($("#titleCard"), { o: title, y: 30 * (1 - P(t, 6.5, 7.3, out)) - 40 * P(t, 8.4, 9.0) });
+  const chrome = P(t, 8.6, 9.2) * (1 - P(t, OUTRO + 0.2, OUTRO + 0.8));
+  $("#header").style.opacity = chrome; $("#rail").style.opacity = chrome;
+
+  // rail state
+  const stepF = (t - T0) / STEP;
+  const active = Math.floor(stepF);
+  nodes.forEach((nd, i) => {
+    const done = i < active, act = i === active;
+    nd.n.style.borderColor = done ? "var(--teal)" : act ? "var(--bronze)" : "var(--grey)";
+    nd.n.style.background = done ? "var(--teal)" : act ? "var(--bronze)" : "var(--paper)";
+    nd.n.innerHTML = done ? "✓" : "";
+    nd.l.style.color = act ? "var(--ink)" : done ? "var(--teal)" : "var(--muted)";
+    nd.l.style.fontWeight = act ? "800" : "600";
+    const pulse = act ? 1 + 0.12 * Math.sin((t - T0) * 6) : 1;
+    put(nd.n, { s: pulse });
+  });
+  $("#railFill").style.width = Math.max(0, Math.min(1, stepF / (STEPS.length - 1))) * (RX1 - RX0) + "px";
+
+  // panels
+  panels.forEach((pn, i) => {
+    const lt = t - (T0 + i * STEP);
+    const vis = lt > -0.5 && lt < STEP + 0.1;
+    pn.p.style.display = vis ? "block" : "none";
+    if (!vis) return;
+    const inn = P(lt, -0.1, 0.45, out), outp = P(lt, STEP - 0.4, STEP);
+    put(pn.left, { o: inn * (1 - outp), x: -40 * (1 - inn) });
+    put(pn.vis, { o: inn * (1 - outp), x: 60 * (1 - inn) - 60 * outp });
+    STEP_FX[i](lt);
+  });
+
+  // outro
+  const ot = t - OUTRO;
+  $("#outro").style.display = ot > -0.1 ? "block" : "none";
+  if (ot > -0.1) {
+    put(O.card, { o: P(ot, 0.5, 1.1), y: 30 * (1 - P(ot, 0.5, 1.2, out)) });
+    O.items.forEach((e, k) => { const p = P(ot, 1.1 + k * 0.25, 1.5 + k * 0.25, back); put(e, { o: clamp(p * 1.5), s: 0.7 + 0.3 * p }); });
+  }
+}
+
+const STEP_FX = [
+  lt => { // see
+    V1.scan.style.top = (P(lt, 0.3, 2.4, x => x) * 700) + "px";
+    V1.scan.style.opacity = 1 - P(lt, 2.3, 2.6);
+    V1.corners.forEach((c, k) => { const p = P(lt, 0.2, 0.8, out); put(c, { o: p, x: (k % 2 ? 1 : -1) * 30 * (1 - p), y: (k > 1 ? 1 : -1) * 30 * (1 - p) }); });
+    put(V1.out, { o: P(lt, 0.8, 1.2) });
+    V1.lines.forEach((l, k) => { l.v.textContent = typed(l.text, P(lt, 1.0 + k * 0.45, 1.5 + k * 0.45, x => x)); l.r.style.opacity = lt > 1.0 + k * 0.45 ? 1 : 0.15; });
+  },
+  lt => { // search
+    V2.q.forEach((q, k) => { const a = 0.2 + k * 0.55; put(q.e, { o: P(lt, a, a + 0.25), y: 20 * (1 - P(lt, a, a + 0.3, out)) }); q.s.textContent = typed(q.text, P(lt, a + 0.1, a + 0.6, x => x)); });
+    V2.src.forEach((e, k) => { const a = 1.9 + k * 0.18; const p = P(lt, a, a + 0.35, back); put(e, { o: clamp(p * 1.5), s: 0.8 + 0.2 * p }); });
+    const c = P(lt, 2.6, 3.6, x => x);
+    V2.count.innerHTML = `<span style="color:var(--bronze)">${Math.round(5 * c)}</span> searches · <span style="color:var(--bronze)">${Math.round(23 * c)}</span> pages seen · <span style="color:var(--bronze)">${Math.round(11 * c)}</span> sources · <span class="tick">${Math.round(19 * c)}</span> verified findings`;
+    V2.count.style.opacity = P(lt, 2.5, 2.8);
+  },
+  lt => { // keywords
+    put(V3.hub, { o: P(lt, 0.1, 0.5), s: 0.9 + 0.1 * P(lt, 0.1, 0.6, out) });
+    V3.chips.forEach((c, k) => { const a = 0.6 + k * 0.4; const p = P(lt, a, a + 0.45, back); put(c, { o: clamp(p * 1.6), s: 0.4 + 0.6 * p, y: 30 * (1 - p) }); });
+  },
+  lt => { // understand
+    V4.cards.forEach(({ e, keep, i }) => {
+      const a = 0.1 + i * 0.06; const p = P(lt, a, a + 0.35, out);
+      const drop = keep ? 0 : P(lt, 1.6, 2.1);
+      put(e, { o: p * (1 - 0.75 * drop), y: 20 * (1 - p), s: 1 - 0.06 * drop });
+      e.style.textDecoration = drop > 0.5 ? "line-through" : "none";
+      e.style.color = drop > 0.5 ? "#9a968e" : "";
+    });
+    V4.spine.forEach((e, k) => { const a = 2.3 + k * 0.3; const p = P(lt, a, a + 0.4, back); put(e, { o: clamp(p * 1.5), y: 30 * (1 - p) }); });
+    V4.arrows.forEach((a, k) => { a.style.opacity = P(lt, 2.6 + k * 0.3, 2.8 + k * 0.3); });
+    V4.label.style.opacity = P(lt, 2.2, 2.6);
+  },
+  lt => { // plan images
+    put(V5.photo, { o: P(lt, 0.1, 0.4) }); V5.photoLbl.style.opacity = P(lt, 0.2, 0.5);
+    [V5.a1, V5.a2].forEach((a, k) => { a.style.opacity = P(lt, 0.6 + k * 0.2, 0.8 + k * 0.2); put(a, { s: 1 }); a.style.width = (120 * P(lt, 0.6 + k * 0.2, 1.0 + k * 0.2, out)) + "px"; });
+    // "rendering" shimmer then reveal
+    [V5.img1, V5.img2].forEach((e, k) => {
+      const a = 1.0 + k * 0.5, p = P(lt, a, a + 0.5, out), sharp = P(lt, a + 0.4, a + 1.2);
+      put(e, { o: p, s: 0.92 + 0.08 * p }); e.querySelector("img").style.filter = `blur(${(1 - sharp) * 18}px)`;
+    });
+    V5.l1.style.opacity = P(lt, 1.8, 2.1); V5.l2.style.opacity = P(lt, 2.3, 2.6);
+    put(V5.rule, { o: P(lt, 2.8, 3.1), y: 16 * (1 - P(lt, 2.8, 3.2, out)) });
+  },
+  lt => { // concept
+    V6.cards.forEach((e, k) => {
+      const a = 0.15 + k * 0.3, p = P(lt, a, a + 0.4, out), pick = P(lt, 2.0, 2.5);
+      const chosen = k === 1;
+      put(e, { o: p * (chosen ? 1 : 1 - 0.6 * pick), y: 30 * (1 - p) - (chosen ? 18 * pick : 0), s: chosen ? 1 + 0.05 * pick : 1 - 0.04 * pick });
+      e.style.borderColor = chosen && pick > 0.3 ? "var(--bronze)" : "#ece8e0"; e.style.borderWidth = chosen && pick > 0.3 ? "3px" : "1px";
+    });
+    const s = P(lt, 2.4, 2.8, back); put(V6.stamp, { o: clamp(s * 1.5), s: 0.6 + 0.4 * s, r: -4 * s });
+  },
+  lt => { // script & review
+    put(V7.script, { o: P(lt, 0.05, 0.35) }); put(V7.review, { o: P(lt, 0.2, 0.5) });
+    const d = lt < 1.6 ? 1 : lt < 2.4 ? 2 : 3; const dn = document.getElementById("draftN"); if (dn) dn.textContent = d;
+    V7.lines.forEach((e, k) => { e.style.opacity = P(lt, 0.3 + k * 0.22, 0.55 + k * 0.22); });
+    V7.checks.forEach((e, k) => { const a = 1.3 + k * 0.38; const p = P(lt, a, a + 0.3, back); put(e, { o: clamp(p * 1.4), x: -20 * (1 - p) }); });
+    put(V7.loop, { o: P(lt, 0.6, 0.9), r: lt * 180 * (lt < 2.6 ? 1 : 0) });
+  },
+  lt => { // generate
+    put(V8.prompt, { o: P(lt, 0.05, 0.3) });
+    V8.txt.textContent = typed(V8.text, P(lt, 0.2, 2.0, x => x));
+    [V8.r1, V8.r2].forEach((e, k) => {
+      const a = 0.4 + k * 0.25, p = P(lt, a, a + 0.4, out), suck = P(lt, 1.8, 2.3);
+      put(e, { o: p * (1 - suck), x: -380 * suck, y: 120 * suck, s: 1 - 0.6 * suck });
+    });
+    V8.film.forEach((e, k) => { const a = 2.3 + k * 0.16, p = P(lt, a, a + 0.35, back); put(e, { o: clamp(p * 1.5), x: 40 * (1 - p) });
+      e.fill.style.width = (P(lt, 2.6 + k * 0.18, 3.2 + k * 0.18, x => x) * 100) + "%"; });
+    V8.filmLbl.style.opacity = P(lt, 3.0, 3.3);
+  },
+];
+
+window.render = render;
+window.DURATION = DURATION;
+// live preview when opened directly: ?t=12 to freeze at a time, otherwise play
+const qt = new URLSearchParams(location.search).get("t");
+if (qt != null) render(parseFloat(qt));
+else if (!window.__capture) { const s = performance.now(); (function loop() { render(((performance.now() - s) / 1000) % DURATION); requestAnimationFrame(loop); })(); }
+</script>
+</body>
+</html>
