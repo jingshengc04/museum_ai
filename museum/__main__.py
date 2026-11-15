@@ -56,10 +56,24 @@ def main() -> None:
 
     sub.add_parser("status", help="show modes, prices and what material each exhibit has")
     sub.add_parser("check", help="test every API key and endpoint with free calls that spend no credits")
+
+    imp = sub.add_parser("import", help="put a film made by the agent's own tools (a harness run or example) into the library")
+    imp.add_argument("run", type=Path, help="folder with final.json and media/segments/seg_N.mp4")
+    imp.add_argument("--exhibit", required=True, help="exhibit id, e.g. hope")
+    imp.add_argument("--name", default="", help="name, for an exhibit that does not exist yet")
+    imp.add_argument("--museum", default="")
+    imp.add_argument("--photo", type=Path, help="picture for the first screen, if the exhibit has none")
     args = parser.parse_args()
 
     if args.command == "status":
         status()
+    elif args.command == "import":
+        try:
+            manifest, folder = pipeline.import_film(args.run, args.exhibit, _print_event, name=args.name,
+                                                    museum=args.museum, photo=args.photo)
+        except Exception as error:  # the CLI reports any failure the same way
+            sys.exit(f"Failed: {error}")
+        print(f"\n{folder / 'final.mp4'}  ({manifest['duration']:.1f}s) is now the library film for {manifest['exhibit']['name']}")
     elif args.command == "check":
         from . import check
 

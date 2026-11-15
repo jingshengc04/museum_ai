@@ -298,7 +298,10 @@ def build(exhibit: Exhibit, language: str, style: str, emit: Emit) -> Storyboard
 # ---------- which exhibit is in the photo? ----------
 
 def identify(photo: Path | None, candidates: list[Exhibit], emit: Emit) -> Exhibit:
-    if len(candidates) == 1 and not (photo and config.is_live("llm")):
+    if len(candidates) == 1 and not photo:
+        emit("thought", text=f"Opening {candidates[0].name}.")
+        return candidates[0]
+    if len(candidates) == 1 and not config.is_live("llm"):
         emit("thought", text=f"One exhibit is set up, so this is {candidates[0].name}. (Photo recognition is in mock mode.)")
         return candidates[0]
     if not (photo and config.is_live("llm")):

@@ -1,5 +1,5 @@
 {
-  "title": "Hope: the whale who came ashore",
+  "title": "Too Young for the Shallows",
   "exhibit": {
     "id": "hope",
     "name": "Hope the blue whale",
@@ -9,26 +9,26 @@
   },
   "language": "en",
   "style": "first_person",
-  "storyboard_origin": "hand-written",
+  "storyboard_origin": "agent",
   "video": "final.mp4",
   "captions_vtt": "captions.vtt",
-  "duration": 29.6,
+  "duration": 30.066,
   "word_joiner": " ",
   "shots": [
     {
       "id": 1,
       "start": 0.0,
-      "end": 15.0,
-      "narration": "I am Hope. Long ago, I swam the ocean as a blue whale. On the morning of 25 March 1891, I stranded on a sandbar at the mouth of Wexford Harbour, in Ireland.",
+      "end": 15.093,
+      "narration": "My skeleton is twenty-five point two metres long. And I wasn't yet fully grown.",
       "fact_ids": [
-        "name",
-        "stranding"
+        "length_25_2",
+        "not_fully_grown"
       ],
       "thumb": "thumbs/shot_01.jpg",
-      "prompt": "Action: First the huge blue whale skeleton hanging in a museum hall softly fills out into a living blue whale. Then she swims through open ocean and does one slow roll. Then, at dawn, she drifts into shallow water and comes to rest on a pale sandbar as small waves wash around her. Camera: Slow rise from the floor of the hall, then a gentle tracking shot beside her, ending in a slow push in at water level. Location: A grand Romanesque museum hall with terracotta arches, then deep blue open ocean, then the mouth of a harbour on the Irish coast at dawn in 1891. Mood: Wonder turning quiet and still. Character: Hope, an original semi-realistic stylized CG blue whale with deep blue mottled skin, a pale ribbed throat and small gentle eyes. Voice-over: Hope narrates off-screen in the warm, gentle voice of a young woman with a soft British accent, speaking clearly and unhurried, saying exactly these words and nothing else: \"I am Hope. Long ago, I swam the ocean as a blue whale. On the morning of 25 March 1891, I stranded on a sandbar at the mouth of Wexford Harbour, in Ireland.\" Sound: Deep underwater ocean ambience, slow distant whale song, soft low rumble, seamless loop, kept low under the voice. No music with lyrics. Semi-realistic stylized CG animation, deep blue mottled whale skin, soft volumetric light, cinematic composition, consistent character design, no text, no captions, no logos.",
+      "prompt": "References: @Image1 = the whale skeleton, identity anchor: shape, decoration and colours exactly as shown; ignore its background; @Image2 = skeleton in Hintze Hall from the first-floor balcony, visitor's photo angle (setting only); @Image3 = Hope the cartoon whale, the character: same design, colours and markings in every shot; ignore its background.\nOnly Hope the cartoon whale comes alive. The whale skeleton ends whole and unchanged.\nStylized 3D animated feature, light anime outlines, soft skylight daylight, grand Romanesque hall.\nShot 1 (0-3.5s) [the whale skeleton from @Image1, the setting from @Image2]: wide elevated balcony view, locked off. Tiny visitors stand frozen on staircase and floor, looking up; at 1.5s the skull's empty eye socket blinks open into a bright cartoon eye that swivels to camera. Shot 2 (3.5-8.5s) [the whale skeleton from @Image1, Hope the cartoon whale from @Image3]: close-up on skull and jaws, slow push-in to her eye. She shakes her head hard, cables twanging, and grins at camera, talking; pale bone -> blue-grey skin ripples fast from the jaw tips back over four seconds -> Hope's living head fills the frame. Shot 3 (8.5-15s) [the setting from @Image2, the whale skeleton from @Image1, Hope the cartoon whale from @Image3]: Whip pan: wide full hall, fast lateral tracking alongside her, then hold. Hope, free of the bare skeleton behind, surges the hall's length, tail beating hard, flipper skimming over frozen visitors on the staircase; cables swing in her wake; she brakes hard and hovers, looking back. End on a near-still image: hope hovering near-still above the grand staircase, looking back at camera, the bare skeleton hanging behind her.\nHope the cartoon whale speaks on screen, lips in sync, a young woman's voice, bright and warm, soft British accent, unhurried pace, playful with a hint of shyness: \"My skeleton is twenty-five point two metres long.\" \"And I wasn't yet fully grown.\"\nSound: Echoing stone hall; bone creak; cables twanging; deep whale call. No music.\nClean picture: no subtitles, captions, lettering, logos or watermark. Never two copies of the whale skeleton or of Hope the cartoon whale in one frame.",
       "refs": [],
-      "video_source": "mock",
-      "voice_source": "mock",
+      "video_source": "override",
+      "voice_source": "model",
       "fit": {
         "how": "native",
         "speed": 1.0,
@@ -37,19 +37,18 @@
     },
     {
       "id": 2,
-      "start": 14.6,
-      "end": 29.6,
-      "narration": "My skeleton was sold to the museum for 250 pounds. In July 2017 I was unveiled here in Hintze Hall. They named me Hope: a symbol of humanity's power to shape a sustainable future.",
+      "start": 14.973,
+      "end": 30.066,
+      "narration": "My youth wasn't enough to escape the shallows. I'm the only blue whale skeleton in a diving lunge.",
       "fact_ids": [
-        "sale",
-        "hintze",
-        "name"
+        "diving_lunge_only",
+        "youth_not_enough"
       ],
       "thumb": "thumbs/shot_02.jpg",
-      "prompt": "Action: First the whale floats past wooden crates in a storeroom as her body turns softly translucent, a glowing skeleton showing inside. Then she sweeps down into a grand museum hall in one long glide as visitors look up, turns to face the viewer and comes gently closer. Camera: Slow sideways dolly, then a wide shot following her glide, ending at eye level with a slow push in to her eye. Location: A dim Victorian museum storeroom with warm gas lamps, then a grand Romanesque museum hall with terracotta arches in bright daylight. Mood: Curious, then soaring, then warm and hopeful. Character: Hope, an original semi-realistic stylized CG blue whale with deep blue mottled skin, a pale ribbed throat and small gentle eyes. Voice-over: Hope narrates off-screen in the warm, gentle voice of a young woman with a soft British accent, speaking clearly and unhurried, saying exactly these words and nothing else: \"My skeleton was sold to the museum for 250 pounds. In July 2017 I was unveiled here in Hintze Hall. They named me Hope: a symbol of humanity's power to shape a sustainable future.\" Sound: Deep underwater ocean ambience, slow distant whale song, soft low rumble, seamless loop, kept low under the voice. No music with lyrics. Semi-realistic stylized CG animation, deep blue mottled whale skin, soft volumetric light, cinematic composition, consistent character design, no text, no captions, no logos.",
+      "prompt": "References: @Image1 = the whale skeleton, identity anchor: shape, decoration and colours exactly as shown; ignore its background; @Image2 = skeleton in Hintze Hall from the first-floor balcony, visitor's photo angle (setting only); @Image3 = Hope the cartoon whale, the character: same design, colours and markings in every shot; ignore its background.\nOnly Hope the cartoon whale comes alive. The whale skeleton ends whole and unchanged.\nStylized 3D animated feature, light anime outlines, soft skylight daylight, grand Romanesque hall.\nShot 1 (0-4.5s) [Hope the cartoon whale from @Image3, the setting from @Image2]: medium close-up, slow push-in to her eyes. Hope hovers above the staircase, looks down at frozen tiny visitors, eyes softening, flippers drooping as she speaks, then her tail snaps once, hard. Shot 2 (4.5-9.5s) [Hope the cartoon whale from @Image3, the whale skeleton from @Image1, the setting from @Image2]: wide at balcony height, 4.5-5.5s fast tilt up, 5.5-9.5s hold wide. Hope rockets to the glazed roof, flips, plunges full speed into the hanging bones, jaw thrown open, throat pleats ballooning; cables swing hard; a deep thud as it locks; blue skin -> streams off into the hanging bones snout to tail over four seconds -> skeleton locked in dive pose. Shot 3 (9.5-15s) [the setting from @Image2, the whale skeleton from @Image1]: wide elevated balcony view, visitor's photo angle, locked off. The skeleton hangs whole and still, jaws angled down; one cable still trembles and a last shimmer of blue fades along the lower jaw.\nHope the cartoon whale speaks on screen, lips in sync, a young woman's voice, bright and warm, soft British accent, unhurried pace, playful with a hint of shyness: \"My youth wasn't enough to escape the shallows.\" \"I'm the only blue whale skeleton in a diving lunge.\"\nSound: Echoing stone hall hush; air whoosh; bones locking thud; cable twang. No music.\nClean picture: no subtitles, captions, lettering, logos or watermark. Never two copies of the whale skeleton or of Hope the cartoon whale in one frame.",
       "refs": [],
-      "video_source": "mock",
-      "voice_source": "mock",
+      "video_source": "override",
+      "voice_source": "model",
       "fit": {
         "how": "native",
         "speed": 1.0,
@@ -59,428 +58,180 @@
   ],
   "captions": [
     {
-      "start": 0.55,
-      "end": 1.523,
-      "text": "I am Hope.",
-      "words": [
-        {
-          "w": "I",
-          "t0": 0.55,
-          "t1": 0.638
-        },
-        {
-          "w": "am",
-          "t0": 0.55,
-          "t1": 0.904
-        },
-        {
-          "w": "Hope.",
-          "t0": 0.55,
-          "t1": 1.435
-        }
-      ]
-    },
-    {
-      "start": 1.523,
-      "end": 4.796,
-      "text": "Long ago, I swam the ocean as a blue",
-      "words": [
-        {
-          "w": "Long",
-          "t0": 1.523,
-          "t1": 1.877
-        },
-        {
-          "w": "ago,",
-          "t0": 1.523,
-          "t1": 2.319
-        },
-        {
-          "w": "I",
-          "t0": 1.523,
-          "t1": 2.496
-        },
-        {
-          "w": "swam",
-          "t0": 1.523,
-          "t1": 2.938
-        },
-        {
-          "w": "the",
-          "t0": 1.523,
-          "t1": 3.292
-        },
-        {
-          "w": "ocean",
-          "t0": 1.523,
-          "t1": 3.823
-        },
-        {
-          "w": "as",
-          "t0": 1.523,
-          "t1": 4.088
-        },
-        {
-          "w": "a",
-          "t0": 1.523,
-          "t1": 4.265
-        },
-        {
-          "w": "blue",
-          "t0": 1.523,
-          "t1": 4.708
-        }
-      ]
-    },
-    {
-      "start": 4.796,
-      "end": 5.415,
-      "text": "whale.",
-      "words": [
-        {
-          "w": "whale.",
-          "t0": 4.796,
-          "t1": 5.327
-        }
-      ]
-    },
-    {
-      "start": 5.415,
-      "end": 8.512,
-      "text": "On the morning of 25 March 1891, I",
-      "words": [
-        {
-          "w": "On",
-          "t0": 5.415,
-          "t1": 5.592
-        },
-        {
-          "w": "the",
-          "t0": 5.415,
-          "t1": 5.946
-        },
-        {
-          "w": "morning",
-          "t0": 5.415,
-          "t1": 6.654
-        },
-        {
-          "w": "of",
-          "t0": 5.415,
-          "t1": 6.919
-        },
-        {
-          "w": "25",
-          "t0": 5.415,
-          "t1": 7.185
-        },
-        {
-          "w": "March",
-          "t0": 5.415,
-          "t1": 7.715
-        },
-        {
-          "w": "1891,",
-          "t0": 5.415,
-          "t1": 8.246
-        },
-        {
-          "w": "I",
-          "t0": 5.415,
-          "t1": 8.423
-        }
-      ]
-    },
-    {
-      "start": 8.512,
-      "end": 11.873,
-      "text": "stranded on a sandbar at the mouth of",
-      "words": [
-        {
-          "w": "stranded",
-          "t0": 8.512,
-          "t1": 9.219
-        },
-        {
-          "w": "on",
-          "t0": 8.512,
-          "t1": 9.485
-        },
-        {
-          "w": "a",
-          "t0": 8.512,
-          "t1": 9.662
-        },
-        {
-          "w": "sandbar",
-          "t0": 8.512,
-          "t1": 10.369
-        },
-        {
-          "w": "at",
-          "t0": 8.512,
-          "t1": 10.635
-        },
-        {
-          "w": "the",
-          "t0": 8.512,
-          "t1": 10.988
-        },
-        {
-          "w": "mouth",
-          "t0": 8.512,
-          "t1": 11.519
-        },
-        {
-          "w": "of",
-          "t0": 8.512,
-          "t1": 11.785
-        }
-      ]
-    },
-    {
-      "start": 11.873,
-      "end": 14.6,
-      "text": "Wexford Harbour, in Ireland.",
-      "words": [
-        {
-          "w": "Wexford",
-          "t0": 11.873,
-          "t1": 12.492
-        },
-        {
-          "w": "Harbour,",
-          "t0": 11.873,
-          "t1": 13.288
-        },
-        {
-          "w": "in",
-          "t0": 11.873,
-          "t1": 13.554
-        },
-        {
-          "w": "Ireland.",
-          "t0": 11.873,
-          "t1": 14.35
-        }
-      ]
-    },
-    {
-      "start": 15.15,
-      "end": 18.157,
-      "text": "My skeleton was sold to the museum for",
+      "start": 1.8,
+      "end": 5.0,
+      "text": "My skeleton is 25.2 metres long.",
       "words": [
         {
           "w": "My",
-          "t0": 15.15,
-          "t1": 15.304
+          "t0": 1.8,
+          "t1": 5.0
         },
         {
           "w": "skeleton",
-          "t0": 15.15,
-          "t1": 15.998
+          "t0": 1.8,
+          "t1": 5.0
         },
         {
-          "w": "was",
-          "t0": 15.15,
-          "t1": 16.306
+          "w": "is",
+          "t0": 1.8,
+          "t1": 5.0
         },
         {
-          "w": "sold",
-          "t0": 15.15,
-          "t1": 16.692
+          "w": "25.2",
+          "t0": 1.8,
+          "t1": 5.0
         },
         {
-          "w": "to",
-          "t0": 15.15,
-          "t1": 16.923
+          "w": "metres",
+          "t0": 1.8,
+          "t1": 5.0
         },
         {
-          "w": "the",
-          "t0": 15.15,
-          "t1": 17.232
-        },
-        {
-          "w": "museum",
-          "t0": 15.15,
-          "t1": 17.771
-        },
-        {
-          "w": "for",
-          "t0": 15.15,
-          "t1": 18.08
+          "w": "long.",
+          "t0": 1.8,
+          "t1": 5.0
         }
       ]
     },
     {
-      "start": 18.157,
-      "end": 19.082,
-      "text": "250 pounds.",
+      "start": 5.6,
+      "end": 8.0,
+      "text": "And I wasn't yet fully grown.",
       "words": [
         {
-          "w": "250",
-          "t0": 18.157,
-          "t1": 18.388
-        },
-        {
-          "w": "pounds.",
-          "t0": 18.157,
-          "t1": 19.005
-        }
-      ]
-    },
-    {
-      "start": 19.082,
-      "end": 21.857,
-      "text": "In July 2017 I was unveiled here in",
-      "words": [
-        {
-          "w": "In",
-          "t0": 19.082,
-          "t1": 19.236
-        },
-        {
-          "w": "July",
-          "t0": 19.082,
-          "t1": 19.622
-        },
-        {
-          "w": "2017",
-          "t0": 19.082,
-          "t1": 20.007
+          "w": "And",
+          "t0": 5.6,
+          "t1": 8.0
         },
         {
           "w": "I",
-          "t0": 19.082,
-          "t1": 20.161
+          "t0": 5.6,
+          "t1": 8.0
         },
         {
-          "w": "was",
-          "t0": 19.082,
-          "t1": 20.47
+          "w": "wasn't",
+          "t0": 5.6,
+          "t1": 8.0
         },
         {
-          "w": "unveiled",
-          "t0": 19.082,
-          "t1": 21.163
+          "w": "yet",
+          "t0": 5.6,
+          "t1": 8.0
         },
         {
-          "w": "here",
-          "t0": 19.082,
-          "t1": 21.549
+          "w": "fully",
+          "t0": 5.6,
+          "t1": 8.0
         },
         {
-          "w": "in",
-          "t0": 19.082,
-          "t1": 21.78
+          "w": "grown.",
+          "t0": 5.6,
+          "t1": 8.0
         }
       ]
     },
     {
-      "start": 21.857,
-      "end": 22.859,
-      "text": "Hintze Hall.",
+      "start": 15.773,
+      "end": 18.973,
+      "text": "My youth wasn't enough to escape the shallows.",
       "words": [
         {
-          "w": "Hintze",
-          "t0": 21.857,
-          "t1": 22.32
+          "w": "My",
+          "t0": 15.773,
+          "t1": 18.973
         },
         {
-          "w": "Hall.",
-          "t0": 21.857,
-          "t1": 22.782
-        }
-      ]
-    },
-    {
-      "start": 22.859,
-      "end": 25.327,
-      "text": "They named me Hope: a symbol of",
-      "words": [
-        {
-          "w": "They",
-          "t0": 22.859,
-          "t1": 23.168
+          "w": "youth",
+          "t0": 15.773,
+          "t1": 18.973
         },
         {
-          "w": "named",
-          "t0": 22.859,
-          "t1": 23.63
+          "w": "wasn't",
+          "t0": 15.773,
+          "t1": 18.973
         },
         {
-          "w": "me",
-          "t0": 22.859,
-          "t1": 23.862
-        },
-        {
-          "w": "Hope:",
-          "t0": 22.859,
-          "t1": 24.324
-        },
-        {
-          "w": "a",
-          "t0": 22.859,
-          "t1": 24.478
-        },
-        {
-          "w": "symbol",
-          "t0": 22.859,
-          "t1": 25.018
-        },
-        {
-          "w": "of",
-          "t0": 22.859,
-          "t1": 25.249
-        }
-      ]
-    },
-    {
-      "start": 25.327,
-      "end": 28.41,
-      "text": "humanity's power to shape a sustainable",
-      "words": [
-        {
-          "w": "humanity's",
-          "t0": 25.327,
-          "t1": 26.097
-        },
-        {
-          "w": "power",
-          "t0": 25.327,
-          "t1": 26.56
+          "w": "enough",
+          "t0": 15.773,
+          "t1": 18.973
         },
         {
           "w": "to",
-          "t0": 25.327,
-          "t1": 26.791
+          "t0": 15.773,
+          "t1": 18.973
         },
         {
-          "w": "shape",
-          "t0": 25.327,
-          "t1": 27.254
+          "w": "escape",
+          "t0": 15.773,
+          "t1": 18.973
         },
         {
-          "w": "a",
-          "t0": 25.327,
-          "t1": 27.408
+          "w": "the",
+          "t0": 15.773,
+          "t1": 18.973
         },
         {
-          "w": "sustainable",
-          "t0": 25.327,
-          "t1": 28.333
+          "w": "shallows.",
+          "t0": 15.773,
+          "t1": 18.973
         }
       ]
     },
     {
-      "start": 28.41,
-      "end": 29.2,
-      "text": "future.",
+      "start": 24.673,
+      "end": 28.673,
+      "text": "I'm the only blue whale skeleton in a diving lunge.",
       "words": [
         {
-          "w": "future.",
-          "t0": 28.41,
-          "t1": 28.95
+          "w": "I'm",
+          "t0": 24.673,
+          "t1": 28.673
+        },
+        {
+          "w": "the",
+          "t0": 24.673,
+          "t1": 28.673
+        },
+        {
+          "w": "only",
+          "t0": 24.673,
+          "t1": 28.673
+        },
+        {
+          "w": "blue",
+          "t0": 24.673,
+          "t1": 28.673
+        },
+        {
+          "w": "whale",
+          "t0": 24.673,
+          "t1": 28.673
+        },
+        {
+          "w": "skeleton",
+          "t0": 24.673,
+          "t1": 28.673
+        },
+        {
+          "w": "in",
+          "t0": 24.673,
+          "t1": 28.673
+        },
+        {
+          "w": "a",
+          "t0": 24.673,
+          "t1": 28.673
+        },
+        {
+          "w": "diving",
+          "t0": 24.673,
+          "t1": 28.673
+        },
+        {
+          "w": "lunge.",
+          "t0": 24.673,
+          "t1": 28.673
         }
       ]
     }
@@ -490,7 +241,7 @@
       "id": "stranding",
       "text": "Hope was a female blue whale. She stranded on a sandbar at the mouth of Wexford Harbour, Ireland, on the morning of 25 March 1891.",
       "source": "https://www.nhm.ac.uk/discover/news/2018/march/a-cetacean-relation.html",
-      "used": true
+      "used": false
     },
     {
       "id": "not_grown",
@@ -502,7 +253,7 @@
       "id": "sale",
       "text": "The 4.5-tonne skeleton was sold to the Natural History Museum for £250.",
       "source": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html",
-      "used": true
+      "used": false
     },
     {
       "id": "mammal_hall",
@@ -514,7 +265,7 @@
       "id": "hintze",
       "text": "The skeleton was moved to Hintze Hall and unveiled there in July 2017.",
       "source": "https://nhm.ac.uk/discover/news/2017/july/museum-unveils-hope-the-blue-whale-skeleton.html",
-      "used": true
+      "used": false
     },
     {
       "id": "dippy",
@@ -526,7 +277,7 @@
       "id": "name",
       "text": "She was named Hope \"as a symbol of humanity's power to shape a sustainable future\".",
       "source": "https://nhm.ac.uk/discover/news/2017/july/museum-unveils-hope-the-blue-whale-skeleton.html",
-      "used": true
+      "used": false
     },
     {
       "id": "length",
@@ -536,13 +287,20 @@
     }
   ],
   "modes": {
-    "llm": false,
+    "llm": true,
     "voice": false,
-    "video": false
+    "video": true
   },
-  "fingerprint": "b20732e4a5194d95103e3f2f",
+  "fingerprint": "3ac4fc6d936772c36ae58568",
   "ambient_source": "model",
   "video_model": "bytedance/seedance-2.0/fast/reference-to-video",
-  "fal_cost_usd": 0,
-  "seconds_to_make": 4.2
+  "fal_cost_usd": 0.0,
+  "seconds_to_make": 3.9,
+  "agent": {
+    "run": "hope_alive_480p",
+    "status": "NEEDS_HUMAN",
+    "claude_cost_usd": 0.0,
+    "voice": "A young woman's voice, bright and warm, soft British accent, unhurried pace, playful with a hint of shyness.",
+    "music": "no music"
+  }
 }

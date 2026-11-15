@@ -54,9 +54,9 @@ def _vtt(cues: list[dict]) -> str:
 
 # ---------- film library: an exhibit that already has a film does not get rendered again ----------
 
-def fingerprint(exhibit: Exhibit, language: str, style: str) -> str:
+def fingerprint(exhibit: Exhibit, language: str, style: str, agent: bool | None = None) -> str:
     """Changes whenever the material a film is made from changes, so stale films are not reused."""
-    if config.use_agent():
+    if config.use_agent() if agent is None else agent:
         # The agent's prompts change often; a film stays good until the facts or reference images behind it change.
         assets = config.HARNESS_DIR / "knowledge" / exhibit.id / "assets"
         files = [f for f in [exhibit.pack, *sorted(assets.glob("*"))] if f and f.is_file()]
@@ -247,6 +247,15 @@ def _agent_exhibit(run: script_agent.AgentRun) -> Exhibit:
 
 def _board_from_agent(run: script_agent.AgentRun) -> storyboard.Storyboard:
     """One shot per video segment, in the shape the rest of the pipeline and the page expect."""
+    if not run.script.get("segments"):  # a hand-written hand-off with no script.json
+        shots, start = [], 0.0
+        for n, request in enumerate(run.final.get("video_requests", []), start=1):
+            seconds = int(request["duration"])
+            said = [s["text"] for s in run.final.get("subtitles", []) if start <= s["t_start"] < start + seconds]
+            shots.append(storyboard.Shot(id=n, narration=" ".join(said), action=run.final.get("title", ""), camera="",
+                                         location="", mood="", seconds=seconds))
+            start += seconds
+        return storyboard.Storyboard(title=run.final.get("title", ""), shots=shots, origin="agent")
     shots = []
     for n, segment in enumerate(run.script.get("segments", []), start=1):
         lines = segment.get("narration", [])
@@ -264,8 +273,12 @@ def _board_from_agent(run: script_agent.AgentRun) -> storyboard.Storyboard:
     return storyboard.Storyboard(title=run.final.get("title") or run.script.get("title", ""), shots=shots, origin="agent")
 
 
-def _agent_film(job_dir: Path, exhibit: Exhibit, run: script_agent.AgentRun, board, emit: Emit) -> dict:
-    """Make the agent's script: its reference images from the visitor's photo, then its Seedance requests."""
+def _agent_film(job_dir: Path, exhibit: Exhibit, run: script_agent.AgentRun, board, emit: Emit,
+                clips: list[Path] | None = None) -> dict:
+    """Make the agent's script: its reference images from the visitor's photo, then its Seedance requests.
+
+    `clips` are finished segments (one per request) to use instead of generating anything.
+    """
     emit("step", step="video", status="start")
     final, live = run.final, config.is_live("video")
     photo = run.photo()
@@ -279,6 +292,14 @@ def _agent_film(job_dir: Path, exhibit: Exhibit, run: script_agent.AgentRun, boa
 
     def photo_for(job: dict) -> Path | None:
         return photo if "<visitor_photo>" in job["input"].get("image_urls", []) else None
+
+    if clips:
+        if len(clips) != len(requests):
+            raise RuntimeError(f"{len(clips)} clip(s) for {len(requests)} video request(s).")
+        plans = [video.ShotPlan(shot, int(request["duration"]), request["prompt"], [], "override", override=clip)
+                 for shot, request, clip in zip(board.shots, requests, clips)]
+        slots, total = _shoot(job_dir, exhibit, plans, "en", emit, False, fade=AGENT_CUT)
+        return _agent_finish(job_dir, run, board, plans, slots, total, 0.0, "model")
 
     # Budget first, before anything is paid for. A clip whose pictures are all cached may itself be cached.
     image_cost = sum(config.IMAGE_PRICE_USD for job in jobs.values() if live and not video.cached_image(prompt_of(job), photo_for(job)))
@@ -326,7 +347,13 @@ def _agent_film(job_dir: Path, exhibit: Exhibit, run: script_agent.AgentRun, boa
         emit("thought", text="Video is in mock mode: drawing animatic cards with a stand-in voice instead of spending fal credits.")
 
     slots, total = _shoot(job_dir, exhibit, plans, "en", emit, bool(paid), fade=AGENT_CUT)
+    return _agent_finish(job_dir, run, board, plans, slots, total, cost, "model" if live else "mock")
 
+
+def _agent_finish(job_dir: Path, run: script_agent.AgentRun, board, plans: list, slots: list[dict], total: float,
+                  cost: float, voiced: str) -> dict:
+    """Subtitles on the real timeline, and the parts of the manifest that describe the clips."""
+    final = run.final
     # The agent times its subtitles against back-to-back segments; move each onto the real timeline.
     starts, t = [], 0.0
     for shot in board.shots:
@@ -340,16 +367,17 @@ def _agent_film(job_dir: Path, exhibit: Exhibit, run: script_agent.AgentRun, boa
         cues.append({"start": start, "end": end, "text": cue["text"],
                      "words": [{"w": w, "t0": start, "t1": end} for w in cue["text"].split()]})
     (job_dir / "captions.vtt").write_text(_vtt(cues))
-    voiced = "model" if live else "mock"
     return {"slots": slots, "total": total, "plans": plans, "fits": [{"how": "native", "speed": 1.0, "freeze": 0.0} for _ in plans],
-            "voices": [voiced if p.source != "override" else "override" for p in plans], "cues": cues, "ambient": "model", "cost": cost}
+            "voices": [voiced for _ in plans], "cues": cues, "ambient": "model", "cost": cost}
 
 
 def make_film(job_dir: Path, language: str, style: str, emit: Emit, photo: Path | None = None,
-              exhibit_id: str | None = None, fresh: bool = False, save: bool = True) -> tuple[dict, Path]:
+              exhibit_id: str | None = None, fresh: bool = False, save: bool = True,
+              prepared: script_agent.AgentRun | None = None, clips: list[Path] | None = None) -> tuple[dict, Path]:
     """Make the film, or reuse the library's. Returns the manifest and the folder that holds the film.
 
     `fresh` renders even when the library has this film; `save` adds a new film to the library.
+    `prepared` is a finished agent run to use instead of running the agent, and `clips` its finished segments.
     """
     started = time.time()
     job_dir.mkdir(parents=True, exist_ok=True)
@@ -388,8 +416,10 @@ def make_film(job_dir: Path, language: str, style: str, emit: Emit, photo: Path 
 
     # 2. Storyboard: the script agent when it is on, otherwise storyboard.py or a hand-written file
     emit("step", step="story", status="start")
-    agent_run = None
-    if config.use_agent():
+    agent_run = prepared
+    if agent_run:
+        board = _board_from_agent(agent_run)
+    elif config.use_agent():
         # The agent only takes an exhibit id it has a knowledge pack for; otherwise it works from the photo.
         agent_run = script_agent.run(emit, exhibit_id=exhibit.id if exhibit and exhibit.pack else None, photo=photo)
         if exhibit is None or agent_run.final.get("exhibit_id") not in (exhibit.id, None):
@@ -409,14 +439,14 @@ def make_film(job_dir: Path, language: str, style: str, emit: Emit, photo: Path 
 
     # 3-5. Sound and picture: either the model voices its own clips, or we record narration and fit clips to it.
     if agent_run:
-        made = _agent_film(job_dir, exhibit, agent_run, board, emit)
+        made = _agent_film(job_dir, exhibit, agent_run, board, emit, clips)
     elif config.NATIVE_AUDIO:
         made = _native_film(job_dir, exhibit, board, language, emit, photo)
     else:
         made = _narrated_film(job_dir, exhibit, board, language, emit)
     slots, total, plans, cues, cost = made["slots"], made["total"], made["plans"], made["cues"], made["cost"]
 
-    facts = agent_run.facts if agent_run else exhibit.facts
+    facts = (agent_run.facts if agent_run else None) or exhibit.facts
     used = {fact_id for shot in board.shots for fact_id in shot.fact_ids}
     manifest = {
         "title": board.title,
@@ -446,8 +476,9 @@ def make_film(job_dir: Path, language: str, style: str, emit: Emit, photo: Path 
         ],
         "captions": cues,
         "facts": [{k: f[k] for k in ("id", "text", "source")} | {"used": f["id"] in used} for f in facts],
-        "modes": {name: m["live"] for name, m in config.modes().items()},
-        "fingerprint": fingerprint(exhibit, language, style),
+        # Finished clips handed in are real video, whatever the services are set to now.
+        "modes": {name: m["live"] for name, m in config.modes().items()} | ({"llm": True, "video": True} if clips else {}),
+        "fingerprint": fingerprint(exhibit, language, style, agent=True if agent_run else None),
         "ambient_source": made["ambient"],
         "video_model": config.VIDEO_MODEL,
         "fal_cost_usd": cost,
@@ -463,12 +494,50 @@ def make_film(job_dir: Path, language: str, style: str, emit: Emit, photo: Path 
     if save and exhibit.data.get("learned") and not (exhibit.dir / "exhibit.json").exists():
         exhibit.dir.mkdir(parents=True, exist_ok=True)
         (exhibit.dir / "exhibit.json").write_text(json.dumps(exhibit.data, ensure_ascii=False, indent=2) + "\n")
+        if photo and not exhibit.photo:
+            save_photo(photo, exhibit)
     if save:
         try:
             promote(job_dir)
         except (RuntimeError, FileNotFoundError):
             pass  # the library holds a real film and this one is a mock, or the exhibit has no home to keep films in
     return manifest, job_dir
+
+
+def save_photo(photo: Path, exhibit: Exhibit) -> Path:
+    """Keep a photo as the exhibit's picture on the first screen (JPEG, at most 1600 px)."""
+    from PIL import Image, ImageOps
+
+    target = exhibit.dir / "photo.jpg"
+    image = ImageOps.exif_transpose(Image.open(photo)).convert("RGB")
+    image.thumbnail((1600, 1600))
+    image.save(target, quality=88)
+    return target
+
+
+def import_film(run_dir: Path, exhibit_id: str, emit: Emit, name: str = "", museum: str = "", location: str = "",
+                photo: Path | None = None) -> tuple[dict, Path]:
+    """Put a film the agent's own tools already made (harness run or example folder) into the library."""
+    run = script_agent.load(run_dir)
+    clips = sorted((run_dir / "media" / "segments").glob("seg_*.mp4"), key=lambda p: int(p.stem.split("_")[1]))
+    if not clips:
+        raise FileNotFoundError(f"No finished segments in {run_dir / 'media' / 'segments'}")
+    try:
+        exhibit = exhibits.load(exhibit_id)
+    except FileNotFoundError:
+        if not name:
+            raise ValueError(f"'{exhibit_id}' is a new exhibit: give its name") from None
+        museum_name, _, place = museum.partition(",")
+        exhibit = Exhibit(id=exhibit_id, dir=config.EXHIBITS_DIR / exhibit_id, data={
+            "name": name, "museum": museum_name.strip(), "location": (location or place).strip(),
+            "hints": name, "facts": [{k: f[k] for k in ("id", "text", "source")} for f in run.facts], "learned": True})
+        exhibit.dir.mkdir(parents=True, exist_ok=True)
+        (exhibit.dir / "exhibit.json").write_text(json.dumps(exhibit.data, ensure_ascii=False, indent=2) + "\n")
+    if photo and not exhibit.photo:
+        save_photo(photo, exhibit)
+    run.final["exhibit_id"] = exhibit.id
+    job_dir = config.OUTPUT_DIR / f"{time.strftime('%m%d-%H%M%S')}-import-{exhibit.id}"
+    return make_film(job_dir, "en", "first_person", emit, exhibit_id=exhibit.id, fresh=True, prepared=run, clips=clips)
 
 
 def promote(job_dir: Path, force: bool = False) -> Path:

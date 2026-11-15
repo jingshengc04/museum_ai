@@ -70,9 +70,10 @@ def state() -> dict:
         "modes": config.modes(),
         "languages": config.LANGUAGES,
         "styles": config.STYLES,
-        # Exhibits known only from the agent's packs, or learned from visitors' photos, are recognised from photos
-        # but are not offered as samples.
-        "exhibits": [e.public() for e in found if not (e.data.get("from_pack") or e.data.get("learned"))],
+        # Offered on the first screen: exhibits with a film ready to play, and our own prepared ones. Any other
+        # exhibit (agent packs, objects learned from photos) is still recognised from a photo.
+        "exhibits": [e.public() for e in found
+                     if pipeline.library_hit(e, "en", "first_person") or not (e.data.get("from_pack") or e.data.get("learned"))],
         "video": {
             "model": config.VIDEO_MODEL,
             "resolution": config.VIDEO_RESOLUTION,
