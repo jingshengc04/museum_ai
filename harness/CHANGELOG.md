@@ -240,3 +240,70 @@ and schema (run it before spending tokens).
 - Content issue: the last line "During the war, bombs destroyed me" is sourced (China Daily) but the film never says the
   vessel was restored, because the museum page that explains the restoration failed the quote check and was dropped
   ("34.5" was not in its quote). Over a shot of the intact zun, it reads as a contradiction.
+
+## v2.0 — re-centre the harness: "make the exhibit act" (2026-11-14, user direction)
+
+The first film (zun, 480p) was technically clean but static. The user: the point is to bring the artifact alive with
+Seedance's freedom, e.g. Hope cartoonized and talking on screen. The rigidity was designed in: the harness was
+centred on avoiding mistakes ("the exhibit never moves or transforms", one slow camera move, no morphing, word caps,
+a reviewer with nothing that rewards aliveness).
+
+Round 6 workflow (5 agents: Seedance motion research, three directors for "awaken", "world returns", "character",
+synthesis; `research/round6/`). New centre:
+- Truth is split: SAID stays strict (spoken facts sourced); SHOWN is free but must read as fantasy, never staged as a
+  documentary record of a real event, no identifiable people, no unsourced places or dates.
+- Modes: character (DEFAULT, per user: stylized animated character with a face, speaking short lines on screen),
+  awaken (one part wakes in place), world_returns (the object holds still while its world moves).
+- Every 15 s: still -> stir -> act -> return; one hero; one high-amplitude beat with speed/force words; return to the
+  real exhibit at the visitor's angle with one trace of life.
+- Renderability = only Seedance's real failure modes (several movers, stacked moves, >1 transformation per shot,
+  instruction overflow, unbound/conflicting references, text, long lip-synced lines).
+
+Changes: schemas (Concept/Script mode, hero, want, big_move, return_trace, spectacle_shot, look, still_parts; ShotSpec
+beat, transition_in, transformation; new Scores incl. aliveness/spectacle/return_shot; Review.fantasy_legibility),
+S1b (identity anchor, in-place view, single-view character "_awake", optional turnaround/keyframe/world plates; no
+restorations, no labelled sheets), S2 (modes, engines A-H, choose by aliveness), S3 (rewritten), S4 (new rubric),
+seedance.py v2 (one job per reference, lock line instead of "no morphing", timecoded shots with transitions,
+transformation phrasing, on-screen speech, no "documentary"), checks (removed the motion vetoes; added one act beat
+with a force word, still/return beats, camera-move count, one transformation per shot, min transform time, short
+lines, no speech over the act, three sounds, return shot shows the real object, record/adjective filters), pass gate
+(aliveness/spectacle/return >= 4, fantasy pass, truth 5, rest >= 3).
+- generate.py made resumable (user asked about network drops): each fal job is submitted once and its request id is
+  saved in media/fal_state.json; on a network error it keeps polling that same job instead of resubmitting (which
+  would pay twice); uploads and finished results are cached there too; downloads skip finished files. Rerunning
+  `generate.py runs/<run>` after a crash resumes. Agent stages were already resumable through the cache.
+
+## v2.1: first "alive" films, moderation, voiceover default (2026-11-14 evening)
+
+- Hope, character mode, 30 s at 480p (`examples/hope_alive_480p`): the skeleton turns into a cartoon whale, swims the
+  hall, talks to camera, dives back into the bones. The exhibit clearly acts now. Agent S3/S4 7.3 min ($1.65),
+  generation 410 s (~$4.65).
+- Four-Ram Zun from the photo, search only, 15 s at 480p (`examples/four_ram_zun_alive_480p`): the front ram wakes,
+  jumps onto the plinth, flings its horns off glowing and catches them back; the vessel returns whole. Agent 516 s
+  ($2.32), generation 407 s (~$2.55). Weak spot: the cut skips the ram pulling free of the vessel.
+- Seedance (fal partner moderation) rejects any reference that may show a real person:
+  `content_policy_violation / partner_validation_failed`. Hit twice: visitors in Hintze Hall, and the photographer's
+  faint reflection on the bronze. Fixes: every image prompt ends with a hard-coded no-people rule (incl. reflections
+  and silhouettes); S1b's in-place view and S3 keep people out of frame; the request builder adds "No people in frame";
+  generate.py treats moderation/4xx as fatal (it used to wait forever thinking it was a network error), uses 60 s
+  HTTP timeouts, and on a moderation rejection retries the segment once without the in-place reference (tags renumbered).
+- Lines default to voiceover; on-screen talking only when a mouth suits the character (user: talking is not required;
+  a bronze ram acts with its body).
+- Direction-word cap 240 → 300 (S3 budget 280): the Hope film followed a ~300-word request well; 240 only kept the
+  review loop failing. Both runs still ended NEEDS_HUMAN on this check after three drafts (336–353 words).
+
+## v2.2: plain English, culture over trivia, one continuous take (2026-11-15)
+
+User feedback on the zun script: lines were odd and hard to follow ("Find the join; it's hard to see"), the story
+dwelt on trivia (400 silver dollars, a chip knocked off the rim) instead of culture, it had no ending, and in-clip cuts
+skipped the moment the ram broke free. Changes (v2.1 prompts archived in prompts/archive/v2.1):
+- S1: a "what matters" rule (identity, age, purpose, meaning, remarkable craft, big turns, where it is now; trivia
+  left out); default through-line shape who I am → what I was for → what happened → where I am now, which must end;
+  the controlling idea must be about significance, not a puzzle.
+- S2: plain self-introductions allowed; lines told in story order with an ending, in plain everyday English;
+  voiceover default.
+- S3: each 15 s segment is one continuous take (beats with transition "continuous", never cut away from a
+  transformation); lines rule rewritten for plain spoken English and importance; "collision" removed.
+- S4: voice_fit now scores naturalness, importance and an ending; a cut inside a segment counts as a render fault;
+  cap text 300.
+- seedance.py: a one-take segment is written "One continuous take, no cuts." with timed beats instead of "Shot n".

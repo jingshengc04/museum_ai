@@ -1,0 +1,172 @@
+{
+  "exhibit_id": "adhoc-four-ram-square-zun",
+  "title": "Caught Looking",
+  "logline": "The visitor's flash wakes the front ram, who catches them staring at his horns, flings them off in a glowing arc and catches them back into his head to show they were cast first and joined in.",
+  "duration_s": 15,
+  "mode": "character",
+  "hero_mover": "the front ram",
+  "hero_want": "Show off his horns",
+  "still_parts": "the other three rams and the rest of the vessel",
+  "look": "stylized 3D animated feature, soft rim light, gallery at night",
+  "return_trace": "A faint silvery glint runs once around the base of each horn on the still vessel and fades into the patina, leaving no visible seam.",
+  "style": "stylized",
+  "narrator_presence": "voiceover",
+  "voice": "A spry middle-aged male voice, warm deep bronze-toned baritone with a dry teasing edge, neutral English accent, quick playful pace.",
+  "narrator_attitude": "Amused and flattered to be caught being stared at; teases the visitor like a show-off who knows his best trick.",
+  "music_style": "no music",
+  "subject_name": "the Four-Ram Square Zun",
+  "living_form_name": "the bronze ram",
+  "subject_lock": "A dark grey-black Shang bronze square wine vessel with silvery-grey patina, flaring square mouth with hooked ridged flanges, four curly-horned ram heads at shoulder corners, densely patterned.",
+  "living_form_lock": "A stylized cartoon bronze ram, dark grey-black bronze with silvery-grey patina, thick spiralling ridged horns, scale-patterned chest, cloud-and-thunder spirals on flanks, large expressive dark eyes.",
+  "assets": [
+    {
+      "id": "zun_now",
+      "source": "generate",
+      "depicts": "exhibit_now",
+      "view": "the zun, exact shape and decoration",
+      "prompt": "From this photo, show the Four-Ram Square Zun alone at the same slightly-low three-quarter angle, the front ram head facing the viewer, on a plain seamless light grey background in even, soft, neutral studio light with all glare and reflections removed. A dark grey-black Shang bronze square wine vessel with silvery-grey patina, flaring square mouth with hooked ridged flanges, four curly-horned ram heads at shoulder corners, densely patterned. The tall flaring neck carries long banana-leaf blade panels edged by notched ridged flanges; the bulging shoulder holds four ram heads projecting from the corners, each with thick spiralling ridged horns curling forward around the ears, long snouts, and chests covered in overlapping scale pattern; the belly panels are filled with fine cloud-and-thunder spirals and beast-face patterns in silvery-grey relief on near-black ground; the square foot below has notched flanges, ram hooves in relief and banana-leaf panels. The whole vessel is fully visible, centred, sharp, with a soft contact shadow only. No text, labels, watermarks, people, glass case, reflections, spotlights, plinth or label card; no gold or green colour shift.",
+      "purpose": "Identity anchor for the exhibit's exact shape, colours and markings in every shot."
+    },
+    {
+      "id": "hall_inplace",
+      "source": "generate",
+      "depicts": "environment",
+      "view": "setting and final angle",
+      "prompt": "From this photo, keep the same angle and framing: the Four-Ram Square Zun standing on its white plinth in the dim gallery, a dark grey-black Shang bronze square wine vessel with silvery-grey patina, flaring square mouth with hooked ridged flanges, four curly-horned ram heads at shoulder corners, densely patterned. Remove every visitor and every reflection of people and phones, remove all glare and spotlight reflections so no glass is visible, remove the label card and any readable text. The background is an empty, softly lit warm-beige gallery wall and dark ceiling with a few distant display cases, no one present. The vessel keeps exactly its shape, its silvery-grey relief patterns and the front ram head facing the viewer, lit by a gentle top spotlight. No people, faces, signs, text or watermarks.",
+      "purpose": "Reference for the exhibit in its hall and for the final return shot."
+    },
+    {
+      "id": "ram_awake",
+      "source": "generate",
+      "depicts": "living_form",
+      "view": "the front ram character",
+      "prompt": "From this photo, design the front ram of the vessel as a stylized animated character: a stylized cartoon bronze ram, dark grey-black bronze with silvery-grey patina, thick spiralling ridged horns, scale-patterned chest, cloud-and-thunder spirals on flanks, large expressive dark eyes. A full-bodied, sturdy little ram standing on four hooves in three-quarter view, head slightly raised with a curious, proud, friendly expression and a soft closed smile; its horns curl forward around the ears exactly like the vessel's ram heads, with the same ridged spiral; its long snout, chest of overlapping scale pattern and flank panels of fine cloud-and-thunder spirals and banana-leaf motifs in silvery-grey relief on near-black bronze, now flexible like a living animal. Plain light grey background, even soft light, the ram alone, fully visible and centred. No text, labels, watermarks, people, vessel, other rams, glass, multiple poses, extra horns, gold or green colouring, or fluffy wool.",
+      "purpose": "Character reference for the front ram that comes alive, keeping the exhibit's bronze identity."
+    }
+  ],
+  "segments": [
+    {
+      "duration_s": 15.0,
+      "setting": "The empty gallery after hours, the zun on its white plinth under one top spotlight",
+      "ref_assets": [
+        "zun_now",
+        "hall_inplace",
+        "ram_awake"
+      ],
+      "shots": [
+        {
+          "t_start": 0.0,
+          "t_end": 3.0,
+          "beat": "still",
+          "transition_in": "cut",
+          "refs": [
+            "zun_now",
+            "hall_inplace"
+          ],
+          "framing": "medium, slightly low head-on, front ram centred",
+          "camera": "slow push-in, ending at chest height",
+          "transformation": "",
+          "action": "A white flash pops across the bronze; at two seconds the front ram's eye blinks once, then one ear flicks sharply.",
+          "visual": ""
+        },
+        {
+          "t_start": 3.0,
+          "t_end": 7.0,
+          "beat": "stir",
+          "transition_in": "cut",
+          "refs": [
+            "zun_now",
+            "ram_awake"
+          ],
+          "framing": "close-up on the front ram at the vessel corner",
+          "camera": "slow push-in",
+          "transformation": "rigid ram head -> softens and flows outward over four seconds, neck and forelegs pulling free -> front half leans out of the corner",
+          "action": "He strains forward hard and locks his eyes on camera.",
+          "visual": ""
+        },
+        {
+          "t_start": 7.0,
+          "t_end": 11.0,
+          "beat": "act",
+          "transition_in": "cut",
+          "refs": [
+            "ram_awake",
+            "hall_inplace"
+          ],
+          "framing": "low wide across the plinth top",
+          "camera": "locked off",
+          "transformation": "",
+          "action": "The ram leaps down heavily onto the plinth, whips his head hard; both horns fly off glowing and spin overhead; he snaps his head up and they slam back on, sparks skittering across the plinth.",
+          "visual": ""
+        },
+        {
+          "t_start": 11.0,
+          "t_end": 15.0,
+          "beat": "return",
+          "transition_in": "match cut on the horn spiral",
+          "refs": [
+            "hall_inplace",
+            "zun_now"
+          ],
+          "framing": "medium, the visitor's slightly low head-on angle",
+          "camera": "locked off",
+          "transformation": "",
+          "action": "The vessel stands whole and still; a faint silvery glint runs once around each horn base and fades.",
+          "visual": ""
+        }
+      ],
+      "narration": [
+        {
+          "t_start": 1.0,
+          "text": "You're staring at my horns, aren't you?",
+          "kind": "voice",
+          "fact_ids": []
+        },
+        {
+          "t_start": 3.9,
+          "text": "My horns were cast first, then joined in.",
+          "kind": "fact",
+          "fact_ids": [
+            "horns_cast_first"
+          ]
+        },
+        {
+          "t_start": 11.35,
+          "text": "Find the join; it's hard to see.",
+          "kind": "fact",
+          "fact_ids": [
+            "joins_hard_to_see"
+          ]
+        }
+      ],
+      "audio": {
+        "ambience": "gallery hum",
+        "sfx": [
+          "shutter click",
+          "bronze grinding",
+          "hooves thud",
+          "ringing clang, molten hiss"
+        ],
+        "music": "No music."
+      },
+      "end_frame": "The still Four-Ram Square Zun at the visitor's slightly low head-on angle, front ram facing the camera, horns in their spiral, the glint faded."
+    }
+  ],
+  "subtitles": [
+    {
+      "t_start": 1.0,
+      "t_end": 3.2,
+      "text": "You're staring at my horns, aren't you?"
+    },
+    {
+      "t_start": 3.9,
+      "t_end": 6.3,
+      "text": "My horns were cast first, then joined in."
+    },
+    {
+      "t_start": 11.35,
+      "t_end": 13.35,
+      "text": "Find the join; it's hard to see."
+    }
+  ]
+}

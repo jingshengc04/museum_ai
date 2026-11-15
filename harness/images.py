@@ -12,6 +12,10 @@ import schemas
 
 ENDPOINT = os.environ.get("IMAGE_ENDPOINT", "fal-ai/nano-banana-pro/edit")
 USD_PER_IMAGE = 0.15  # nano-banana-pro/edit, research/round1
+# Seedance's partner moderation rejects any reference image that may show a real person's likeness
+# ("content_policy_violation: partner_validation_failed"), and a visitor photo is usually full of people.
+NO_PEOPLE = ("No people anywhere in the image: the space is empty, every visitor and figure removed, including any "
+             "reflection, shadow or silhouette of a person on glass, metal or polished surfaces.")
 
 
 def jobs(plan: schemas.AssetPlan, existing: list[dict], photo: bool) -> list[dict]:
@@ -27,7 +31,7 @@ def jobs(plan: schemas.AssetPlan, existing: list[dict], photo: bool) -> list[dic
             "endpoint": ENDPOINT,
             "input": {
                 "image_urls": initial,
-                "prompt": f"{im.prompt.strip()} Avoid: {im.must_avoid.strip()}",
+                "prompt": f"{im.prompt.strip()} {NO_PEOPLE} Avoid: {im.must_avoid.strip()}",
             },
             "purpose": im.purpose,
             "est_usd": USD_PER_IMAGE,

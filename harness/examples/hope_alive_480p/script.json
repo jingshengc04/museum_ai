@@ -1,0 +1,241 @@
+{
+  "exhibit_id": "hope",
+  "title": "Too Young for the Shallows",
+  "logline": "Cartoon Hope slips out of her skeleton, measures herself against the whole hall and reveals she wasn't yet fully grown, then lunges back into the only diving pose of its kind.",
+  "duration_s": 30,
+  "mode": "character",
+  "hero_mover": "Hope the cartoon whale",
+  "hero_want": "To show how big she is",
+  "still_parts": "",
+  "look": "stylized 3D animated feature, light anime outlines, soft skylight daylight, grand Romanesque hall",
+  "return_trace": "One hanging cable still trembles and a last faint shimmer of blue fades along the lower jaw of the still skeleton.",
+  "style": "stylized",
+  "narrator_presence": "on_screen",
+  "voice": "A young woman's voice, bright and warm, soft British accent, unhurried pace, playful with a hint of shyness.",
+  "narrator_attitude": "Delighted to be noticed, eager to impress the visitor with her size, then tender and a little wistful about how young she was.",
+  "music_style": "no music",
+  "subject_name": "the whale skeleton",
+  "living_form_name": "Hope the cartoon whale",
+  "subject_lock": "A 25-metre blue whale skeleton of pale cream-grey bone suspended mid-dive by thin cables, long lower jaws and skull angled downward, spine and ribs arcing up behind.",
+  "living_form_lock": "A stylized cartoon blue whale, slender body, deep blue-grey mottled skin with soft lighter patches, pale ribbed throat, large expressive dark eyes, gentle smiling mouth, long slim flippers.",
+  "assets": [
+    {
+      "id": "hope_skeleton_now",
+      "source": "generate",
+      "depicts": "exhibit_now",
+      "view": "skeleton, three-quarter side view in dive pose, isolated",
+      "prompt": "From this photo, show only the whale skeleton, isolated on a plain light grey background, at the same three-quarter angle as the photo: a 25-metre blue whale skeleton of pale cream-grey bone suspended mid-dive by thin cables, long lower jaws and skull angled downward, spine and ribs arcing up behind. Show the full skeleton from jaw tips to tail vertebrae, with flipper bones visible, every vertebra and rib curve crisp. Even, soft neutral studio light, no glare, no harsh shadows, no reflections. Remove the hall, the architecture, the windows and all people. Photorealistic bone texture. No text, labels or watermarks.",
+      "purpose": "Identity anchor for the exhibit as it is now: exact bone shape, colour and dive pose."
+    },
+    {
+      "id": "hall_inplace",
+      "source": "generate",
+      "depicts": "environment",
+      "view": "skeleton in Hintze Hall from the first-floor balcony, visitor's photo angle",
+      "prompt": "From this photo, keep the exact same angle and framing of the Romanesque hall with its terracotta arches, carved stonework, glazed roof, stained-glass arched windows, grand staircase and white marble statue, with the whale skeleton hanging in the centre: a 25-metre blue whale skeleton of pale cream-grey bone suspended mid-dive by thin cables, long lower jaws and skull angled downward, spine and ribs arcing up behind. Keep only a few small, still, unidentifiable figures standing on the staircase and floor, seen from far away with no visible faces; remove all other visitors. Remove the hanging banners, signs, display text and any readable lettering. Remove glare and lens reflections. Soft natural daylight from the skylights, photorealistic.",
+      "purpose": "In-place view for the opening still shot, the hall-scale action and the final return shot; its few tiny still figures carry the scale gag."
+    },
+    {
+      "id": "hope_awake",
+      "source": "generate",
+      "depicts": "living_form",
+      "view": "cartoon Hope alive, three-quarter view, whole body",
+      "prompt": "From this photo, design the whale skeleton as a living character: Hope, a stylized cartoon blue whale shown alone in three-quarter view on a plain light grey-blue background. Slender, streamlined body, deep blue-grey mottled skin with soft lighter patches, pale ribbed throat with fine parallel grooves, large expressive dark eyes with a soft highlight, a long gently smiling mouth that can open to talk, long slim pale-edged flippers, small dorsal fin, broad tail flukes. Friendly, curious, young personality. Clean outline, lightly anime-styled with simplified mottling, as in the stylized design guide. Whole body visible from snout to tail flukes. Even soft light, no water, no hall, no text.",
+      "purpose": "Clean single-view character reference for Hope, derived from the labelled stylized sheet; keeps her design identical in every shot."
+    }
+  ],
+  "segments": [
+    {
+      "duration_s": 15.0,
+      "setting": "Hintze Hall, seen from the first-floor balcony",
+      "ref_assets": [
+        "hope_skeleton_now",
+        "hall_inplace",
+        "hope_awake"
+      ],
+      "shots": [
+        {
+          "t_start": 0.0,
+          "t_end": 3.5,
+          "beat": "still",
+          "transition_in": "cut",
+          "refs": [
+            "hope_skeleton_now",
+            "hall_inplace"
+          ],
+          "framing": "wide elevated balcony view",
+          "camera": "locked off",
+          "transformation": "",
+          "action": "Tiny visitors stand frozen on staircase and floor, looking up; at 1.5s the skull's empty eye socket blinks open into a bright cartoon eye that swivels to camera.",
+          "visual": ""
+        },
+        {
+          "t_start": 3.5,
+          "t_end": 8.5,
+          "beat": "stir",
+          "transition_in": "cut",
+          "refs": [
+            "hope_skeleton_now",
+            "hope_awake"
+          ],
+          "framing": "close-up on skull and jaws",
+          "camera": "slow push-in to her eye",
+          "transformation": "pale bone -> blue-grey skin ripples fast from the jaw tips back over four seconds -> Hope's living head fills the frame",
+          "action": "She shakes her head hard, cables twanging, and grins at camera, talking.",
+          "visual": ""
+        },
+        {
+          "t_start": 8.5,
+          "t_end": 15.0,
+          "beat": "act",
+          "transition_in": "whip pan",
+          "refs": [
+            "hall_inplace",
+            "hope_skeleton_now",
+            "hope_awake"
+          ],
+          "framing": "wide full hall",
+          "camera": "fast lateral tracking alongside her, then hold",
+          "transformation": "",
+          "action": "Hope, free of the bare skeleton behind, surges the hall's length, tail beating hard, flipper skimming over frozen visitors on the staircase; cables swing in her wake; she brakes hard and hovers, looking back.",
+          "visual": ""
+        }
+      ],
+      "narration": [
+        {
+          "t_start": 1.8,
+          "text": "My skeleton is twenty-five point two metres long.",
+          "kind": "fact",
+          "fact_ids": [
+            "length_25_2"
+          ]
+        },
+        {
+          "t_start": 5.6,
+          "text": "And I wasn't yet fully grown.",
+          "kind": "fact",
+          "fact_ids": [
+            "not_fully_grown"
+          ]
+        }
+      ],
+      "audio": {
+        "ambience": "Echoing stone hall",
+        "sfx": [
+          "bone creak",
+          "cables twanging",
+          "deep whale call"
+        ],
+        "music": "No music."
+      },
+      "end_frame": "Hope hovering near-still above the grand staircase, looking back at camera, the bare skeleton hanging behind her."
+    },
+    {
+      "duration_s": 15.0,
+      "setting": "Hintze Hall, seen from the first-floor balcony",
+      "ref_assets": [
+        "hope_skeleton_now",
+        "hall_inplace",
+        "hope_awake"
+      ],
+      "shots": [
+        {
+          "t_start": 0.0,
+          "t_end": 4.5,
+          "beat": "stir",
+          "transition_in": "cut",
+          "refs": [
+            "hope_awake",
+            "hall_inplace"
+          ],
+          "framing": "medium close-up",
+          "camera": "slow push-in to her eyes",
+          "transformation": "",
+          "action": "Hope hovers above the staircase, looks down at frozen tiny visitors, eyes softening, flippers drooping as she speaks, then her tail snaps once, hard.",
+          "visual": ""
+        },
+        {
+          "t_start": 4.5,
+          "t_end": 9.5,
+          "beat": "act",
+          "transition_in": "cut",
+          "refs": [
+            "hope_awake",
+            "hope_skeleton_now",
+            "hall_inplace"
+          ],
+          "framing": "wide at balcony height",
+          "camera": "4.5-5.5s fast tilt up, 5.5-9.5s hold wide",
+          "transformation": "blue skin -> streams off into the hanging bones snout to tail over four seconds -> skeleton locked in dive pose",
+          "action": "Hope rockets to the glazed roof, flips, plunges full speed into the hanging bones, jaw thrown open, throat pleats ballooning; cables swing hard; a deep thud as it locks.",
+          "visual": ""
+        },
+        {
+          "t_start": 9.5,
+          "t_end": 15.0,
+          "beat": "return",
+          "transition_in": "cut",
+          "refs": [
+            "hall_inplace",
+            "hope_skeleton_now"
+          ],
+          "framing": "wide elevated balcony view, visitor's photo angle",
+          "camera": "locked off",
+          "transformation": "",
+          "action": "The skeleton hangs whole and still, jaws angled down; one cable still trembles and a last shimmer of blue fades along the lower jaw.",
+          "visual": ""
+        }
+      ],
+      "narration": [
+        {
+          "t_start": 0.8,
+          "text": "My youth wasn't enough to escape the shallows.",
+          "kind": "fact",
+          "fact_ids": [
+            "youth_not_enough"
+          ]
+        },
+        {
+          "t_start": 9.7,
+          "text": "I'm the only blue whale skeleton in a diving lunge.",
+          "kind": "fact",
+          "fact_ids": [
+            "diving_lunge_only"
+          ]
+        }
+      ],
+      "audio": {
+        "ambience": "Echoing stone hall hush",
+        "sfx": [
+          "air whoosh",
+          "bones locking thud",
+          "cable twang"
+        ],
+        "music": "No music."
+      },
+      "end_frame": "The real skeleton whole and still in Hintze Hall at the visitor's balcony angle, one cable barely trembling."
+    }
+  ],
+  "subtitles": [
+    {
+      "t_start": 1.8,
+      "t_end": 5.0,
+      "text": "My skeleton is 25.2 metres long."
+    },
+    {
+      "t_start": 5.6,
+      "t_end": 8.0,
+      "text": "And I wasn't yet fully grown."
+    },
+    {
+      "t_start": 15.8,
+      "t_end": 19.0,
+      "text": "My youth wasn't enough to escape the shallows."
+    },
+    {
+      "t_start": 24.7,
+      "t_end": 28.7,
+      "text": "I'm the only blue whale skeleton in a diving lunge."
+    }
+  ]
+}

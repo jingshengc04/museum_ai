@@ -22,6 +22,7 @@ import agent  # loads .env (FAL_KEY)
 import images
 
 VIDEO_USD_PER_S = {"480p": 0.14, "720p": 0.30}
+VIDEO_USD_PER_S_25 = {"480p": 0.2205, "720p": 0.473, "1080p": 1.164}  # Seedance 2.5, fal model page
 FONT = next((f for f in ("/System/Library/Fonts/Supplemental/Arial Bold.ttf", "/System/Library/Fonts/Helvetica.ttc",
                          "/Library/Fonts/Arial.ttf") if Path(f).exists()), None)
 
@@ -30,16 +31,70 @@ def log(msg: str) -> None:
     print(time.strftime("%H:%M:%S"), msg, flush=True)
 
 
-def fal_run(endpoint: str, arguments: dict) -> dict:
+STATE: dict = {}
+CLIENT = None
+STATE_FILE: Path | None = None
+STATE_LOCK = None
+
+
+def _save_state() -> None:
+    if STATE_FILE:
+        with STATE_LOCK:
+            STATE_FILE.write_text(json.dumps(STATE, indent=2, ensure_ascii=False))
+
+
+def fal_run(endpoint: str, arguments: dict, key: str) -> dict:
+    """Submit once, remember the fal request id, then wait for that same job.
+
+    A network drop never resubmits (which would pay twice): we keep polling the saved request id until the
+    network is back. Rerunning generate.py after a crash picks up the saved ids and finished results."""
     import fal_client
-    for attempt in range(3):
+    entry = STATE.setdefault(key, {})
+    if entry.get("result"):
+        return entry["result"]
+    if not entry.get("request_id"):
+        for attempt in range(6):
+            try:
+                entry["request_id"] = fal_client.submit(endpoint, arguments=arguments).request_id
+                entry["endpoint"] = endpoint
+                _save_state()
+                log(f"  submitted {key}: {entry['request_id']}")
+                break
+            except Exception as e:  # nothing was queued if submit itself failed
+                if attempt == 5:
+                    raise
+                log(f"  submit {key} failed ({type(e).__name__}); retrying in {15 * (attempt + 1)}s")
+                time.sleep(15 * (attempt + 1))
+    rid, waited = entry["request_id"], 0
+    global CLIENT
+    CLIENT = CLIENT or fal_client.SyncClient(default_timeout=60)  # a hung socket must not hang the run
+    while True:
         try:
-            return fal_client.subscribe(endpoint, arguments=arguments, with_logs=False)
-        except Exception as e:  # transient queue/network errors: retry, anything else surfaces
-            if attempt == 2:
-                raise
-            log(f"  retry {endpoint}: {type(e).__name__}: {str(e)[:120]}")
-            time.sleep(10 * (attempt + 1))
+            st = CLIENT.status(endpoint, rid)
+            if isinstance(st, fal_client.Completed):
+                entry["result"] = CLIENT.result(endpoint, rid)
+                _save_state()
+                return entry["result"]
+            time.sleep(5)
+            waited += 5
+        except Exception as e:  # offline or transient: keep waiting on the same job
+            code = getattr(getattr(e, "response", None), "status_code", None) or getattr(e, "status_code", None)
+            if "content_policy" in str(e) or (code and 400 <= code < 500 and code not in (408, 429)):
+                raise RuntimeError(f"{key}: fal rejected request {rid}: {str(e)[:400]}") from e
+            log(f"  waiting on {key} ({type(e).__name__}: {str(e)[:80]}); will reconnect")
+            time.sleep(20)
+            waited += 20
+        if waited > 3600:
+            raise RuntimeError(f"{key}: no result after an hour (request {rid})")
+
+
+def drop_ref(prompt: str, n: int) -> str:
+    """Remove @Image{n} from a Seedance prompt: its binding clause, its mentions, and shift later tags down."""
+    import re
+    prompt = re.sub(rf"@Image{n} = [^;\n]*(; |(?=\n))", "", prompt)
+    prompt = re.sub(rf"(the [\w\s-]{{1,40}}?) from @Image{n}\b", r"\1", prompt)
+    prompt = re.sub(rf"\s*@Image{n}\b", "", prompt)
+    return re.sub(r"@Image(\d+)", lambda m: f"@Image{int(m[1]) - 1}" if int(m[1]) > n else m[0], prompt)
 
 
 def upload(path: Path) -> str:
@@ -54,8 +109,16 @@ def upload(path: Path) -> str:
 
 def download(url: str, target: Path) -> Path:
     target.parent.mkdir(parents=True, exist_ok=True)
-    urllib.request.urlretrieve(url, target)
-    return target
+    if target.exists() and target.stat().st_size > 0:
+        return target
+    for attempt in range(10):
+        try:
+            urllib.request.urlretrieve(url, target)
+            return target
+        except Exception as e:
+            log(f"  download {target.name} failed ({type(e).__name__}); retrying in 20s")
+            time.sleep(20)
+    raise RuntimeError(f"could not download {url}")
 
 
 def srt(cues: list[dict]) -> str:
@@ -100,7 +163,7 @@ def probe(path: Path) -> tuple[int, int, float]:
 def main() -> None:
     ap = argparse.ArgumentParser()
     ap.add_argument("run", type=Path)
-    ap.add_argument("--resolution", default="480p", choices=["480p", "720p"])
+    ap.add_argument("--resolution", default="480p", choices=["480p", "720p", "1080p"])
     ap.add_argument("--photo", type=Path, help="visitor photo, if final.json does not name one")
     args = ap.parse_args()
 
@@ -108,6 +171,14 @@ def main() -> None:
     final = json.loads((run / "final.json").read_text())
     media = run / "media"
     media.mkdir(exist_ok=True)
+    global STATE, STATE_FILE, STATE_LOCK
+    import threading
+    STATE_LOCK = threading.Lock()
+    STATE_FILE = media / "fal_state.json"
+    STATE = json.loads(STATE_FILE.read_text()) if STATE_FILE.exists() else {}
+    if STATE:
+        log(f"resuming: {sum(1 for v in STATE.values() if v.get('result'))} finished, "
+            f"{sum(1 for v in STATE.values() if v.get('request_id') and not v.get('result'))} waiting on fal")
     record: dict = {"run": run.name, "resolution": args.resolution, "started": time.strftime("%Y-%m-%d %H:%M:%S"),
                     "images": [], "segments": [], "est_usd": 0.0}
     t0 = time.time()
@@ -117,12 +188,26 @@ def main() -> None:
     if photo and not photo.is_absolute():
         photo = agent.HERE / photo
     urls: dict[str, str] = {}
+    def cached_upload(key: str, path: Path) -> str:
+        if STATE.get(key, {}).get("url"):
+            return STATE[key]["url"]
+        for attempt in range(6):
+            try:
+                url = upload(path)
+                STATE[key] = {"url": url}
+                _save_state()
+                return url
+            except Exception as e:
+                log(f"  upload {path.name} failed ({type(e).__name__}); retrying in 20s")
+                time.sleep(20)
+        raise RuntimeError(f"could not upload {path}")
+
     if photo:
-        urls["<visitor_photo>"] = upload(photo)
+        urls["<visitor_photo>"] = cached_upload("upload:visitor_photo", photo)
         log(f"uploaded visitor photo {photo.name}")
     for aid in final.get("existing_images_used", []):
         asset = next(a for a in agent.existing_assets(final["exhibit_id"]) if a["id"] == aid)
-        urls[f"<existing:{aid}>"] = upload(Path(asset["path"]))
+        urls[f"<existing:{aid}>"] = cached_upload(f"upload:{aid}", Path(asset["path"]))
         log(f"uploaded existing reference {aid}")
 
     # 2. reference images (all start from the photo + prompt; run in parallel)
@@ -133,7 +218,7 @@ def main() -> None:
         refs = [urls[u] for u in inp.get("image_urls", []) if u in urls]
         if refs:
             arguments["image_urls"] = refs
-        res = fal_run(images.ENDPOINT, arguments)
+        res = fal_run(images.ENDPOINT, arguments, f"image:{job['id']}")
         url = res["images"][0]["url"]
         download(url, media / "images" / f"{job['id']}.png")
         log(f"image {job['id']} done in {time.time() - t:.0f}s")
@@ -156,18 +241,30 @@ def main() -> None:
         missing = [u for u in req["image_urls"] if u not in urls]
         arguments = {"prompt": req["prompt"], "image_urls": refs, "duration": req["duration"],
                      "resolution": args.resolution, "aspect_ratio": req["aspect_ratio"], "generate_audio": True}
-        res = fal_run(req["endpoint"], arguments)
+        try:
+            res = fal_run(req["endpoint"], arguments, f"segment:{i + 1}")
+        except RuntimeError as e:
+            # Moderation may flag a photo-derived setting image (a faint reflection of the photographer is enough).
+            # Fall back once: drop the in-place reference, renumber the @Image tags, keep the identity anchor.
+            k = next((n for n, u in enumerate(req["image_urls"]) if u in in_place), None)
+            if "content_policy" not in str(e) or k is None:
+                raise
+            log(f"  segment {i + 1} rejected by moderation; retrying without the in-place reference")
+            arguments = {**arguments, "image_urls": [r for n, r in enumerate(refs) if n != k],
+                         "prompt": drop_ref(req["prompt"], k + 1)}
+            res = fal_run(req["endpoint"], arguments, f"segment:{i + 1}:no_in_place")
         path = download(res["video"]["url"], media / "segments" / f"seg_{i + 1}.mp4")
         log(f"segment {i + 1} done in {time.time() - t:.0f}s ({req['duration']} s)")
         return {"index": i + 1, "url": res["video"]["url"], "seed": res.get("seed"), "path": str(path),
                 "missing_refs": missing, "seconds": round(time.time() - t, 1), "prompt": req["prompt"]}
 
+    in_place = {f"<job:{j['id']}>" for j in final.get("image_jobs", []) if j.get("kind") == "in_place"}
     reqs = final["video_requests"]
     log(f"generating {len(reqs)} video segment(s) at {args.resolution}")
     with ThreadPoolExecutor(max_workers=2) as pool:
         segs = list(pool.map(make_segment, enumerate(reqs)))
     record["segments"] = segs
-    record["est_usd"] += sum(int(r["duration"]) * VIDEO_USD_PER_S[args.resolution] for r in reqs)
+    record["est_usd"] += sum(int(r["duration"]) * (VIDEO_USD_PER_S_25 if "2.5" in r["endpoint"] else VIDEO_USD_PER_S)[args.resolution] for r in reqs)
 
     # 4. join segments (hard cut) and burn English subtitles
     raw = media / "film_raw.mp4"

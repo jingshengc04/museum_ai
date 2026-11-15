@@ -109,14 +109,16 @@ class MaterialSheet(BaseModel):
 # ---------- S1b reference-image plan ----------
 
 class PlannedImage(BaseModel):
-    id: str = Field(description="Short id, e.g. alive_restoration, sheet_realistic, detail_skull.")
-    kind: Literal["restoration", "character_sheet", "subject_view", "detail", "environment"]
+    id: str = Field(description="Short id, e.g. zun_now, ram_awake, hall_inplace, ritual_hall_plate.")
+    kind: Literal["subject_view", "in_place", "living_form", "turnaround", "keyframe", "world_plate", "detail"]
     prompt: str = Field(description="Image-generation prompt. The image model starts from the visitor's photo; describe the full result.")
     must_avoid: str = Field(description="What must not appear (text labels, people, glass, other objects...).")
     purpose: str
 
 
 class AssetPlan(BaseModel):
+    hero_mover_name: str = Field(description="The one part or creature that comes alive, e.g. 'the front ram', 'Hope'.")
+    still_parts: str = Field(description="What stays still, e.g. 'the other three rams'; empty if nothing else.")
     subject_name: str = Field(description="2-6 word name of the exhibit as it is now, e.g. 'the whale skeleton'.")
     living_form_name: str = Field(description="2-6 word name of the living/original form, e.g. 'the living blue whale'; empty if none.")
     subject_lock: str = Field(description="One canonical 15-30 word description of the exhibit, reused verbatim everywhere it appears.")
@@ -128,6 +130,7 @@ class AssetPlan(BaseModel):
 
 class Concept(BaseModel):
     name: str
+    mode: Literal["character", "awaken", "world_returns"]
     engine: str = Field(description="Which story engine drives it (reveal, decisive moment, visitor's view back in time, contrast, direct address, overlooked detail, ...).")
     logline: str = Field(description="The whole film in one sentence.")
     hook_visual: str = Field(description="What is seen in the first 2-3 seconds. Must be filmable; no text or numbers on screen.")
@@ -137,6 +140,12 @@ class Concept(BaseModel):
     ending_line: str = Field(description="The last spoken line, written as final.")
     fact_ids: list[str]
     answers_question: str = Field(description="Which visitor question this film answers.")
+    hero_mover: str = Field(description="Exactly one: the part or character that comes alive, or 'the world' in world_returns mode.")
+    want: str = Field(description="What the hero wants, at most five words, readable with the sound off.")
+    first_sign: str = Field(description="The first visible sign of life, by about 3 s.")
+    big_move: str = Field(description="The high-amplitude beat, with a speed or force word and its physical consequence.")
+    return_trace: str = Field(description="What is left on the still, whole exhibit in the last shot.")
+    spectacle_shot: str = Field(description="The one image a visitor would screen-record, in one sentence.")
 
 
 class ConceptSet(BaseModel):
@@ -150,7 +159,7 @@ class ConceptSet(BaseModel):
 class Asset(BaseModel):
     id: str = Field(description="Use the id of an existing reference image when one fits; otherwise a new short id.")
     source: Literal["existing", "generate"]
-    depicts: Literal["exhibit_now", "living_form", "environment", "detail"] = Field(description="exhibit_now = the real object as displayed; living_form = as it was alive/new/in use; environment = a place; detail = close-up of the exhibit.")
+    depicts: Literal["exhibit_now", "living_form", "environment", "detail", "keyframe"] = Field(description="exhibit_now = the real object (identity anchor); living_form = the awakened hero / character; environment = in-place view or a world plate; detail = close-up of the exhibit; keyframe = the hero at its big pose.")
     view: str = Field(description="Which view or state of the exhibit, e.g. skeleton front, alive side, detail of jaw.")
     prompt: str = Field(description="For 'generate': image-generation prompt (subject alone, neutral even light, plain background, no text). For 'existing': empty.")
     purpose: str
@@ -159,11 +168,14 @@ class Asset(BaseModel):
 class ShotSpec(BaseModel):
     t_start: float = Field(description="Seconds from the start of the segment.")
     t_end: float
+    beat: Literal["still", "stir", "act", "return"]
+    transition_in: str = Field(description="How the shot begins: cut, match cut on <feature>, whip pan, through the glass, time-lapse. 'cut' for shot 1.")
     refs: list[str] = Field(description="Asset ids actually visible in this shot.")
     framing: str = Field(description="e.g. extreme close-up, wide, aerial.")
-    camera: str = Field(description="Exactly one camera move, e.g. slow push-in, static, slow tilt up.")
-    action: str = Field(description="The one motion in the shot as a full clause: subject + verb + direction, 4-12 words.")
-    visual: str = Field(description="At most 15 words: light, colour, texture or composition the action does not already say. No motion verbs, never repeat the action, never describe the exhibit's own shape or colour (the reference shows it); describe a living form's look the first time it appears in a segment. No @Image tags.")
+    camera: str = Field(description="One primary camera move with its speed and endpoint (any move, any speed).")
+    transformation: str = Field(description="Optional, at most one: start state -> mechanism and speed -> end state. Empty if none.")
+    action: str = Field(description="A verb chain with physical consequences, up to about 35 words, speed and force words included.")
+    visual: str = Field(description="At most 8 words of light or colour, only if it adds something. No @Image tags.")
 
 
 class Line(BaseModel):
@@ -200,8 +212,14 @@ class Script(BaseModel):
     title: str
     logline: str
     duration_s: Literal[15, 30]
+    mode: Literal["character", "awaken", "world_returns"]
+    hero_mover: str
+    hero_want: str
+    still_parts: str
+    look: str = Field(description="One concrete look line, e.g. 'stylized 3D animated feature, soft rim light, gallery at night'.")
+    return_trace: str
     style: Literal["realistic", "stylized"] = Field(description="Look of the film; must match the reference images used.")
-    narrator_presence: Literal["voiceover", "on_screen"] = Field(description="voiceover = unseen narrator over the images; on_screen = the exhibit's living form speaks in shot.")
+    narrator_presence: Literal["voiceover", "on_screen"] = Field(description="voiceover = the character's voice over its action, no lip-sync (default); on_screen = it visibly speaks in shot, only when a talking mouth suits it.")
     voice: str = Field(description="One fixed narrator voice description (age, gender if any, timbre, accent, pace, warmth), repeated verbatim in every segment.")
     narrator_attitude: str = Field(description="How the exhibit feels about the person standing in front of it.")
     music_style: str = Field(description="One music style for the whole film (instruments, tempo, one texture), or 'no music'.")
@@ -234,18 +252,21 @@ class Issue(BaseModel):
 class Scores(BaseModel):
     hook: int = Field(description="1-5")
     visitor_view: int = Field(description="1-5")
-    focus: int = Field(description="1-5")
-    concept_fidelity: int = Field(description="1-5")
-    truth: int = Field(description="1-5")
-    counterpoint: int = Field(description="1-5: lines add what the picture cannot show instead of describing it")
-    spoken: int = Field(description="1-5: lines sound like a voice, fit their time")
-    visual_feasibility: int = Field(description="1-5")
-    length_fit: int = Field(description="1-5")
-    ending: int = Field(description="1-5")
+    aliveness: int = Field(description="1-5: the exhibit or its character acts with intent and weight")
+    spectacle: int = Field(description="1-5: there is a shot a viewer would screen-record")
+    escalation: int = Field(description="1-5: still, stir, act, return with a real high-amplitude beat")
+    physicality: int = Field(description="1-5: verb chains with visible consequences and named sounds")
+    character: int = Field(description="1-5: personality through behaviour and voice")
+    return_shot: int = Field(description="1-5: last shot is the real exhibit, whole, at the visitor's angle, with one trace of life")
+    renderability: int = Field(description="1-5: only Seedance's real failure modes count")
+    truth: int = Field(description="1-5: spoken claims only")
+    sound: int = Field(description="1-5")
+    voice_fit: int = Field(description="1-5: lines add what the picture cannot, sound like this character, fit their time")
 
 
 class Review(BaseModel):
     claims: list[Claim]
+    fantasy_legibility: Literal["pass", "fail"] = Field(description="fail if any image could be read as a documentary record of an invented or unsourced event, or shows identifiable people.")
     previous_issues_resolved: list[str] = Field(description="For each issue in the previous review (if any): resolved / not resolved, one line each.")
     issues: list[Issue]
     scores: Scores

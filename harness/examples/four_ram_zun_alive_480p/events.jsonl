@@ -1,0 +1,83 @@
+{"t_run": 0.0, "stage": "s0_identify", "type": "stage_start"}
+{"t_run": 3.65, "stage": "s0_identify", "t": 3.65, "type": "writing"}
+{"t_run": 8.99, "stage": "s0_identify", "type": "stage_end", "cached": false}
+{"t_run": 8.99, "stage": "kw_identify", "type": "stage_start"}
+{"t_run": 8.99, "stage": "s0b_research", "type": "stage_start"}
+{"t_run": 10.31, "stage": "kw_identify", "t": 1.33, "type": "writing"}
+{"t_run": 11.44, "stage": "s0b_research", "t": 2.45, "type": "thinking"}
+{"t_run": 11.98, "stage": "kw_identify", "type": "stage_end", "cached": false}
+{"t_run": 11.98, "stage": "kw_identify", "type": "keywords_batch", "label": "identify", "keywords": [{"kind": "name", "text": "Siyang Fangzun", "basis": "photo"}, {"kind": "name", "text": "Four-Ram Square Zun", "basis": "photo"}, {"kind": "period", "text": "late Shang dynasty", "basis": "photo"}, {"kind": "material", "text": "bronze", "basis": "photo"}, {"kind": "theme", "text": "ritual wine vessel", "basis": "photo"}, {"kind": "visual", "text": "four curly-horned rams", "basis": "photo"}, {"kind": "visual", "text": "flaring square mouth", "basis": "photo"}, {"kind": "place", "text": "National Museum of China", "basis": "photo"}, {"kind": "name", "text": "四羊青铜方尊", "basis": "photo"}], "flags": []}
+{"t_run": 12.29, "stage": "s0b_research", "t": 3.3, "type": "fetch", "text": null}
+{"t_run": 16.44, "stage": "s0b_research", "t": 7.45, "type": "search", "text": "Four-Ram Square Zun National Museum of China"}
+{"t_run": 16.44, "stage": "s0b_research", "t": 7.45, "type": "source", "text": "Four-Ram Square Zun: Masterpiece of Ancient Chinese Bronze Art - The Context", "url": "https://www.buzzsprout.com/1234292/episodes/17369505-four-ram-square-zun-masterpiece-of-ancient-chinese-bronze-art"}
+{"t_run": 16.44, "stage": "s0b_research", "t": 7.45, "type": "source", "text": "four-ram zun - 四羊方尊", "url": "https://www.wikidata.org/wiki/Q10925255"}
+{"t_run": 16.44, "stage": "s0b_research", "t": 7.45, "type": "source", "text": "National Museum of China, Beijing", "url": "https://govt.chinadaily.com.cn/s/202110/15/WS61691ebd498e6a12c1206bb6/national-museum-of-china-beijing.html"}
+{"t_run": 16.79, "stage": "s0b_research", "t": 7.8, "type": "fetch", "text": null}
+{"t_run": 20.36, "stage": "s0b_research", "t": 11.37, "type": "search", "text": "Four-Ram Square Zun National Museum of China"}
+{"t_run": 20.39, "stage": "s0b_research", "t": 11.4, "type": "source", "text": "Four-Ram Square Zun: Masterpiece of Ancient Chinese Bronze Art - The Context", "url": "https://www.buzzsprout.com/1234292/episodes/17369505-four-ram-square-zun-masterpiece-of-ancient-chinese-bronze-art"}
+{"t_run": 20.39, "stage": "s0b_research", "t": 11.4, "type": "source", "text": "four-ram zun - 四羊方尊", "url": "https://www.wikidata.org/wiki/Q10925255"}
+{"t_run": 20.39, "stage": "s0b_research", "t": 11.4, "type": "source", "text": "National Museum of China, Beijing", "url": "https://govt.chinadaily.com.cn/s/202110/15/WS61691ebd498e6a12c1206bb6/national-museum-of-china-beijing.html"}
+{"t_run": 21.0, "stage": "s0b_research", "t": 12.01, "type": "fetch", "text": null}
+{"t_run": 27.96, "stage": "s0b_research", "t": 18.97, "type": "search", "text": "Four-Ram Square Zun National Museum of China"}
+{"t_run": 28.04, "stage": "s0b_research", "t": 19.05, "type": "source", "text": "Four-Ram Square Zun: Masterpiece of Ancient Chinese Bronze Art - The Context", "url": "https://www.buzzsprout.com/1234292/episodes/17369505-four-ram-square-zun-masterpiece-of-ancient-chinese-bronze-art"}
+{"t_run": 28.04, "stage": "s0b_research", "t": 19.05, "type": "source", "text": "four-ram zun - 四羊方尊", "url": "https://www.wikidata.org/wiki/Q10925255"}
+{"t_run": 28.04, "stage": "s0b_research", "t": 19.05, "type": "source", "text": "National Museum of China, Beijing", "url": "https://govt.chinadaily.com.cn/s/202110/15/WS61691ebd498e6a12c1206bb6/national-museum-of-china-beijing.html"}
+{"t_run": 28.04, "stage": "s0b_research", "t": 19.05, "type": "search", "text": "四羊方尊 中国国家博物馆 高 重 出土 宁乡"}
+{"t_run": 28.09, "stage": "s0b_research", "t": 19.11, "type": "source", "text": "学者称四羊方尊原出土于河北 后被带入宁乡埋藏-中新网", "url": "https://www.chinanews.com.cn/cul/2012/09-03/4153515.shtml"}
+{"t_run": 28.1, "stage": "s0b_research", "t": 19.11, "type": "source", "text": "四羊方尊 - 维基百科，自由的百科全书", "url": "https://zh.wikipedia.org/zh-hans/%E5%9B%9B%E7%BE%8A%E6%96%B9%E5%B0%8A"}
+{"t_run": 28.1, "stage": "s0b_research", "t": 19.11, "type": "source", "text": "四羊方尊 - 維基百科，自由的百科全書", "url": "https://zh.wikipedia.org/zh-hk/%E5%9B%9B%E7%BE%8A%E6%96%B9%E5%B0%8A"}
+{"t_run": 28.1, "stage": "s0b_research", "t": 19.11, "type": "search", "text": "Siyang fangzun Ningxiang 1938 bronze casting rams"}
+{"t_run": 28.11, "stage": "s0b_research", "t": 19.13, "type": "source", "text": "Shang Siyang Bronze Square Zun（A bronze ritual vessel from the Late Shang Dynasty.）_Baiduwiki", "url": "https://baike.baidu.com/en/item/Shang%20Siyang%20Bronze%20Square%20Zun/941638"}
+{"t_run": 28.11, "stage": "s0b_research", "t": 19.13, "type": "source", "text": "The Four-Ram Square Zun (商四羊方尊)", "url": "https://link.springer.com/rwe/10.1007/978-981-99-5009-6_10369"}
+{"t_run": 28.12, "stage": "s0b_research", "t": 19.13, "type": "source", "text": "Bronze vessel with ram-head sculptures: masterpiece from the Shang Dynasty", "url": "https://govt.chinadaily.com.cn/s/202206/06/WS629d9cd4498e6a12c122e1df/bronze-vessel-with-ram-head-sculptures-masterpiece-from-the-shang-dynasty.html"}
+{"t_run": 29.82, "stage": "s0b_research", "t": 20.83, "type": "fetch", "text": null}
+{"t_run": 32.93, "stage": "s0b_research", "t": 23.94, "type": "fetch", "text": null}
+{"t_run": 38.65, "stage": "s0b_research", "t": 29.66, "type": "fetch", "text": "http://www.china.org.cn/top10/2012-08/24/content_26326351_8.htm"}
+{"t_run": 38.65, "stage": "s0b_research", "t": 29.66, "type": "source", "text": "http://www.china.org.cn/top10/2012-08/24/content_26326351_8.htm", "url": "http://www.china.org.cn/top10/2012-08/24/content_26326351_8.htm"}
+{"t_run": 53.68, "stage": "s0b_research", "t": 44.69, "type": "writing"}
+{"t_run": 83.64, "stage": "s0b_research", "type": "stage_end", "cached": false}
+{"t_run": 83.64, "stage": "kw_research", "type": "stage_start"}
+{"t_run": 83.65, "stage": "s1_digest", "type": "stage_start"}
+{"t_run": 84.92, "stage": "kw_research", "t": 1.28, "type": "writing"}
+{"t_run": 86.8, "stage": "s1_digest", "t": 3.16, "type": "thinking"}
+{"t_run": 88.92, "stage": "kw_research", "type": "stage_end", "cached": false}
+{"t_run": 88.92, "stage": "kw_research", "type": "keywords_batch", "label": "research", "keywords": [{"kind": "name", "text": "Four-goat Square Zun", "basis": "https://en.wikipedia.org/wiki/Four-goat_Square_Zun"}, {"kind": "period", "text": "Late Shang (1300–1046 BC)", "basis": "http://www.china.org.cn/top10/2012-08/24/content_26326351_8.htm"}, {"kind": "place", "text": "Ningxiang County", "basis": "http://www.china.org.cn/top10/2012-08/24/content_26326351_8.htm"}, {"kind": "date", "text": "April 1938", "basis": "http://wenwuchina.com/a/203/201295.html"}, {"kind": "place", "text": "National Museum of China", "basis": "https://govt.chinadaily.com.cn/s/202206/06/WS629d9cd4498e6a12c122e1df/bronze-vessel-with-ram-head-sculptures-masterpiece-from-the-shang-dynasty.html"}, {"kind": "measure", "text": "58.3cm", "basis": "http://www.china.org.cn/top10/2012-08/24/content_26326351_8.htm"}, {"kind": "measure", "text": "34.5 kg", "basis": "http://www.china.org.cn/top10/2012-08/24/content_26326351_8.htm"}, {"kind": "visual", "text": "rams' heads with curly horns", "basis": "http://www.china.org.cn/top10/2012-08/24/content_26326351_8.htm"}, {"kind": "material", "text": "Piece mold casting technique", "basis": "https://baike.baidu.com/en/item/Shang%20Siyang%20Bronze%20Square%20Zun/941638"}, {"kind": "person", "text": "Jiang Jingshu", "basis": "https://wap.ningxiangnews.cn/content/2012/09/04/5674647.html"}], "flags": []}
+{"t_run": 104.26, "stage": "s1_digest", "t": 20.62, "type": "writing"}
+{"t_run": 140.77, "stage": "s1_digest", "type": "stage_end", "cached": false}
+{"t_run": 140.78, "stage": "s1_digest", "type": "stage_start"}
+{"t_run": 144.8, "stage": "s1_digest", "t": 4.02, "type": "thinking"}
+{"t_run": 147.18, "stage": "s1_digest", "t": 6.4, "type": "writing"}
+{"t_run": 178.41, "stage": "s1_digest", "type": "stage_end", "cached": false}
+{"t_run": 178.42, "stage": "s1b_assets", "type": "stage_start"}
+{"t_run": 182.45, "stage": "s1b_assets", "t": 4.03, "type": "thinking"}
+{"t_run": 187.06, "stage": "s1b_assets", "t": 8.64, "type": "writing"}
+{"t_run": 200.1, "stage": "s1b_assets", "type": "stage_end", "cached": false}
+{"t_run": 200.1, "stage": "s1b_assets", "type": "image_jobs_ready", "count": 3, "est_usd": 0.45}
+{"t_run": 200.11, "stage": "s2_concept", "type": "stage_start"}
+{"t_run": 205.08, "stage": "s2_concept", "t": 4.97, "type": "thinking"}
+{"t_run": 228.39, "stage": "s2_concept", "t": 28.28, "type": "writing"}
+{"t_run": 248.44, "stage": "s2_concept", "type": "stage_end", "cached": false}
+{"t_run": 248.44, "stage": "s3_script", "type": "stage_start"}
+{"t_run": 252.27, "stage": "s3_script", "t": 3.83, "type": "thinking"}
+{"t_run": 287.55, "stage": "s3_script", "t": 39.1, "type": "writing"}
+{"t_run": 307.19, "stage": "s3_script", "type": "stage_end", "cached": false}
+{"t_run": 307.19, "stage": "s4_review", "type": "stage_start"}
+{"t_run": 311.0, "stage": "s4_review", "t": 3.81, "type": "thinking"}
+{"t_run": 353.96, "stage": "s4_review", "t": 46.77, "type": "writing"}
+{"t_run": 373.36, "stage": "s4_review", "type": "stage_end", "cached": false}
+{"t_run": 373.37, "stage": "s3_script", "type": "stage_start"}
+{"t_run": 376.83, "stage": "s3_script", "t": 3.46, "type": "thinking"}
+{"t_run": 382.03, "stage": "s3_script", "t": 8.67, "type": "writing"}
+{"t_run": 399.44, "stage": "s3_script", "type": "stage_end", "cached": false}
+{"t_run": 399.45, "stage": "s4_review", "type": "stage_start"}
+{"t_run": 403.91, "stage": "s4_review", "t": 4.45, "type": "thinking"}
+{"t_run": 427.71, "stage": "s4_review", "t": 28.25, "type": "writing"}
+{"t_run": 446.77, "stage": "s4_review", "type": "stage_end", "cached": false}
+{"t_run": 446.78, "stage": "s3_script", "type": "stage_start"}
+{"t_run": 451.22, "stage": "s3_script", "t": 4.44, "type": "thinking"}
+{"t_run": 458.0, "stage": "s3_script", "t": 11.22, "type": "writing"}
+{"t_run": 473.64, "stage": "s3_script", "type": "stage_end", "cached": false}
+{"t_run": 473.64, "stage": "s4_review", "type": "stage_start"}
+{"t_run": 477.47, "stage": "s4_review", "t": 3.82, "type": "thinking"}
+{"t_run": 498.42, "stage": "s4_review", "t": 24.77, "type": "writing"}
+{"t_run": 515.08, "stage": "s4_review", "type": "stage_end", "cached": false}

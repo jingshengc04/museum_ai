@@ -1,0 +1,71 @@
+{"t_run": 0.0, "stage": "s0_identify", "type": "stage_start"}
+{"t_run": 0.0, "stage": "s0_identify", "replay": true, "t": 3.73, "type": "writing"}
+{"t_run": 0.0, "stage": "s0_identify", "type": "stage_end", "cached": true}
+{"t_run": 0.01, "stage": "kw_identify", "type": "stage_start"}
+{"t_run": 0.01, "stage": "kw_identify", "replay": true, "t": 1.44, "type": "writing"}
+{"t_run": 0.01, "stage": "kw_identify", "type": "stage_end", "cached": true}
+{"t_run": 0.01, "stage": "s0b_research", "type": "stage_start"}
+{"t_run": 0.01, "stage": "kw_identify", "type": "keywords_batch", "label": "identify", "keywords": [{"kind": "name", "text": "Hope", "basis": "photo"}, {"kind": "species", "text": "blue whale skeleton", "basis": "photo"}, {"kind": "place", "text": "Hintze Hall", "basis": "photo"}, {"kind": "place", "text": "Natural History Museum, London", "basis": "photo"}, {"kind": "visual", "text": "diving lunge", "basis": "photo"}, {"kind": "visual", "text": "long lower jaws", "basis": "photo"}, {"kind": "visual", "text": "terracotta Romanesque arches", "basis": "photo"}, {"kind": "visual", "text": "hanging cables", "basis": "photo"}], "flags": []}
+{"t_run": 0.01, "stage": "s0b_research", "replay": true, "t": 4.14, "type": "thinking"}
+{"t_run": 0.01, "stage": "s0b_research", "replay": true, "t": 4.3, "type": "fetch", "text": null}
+{"t_run": 0.01, "stage": "s0b_research", "replay": true, "t": 8.07, "type": "fetch", "text": "https://nhm.ac.uk/discover/news/2017/july/museum-unveils-hope-the-blue-whale-skeleton.html"}
+{"t_run": 0.01, "stage": "s0b_research", "replay": true, "t": 8.07, "type": "source", "text": "https://nhm.ac.uk/discover/news/2017/july/museum-unveils-hope-the-blue-whale-skeleton.html", "url": "https://nhm.ac.uk/discover/news/2017/july/museum-unveils-hope-the-blue-whale-skeleton.html"}
+{"t_run": 0.01, "stage": "s0b_research", "replay": true, "t": 9.5, "type": "fetch", "text": null}
+{"t_run": 0.01, "stage": "s0b_research", "replay": true, "t": 12.47, "type": "fetch", "text": null}
+{"t_run": 0.01, "stage": "s0b_research", "replay": true, "t": 17.08, "type": "fetch", "text": null}
+{"t_run": 0.01, "stage": "s0b_research", "replay": true, "t": 21.59, "type": "fetch", "text": null}
+{"t_run": 0.01, "stage": "s0b_research", "replay": true, "t": 26.0, "type": "fetch", "text": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html"}
+{"t_run": 0.01, "stage": "s0b_research", "replay": true, "t": 26.0, "type": "source", "text": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html", "url": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html"}
+{"t_run": 0.01, "stage": "s0b_research", "replay": true, "t": 27.96, "type": "fetch", "text": null}
+{"t_run": 0.01, "stage": "s0b_research", "replay": true, "t": 31.06, "type": "fetch", "text": null}
+{"t_run": 0.01, "stage": "s0b_research", "replay": true, "t": 35.32, "type": "fetch", "text": null}
+{"t_run": 0.01, "stage": "s0b_research", "replay": true, "t": 39.48, "type": "search", "text": "Hope blue whale named \"symbol of humanity's power to shape a sustainable future\" Natural History Museum"}
+{"t_run": 0.01, "stage": "s0b_research", "replay": true, "t": 39.48, "type": "source", "text": "Whale Skeleton Takes Centre Stage at London's Natural History Museum", "url": "https://www.urdesignmag.com/whale-skeleton-natural-history-museum/"}
+{"t_run": 0.01, "stage": "s0b_research", "replay": true, "t": 39.48, "type": "source", "text": "Natural History Museum blue whale: See time-lapse video showing 126-year-old giant mammal skeleton making main hall its home", "url": "https://www.getsurrey.co.uk/whats-on/arts-culture-news/natural-history-museum-blue-whale-13326321"}
+{"t_run": 0.01, "stage": "s0b_research", "replay": true, "t": 39.48, "type": "source", "text": "Blue Whale Hope replaces Dippy Diplodocus at London’s Natural History Museum", "url": "https://blooloop.com/museum/news/natural-history-museum-dippy/"}
+{"t_run": 0.01, "stage": "s0b_research", "replay": true, "t": 40.02, "type": "fetch", "text": null}
+{"t_run": 0.01, "stage": "s0b_research", "replay": true, "t": 43.29, "type": "fetch", "text": null}
+{"t_run": 0.01, "stage": "s0b_research", "replay": true, "t": 48.32, "type": "fetch", "text": null}
+{"t_run": 0.01, "stage": "s0b_research", "replay": true, "t": 58.28, "type": "writing"}
+{"t_run": 0.01, "stage": "s0b_research", "type": "stage_end", "cached": true}
+{"t_run": 0.01, "stage": "kw_research", "type": "stage_start"}
+{"t_run": 0.01, "stage": "kw_research", "replay": true, "t": 1.4, "type": "writing"}
+{"t_run": 0.01, "stage": "kw_research", "type": "stage_end", "cached": true}
+{"t_run": 0.01, "stage": "s1_digest", "type": "stage_start"}
+{"t_run": 0.01, "stage": "kw_research", "type": "keywords_batch", "label": "research", "keywords": [{"kind": "name", "text": "Hope the blue whale", "basis": "pack"}, {"kind": "date", "text": "25 March 1891", "basis": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html"}, {"kind": "place", "text": "mouth of Wexford Harbour", "basis": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html"}, {"kind": "measure", "text": "25.2 metres long", "basis": "pack"}, {"kind": "place", "text": "Hintze Hall", "basis": "pack"}, {"kind": "theme", "text": "diving lunge feeding position", "basis": "https://artsandculture.google.com/asset/blue-whale-the-largest-creature-on-earth-1-20-scale/GAG_J9wcz31GXw?hl=en"}, {"kind": "place", "text": "Swantons Bank", "basis": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html"}, {"kind": "person", "text": "Ned Wickham", "basis": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html"}, {"kind": "measure", "text": "£250", "basis": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html"}, {"kind": "theme", "text": "royal fish", "basis": "https://nhm.ac.uk/discover/news/2018/september/secret-history-of-hope-the-blue-whale-finally-revealed.html"}], "flags": []}
+{"t_run": 0.01, "stage": "s1_digest", "replay": true, "t": 3.86, "type": "thinking"}
+{"t_run": 0.01, "stage": "s1_digest", "replay": true, "t": 39.71, "type": "writing"}
+{"t_run": 0.01, "stage": "s1_digest", "type": "stage_end", "cached": true}
+{"t_run": 0.02, "stage": "s1b_assets", "type": "stage_start"}
+{"t_run": 0.02, "stage": "s1b_assets", "replay": true, "t": 7.03, "type": "thinking"}
+{"t_run": 0.02, "stage": "s1b_assets", "replay": true, "t": 11.26, "type": "writing"}
+{"t_run": 0.02, "stage": "s1b_assets", "type": "stage_end", "cached": true}
+{"t_run": 0.02, "stage": "s1b_assets", "type": "image_jobs_ready", "count": 6, "est_usd": 0.9}
+{"t_run": 0.02, "stage": "s2_concept", "type": "stage_start"}
+{"t_run": 0.02, "stage": "s2_concept", "replay": true, "t": 7.84, "type": "thinking"}
+{"t_run": 0.02, "stage": "s2_concept", "replay": true, "t": 29.1, "type": "writing"}
+{"t_run": 0.02, "stage": "s2_concept", "type": "stage_end", "cached": true}
+{"t_run": 0.03, "stage": "s3_script", "type": "stage_start"}
+{"t_run": 6.5, "stage": "s3_script", "t": 6.47, "type": "thinking"}
+{"t_run": 83.15, "stage": "s3_script", "t": 83.12, "type": "writing"}
+{"t_run": 106.77, "stage": "s3_script", "type": "stage_end", "cached": false}
+{"t_run": 106.79, "stage": "s4_review", "type": "stage_start"}
+{"t_run": 111.23, "stage": "s4_review", "t": 4.44, "type": "thinking"}
+{"t_run": 217.83, "stage": "s4_review", "t": 111.04, "type": "writing"}
+{"t_run": 240.6, "stage": "s4_review", "type": "stage_end", "cached": false}
+{"t_run": 240.61, "stage": "s3_script", "type": "stage_start"}
+{"t_run": 243.89, "stage": "s3_script", "t": 3.27, "type": "thinking"}
+{"t_run": 265.61, "stage": "s3_script", "t": 25.0, "type": "writing"}
+{"t_run": 286.4, "stage": "s3_script", "type": "stage_end", "cached": false}
+{"t_run": 286.42, "stage": "s4_review", "type": "stage_start"}
+{"t_run": 291.62, "stage": "s4_review", "t": 5.2, "type": "thinking"}
+{"t_run": 334.38, "stage": "s4_review", "t": 47.96, "type": "writing"}
+{"t_run": 355.98, "stage": "s4_review", "type": "stage_end", "cached": false}
+{"t_run": 356.0, "stage": "s3_script", "type": "stage_start"}
+{"t_run": 360.54, "stage": "s3_script", "t": 4.54, "type": "thinking"}
+{"t_run": 367.64, "stage": "s3_script", "t": 11.64, "type": "writing"}
+{"t_run": 387.26, "stage": "s3_script", "type": "stage_end", "cached": false}
+{"t_run": 387.28, "stage": "s4_review", "type": "stage_start"}
+{"t_run": 391.43, "stage": "s4_review", "t": 4.16, "type": "thinking"}
+{"t_run": 420.89, "stage": "s4_review", "t": 33.61, "type": "writing"}
+{"t_run": 439.55, "stage": "s4_review", "type": "stage_end", "cached": false}
