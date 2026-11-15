@@ -1,0 +1,35 @@
+{
+  "run": "1114-demo-zun-seedance25",
+  "resolution": "720p",
+  "started": "2026-11-14 23:59:00",
+  "images": [
+    {
+      "id": "zun_now",
+      "url": "https://v3b.fal.media/files/b/0ab27d1b/Pc701k-r_V4fIOohpoYDJ_AuD7BDeh.png",
+      "seconds": 0.1,
+      "prompt": "From this photo, show the Four-Ram Square Zun alone at the same slightly-low three-quarter angle, the front ram head facing the viewer, on a plain seamless light grey background in even, soft, neutral studio light with all glare and reflections removed. A dark grey-black Shang bronze square wine vessel with silvery-grey patina, flaring square mouth with hooked ridged flanges, four curly-horned ram heads at shoulder corners, densely patterned. The tall flaring neck carries long banana-leaf blade panels edged by notched ridged flanges; the bulging shoulder holds four ram heads projecting from the corners, each with thick spiralling ridged horns curling forward around the ears, long snouts, and chests covered in overlapping scale pattern; the belly panels are filled with fine cloud-and-thunder spirals and beast-face patterns in silvery-grey relief on near-black ground; the square foot below has notched flanges, ram hooves in relief and banana-leaf panels. The whole vessel is fully visible, centred, sharp, with a soft contact shadow only. No people anywhere in the image: the space is empty, every visitor and figure removed, including any reflection, shadow or silhouette of a person on glass, metal or polished surfaces. Avoid: text, labels, captions, watermarks, people, reflections of visitors or phones, glass case, glass reflections, spotlights, plinth, museum label card, second copies of the vessel, colour shifts to gold or green"
+    },
+    {
+      "id": "ram_awake",
+      "url": "https://v3b.fal.media/files/b/0ab27d1a/jQSo902v1u7l5iEqyctQT_fNZhH2a2.png",
+      "seconds": 0.1,
+      "prompt": "From this photo, design the front ram of the vessel as a stylized animated character: a stylized cartoon bronze ram, dark grey-black bronze with silvery-grey patina, thick spiralling ridged horns, scale-patterned chest, cloud-and-thunder spirals on flanks, large expressive dark eyes. A full-bodied, sturdy little ram standing on four hooves in three-quarter view, head slightly raised with a curious, proud, friendly expression and a soft closed smile; its horns curl forward around the ears exactly like the vessel's ram heads, with the same ridged spiral; its long snout, chest of overlapping scale pattern and flank panels of fine cloud-and-thunder spirals and banana-leaf motifs are rendered in silvery-grey relief on near-black bronze, matching the vessel's surface, now flexible like a living animal. Plain light grey background, even soft light, the ram alone, fully visible and centred. No people anywhere in the image: the space is empty, every visitor and figure removed, including any reflection, shadow or silhouette of a person on glass, metal or polished surfaces. Avoid: text, labels, captions, watermarks, people, the vessel, other rams, glass case, multiple poses, expression grids, extra horns, gold or green colouring, fluffy wool"
+    }
+  ],
+  "segments": [
+    {
+      "index": 1,
+      "url": "https://v3b.fal.media/files/b/0ab27f1f/p5tgCOhgVQRzsRBE80LlH_video.mp4",
+      "seed": 1430343553,
+      "path": "/Users/liangkaicheng.1/Documents/Imperial AI Hackathon 2026/museum_ai/harness/runs/1114-demo-zun-seedance25/media/segments/seg_1.mp4",
+      "missing_refs": [],
+      "seconds": 391.4,
+      "prompt": "References: @Image1 = the Four-Ram Square Zun, identity anchor: shape, decoration and dark silver-grey patina exactly as shown; ignore its background. @Image2 = the front ram as a character: same design and markings throughout; ignore its background.\nOnly the front ram comes alive. The other three rams and the vessel body stay still. The zun ends whole and unchanged.\nLook: stylized 3D animated feature, dark museum gallery at night, soft spotlight on a white plinth, rim light on the bronze.\nOne continuous take, no cuts.\n0-3s: medium head-on view of the zun on its plinth, slow push-in; the front ram's eye blinks open and looks at the camera.\n3-9s: the ram's bronze head softens; it bursts out of the vessel corner, lands hard on the plinth, shakes off bronze dust and trots fast half a circle around the zun; low camera tracks with it.\n9-15s: the ram stops in front of the zun, turns to camera and lifts its chin proudly; camera holds.\n15-20s: the ram hops onto the zun's rim; warm amber light rises out of the vessel's mouth like wine, and the cloud-and-thunder patterns on the body glow one by one.\n20-25s: the zun splits into bronze fragments floating in the air; the ram leaps between them; the fragments snap back together fast, thin gold seams glowing, then fading.\n25-30s: the ram jumps back into its corner and turns back into bronze; the zun stands whole and still; the camera settles at the opening head-on angle; one last glint fades.\nVoiceover, the ram's voice, no lip-sync: A warm, friendly middle-aged male voice, clear neutral English, relaxed pace, smiling. Lines, exactly: at 0.8s: \"Hi! I'm one of the four rams on this zun.\"; at 9.5s: \"I'm over three thousand years old.\"; at 11.8s: \"People call us the biggest square zun of the Shang dynasty.\"; at 15.8s: \"Long ago, I held wine for sacred ceremonies.\"; at 25.3s: \"During the war, I was hit by bombs.\"; at 27.6s: \"I was repaired, and now I'm here.\".\nSound: quiet gallery hum; bronze creaking as the ram breaks free; hooves clinking on stone; soft rising chime as the patterns glow; bronze pieces ringing as they snap back together. No music.\nClean picture: no subtitles, captions, lettering, logos or watermark. No people in frame."
+    }
+  ],
+  "est_usd": 14.49,
+  "film": "/Users/liangkaicheng.1/Documents/Imperial AI Hackathon 2026/museum_ai/harness/runs/1114-demo-zun-seedance25/media/film.mp4",
+  "film_seconds": 30.09,
+  "frame": "1280x720",
+  "wall_seconds": 394.2
+}

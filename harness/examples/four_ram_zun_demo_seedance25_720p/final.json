@@ -1,0 +1,85 @@
+{
+  "exhibit_id": "adhoc-four-ram-square-zun",
+  "status": "DEMO_HAND_WRITTEN",
+  "title": "Over Three Thousand Years",
+  "duration_s": 30,
+  "photo": "photos/four_ram_zun.webp",
+  "existing_images_used": [],
+  "missing_images": [],
+  "image_jobs": [
+    {
+      "id": "zun_now",
+      "kind": "subject_view",
+      "endpoint": "fal-ai/nano-banana-pro/edit",
+      "input": {
+        "image_urls": [
+          "<visitor_photo>"
+        ],
+        "prompt": "From this photo, show the Four-Ram Square Zun alone at the same slightly-low three-quarter angle, the front ram head facing the viewer, on a plain seamless light grey background in even, soft, neutral studio light with all glare and reflections removed. A dark grey-black Shang bronze square wine vessel with silvery-grey patina, flaring square mouth with hooked ridged flanges, four curly-horned ram heads at shoulder corners, densely patterned. The tall flaring neck carries long banana-leaf blade panels edged by notched ridged flanges; the bulging shoulder holds four ram heads projecting from the corners, each with thick spiralling ridged horns curling forward around the ears, long snouts, and chests covered in overlapping scale pattern; the belly panels are filled with fine cloud-and-thunder spirals and beast-face patterns in silvery-grey relief on near-black ground; the square foot below has notched flanges, ram hooves in relief and banana-leaf panels. The whole vessel is fully visible, centred, sharp, with a soft contact shadow only. No people anywhere in the image: the space is empty, every visitor and figure removed, including any reflection, shadow or silhouette of a person on glass, metal or polished surfaces. Avoid: text, labels, captions, watermarks, people, reflections of visitors or phones, glass case, glass reflections, spotlights, plinth, museum label card, second copies of the vessel, colour shifts to gold or green"
+      },
+      "purpose": "Identity anchor for the exhibit's exact shape, colours and markings in every shot.",
+      "est_usd": 0.15
+    },
+    {
+      "id": "ram_awake",
+      "kind": "living_form",
+      "endpoint": "fal-ai/nano-banana-pro/edit",
+      "input": {
+        "image_urls": [
+          "<visitor_photo>"
+        ],
+        "prompt": "From this photo, design the front ram of the vessel as a stylized animated character: a stylized cartoon bronze ram, dark grey-black bronze with silvery-grey patina, thick spiralling ridged horns, scale-patterned chest, cloud-and-thunder spirals on flanks, large expressive dark eyes. A full-bodied, sturdy little ram standing on four hooves in three-quarter view, head slightly raised with a curious, proud, friendly expression and a soft closed smile; its horns curl forward around the ears exactly like the vessel's ram heads, with the same ridged spiral; its long snout, chest of overlapping scale pattern and flank panels of fine cloud-and-thunder spirals and banana-leaf motifs are rendered in silvery-grey relief on near-black bronze, matching the vessel's surface, now flexible like a living animal. Plain light grey background, even soft light, the ram alone, fully visible and centred. No people anywhere in the image: the space is empty, every visitor and figure removed, including any reflection, shadow or silhouette of a person on glass, metal or polished surfaces. Avoid: text, labels, captions, watermarks, people, the vessel, other rams, glass case, multiple poses, expression grids, extra horns, gold or green colouring, fluffy wool"
+      },
+      "purpose": "Character reference for the front ram that comes alive, keeping the exhibit's bronze identity.",
+      "est_usd": 0.15
+    }
+  ],
+  "video_requests": [
+    {
+      "endpoint": "bytedance/seedance-2.5/reference-to-video",
+      "image_urls": [
+        "<job:zun_now>",
+        "<job:ram_awake>"
+      ],
+      "duration": "30",
+      "resolution": "720p",
+      "aspect_ratio": "16:9",
+      "generate_audio": true,
+      "prompt": "References: @Image1 = the Four-Ram Square Zun, identity anchor: shape, decoration and dark silver-grey patina exactly as shown; ignore its background. @Image2 = the front ram as a character: same design and markings throughout; ignore its background.\nOnly the front ram comes alive. The other three rams and the vessel body stay still. The zun ends whole and unchanged.\nLook: stylized 3D animated feature, dark museum gallery at night, soft spotlight on a white plinth, rim light on the bronze.\nOne continuous take, no cuts.\n0-3s: medium head-on view of the zun on its plinth, slow push-in; the front ram's eye blinks open and looks at the camera.\n3-9s: the ram's bronze head softens; it bursts out of the vessel corner, lands hard on the plinth, shakes off bronze dust and trots fast half a circle around the zun; low camera tracks with it.\n9-15s: the ram stops in front of the zun, turns to camera and lifts its chin proudly; camera holds.\n15-20s: the ram hops onto the zun's rim; warm amber light rises out of the vessel's mouth like wine, and the cloud-and-thunder patterns on the body glow one by one.\n20-25s: the zun splits into bronze fragments floating in the air; the ram leaps between them; the fragments snap back together fast, thin gold seams glowing, then fading.\n25-30s: the ram jumps back into its corner and turns back into bronze; the zun stands whole and still; the camera settles at the opening head-on angle; one last glint fades.\nVoiceover, the ram's voice, no lip-sync: A warm, friendly middle-aged male voice, clear neutral English, relaxed pace, smiling. Lines, exactly: at 0.8s: \"Hi! I'm one of the four rams on this zun.\"; at 9.5s: \"I'm over three thousand years old.\"; at 11.8s: \"People call us the biggest square zun of the Shang dynasty.\"; at 15.8s: \"Long ago, I held wine for sacred ceremonies.\"; at 25.3s: \"During the war, I was hit by bombs.\"; at 27.6s: \"I was repaired, and now I'm here.\".\nSound: quiet gallery hum; bronze creaking as the ram breaks free; hooves clinking on stone; soft rising chime as the patterns glow; bronze pieces ringing as they snap back together. No music.\nClean picture: no subtitles, captions, lettering, logos or watermark. No people in frame."
+    }
+  ],
+  "subtitles": [
+    {
+      "t_start": 0.8,
+      "t_end": 3.0,
+      "text": "Hi! I'm one of the four rams on this zun."
+    },
+    {
+      "t_start": 9.5,
+      "t_end": 11.5,
+      "text": "I'm over three thousand years old."
+    },
+    {
+      "t_start": 11.8,
+      "t_end": 14.6,
+      "text": "People call us the biggest square zun of the Shang dynasty."
+    },
+    {
+      "t_start": 15.8,
+      "t_end": 18.6,
+      "text": "Long ago, I held wine for sacred ceremonies."
+    },
+    {
+      "t_start": 25.3,
+      "t_end": 27.3,
+      "text": "During the war, I was hit by bombs."
+    },
+    {
+      "t_start": 27.6,
+      "t_end": 29.6,
+      "text": "I was repaired, and now I'm here."
+    }
+  ],
+  "voice": "A warm, friendly middle-aged male voice, clear neutral English, relaxed pace, smiling.",
+  "music_style": "no music"
+}
