@@ -12,7 +12,7 @@ from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.responses import FileResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
-from . import config, exhibits, outline, pipeline, video
+from . import config, exhibits, outline, pipeline, storyboard, video
 
 MAX_PHOTO_BYTES = 15 * 1024 * 1024
 # How far a job has got when each step starts, and what it says meanwhile (the page shows the same).
@@ -195,9 +195,44 @@ async def create_job(
         saved = job.dir / f"photo{PHOTO_TYPES[photo.content_type]}"
         saved.write_bytes(blob)
         job.photo_url = job.summary["photo"] = config.url_for(saved)
+    if config.HOSTED:
+        return hosted_job(job, saved)
     JOBS[job.id] = job
     threading.Thread(target=job.run, args=(saved,), daemon=True).start()
     return {"job_id": job.id}
+
+
+NOT_IN_LIBRARY = ("This object is not in our film library yet. The online demo plays films we have already made; "
+                  "new films are made on our own server.")
+
+
+def hosted_job(job: Job, photo: Path | None) -> dict:
+    """Hosted demo: recognise the photo, then hand back the saved film's making-of, timed, for the page to play.
+    A serverless function keeps no jobs between requests and cannot make films, so nothing runs after this returns."""
+    events: list[dict] = []
+
+    def emit(kind: str, **data) -> None:
+        events.append({"type": kind, "t": 0.0, **data})
+
+    try:
+        emit("step", step="identify", status="start")
+        candidates = [exhibits.load(job.exhibit_id)] if job.exhibit_id else exhibits.all_exhibits()
+        exhibit = storyboard.identify(photo, candidates, emit)
+        emit("exhibit", exhibit=exhibit.public())
+        emit("step", step="identify", status="done")
+        folder = pipeline.library_hit(exhibit, job.language, job.style)
+        if folder is None:
+            raise LookupError(NOT_IN_LIBRARY)
+        replayed = pipeline.replay_events(folder)
+        events += replayed
+        events.append({"type": "done", "t": (replayed[-1]["t"] if replayed else 0) + 0.3,
+                       "manifest": config.url_for(folder / "manifest.json")})
+    except LookupError:
+        events.append({"type": "error", "t": 0.3, "message": NOT_IN_LIBRARY, "fallback": None})
+    except Exception as error:  # the page must always get an answer
+        print(f"job {job.id} failed: {error!r}", flush=True)
+        events.append({"type": "error", "t": 0.3, "message": plain(error), "fallback": None})
+    return {"job_id": job.id, "events": events}
 
 
 @app.get("/api/jobs/{job_id}")
@@ -226,3 +261,14 @@ async def job_events(job_id: str) -> StreamingResponse:
             await asyncio.sleep(0.15)
 
     return StreamingResponse(stream(), media_type="text/event-stream", headers={"Cache-Control": "no-store"})
+
+
+@app.get("/api/jobs/{job_id}/log")
+def job_log(job_id: str, after: int = 0) -> dict:
+    """The job's events from number `after` on. The page polls this instead of the event stream above: some proxies
+    (a Cloudflare quick tunnel, used to open the demo on a phone) hold a stream back until it ends."""
+    job = JOBS.get(job_id)
+    if job is None:
+        raise HTTPException(404, "No such job.")
+    events = job.events[max(after, 0):]
+    return {"events": events, "finished": job.finished and after + len(events) >= len(job.events)}

@@ -1,0 +1,8 @@
+# The hosted demo on Vercel (api/index.py). Local development uses pyproject.toml with uv.
+anthropic>=2.8
+fastapi
+httpx
+numpy>=2.4.6
+onnxruntime>=1.32.0
+pillow
+python-multipart

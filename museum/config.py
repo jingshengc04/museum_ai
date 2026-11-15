@@ -34,6 +34,9 @@ def _env(name: str, default: str) -> str:
 
 CACHE_DIR = Path(_env("MUSEUM_CACHE_DIR", str(ROOT / "cache")))
 OUTPUT_DIR = Path(_env("MUSEUM_OUTPUT_DIR", str(ROOT / "output")))
+# Hosted demo (Vercel): short-lived functions with no background jobs, no ffmpeg and a read-only disk. It recognises
+# the photo and plays films already in the library; it never makes a new one.
+HOSTED = _env("MUSEUM_HOSTED", "") == "1"
 
 SERVICES = ("llm", "voice", "video")
 _KEYS = {

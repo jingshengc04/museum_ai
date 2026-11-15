@@ -178,11 +178,20 @@
   .status { font-size: 10px; color: #d8d2c8; letter-spacing: .17em; text-transform: uppercase; margin: 0; }
   .status.problem { color: #f0b9a0; letter-spacing: .08em; text-transform: none; font-size: 13px; max-width: 520px; line-height: 1.5; }
   .loading-screen .result-actions { margin-bottom: 0; }
-  /* Words the script agent picks out while it researches: they light up one by one under the progress bar. */
-  .keywords { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; max-width: 460px; min-height: 30px; margin: 14px auto 0; }
-  .keywords span { font-size: 11px; letter-spacing: .06em; padding: 6px 12px; border-radius: 99px; color: #f3dbb5;
-    background: rgba(215,185,140,.14); border: 1px solid rgba(215,185,140,.35); animation: word-in .6s cubic-bezier(.2, .7, .2, 1) both; }
-  @keyframes word-in { from { opacity: 0; transform: translateY(6px) scale(.96); filter: blur(4px); } }
+  /* Words the script agent picks out while it researches, as a constellation around the object: a thin gold line
+     draws out from the object's edge, then the word fades in at its end. Older words fade as new ones arrive.
+     Over the picture, so the panel never grows; only opacity, translate and a line dash animate (cheap to draw). */
+  .keywords { position: absolute; inset: 0; z-index: 3; pointer-events: none; }
+  .keywords svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .keywords line { stroke: rgba(231,185,118,.5); stroke-width: 1; stroke-dasharray: var(--len); stroke-dashoffset: var(--len);
+    animation: line-draw .55s ease-out forwards; transition: opacity .9s ease; }
+  .keywords circle { fill: #f6dfb8; animation: dot-in .3s ease-out .45s backwards; transition: opacity .9s ease; }
+  .keywords .word { position: absolute; width: max-content; max-width: 125px; font: italic 400 13px/1.3 var(--serif); color: #f6dfb8;
+    text-shadow: 0 1px 2px #000b, 0 0 14px #000c; animation: word-in .7s ease-out .4s backwards; transition: opacity .9s ease; }
+  .keywords .gone { opacity: 0; }
+  @keyframes line-draw { to { stroke-dashoffset: 0; } }
+  @keyframes dot-in { from { opacity: 0; } }
+  @keyframes word-in { from { opacity: 0; translate: var(--from-x) var(--from-y); } }
 
   /* result */
   .result { width: min(1120px, 100%); margin: auto; }
@@ -300,11 +309,11 @@
         <div class="orbit two"></div>
         <div class="orbit"></div>
         <div class="preview"><div class="frame" id="frame-2"><img id="photo-2" alt=""><div class="outline" id="outline-2"></div></div></div>
+        <div class="keywords" id="keywords" aria-live="polite"></div>
       </div>
       <h2 class="loadlabel" id="loadlabel">Awakening<span class="loading-dots">...</span></h2>
       <div class="progress"><div class="bar" id="bar"></div></div>
       <p class="status" id="status">READING THE ARTIFACT</p>
-      <div class="keywords" id="keywords"></div>
       <div class="result-actions" id="problem-actions" hidden></div>
       <div class="result-actions" id="keep-actions" hidden>
         <button class="secondary" id="keep-running">Keep this running</button>
@@ -365,7 +374,7 @@ const SAMPLE = "/assets/sample.jpg";  // shown for an exhibit that has no photo.
 // What the visitor reads while each pipeline step runs, and how far the bar has got when it starts.
 const STEPS = { identify: [8, "Reading the artifact"], story: [18, "Searching the archives"], voice: [30, "Recovering its voice"],
                 video: [36, "Restoring the moment"], edit: [92, "Cutting the film"] };
-const S = { app: null, exhibit: 0, photo: null, image: null, outline: null, source: null, film: null, busy: false, run: 0,
+const S = { app: null, exhibit: 0, photo: null, image: null, outline: null, film: null, busy: false, run: 0,
             stream: null, jobId: null, films: [] };
 
 function show(view) {
@@ -426,7 +435,6 @@ function renderScan() {
 
 function reset() {
   S.run++;  // anything still in flight belongs to an earlier run and is ignored
-  if (S.source) S.source.close();
   S.busy = false;
   S.photo = null;
   $("gallery").classList.remove("is-scanning", "sweep");
@@ -465,7 +473,7 @@ async function begin(blob, exhibitId) {
   const outline = findOutline(blob);
   const picture = S.image;
   const job = startJob(exhibitId).then((started) => {
-    if (started.job_id) remember(started.job_id, picture);
+    if (started.job_id) remember(started.job_id, picture, Boolean(started.events));
     return started;
   });
 
@@ -618,6 +626,72 @@ function progress(percent, text) {
   if (text) $("status").textContent = text;
 }
 
+// ---------- keywords: a constellation around the object ----------
+// Words arrive in batches and are placed one at a time: every 700 ms, faster when many are waiting so that a batch
+// is out within about WORDS_WITHIN ms (a replayed making-of lasts only ~12 s), never faster than every 300 ms.
+// Each goes round from the last by the golden angle (137.5°), so any few in a row point different ways and together
+// they fill every side; the distance varies a little so the pattern does not look like a clock face. At most
+// MAX_WORDS stay; the oldest fades out.
+const WORDS_WITHIN = 7000, MAX_WORDS = 8, SVG = "http://www.w3.org/2000/svg";
+const words = { queue: [], timer: null, next: 0, shown: [] };
+
+function resetWords() {
+  clearTimeout(words.timer);
+  Object.assign(words, { queue: [], timer: null, next: 0, shown: [] });
+  $("keywords").replaceChildren(document.createElementNS(SVG, "svg"));
+}
+
+function addWords(list) {
+  words.queue.push(...list);
+  if (!words.timer) placeWord();
+}
+
+function placeWord() {
+  const text = words.queue.shift();
+  if (text === undefined) {
+    words.timer = null;
+    return;
+  }
+  const gap = Math.max(300, Math.min(700, WORDS_WITHIN / (words.queue.length + 1)));
+  words.timer = setTimeout(placeWord, gap);
+  const box = $("keywords"), svg = box.querySelector("svg"), w = box.clientWidth, h = box.clientHeight;
+  const angle = (words.next++ * 137.5 - 20) * Math.PI / 180, cos = Math.cos(angle), sin = Math.sin(angle);
+  const reach = 0.82 + Math.random() * 0.18;
+  // from just outside the photo to the word's anchor, on two ellipses round the centre
+  const x0 = w / 2 + cos * w * 0.32, y0 = h / 2 + sin * h * 0.36;
+  const x1 = w / 2 + cos * w * 0.44 * reach, y1 = h / 2 + sin * h * 0.48 * reach;
+
+  const line = document.createElementNS(SVG, "line");
+  Object.entries({ x1: x0, y1: y0, x2: x1, y2: y1 }).forEach(([k, v]) => line.setAttribute(k, v.toFixed(1)));
+  line.style.setProperty("--len", Math.hypot(x1 - x0, y1 - y0).toFixed(1));
+  const dot = document.createElementNS(SVG, "circle");
+  Object.entries({ cx: x1, cy: y1, r: 2 }).forEach(([k, v]) => dot.setAttribute(k, typeof v === "number" ? v.toFixed(1) : v));
+  svg.append(line, dot);
+
+  // The word sits beside its dot, always to the left or right (above or below it would run into the headings),
+  // on the side away from the object, and drifts out to it as it appears.
+  const word = el("span", { className: "word", textContent: text });
+  word.style.left = `${x1}px`;
+  word.style.top = `${y1}px`;
+  const right = cos >= 0;
+  word.style.transform = right ? "translate(8px, -50%)" : "translate(calc(-100% - 8px), -50%)";
+  word.style.textAlign = right ? "left" : "right";
+  // On a phone the words would run off the screen: wrap them within what is left to the edge.
+  const dotX = box.getBoundingClientRect().left + x1, edge = 12;
+  const room = right ? innerWidth - dotX - 8 - edge : dotX - 8 - edge;
+  word.style.maxWidth = `${Math.round(Math.max(70, Math.min(125, room)))}px`;
+  word.style.setProperty("--from-x", `${(-cos * 10).toFixed(1)}px`);
+  word.style.setProperty("--from-y", `${(-sin * 10).toFixed(1)}px`);
+  box.append(word);
+
+  words.shown.push([line, dot, word]);
+  if (words.shown.length > MAX_WORDS) {
+    const old = words.shown.shift();
+    old.forEach((node) => node.classList.add("gone"));
+    setTimeout(() => old.forEach((node) => node.remove()), 1000);
+  }
+}
+
 function showLoading() {
   $("keep-actions").hidden = true;
   $("status").className = "status";
@@ -625,7 +699,7 @@ function showLoading() {
   $("problem-actions").hidden = true;
   $("bar").style.width = "0%";
   S.percent = 0;
-  $("keywords").replaceChildren();
+  resetWords();
   show("loading");
   requestAnimationFrame(() => progress(...STEPS.identify));
 }
@@ -635,43 +709,60 @@ function listen(job, run) {
   if (job.error) return fail(job.error, null);
   S.jobId = job.job_id;
   $("keep-actions").hidden = false;
-  // EventSource reconnects by replaying from the start, so count what we have handled.
-  let handled = 0, seen = 0, shots = 0, drawn = 0;
-  S.source = new EventSource(`/api/jobs/${job.job_id}/events`);
-  S.source.onopen = () => { seen = 0; };
-  S.source.onmessage = (message) => {
-    if (seen++ < handled) return;
-    handled++;
-    const ev = JSON.parse(message.data);
+  let shots = 0, drawn = 0;
+  const handle = (ev) => {
     if (ev.type === "step" && ev.status === "start") {
       progress(...STEPS[ev.step]);
     } else if (ev.type === "progress") {
       progress(ev.percent, ev.text);
     } else if (ev.type === "keywords") {
-      const box = $("keywords");
-      ev.words.forEach((word, i) => {
-        const chip = el("span", { textContent: word });
-        chip.style.animationDelay = `${i * 120}ms`;
-        box.append(chip);
-      });
-      while (box.children.length > 10) box.firstChild.remove();
+      addWords(ev.words);
     } else if (ev.type === "storyboard") {
       shots = ev.shots.length;
     } else if (ev.type === "shot" && ev.stage === "video" && ev.status === "done" && shots) {
       progress(STEPS.video[0] + (STEPS.edit[0] - STEPS.video[0]) * (++drawn / shots));  // the bar creeps as each shot is drawn
     } else if (ev.type === "done") {
-      S.source.close();
       $("keep-actions").hidden = true;
       updateFilm(job.job_id, { state: "done", percent: 100, manifest: ev.manifest }, true);
       progress(100, "History is ready");
       setTimeout(() => { if (run === S.run) loadFilm(ev.manifest); }, 550);
     } else if (ev.type === "error") {
-      S.source.close();
       $("keep-actions").hidden = true;
       updateFilm(job.job_id, { state: "error", error: ev.message, fallback: ev.fallback }, true);
       fail(ev.message, ev.fallback);
     }
   };
+
+  // The hosted demo keeps no jobs: the server hands back the whole making-of, timed, and the page plays it. If the
+  // visitor moves on, the film still finishes in their list of films.
+  if (job.events) {
+    for (const ev of job.events) {
+      setTimeout(() => {
+        if (run === S.run) return handle(ev);
+        if (ev.type === "done") updateFilm(job.job_id, { state: "done", percent: 100, manifest: ev.manifest });
+        if (ev.type === "error") updateFilm(job.job_id, { state: "error", error: ev.message, fallback: ev.fallback });
+      }, ev.t * 1000);
+    }
+    return;
+  }
+
+  // Polled rather than an EventSource: some proxies (a Cloudflare quick tunnel, to open the demo on a phone) hold an
+  // event stream back until it ends, and the whole making-of would arrive at once. Stops when the visitor moves on;
+  // their list of films keeps following the job.
+  let after = 0;
+  const pull = async () => {
+    if (run !== S.run) return;
+    try {
+      const response = await fetch(`/api/jobs/${job.job_id}/log?after=${after}`, { cache: "no-store" });
+      if (response.status === 404) return handle({ type: "error", message: "The server restarted before this film was finished.", fallback: null });
+      const log = await response.json();
+      after += log.events.length;
+      for (const ev of log.events) if (run === S.run) handle(ev);
+      if (log.finished) return;
+    } catch { /* offline for a moment: try again */ }
+    setTimeout(pull, 600);
+  };
+  pull();
 }
 
 function fail(message, fallback) {
@@ -696,10 +787,11 @@ function saveFilms() {
   if (!$("v-films").hidden) renderFilms(false);
 }
 
-function remember(id, photo) {
+// `local`: played by the page itself (hosted demo), so there is no job on the server to ask about.
+function remember(id, photo, local = false) {
   S.films = S.films.filter((f) => f.id !== id);
   S.films.unshift({ id, started: Date.now() / 1000, state: "running", percent: 0, text: "Starting", name: "", title: "",
-                    photo: photo && !photo.startsWith("blob:") ? photo : null, manifest: null });
+                    photo: photo && !photo.startsWith("blob:") ? photo : null, manifest: null, local });
   saveFilms();
   poll();
 }
@@ -717,7 +809,11 @@ function updateFilm(id, data, watched = false) {
 let pollTimer = null;
 async function poll() {
   clearTimeout(pollTimer);
-  for (const film of S.films.filter((f) => f.state === "running")) {
+  for (const film of S.films.filter((f) => f.state === "running" && f.local)) {
+    // a page-played film whose page was reloaded before it finished
+    if (Date.now() / 1000 - film.started > 60) updateFilm(film.id, { state: "error", error: "Interrupted. Add the photo again to watch it." });
+  }
+  for (const film of S.films.filter((f) => f.state === "running" && !f.local)) {
     try {
       const response = await fetch(`/api/jobs/${film.id}`, { cache: "no-store" });
       if (response.status === 404) {
@@ -729,7 +825,7 @@ async function poll() {
                             manifest: job.manifest, error: job.error, fallback: job.fallback });
     } catch { /* offline for a moment: try again next round */ }
   }
-  if (S.films.some((f) => f.state === "running")) pollTimer = setTimeout(poll, 2500);
+  if (S.films.some((f) => f.state === "running")) pollTimer = setTimeout(poll, 2500);  // local ones too: the 60 s check
 }
 
 function ago(seconds) {
@@ -765,7 +861,6 @@ function renderFilms(fresh) {
 
 function showFilms() {
   S.run++;  // the waiting screen, if open, stops listening; its job carries on and is followed from this list
-  if (S.source) S.source.close();
   S.busy = false;
   $("gallery").classList.remove("is-scanning", "sweep");
   renderFilms(true);
@@ -778,7 +873,6 @@ function openFilm(film) {
   if (film.state === "error") return film.fallback ? loadFilm(film.fallback) : null;
   // Still being made: back to its waiting screen, which picks up the job's progress from the start.
   const run = ++S.run;
-  if (S.source) S.source.close();
   $("photo-2").src = film.photo || SAMPLE;
   setOutline(null);
   showLoading();

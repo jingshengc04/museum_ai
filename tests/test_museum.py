@@ -204,6 +204,29 @@ def test_second_visitor_gets_the_library_film_through_the_same_steps(tiny_exhibi
     assert pipeline.library_hit(exhibits.load("hope"), "en", "first_person") is None, "new material means a new film"
 
 
+def test_hosted_demo_hands_back_the_saved_making_of(tiny_exhibit, tmp_path, monkeypatch):
+    """On Vercel there are no background jobs: one request recognises the photo and returns the timed replay."""
+    from museum import server
+
+    monkeypatch.setattr(config, "REPLAY_SECONDS", 0.2)
+    client = TestClient(server.app)
+    monkeypatch.setattr(config, "HOSTED", True)
+    photo = {"photo": ("x.jpg", (tiny_exhibit / "photo.jpg").read_bytes(), "image/jpeg")}
+    missing = client.post("/api/jobs", data={"exhibit_id": "hope"}, files=photo).json()
+    assert missing["events"][-1] == {"type": "error", "t": 0.3, "message": server.NOT_IN_LIBRARY, "fallback": None}
+
+    monkeypatch.setattr(config, "HOSTED", False)
+    pipeline.make_film(config.OUTPUT_DIR / tmp_path.name / "job", "en", "first_person", lambda *a, **k: None)
+    monkeypatch.setattr(config, "HOSTED", True)
+    job = client.post("/api/jobs", data={"exhibit_id": "hope"}, files=photo).json()
+    kinds = [e["type"] for e in job["events"]]
+    assert kinds[:2] == ["step", "thought"] and "exhibit" in kinds and kinds[-1] == "done"
+    assert job["events"][-1]["manifest"] == "/exhibits/hope/demo/en-first_person/manifest.json"
+    times = [e["t"] for e in job["events"]]
+    assert times == sorted(times) and times[-1] <= 0.2 + 0.3 + 1e-6, "played in about REPLAY_SECONDS"
+    assert job["job_id"] not in server.JOBS, "nothing is left running"
+
+
 def test_server_runs_a_job_and_falls_back_to_a_saved_film(tiny_exhibit, monkeypatch):
     from museum import server
 
@@ -233,6 +256,12 @@ def test_server_runs_a_job_and_falls_back_to_a_saved_film(tiny_exhibit, monkeypa
 
     job_id, events = run({"exhibit_id": "hope", "language": "en", "style": "first_person"})
     assert events[-1] == {"type": "done", "manifest": f"/output/{job_id}/manifest.json"}
+    # the page polls the same events in pieces (proxy-proof)
+    log = client.get(f"/api/jobs/{job_id}/log", params={"after": 0}).json()
+    assert log["events"] == events and log["finished"]
+    rest = client.get(f"/api/jobs/{job_id}/log", params={"after": len(events) - 1}).json()
+    assert rest["events"] == events[-1:] and rest["finished"]
+    assert client.get("/api/jobs/nope/log").status_code == 404
     assert client.get(events[-1]["manifest"]).json()["video"] == "final.mp4"
     assert client.get(f"/output/{job_id}/final.mp4", headers={"Range": "bytes=0-99"}).status_code == 206
 

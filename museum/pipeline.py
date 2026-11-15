@@ -71,6 +71,8 @@ def fingerprint(exhibit: Exhibit, language: str, style: str, agent: bool | None 
 def library_hit(exhibit: Exhibit, language: str, style: str) -> Path | None:
     """The saved film for this exhibit, language and style, if it is still current."""
     folder = exhibit.demo_dir(language, style)
+    if config.HOSTED:  # the hosted demo plays what was saved (its videos are served apart from the code) and makes nothing
+        return folder if all((folder / name).exists() for name in ("manifest.json", "events.json")) else None
     if not all((folder / name).exists() for name in ("final.mp4", "manifest.json", "events.json")):
         return None
     saved = json.loads((folder / "manifest.json").read_text())
@@ -85,20 +87,30 @@ def library_hit(exhibit: Exhibit, language: str, style: str) -> Path | None:
     return folder
 
 
-def replay(folder: Path, emit: Emit) -> None:
-    """Walk the visitor through the film's recorded making-of, compressed to a few seconds."""
+def replay_events(folder: Path) -> list[dict]:
+    """The film's recorded making-of after recognition, re-timed (`t`, seconds from now) to take a few seconds."""
     events = json.loads((folder / "events.json").read_text())
     first = next(i for i, e in enumerate(events) if e["type"] == "step" and e["step"] == "identify" and e["status"] == "done") + 1
     events = events[first:]
     scale = config.REPLAY_SECONDS / max(events[-1]["t"] - events[0]["t"], 0.001)
-    previous = events[0]["t"]
+    timed, at, previous = [], 0.0, events[0]["t"]
     for event in events:
-        time.sleep(min((event["t"] - previous) * scale, 3.0))
+        at += min((event["t"] - previous) * scale, 3.0)
         previous = event["t"]
         data = {k: v for k, v in event.items() if k not in ("type", "t")}
         if "thumb" in data:
             data["thumb"] = config.url_for(folder / "thumbs" / Path(data["thumb"]).name)
-        emit(event["type"], **data)
+        timed.append({"type": event["type"], "t": round(at, 3), **data})
+    return timed
+
+
+def replay(folder: Path, emit: Emit) -> None:
+    """Walk the visitor through the film's recorded making-of, compressed to a few seconds."""
+    previous = 0.0
+    for event in replay_events(folder):
+        time.sleep(event["t"] - previous)
+        previous = event["t"]
+        emit(event["type"], **{k: v for k, v in event.items() if k not in ("type", "t")})
 
 
 def _narrated_film(job_dir: Path, exhibit: Exhibit, board, language: str, emit: Emit) -> dict:

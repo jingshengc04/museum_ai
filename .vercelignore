@@ -1,0 +1,13 @@
+# Never upload keys or local work. The hosted demo needs only api/, museum/, web/ and exhibits/.
+.env
+**/.env*
+.env*
+.vercel
+.venv
+cache
+output
+harness
+tests
+ui
+*.pdf
+claude.md
