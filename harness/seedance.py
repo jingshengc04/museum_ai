@@ -23,8 +23,8 @@ ENDPOINT = os.environ.get("SEEDANCE_ENDPOINT", "bytedance/seedance-2.0/reference
 RESOLUTION = os.environ.get("SEEDANCE_RESOLUTION", "720p")
 ASPECT = os.environ.get("SEEDANCE_ASPECT", "16:9")
 USD_PER_SECOND = {"480p": 0.14, "720p": 0.30}  # standard tier, from verified token pricing
-MAX_DIRECTION_WORDS = 300   # hard limit: instruction overflow is a real failure
-SOFT_DIRECTION_WORDS = 260  # above this: a note
+MAX_DIRECTION_WORDS = 380   # hard limit: instruction overflow is a real failure
+SOFT_DIRECTION_WORDS = 330  # above this: a note
 NOTE_TOTAL_WORDS = 320
 
 

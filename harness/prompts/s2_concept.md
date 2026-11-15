@@ -17,7 +17,7 @@ Write three concepts that differ in their engine. Choose engines from this list,
 (F) WHAT IT HELD: the contents or function move (wine rises, smoke curls, the sea returns), so the function is acted rather than described.
 (G) THE GUARDIAN ON DUTY: the character performs the role its form suggests; shown, never claimed in speech unless a fact says it.
 (H) SCALE DIVE: the camera shrinks into the surface until a carved creature looms as a living giant, then pulls back out.
-The older engines (reveal, contrast, decisive moment, detail most people miss) survive as the way the spoken lines are ordered inside one of these.
+The engine decides what the exhibit does on screen. It never decides what is said: in every concept the spoken lines tell the same self-introduction story from the material, in order.
 
 For each concept give: mode; engine; a one-sentence logline; hook_visual and hook_line (the first spoken line; a plain self-introduction such as "Hi, I'm one of the four rams on this zun." is fine); the emotional arc; ending_visual (the real exhibit, whole, at the visitor's angle) and ending_line; the facts it uses; the question it answers; hero_mover (exactly one character or part, or "the world" in world_returns); want (at most five words, readable with the sound off); first_sign (by about 3 s); big_move (the high-amplitude beat with a speed or force word and its physical consequence); return_trace (what is left on the still exhibit at the end); spectacle_shot (the one image a visitor would screen-record).
 

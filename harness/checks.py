@@ -20,7 +20,7 @@ MIN_TRANSFORM_S = 3.5      # a transformation needs time
 MAX_SHOTS_PER_SEGMENT = 5
 MAX_LINE_WORDS = 10        # short lines keep lip-sync clean
 MAX_SEG_WORDS = 24         # lines are a counter-track, not a lecture
-MAX_SHOT_WORDS = 45        # framing+camera+action+transformation+visual per shot
+MAX_SHOT_WORDS = 60        # framing+camera+action+transformation+visual per shot
 TAIL_S = 1.0               # last line must finish this long before its segment ends
 HEAD_S = 0.8               # film opens on picture and sound
 
@@ -266,7 +266,7 @@ def script(sc: schemas.Script, sheet: schemas.MaterialSheet, exhibit_id: str,
                 problems.append(f"{where} camera stacks moves ('{shot.camera}'); cut, or write timed beats")
             shot_words = len(" ".join([shot.framing, shot.camera, shot.action, shot.transformation, shot.visual]).split())
             if shot_words > MAX_SHOT_WORDS:
-                problems.append(f"{where} is {shot_words} words; keep each shot to about 40 (one tight sentence, verbs first)")
+                problems.append(f"{where} is {shot_words} words; keep each beat to about 55 (one tight sentence, verbs first)")
             n_tr = len(TRANSFORM_VERBS.findall(shot.action)) + (1 if _s(shot.transformation) else 0)
             if n_tr > 1:
                 problems.append(f"{where} has more than one transformation; give each its own shot")
@@ -402,6 +402,6 @@ def keywords(batch: list[dict], material: str) -> list[str]:
             out.append(f"'{text}' is not copied from its material (missing: {', '.join(missing)})")
         if len(text.split()) > 5:
             out.append(f"'{text}' is longer than 5 words")
-    if not 5 <= len(batch) <= 10:
-        out.append(f"{len(batch)} keywords; asked for 5-10")
+    if not batch:
+        out.append("no keywords returned")
     return out

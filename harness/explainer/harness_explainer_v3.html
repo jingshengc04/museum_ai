@@ -1,0 +1,416 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Harness Explainer v3</title>
+<style>
+  :root {
+    --ink: #1c1b1f; --muted: #6d6a73; --line: #dcd8cf; --paper: #f6f4ef; --card: #ffffff;
+    --bronze: #a8692e; --bronze-soft: #f3e6d6; --teal: #2b7a72; --teal-soft: #dcefeb; --grey: #b9b5ad;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { width: 1920px; height: 1080px; overflow: hidden; background: #fff; }
+  body { font-family: -apple-system, "SF Pro Display", "Helvetica Neue", "PingFang SC", sans-serif; color: var(--ink); }
+  #stage { position: absolute; inset: 0; overflow: hidden; background: #fff; }
+  .abs { position: absolute; }
+  .layer { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; transform-origin: 0 0; }
+
+  .chip { padding: 14px 24px; border-radius: 999px; background: var(--bronze-soft); color: #6b3f15; font-size: 26px; font-weight: 600;
+          white-space: nowrap; }
+
+  /* ---------- harness scene ---------- */
+  #harness { background: var(--paper); }
+  #grid { position: absolute; inset: 0; opacity: .55;
+          background-image: linear-gradient(#e8e4dc 1px, transparent 1px), linear-gradient(90deg, #e8e4dc 1px, transparent 1px);
+          background-size: 60px 60px; }
+  #titleCard { position: absolute; left: 0; top: 0; width: 1920px; height: 1080px; display: flex; flex-direction: column;
+               align-items: center; justify-content: center; text-align: center; }
+  #titleCard .kicker { font-size: 28px; letter-spacing: 6px; text-transform: uppercase; color: var(--bronze); font-weight: 700; }
+  #titleCard h1 { font-size: 104px; font-weight: 750; letter-spacing: -2px; margin-top: 18px; }
+  #titleCard p { font-size: 34px; color: var(--muted); margin-top: 22px; }
+  #header { position: absolute; left: 96px; top: 52px; font-size: 22px; letter-spacing: 4px; text-transform: uppercase;
+            color: var(--bronze); font-weight: 700; }
+  #rail { position: absolute; left: 0; top: 120px; width: 1920px; height: 120px; }
+  #railLine { position: absolute; left: 190px; top: 30px; width: 1540px; height: 4px; background: var(--line); border-radius: 2px; }
+  #railFill { position: absolute; left: 190px; top: 30px; width: 0; height: 4px; background: var(--teal); border-radius: 2px; }
+  .node { position: absolute; top: 12px; width: 40px; height: 40px; margin-left: -20px; border-radius: 50%;
+          background: var(--paper); border: 4px solid var(--grey); display: flex; align-items: center; justify-content: center;
+          color: #fff; font-size: 20px; font-weight: 800; }
+  .nodeLabel { position: absolute; top: 66px; width: 220px; margin-left: -110px; text-align: center; font-size: 21px;
+               color: var(--muted); font-weight: 600; }
+  .panel { position: absolute; left: 0; top: 260px; width: 1920px; height: 780px; }
+  .left { position: absolute; left: 96px; top: 40px; width: 520px; }
+  .left .num { font-size: 26px; font-weight: 800; color: var(--bronze); letter-spacing: 2px; }
+  .left h2 { font-size: 66px; font-weight: 750; letter-spacing: -1.5px; margin-top: 8px; line-height: 1.05; }
+  .left p { font-size: 33px; line-height: 1.36; color: #46434b; margin-top: 22px; }
+  .badges { margin-top: 30px; display: flex; flex-wrap: wrap; gap: 12px; }
+  .badge { padding: 9px 18px; border-radius: 10px; background: #fff; border: 1px solid var(--line); font-size: 21px; font-weight: 600;
+           color: #3b3940; font-family: "SF Mono", Menlo, monospace; }
+  .badge.time { background: var(--teal-soft); border-color: transparent; color: var(--teal); }
+  .vis { position: absolute; left: 700px; top: 0; width: 1140px; height: 780px; }
+  .card { position: absolute; background: var(--card); border-radius: 22px; box-shadow: 0 14px 40px rgba(40,30,10,.10);
+          border: 1px solid #ece8e0; }
+  .mono { font-family: "SF Mono", Menlo, monospace; }
+  .lbl { font-size: 19px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+  .tick { color: var(--teal); font-weight: 800; }
+  img.cover { width: 100%; height: 100%; object-fit: cover; border-radius: inherit; display: block; }
+  img.contain { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .arrow { position: absolute; height: 4px; background: var(--grey); transform-origin: 0 50%; }
+  .arrow::after { content: ""; position: absolute; right: -4px; top: -9px; border-left: 18px solid var(--grey);
+                  border-top: 11px solid transparent; border-bottom: 11px solid transparent; }
+  #outro { position: absolute; inset: 0; }
+  #whiteout { position: absolute; inset: 0; background: #fff; pointer-events: none; }
+</style>
+</head>
+<body>
+<div id="stage">
+  <!-- harness scene -->
+  <div id="harnessLayer" class="layer">
+    <div id="harness" class="layer"><div id="grid"></div></div>
+    <div id="titleCard">
+      <div class="kicker">Behind the screen</div>
+      <h1>How the agent makes the film</h1>
+    </div>
+    <div id="header">The harness · one photo → one film</div>
+    <div id="rail"><div id="railLine"></div><div id="railFill"></div></div>
+    <div id="panels"></div>
+    <div id="outro"></div>
+  </div>
+  <div id="whiteout"></div>
+</div>
+
+<script src="timeline_v3.js"></script>
+<script>
+// ---------------- data (from the real Four-Ram Zun run) ----------------
+const STEPS = [
+  { id: "see", name: "See", title: "See", text: "Claude looks at the visitor's photo and names the object.", badges: ["Claude Opus · vision"] },
+  { id: "search", name: "Search", title: "Search", text: "It searches the web. Every finding must quote its source.", badges: ["web search"] },
+  { id: "understand", name: "Understand & Concept", title: "Understand &amp; Concept", text: "It keeps what matters and shapes a story with an ending.", badges: ["24 sourced facts"] },
+  { id: "assets", name: "Video assets", title: "Video assets", text: "From the photo, it prepares the reference images the video needs.", badges: ["2 reference images"] },
+  { id: "script", name: "Script & Refine", title: "Script &amp; Refine", text: "The script is drafted, checked line by line, and refined.", badges: ["3 drafts"] },
+  { id: "generate", name: "Generate", title: "Generate", text: "One request goes to the video model. A film comes back.", badges: ["Seedance 2.5 · 720p · 30 s"] },
+];
+// Timeline: written by render_v3.py from the narration lengths (timeline_v3.js). Fallback: fixed lengths, for opening the page alone.
+const TL = window.TIMELINE || (() => {
+  const ids = ["title", ...STEPS.map(s => s.id), "closing"]; let t = 0.5;
+  const segs = ids.map(id => { const g = { id, start: t, dur: id === "title" ? 2.8 : id === "closing" ? 3.4 : 4.4 }; t += g.dur; return g; });
+  return { segs, duration: t };
+})();
+const SEG = Object.fromEntries(TL.segs.map(g => [g.id, g]));
+const TITLE = SEG.title, CLOSE = SEG.closing;
+const DURATION = TL.duration;
+
+// ---------------- helpers ----------------
+const $ = s => document.querySelector(s);
+const clamp = x => Math.max(0, Math.min(1, x));
+const io = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+const out = x => 1 - Math.pow(1 - x, 3);
+const back = x => { const c = 1.6; return 1 + (c + 1) * Math.pow(x - 1, 3) + c * Math.pow(x - 1, 2); };
+const P = (t, a, b, f = io) => f(clamp((t - a) / (b - a)));
+function el(tag, cls, parent, html) { const e = document.createElement(tag); if (cls) e.className = cls; if (html != null) e.innerHTML = html; (parent || document.body).appendChild(e); return e; }
+function put(e, o) {
+  if (o.o != null) e.style.opacity = o.o;
+  const x = o.x || 0, y = o.y || 0, s = o.s == null ? 1 : o.s, r = o.r || 0;
+  e.style.transform = `translate(${x}px, ${y}px) scale(${s}) rotate(${r}deg)`;
+}
+function box(e, l, t, w, h) { e.style.left = l + "px"; e.style.top = t + "px"; if (w != null) e.style.width = w + "px"; if (h != null) e.style.height = h + "px"; return e; }
+const typed = (s, p) => s.slice(0, Math.round(s.length * clamp(p)));
+const pop = (e, lt, a, d = 0.32) => { const p = P(lt, a, a + d, back); put(e, { o: clamp(p * 1.6), s: 0.82 + 0.18 * p }); };
+
+// ---------------- cue times (seconds from the start of each step); the same numbers drive picture and sound ----------------
+const C = {
+  see:        { scan: [0.25, 1.35], card: 1.3, name: [1.4, 2.0], sub: 2.25 },
+  search:     { q: [0.2, 0.55, 0.9], chip0: 1.5, chipGap: 0.17, count: 2.75 },
+  understand: { card0: 0.12, cardGap: 0.06, strike: 1.0, flow0: 1.5, flowGap: 0.16, done: 2.6 },
+  assets:     { photo: 0.15, img: [0.9, 1.4], sharp: 2.35 },
+  script:     { line0: 0.3, lineGap: 0.2, check0: 1.7, checkGap: 0.3 },
+  generate:   { card: 0.1, type: [0.25, 1.3], film0: 1.5, filmGap: 0.22, done: 3.05 },
+  closing:    { card: 0.3, chip0: 0.95, chipGap: 0.3 },
+};
+
+// ---------------- build: rail ----------------
+const RX0 = 190, RX1 = 1730;
+const nodes = STEPS.map((s, i) => {
+  const x = RX0 + (RX1 - RX0) * i / (STEPS.length - 1);
+  const n = el("div", "node", $("#rail")); n.style.left = x + "px";
+  const l = el("div", "nodeLabel", $("#rail"), s.name); l.style.left = x + "px";
+  return { n, l, x };
+});
+
+// ---------------- build: panels ----------------
+const panels = STEPS.map((s, i) => {
+  const p = el("div", "panel", $("#panels"));
+  const left = el("div", "left", p, `<div class="num">0${i + 1}</div><h2>${s.title}</h2><p>${s.text}</p>
+    <div class="badges">${s.badges.map(b => `<span class="badge">${b}</span>`).join("")}</div>`);
+  const vis = el("div", "vis", p);
+  return { p, left, vis };
+});
+
+// 1. See: scan the photo, the name appears
+const V1 = {};
+(() => {
+  const v = panels[0].vis;
+  V1.photo = box(el("div", "card", v, `<img class="cover" src="assets/photo.jpg">`), 60, 0, 400, 703);
+  V1.photo.style.overflow = "hidden";
+  V1.scan = box(el("div", "abs", V1.photo), 0, 0, 400, 5);
+  V1.scan.style.background = "linear-gradient(90deg, transparent, #f2b066, transparent)"; V1.scan.style.boxShadow = "0 0 30px #f2b066";
+  V1.corners = [];
+  [[50, -10], [430, -10], [50, 673], [430, 673]].forEach(([x, y], k) => {
+    const c = box(el("div", "abs", v), x, y, 40, 40);
+    c.style.border = "5px solid var(--bronze)";
+    c.style[k % 2 ? "borderLeft" : "borderRight"] = "none"; c.style[k > 1 ? "borderTop" : "borderBottom"] = "none";
+    V1.corners.push(c);
+  });
+  V1.out = box(el("div", "card", v, `<div class="lbl">recognized</div>
+    <div class="name" style="font-size:48px;font-weight:750;letter-spacing:-1px;margin-top:12px;height:60px;white-space:nowrap"></div>
+    <div class="sub" style="font-size:32px;font-weight:600;color:var(--bronze);margin-top:10px">Late Shang dynasty · bronze</div>`), 520, 236, 610, 228);
+  V1.out.style.padding = "40px 44px";
+  V1.name = V1.out.querySelector(".name"); V1.sub = V1.out.querySelector(".sub");
+})();
+
+// 2. Search: three queries, source chips tick "verified"
+const V2 = {};
+(() => {
+  const v = panels[1].vis;
+  const qs = ["Four-Ram Square Zun National Museum of China", "四羊方尊 中国国家博物馆 高 重 出土 宁乡", "Siyang fangzun Ningxiang 1938 bronze casting rams"];
+  V2.q = qs.map((q, i) => {
+    const e = box(el("div", "card mono", v, `<span style="color:var(--bronze);font-weight:800">⌕</span>&nbsp; <span class="q"></span>`), 20, 30 + i * 96, 1080, 76);
+    e.style.padding = "21px 30px"; e.style.fontSize = "27px"; e.style.borderRadius = "40px";
+    return { e, s: e.querySelector(".q"), text: q };
+  });
+  const src = ["govt.chinadaily.com.cn", "zh.wikipedia.org", "chinanews.com.cn", "link.springer.com", "china.org.cn", "wikidata.org"];
+  V2.src = src.map((d, i) => {
+    const e = box(el("div", "card", v, `<div class="mono" style="font-size:21px;font-weight:700;white-space:nowrap">${d}</div>
+      <div style="font-size:22px;margin-top:10px" class="tick">✓ verified</div>`),
+      20 + (i % 3) * 365, 360 + Math.floor(i / 3) * 132, 345, 112);
+    e.style.padding = "22px 26px"; e.style.borderRadius = "18px"; e.tk = e.querySelector(".tick"); return e;
+  });
+  V2.count = box(el("div", "abs", v, `<span style="color:var(--bronze)">11</span> sources · <span class="tick">19</span> verified findings`), 20, 650, 1100, 60);
+  V2.count.style.fontSize = "32px"; V2.count.style.fontWeight = "700";
+})();
+
+// 3. Understand & Concept: facts, trivia struck out, the kept ones become the four-part story
+const V3 = {};
+(() => {
+  const v = panels[2].vis;
+  const W = 262, PITCH = 289;
+  const facts = [  // [text, story slot it flows into, or -1 for trivia]; each kept fact sits in the column of its slot
+    ["Late Shang, 1300–1046 BC", 0], ["Sold for 400 silver dollars", -1], ["Hit by bombs in the war, then repaired", 2], ["A chip knocked off the rim", -1],
+    ["Kept by a provincial bank", -1], ["A ritual wine vessel", 1], ["Dealer bought it in May 1938", -1], ["Now in the National Museum of China", 3],
+  ];
+  V3.cards = facts.map(([t, slot], i) => {
+    const y = 60 + Math.floor(i / 4) * 116;
+    const e = box(el("div", "card", v, `<div style="font-size:23px;font-weight:600;line-height:1.22">${t}</div>`), 6 + (i % 4) * PITCH, y, W, 96);
+    e.style.padding = "0 20px"; e.style.display = "flex"; e.style.alignItems = "center"; e.style.borderRadius = "16px";
+    return { e, slot, i, y };
+  });
+  const spine = [["Who I am", "Shang bronze, 3,000+ years"], ["What I was for", "Wine for sacred ceremonies"],
+                 ["What happened", "Hit by bombs, then repaired"], ["Where I am now", "National Museum of China"]];
+  V3.spineY = 420;
+  V3.label = box(el("div", "abs lbl", v, "the story, with an ending"), 6, 376);
+  V3.spine = spine.map(([h, t], i) => {
+    const e = box(el("div", "card", v, `<div class="lbl" style="color:var(--bronze);font-size:18px">${h}</div><div style="font-size:24px;font-weight:650;margin-top:10px;line-height:1.22">${t}</div>`), 6 + i * PITCH, V3.spineY, W, 156);
+    e.style.padding = "22px 20px"; e.style.borderTop = "6px solid var(--bronze)"; e.style.borderRadius = "16px"; return e;
+  });
+  V3.arrows = [0, 1, 2].map(i => box(el("div", "arrow", v), 6 + W + 4 + i * PITCH, V3.spineY + 78, 14));
+})();
+
+// 4. Video assets: photo -> two reference images
+const V4 = {};
+(() => {
+  const v = panels[3].vis;
+  V4.photo = box(el("div", "card", v, `<img class="cover" src="assets/photo.jpg">`), 30, 40, 350, 615); V4.photo.style.overflow = "hidden";
+  V4.photoLbl = box(el("div", "abs lbl", v, "visitor photo"), 30, 672);
+  V4.a1 = box(el("div", "arrow", v), 410, 250, 110);
+  V4.a2 = box(el("div", "arrow", v), 410, 440, 110);
+  V4.img1 = box(el("div", "card", v, `<img class="contain" src="assets/zun_now.png">`), 560, 100, 262, 460); V4.img1.style.overflow = "hidden"; V4.img1.style.background = "#eeeeee";
+  V4.img2 = box(el("div", "card", v, `<img class="contain" src="assets/ram_awake.png">`), 852, 246, 278, 156); V4.img2.style.overflow = "hidden"; V4.img2.style.background = "#eeeeee";
+  V4.l1 = box(el("div", "abs", v, `<div style="font-size:26px;font-weight:650">the object's look</div>`), 560, 580);
+  V4.l2 = box(el("div", "abs", v, `<div style="font-size:26px;font-weight:650">the character</div>`), 852, 422);
+})();
+
+// 5. Script & Refine: six lines, a few checks
+const V5 = {};
+(() => {
+  const v = panels[4].vis;
+  V5.script = box(el("div", "card", v, `<div class="lbl">script</div>`), 10, 50, 640, 590);
+  V5.script.style.padding = "32px 36px";
+  const lines = ["Hi! I'm one of the four rams on this zun.", "I'm over three thousand years old.", "People call us the biggest square zun of the Shang dynasty.",
+                 "Long ago, I held wine for sacred ceremonies.", "During the war, I was hit by bombs.", "I was repaired, and now I'm here."];
+  V5.lines = lines.map(l => el("div", "", V5.script, `<span style="color:var(--bronze);font-weight:800">“</span>${l}`));
+  V5.lines.forEach(e => { e.style.fontSize = "27px"; e.style.margin = "22px 0 0"; e.style.lineHeight = "1.3"; e.style.fontWeight = "560"; });
+  V5.review = box(el("div", "card", v, `<div class="lbl">reviewer</div>`), 690, 50, 440, 590);
+  V5.review.style.padding = "32px 36px";
+  const checks = ["Every line has a source", "Plain English", "One continuous take", "Exhibit ends whole"];
+  V5.checks = checks.map(c => { const e = el("div", "", V5.review, `<span class="tick">✓</span>&nbsp; ${c}`); e.style.fontSize = "29px"; e.style.margin = "44px 0 0"; e.style.fontWeight = "600"; return e; });
+})();
+
+// 6. Generate: a short request, then abstract video frames fill
+const V6 = {};
+(() => {
+  const v = panels[5].vis;
+  V6.prompt = box(el("div", "card mono", v, `<div class="lbl" style="font-family:inherit">request to the video model</div><pre class="txt" style="white-space:pre-wrap;font-family:inherit;font-size:24px;line-height:1.6;margin-top:16px;color:#33313a"></pre>`), 10, 40, 720, 300);
+  V6.prompt.style.padding = "30px 36px"; V6.txt = V6.prompt.querySelector(".txt");
+  V6.text = "@Image1 = the Four-Ram Square Zun\n@Image2 = the front ram, as a character\nOne continuous take, no cuts.\nVoiceover: \"Hi! I'm one of the four rams…\"";
+  V6.r1 = box(el("div", "card", v, `<img class="contain" src="assets/zun_now.png">`), 780, 40, 150, 263); V6.r1.style.overflow = "hidden"; V6.r1.style.background = "#eee";
+  V6.r2 = box(el("div", "card", v, `<img class="contain" src="assets/ram_awake.png">`), 950, 112, 180, 101); V6.r2.style.overflow = "hidden"; V6.r2.style.background = "#eee";
+  V6.film = [0, 1, 2, 3, 4, 5].map(i => {
+    const e = box(el("div", "card", v, `<div class="abs" style="left:0;top:0;height:100%;width:0;background:var(--bronze-soft)"></div>
+      <div class="abs" style="left:0;top:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:30px;color:var(--bronze)">${i === 0 ? "▶" : ""}</div>`), 10 + i * 190, 430, 176, 99);
+    e.style.overflow = "hidden"; e.style.borderRadius = "12px"; e.style.border = "2px dashed var(--grey)"; e.fill = e.firstChild; return e;
+  });
+  V6.filmLbl = box(el("div", "abs lbl", v, "30 s film · voice · sound · one continuous take"), 10, 556);
+})();
+
+// closing card
+const O = {};
+O.card = box(el("div", "abs", $("#outro"), `<div style="font-size:28px;letter-spacing:6px;text-transform:uppercase;color:var(--bronze);font-weight:700">The harness</div>
+  <div style="font-size:92px;font-weight:750;letter-spacing:-2px;margin-top:18px">One photo → one film</div>
+  <div id="sumRow" style="display:flex;justify-content:center;gap:28px;margin-top:56px"></div>`), 0, 330, 1920);
+O.card.style.textAlign = "center";
+O.items = ["6 steps", "11 sources checked", "every line sourced"].map(x => {
+  const e = el("div", "card", O.card.querySelector("#sumRow"), x); e.style.position = "relative"; e.style.padding = "22px 34px"; e.style.fontSize = "30px"; e.style.fontWeight = "700"; return e; });
+
+// ---------------- render(t) ----------------
+function render(t) {
+  $("#whiteout").style.opacity = 1 - P(t, TITLE.start, TITLE.start + 0.6);
+  const T0 = SEG[STEPS[0].id].start, OUTRO = CLOSE.start;
+  const tin = P(t, TITLE.start + 0.1, TITLE.start + 0.8, out), tout = P(t, T0 - 0.5, T0 - 0.05);
+  put($("#titleCard"), { o: tin * (1 - tout), y: 30 * (1 - tin) - 40 * tout });
+  const chrome = P(t, T0 - 0.3, T0 + 0.25) * (1 - P(t, OUTRO - 0.1, OUTRO + 0.4));
+  $("#header").style.opacity = chrome; $("#rail").style.opacity = chrome;
+
+  // rail
+  let active = -1, frac = 0;
+  STEPS.forEach((s, i) => { const g = SEG[s.id]; if (t >= g.start) { active = i; frac = clamp((t - g.start) / g.dur); } });
+  if (t >= OUTRO) { active = STEPS.length; frac = 0; }
+  nodes.forEach((nd, i) => {
+    const done = i < active, act = i === active;
+    nd.n.style.borderColor = done ? "var(--teal)" : act ? "var(--bronze)" : "var(--grey)";
+    nd.n.style.background = done ? "var(--teal)" : act ? "var(--bronze)" : "var(--paper)";
+    nd.n.innerHTML = done ? "✓" : "";
+    nd.l.style.color = act ? "var(--ink)" : done ? "var(--teal)" : "var(--muted)";
+    nd.l.style.fontWeight = act ? "800" : "600";
+    put(nd.n, { s: act ? 1 + 0.12 * Math.sin((t - T0) * 6) : 1 });
+  });
+  $("#railFill").style.width = clamp((Math.min(active, STEPS.length - 1) + (active < STEPS.length - 1 ? frac : 0)) / (STEPS.length - 1)) * (RX1 - RX0) + "px";
+
+  // panels
+  panels.forEach((pn, i) => {
+    const g = SEG[STEPS[i].id], lt = t - g.start, D = g.dur;
+    const vis = lt > -0.5 && lt < D + 0.1;
+    pn.p.style.display = vis ? "block" : "none";
+    if (!vis) return;
+    const inn = P(lt, -0.1, 0.4, out), outp = P(lt, D - 0.35, D);
+    put(pn.left, { o: inn * (1 - outp), x: -40 * (1 - inn) });
+    put(pn.vis, { o: inn * (1 - outp), x: 60 * (1 - inn) - 60 * outp });
+    STEP_FX[i](lt);
+  });
+
+  // closing
+  const ot = t - OUTRO;
+  $("#outro").style.display = ot > -0.1 ? "block" : "none";
+  if (ot > -0.1) {
+    const c = C.closing;
+    put(O.card, { o: P(ot, c.card - 0.1, c.card + 0.45), y: 30 * (1 - P(ot, c.card - 0.1, c.card + 0.55, out)) });
+    O.items.forEach((e, k) => pop(e, ot, c.chip0 + k * c.chipGap));
+  }
+}
+
+const STEP_FX = [
+  lt => { const c = C.see;
+    V1.scan.style.top = (P(lt, c.scan[0], c.scan[1], x => x) * 700) + "px";
+    V1.scan.style.opacity = P(lt, c.scan[0] - 0.1, c.scan[0]) * (1 - P(lt, c.scan[1] - 0.05, c.scan[1] + 0.2));
+    V1.corners.forEach((cn, k) => { const p = P(lt, 0.15, 0.6, out); put(cn, { o: p, x: (k % 2 ? 1 : -1) * 30 * (1 - p), y: (k > 1 ? 1 : -1) * 30 * (1 - p) }); });
+    put(V1.out, { o: P(lt, c.card, c.card + 0.3), y: 20 * (1 - P(lt, c.card, c.card + 0.35, out)) });
+    V1.name.textContent = typed("Four-Ram Square Zun", P(lt, c.name[0], c.name[1], x => x));
+    put(V1.sub, { o: P(lt, c.sub, c.sub + 0.3), y: 10 * (1 - P(lt, c.sub, c.sub + 0.3, out)) });
+  },
+  lt => { const c = C.search;
+    V2.q.forEach((q, k) => { const a = c.q[k]; put(q.e, { o: P(lt, a, a + 0.22), y: 20 * (1 - P(lt, a, a + 0.28, out)) }); q.s.textContent = typed(q.text, P(lt, a + 0.08, a + 0.55, x => x)); });
+    V2.src.forEach((e, k) => { const a = c.chip0 + k * c.chipGap; pop(e, lt, a); e.tk.style.opacity = P(lt, a + 0.2, a + 0.35); });
+    put(V2.count, { o: P(lt, c.count, c.count + 0.3), y: 12 * (1 - P(lt, c.count, c.count + 0.3, out)) });
+  },
+  lt => { const c = C.understand;
+    V3.cards.forEach(({ e, slot, i, y }) => {
+      const a = c.card0 + i * c.cardGap, p = P(lt, a, a + 0.3, out);
+      if (slot < 0) {
+        const drop = P(lt, c.strike, c.strike + 0.3);
+        put(e, { o: p * (1 - 0.7 * drop), y: 20 * (1 - p), s: 1 - 0.05 * drop });
+        e.style.textDecoration = drop > 0.5 ? "line-through" : "none"; e.style.color = drop > 0.5 ? "#9a968e" : "";
+      } else {
+        const a2 = c.flow0 + slot * c.flowGap;
+        put(e, { o: p * (1 - P(lt, a2 + 0.2, a2 + 0.45)), y: 20 * (1 - p) + (V3.spineY - y) * P(lt, a2, a2 + 0.45) });
+        e.style.borderColor = P(lt, c.strike, c.strike + 0.3) > 0.4 ? "var(--bronze)" : "#ece8e0"; e.style.zIndex = 2;
+      }
+    });
+    V3.label.style.opacity = P(lt, c.flow0 - 0.1, c.flow0 + 0.2);
+    V3.spine.forEach((e, k) => { const a2 = c.flow0 + k * c.flowGap; const p = P(lt, a2 + 0.2, a2 + 0.5, out); put(e, { o: p, s: 0.94 + 0.06 * p }); });
+    V3.arrows.forEach((a, k) => { a.style.opacity = P(lt, c.flow0 + (k + 1) * c.flowGap + 0.3, c.flow0 + (k + 1) * c.flowGap + 0.5); });
+  },
+  lt => { const c = C.assets;
+    put(V4.photo, { o: P(lt, c.photo, c.photo + 0.3) }); V4.photoLbl.style.opacity = P(lt, c.photo + 0.1, c.photo + 0.4);
+    [V4.a1, V4.a2].forEach((a, k) => { const s = c.img[k] - 0.35; a.style.opacity = P(lt, s, s + 0.2); a.style.width = (110 * P(lt, s, s + 0.35, out)) + "px"; });
+    [V4.img1, V4.img2].forEach((e, k) => {
+      const a = c.img[k], p = P(lt, a, a + 0.4, out), sharp = P(lt, a + 0.3, c.sharp);
+      put(e, { o: p, s: 0.92 + 0.08 * p }); e.querySelector("img").style.filter = `blur(${(1 - sharp) * 18}px)`;
+    });
+    V4.l1.style.opacity = P(lt, c.img[0] + 0.5, c.img[0] + 0.8); V4.l2.style.opacity = P(lt, c.img[1] + 0.5, c.img[1] + 0.8);
+  },
+  lt => { const c = C.script;
+    put(V5.script, { o: P(lt, 0.05, 0.3) }); put(V5.review, { o: P(lt, 0.15, 0.4) });
+    V5.lines.forEach((e, k) => { const a = c.line0 + k * c.lineGap; put(e, { o: P(lt, a, a + 0.22), x: -14 * (1 - P(lt, a, a + 0.25, out)) }); });
+    V5.checks.forEach((e, k) => { const a = c.check0 + k * c.checkGap; const p = P(lt, a, a + 0.28, back); put(e, { o: clamp(p * 1.4), x: -20 * (1 - p) }); });
+  },
+  lt => { const c = C.generate;
+    put(V6.prompt, { o: P(lt, c.card, c.card + 0.25) });
+    V6.txt.textContent = typed(V6.text, P(lt, c.type[0], c.type[1], x => x));
+    [V6.r1, V6.r2].forEach((e, k) => { const a = 0.3 + k * 0.2, p = P(lt, a, a + 0.35, out); put(e, { o: p, s: 0.9 + 0.1 * p }); });
+    V6.film.forEach((e, k) => { const a = c.film0 + k * c.filmGap; const p = P(lt, a - 0.25, a + 0.05, out); put(e, { o: p, x: 30 * (1 - p) });
+      e.fill.style.width = (P(lt, a, a + c.filmGap + 0.1, x => x) * 100) + "%"; });
+    V6.filmLbl.style.opacity = P(lt, c.done - 0.2, c.done + 0.1);
+  },
+];
+
+// ---------------- sound cues: [time, type, pitch offset in semitones, pan] ----------------
+function sfxEvents() {
+  const ev = [], add = (t, type, v = 0, pan = 0) => ev.push({ t: +t.toFixed(3), type, v, pan });
+  add(TITLE.start + 0.15, "chime");
+  const at = id => SEG[id].start;
+  STEPS.forEach(s => add(at(s.id) - 0.27, "whoosh"));
+  let c = C.see, s = at("see");
+  add(s + c.scan[0], "tick", -5); add(s + c.card, "tick"); add(s + c.sub + 0.1, "confirm");
+  c = C.search; s = at("search");
+  c.q.forEach((a, k) => add(s + a, "tick", -3));
+  for (let k = 0; k < 6; k++) add(s + c.chip0 + k * c.chipGap + 0.2, "check", [0, 2, 4, 5, 7, 9][k], (k % 3 - 1) * 0.5);
+  add(s + c.count + 0.1, "confirm");
+  c = C.understand; s = at("understand");
+  [0, 2, 4, 6].forEach(k => add(s + c.card0 + k * c.cardGap, "tick", -3 + k / 2));
+  add(s + c.strike + 0.05, "drop");
+  for (let k = 0; k < 4; k++) add(s + c.flow0 + k * c.flowGap + 0.4, "tick", [0, 2, 4, 7][k], (k - 1.5) * 0.4);
+  add(s + c.done, "confirm");
+  c = C.assets; s = at("assets");
+  add(s + c.photo, "tick", -5, -0.5); add(s + c.img[0], "tick", 0, 0.3); add(s + c.img[1], "tick", 2, 0.6); add(s + c.sharp, "confirm");
+  c = C.script; s = at("script");
+  for (let k = 0; k < 6; k++) add(s + c.line0 + k * c.lineGap, "tick", -5, -0.3);
+  for (let k = 0; k < 4; k++) add(s + c.check0 + k * c.checkGap + 0.05, "check", [0, 2, 4, 7][k], 0.5);
+  c = C.generate; s = at("generate");
+  add(s + c.card, "tick", -5);
+  for (let k = 0; k < 6; k++) add(s + c.film0 + k * c.filmGap, "tick", k, (k - 2.5) * 0.25);
+  add(s + c.done, "confirm");
+  c = C.closing; s = CLOSE.start;
+  add(s - 0.62, "riser"); add(s + c.card - 0.05, "chime");
+  O.items.forEach((_, k) => add(s + c.chip0 + k * c.chipGap, "tick", k * 2));
+  return ev.sort((a, b) => a.t - b.t);
+}
+
+window.render = render;
+window.sfxEvents = sfxEvents;
+window.DURATION = DURATION;
+// live preview when opened directly (silent): ?t=12 to freeze at a time, otherwise play
+const qt = new URLSearchParams(location.search).get("t");
+if (qt != null) render(parseFloat(qt));
+else if (!window.__capture) { const s0 = performance.now(); (function loop() { render(((performance.now() - s0) / 1000) % DURATION); requestAnimationFrame(loop); })(); }
+</script>
+</body>
+</html>

@@ -19,7 +19,7 @@ class Highlight(BaseModel):
 
 
 class KeywordBatch(BaseModel):
-    keywords: list[Highlight] = Field(description="5-10 keywords, each copied from the material given.")
+    keywords: list[Highlight] = Field(description="The keywords, most important first, each copied from the material given.")
 
 
 # ---------- S0 identify (multimodal, open recognition) ----------

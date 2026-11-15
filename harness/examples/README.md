@@ -12,3 +12,8 @@ kept so the product code can be built against real data:
   (fal results and timings), `timing.md`.
 
 Produce your own: `uv run python run.py --photo photo.jpg` then `uv run python generate.py runs/<run>`.
+
+`four_ram_zun_lean/` is the output of the lean pipeline (`lean.py`, see `../README.md`) on the same photo: `final.json`
+(same format, plus `problems`, `lines`, `timing_s`), `events.jsonl`, and `film.json` (the writer's raw output). No
+video was generated from it. `four_ram_zun_demo_seedance25_720p/` is the best film so far (Seedance 2.5, 720p, 30 s,
+one continuous take), made from a hand-written script in the same request format.

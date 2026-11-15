@@ -13,7 +13,7 @@ Renderability counts only what actually breaks Seedance:
 - a cut inside a segment (each segment should be one continuous take);
 - an orbit or a reveal of an unseen side with no reference showing it;
 - a reference with no stated job, or two references showing different versions of the same whole subject;
-- over about 300 direction words, or essentials placed after the sound list;
+- over about 380 direction words, or essentials placed after the sound list;
 - text, captions or inscriptions in the picture;
 - a spoken line over about ten words, or more than three lines in 15 seconds;
 - a different voice description between segments.

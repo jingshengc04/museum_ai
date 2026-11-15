@@ -1,0 +1,6 @@
+stills/
+stills_v3/
+video_v2_silent.mp4
+video_v3_silent.mp4
+audio/**/*.wav
+audio/*.wav
